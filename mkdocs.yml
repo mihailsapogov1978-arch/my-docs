@@ -1,40 +1,30 @@
-# Название сайта
-site_name: Моя документация
+name: Deploy MkDocs to GitHub Pages
 
-# Тема (Material — самая популярная)
-theme:
-   name: material
-   language: ru
-   features:
-      - navigation.instant
-      - navigation.tracking
-      - search.suggest
-      - search.highlight
-      - content.code.copy
+on:
+   push:
+      branches: [main]
 
-# Навигация (порядок страниц)
-nav:
-   - Главная: index.md
-   - Руководство пользователя: user-guide.md
+permissions:
+   pages: write
+   id-token: write
 
-# Расширения Markdown
-markdown_extensions:
-   - admonition
-   - attr_list
-   - def_list
-   - footnotes
-   - md_in_html
-   - toc:
-        permalink: true
-   - pymdownx.highlight:
-        anchor_linenums: true
-   - pymdownx.superfences:
-        custom_fences:
-           - name: mermaid
-             class: mermaid
-             format:
-                !!python/name:pymdownx.superfences.fence_code_format # Язык поиска
+jobs:
+   deploy:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v4
 
-extra:
-   search:
-      language: ru
+         - name: Setup Python
+           uses: actions/setup-python@v5
+           with:
+              python-version: 3.11
+
+         - name: Install MkDocs
+           run: |
+              pip install mkdocs-material
+
+         - name: Build and deploy
+           run: |
+              mkdocs gh-deploy --force
+           env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
