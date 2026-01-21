@@ -3,4 +3,4 @@ theme: material
 
 nav:
    - Главная: index.md
-   - Руководство: user-guide.md
+   - Руководство пользователя: user-guide.md
