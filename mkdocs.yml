@@ -1,46 +1,40 @@
-
----
-
-## ⚙️ 3. `mkdocs.yml` — конфигурация MkDocs
-
-```yaml
 # Название сайта
 site_name: Моя документация
 
 # Тема (Material — самая популярная)
 theme:
-  name: material
-  language: ru
-  features:
-    - navigation.instant
-    - navigation.tracking
-    - search.suggest
-    - search.highlight
-    - content.code.copy
+   name: material
+   language: ru
+   features:
+      - navigation.instant
+      - navigation.tracking
+      - search.suggest
+      - search.highlight
+      - content.code.copy
 
 # Навигация (порядок страниц)
 nav:
-  - Главная: index.md
-  - Руководство пользователя: user-guide.md
+   - Главная: index.md
+   - Руководство пользователя: user-guide.md
 
 # Расширения Markdown
 markdown_extensions:
-  - admonition
-  - attr_list
-  - def_list
-  - footnotes
-  - md_in_html
-  - toc:
-      permalink: true
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+   - admonition
+   - attr_list
+   - def_list
+   - footnotes
+   - md_in_html
+   - toc:
+        permalink: true
+   - pymdownx.highlight:
+        anchor_linenums: true
+   - pymdownx.superfences:
+        custom_fences:
+           - name: mermaid
+             class: mermaid
+             format:
+                !!python/name:pymdownx.superfences.fence_code_format # Язык поиска
 
-# Язык поиска
 extra:
-  search:
-    language: ru
+   search:
+      language: ru
