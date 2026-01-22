@@ -1,5 +1,6 @@
 site_name: Моя документация
-
+dev_addr: 127.0.0.1:8000
+livereload: true
 theme:
   name: material
   features:
