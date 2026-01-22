@@ -43,5 +43,6 @@ markdown_extensions:
 
 nav:
    - Главная: index.md
-   - Установка ГИС "Смета ЯНАО": install-vipnet.md
-   - О пользователе: user-guide.md
+   - Первое подключение к ГИС "Смета ЯНАО": First_create_access_Smeta.md
+   - Настройка КЭП в ЛК ПОЛ "Сервис подотчетного лица" : Crypto_lk_pol.md
+   - "RA-LK-2024 ЯНАО": RA-LK-2024_YANAO.md
