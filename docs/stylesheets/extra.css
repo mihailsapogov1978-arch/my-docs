@@ -75,5 +75,40 @@ html {
 .md-typeset h1 {
     font-size: 1.5em;
     font-weight: 400;
-   
+}
+
+/* Стили для нумерованных шагов в таблице */
+table.steps {
+    border: none;
+    margin: 1em 0;
+}
+
+table.steps td {
+    border: none;
+    padding: 4px 8px;
+    vertical-align: top;
+}
+
+table.steps tr td:first-child {
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+}
+
+table.steps tr {
+    background: transparent;
+}
+
+table.steps tr:hover {
+    background: #f5f5f5;
+}
+
+/* Убрать жирность у цифр в таблице steps */
+table.steps td strong {
+    font-weight: 400 !important;
+}
+
+/* Или у всех ячеек первого столбца */
+table.steps td:first-child {
+    font-weight: 400;
 }
