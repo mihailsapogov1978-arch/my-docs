@@ -3,13 +3,35 @@ dev_addr: 127.0.0.1:8000
 livereload: true
 theme:
   name: material
+  # Палитра цветов (светлая/тёмная тема)
+  palette:
+    # Светлая тема
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: "Переключиться на тёмный режим"
+    # Тёмная тема
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: "Переключиться на светлый режим"
+
+  # Особенности оформления
   features:
-    # - navigation.tabs      ← удалить
-    # - navigation.sections 
-    # - toc.integrate
+    #- navigation.tabs
+    - navigation.sections
     - navigation.expand
+    #- toc.integrate # Встроенное оглавление
     - search.suggest
-    - search.highlight
+
+extra_css:
+  - stylesheets/extra.css
 
 markdown_extensions:
   - attr_list     # ← обязательно!
