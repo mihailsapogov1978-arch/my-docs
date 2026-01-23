@@ -43,7 +43,7 @@ markdown_extensions:
    - pymdownx.highlight
 
 nav:
-   - Главная: index.md
-   - Первое подключение к ГИС "Смета ЯНАО": Pervoe_podkluchenie/index.md
-   - Настройка КЭП в ЛК ПОЛ "Сервис подотчетного лица" : Crypto_lk_pol.md
-   - "RA-LK-2024 ЯНАО": RA-LK-2024_YANAO.md
+  - Руководство ГИС Смета ЯНАО для администратора: RA-LK-2024_YANAO/index.md
+  - Настройка УКЭП в сервисе ЛК ПОЛ: Nastroyka-UKEP-v-servise-LK-POL/index.md 
+  - Главная: index.md
+  - Первое подключение к ГИС "Смета ЯНАО": Pervoe_podkluchenie/index.md
