@@ -32,6 +32,7 @@ theme:
 
 extra_css:
    - stylesheets/extra.css
+   - docs/Pervoe_podkluchenie/media/
 
 markdown_extensions:
    - attr_list # ← обязательно!
@@ -43,6 +44,6 @@ markdown_extensions:
 
 nav:
    - Главная: index.md
-   - Первое подключение к ГИС "Смета ЯНАО": First_create_access_Smeta.md
+   - Первое подключение к ГИС "Смета ЯНАО": Pervoe_podkluchenie/index.md
    - Настройка КЭП в ЛК ПОЛ "Сервис подотчетного лица" : Crypto_lk_pol.md
    - "RA-LK-2024 ЯНАО": RA-LK-2024_YANAO.md
