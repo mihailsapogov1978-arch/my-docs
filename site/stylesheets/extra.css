@@ -1,3 +1,114 @@
+/* ===== ТЕСТ РАБОТЫ CSS ===== */
+/* Если видите красную рамку - CSS работает! */
+
+/* ===== ПЛАВНЫЙ СКРОЛЛ ===== */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
+}
+
+/* ===== ВЫРАВНИВАНИЕ НАВИГАЦИИ ===== */
+.md-nav {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.md-nav__list {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.md-nav__item {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.md-nav__link {
+    margin: 0 !important;
+    padding: 0.4rem 0.8rem !important;
+    line-height: 1.2 !important;
+    min-height: auto !important;
+}
+
+/* Вложенные пункты */
+.md-nav__item .md-nav__item .md-nav__link {
+    padding-left: 1.2rem !important;
+}
+
+/* Активный пункт */
+.md-nav__item--active .md-nav__link {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.custom-large {
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.custom-small {
+    font-size: 0.85em;
+    color: #666;
+}
+
+.custom-highlight {
+    background-color: #fffacd;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.custom-heading {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #2c3e50;
+    border-left: 4px solid #3498db;
+    padding-left: 10px;
+}
+
+.md-typeset h2 {
+    font-size: 1.1em;
+    font-weight: 400;
+    color: #2c3e50;
+    border-left: 4px solid #3498db;
+    padding-left: 10px;
+    margin-top: 1.5em;
+}
+
+.md-typeset h1 {
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+/* Стили для нумерованных шагов в таблице */
+table.steps {
+    border: none;
+    margin: 1em 0;
+}
+
+table.steps td {
+    border: none;
+    padding: 4px 8px;
+    vertical-align: top;
+}
+
+table.steps tr td:first-child {
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+}
+
+table.steps tr {
+    background: transparent;
+}
+
+table.steps tr:hover {
+    background: #f5f5f5;
+}
+
+/* Убрать жирность у цифр в таблице steps */
+table.steps td strong {
+    font-weight: 400 !important;
+}
+
+/* Или у всех ячеек первого столбца */
+table.steps td:first-child {
+    font-weight: 400;
 }

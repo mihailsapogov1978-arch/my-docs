@@ -1,63 +1,62 @@
-site_name: Моя документация   
+﻿site_name: Моя документация
 dev_addr: 127.0.0.1:8000
 livereload: true
+
 theme:
-   name: material
-   language: ru
-   font:
+  name: material
+  language: ru
+  font:
     text: Roboto
     code: Roboto Mono
-   # Палитра цветов (светлая/тёмная тема)
-   palette:
-      # Светлая тема
-      - media: "(prefers-color-scheme: light)"
-        scheme: default
-        primary: indigo
-        accent: indigo
-        toggle:
-           icon: material/weather-sunny
-           name: "Переключиться на тёмный режим"
-      # Тёмная тема
-      - media: "(prefers-color-scheme: dark)"
-        scheme: slate
-        primary: indigo
-        accent: indigo
-        toggle:
-           icon: material/weather-night
-           name: "Переключиться на светлый режим"
-
-   # Особенности оформления
-   features:
-      #- navigation.tabs
-      - navigation.sections
-      - navigation.expand
-      #- toc.integrate # Встроенное оглавление
-      - search.suggest
+  
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: "Переключиться на тёмный режим"
+    
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: "Переключиться на светлый режим"
+      plugins:
+      - git-revision-date-localized:
+            type: date
+            timezone: Europe/Moscow
+            
+  features:
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
 
 extra_css:
-   - stylesheets/extra.css
-   - docs/Pervoe_podkluchenie/media/
+  - stylesheets/extra.css
 
-   # Переопределяем текст для "Table of contents"
 toc_title: Оглавление
 
-дmarkdown_extensions:
-   - attr_list # ← обязательно!
-   - admonition
-   - toc:
-        permalink: true
-   - pymdownx.superfences
-   - pymdownx.highlight
+markdown_extensions:
+  - attr_list
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.highlight
 
 nav:
   - Главная: index.md
-  - Настройка прав на документооборот ГИС Смета ЯНАО : Nastroyka-prav-Interfeys-Dokumentooborot/index.md
+  - Настройка прав на документооборот ГИС Смета ЯНАО: Nastroyka-prav-Interfeys-Dokumentooborot/index.md
   - Руководство ГИС Смета ЯНАО для администратора: RA-LK-2024_YANAO/index.md
-  - Настройка УКЭП в сервисе ЛК ПОЛ: Nastroyka-UKEP-v-servise-LK-POL/index.md 
+  - Настройка УКЭП в сервисе ЛК ПОЛ: Nastroyka-UKEP-v-servise-LK-POL/index.md
   - Первое подключение к ГИС "Смета ЯНАО": Pervoe_podkluchenie/index.md
   - Чек-листы:
     - Перед релизом: checklists/release-checklist.md
   - Справочники:
     - Глоссарий: reference/glossary.md
     - FAQ: faq/index.md
-  - Журнал изменений: changelog.md
+  - Журнал изменений: changes.md
