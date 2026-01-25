@@ -1,14 +1,22 @@
-﻿site_name: Моя документация
+﻿site_name: Документация ЦБ ОГВ ЯНАО
 dev_addr: 127.0.0.1:8000
-livereload: true
 
+# Плагины — на корневом уровне
+plugins:
+  - git-revision-date-localized:
+      type: date
+      timezone: Europe/Moscow
+  - search:
+      lang: ru
+      separator: '[\s\-–—_]+|(?<=[а-яё])(?=[А-ЯЁ])'
+
+# Тема — один блок
 theme:
   name: material
   language: ru
   font:
     text: Roboto
     code: Roboto Mono
-  
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -17,7 +25,6 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: "Переключиться на тёмный режим"
-    
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: indigo
@@ -25,33 +32,37 @@ theme:
       toggle:
         icon: material/weather-night
         name: "Переключиться на светлый режим"
-      plugins:
-      - git-revision-date-localized:
-            type: date
-            timezone: Europe/Moscow
-            
   features:
+    - content.tooltips
     - navigation.sections
     - navigation.expand
+    - search.highlight
     - search.suggest
 
 extra_css:
   - stylesheets/extra.css
-
-toc_title: Оглавление
 
 markdown_extensions:
   - attr_list
   - admonition
   - toc:
       permalink: true
+      title: "Оглавление"
   - pymdownx.superfences
   - pymdownx.highlight
 
 nav:
   - Главная: index.md
-  - Настройка прав на документооборот ГИС Смета ЯНАО: Nastroyka-prav-Interfeys-Dokumentooborot/index.md
-  - Руководство ГИС Смета ЯНАО для администратора: RA-LK-2024_YANAO/index.md
-  - Настройка УКЭП в сервисе ЛК ПОЛ: Nastroyka-UKEP-v-servise-LK-POL/index.md
-  - Первое подключение к ГИС "Смета ЯНАО": Pervoe_podkluchenie/index.md
-  
+  - Мероприятия:
+    - 2026: Meropriyatia/2026/
+    - 2025: Meropriyatia/2025/
+    - 2024: Meropriyatia/2024/
+    - 2023: Meropriyatia/2023/
+    - 2022: Meropriyatia/2022/
+    - 2021: Meropriyatia/2021/
+    - 2020: Meropriyatia/2020/
+    - 2019: Meropriyatia/2019/
+  - Инструкции:
+    - Настройка прав на документооборот ГИС Смета ЯНАО: Nastroyka-prav-Interfeys-Dokumentooborot/index.md
+    - Руководство ГИС Смета ЯНАО для администратора: RA-LK-2024_YANAO/index.md
+    - Первое подключение к ГИС "Смета ЯНАО": Pervoe_podkluchenie/index.md
