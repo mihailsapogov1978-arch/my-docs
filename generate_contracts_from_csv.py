@@ -15,7 +15,6 @@ def main():
         print(f"❌ Файл {csv_file} не найден")
         return
     
-    # ИСПРАВЛЕНО: используем cp1251 вместо utf-8-sig
     with open(csv_file, "r", encoding="cp1251") as f:
         reader = csv.DictReader(f, delimiter=";")
         rows = list(reader)
@@ -47,6 +46,11 @@ def main():
                     year = "архив"
             else:
                 year = "архив"
+            
+            # Пропускаем 2019 год
+            if year == "2019":
+                print(f"⚠️  Пропускаем {reestr_number} (2019 год)")
+                continue
             
             # Создаём папку года
             output_dir = f"docs/Meropriyatia/{year}"
@@ -81,9 +85,32 @@ tags: [закупка, 44-ФЗ]
 - **ИКЗ**: {ikz}
 
 [Полная карточка на zakupki.gov.ru](https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber={reestr_number})
+
+## Требования к технической поддержке
+
+- Консультационная поддержка: 8:30–17:30 (пн–пт, МСК+2)
+- Обновления системы: до вступления в силу изменений в законодательстве РФ
+- Резервное копирование: ежедневно + ежемесячно
+- Удалённое подключение: через защищённую сеть ViPNet
+
+## Поддерживаемые интеграции
+
+- ФНС, СФР, Росстат
+- ЕИС, ЕСИА
+- ГИС «Региональный электронный бюджет ЯНАО»
+- ГИС «Кадровый учёт»
+
+## Диаграмма процесса
+
+> ⚠️ BPMN-схема находится в разработке.
+
+## Связанные доработки
+
+- [Первое подключение к ГИС «Смета ЯНАО»](../Pervoe_podkluchenie/index.md)
+- [Настройка прав на документооборот](../Nastroyka-prav-Interfeys-Dokumentooborot/index.md)
 """
             
-            # Сохраняем файл в UTF-8
+            # Сохраняем файл
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(content)
             
