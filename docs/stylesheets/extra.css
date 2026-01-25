@@ -112,3 +112,60 @@ table.steps td strong {
 table.steps td:first-child {
     font-weight: 400;
 }
+
+/* stylesheets/extra.css */
+
+.table-contracts {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+
+.table-contracts th,
+.table-contracts td {
+  border: 1px solid var(--md-typeset-table-color, #ddd);
+  padding: 8px 12px;
+  vertical-align: top;
+  text-align: left;
+}
+
+/* Тонкие границы — используем цвет из темы Material */
+.table-contracts th {
+  background-color: var(--md-typeset-table-header-bg, #f9f9f9);
+  font-weight: bold;
+}
+
+/* Узкий столбец № */
+.table-contracts th:first-child,
+.table-contracts td:first-child {
+  width: 5%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Наименование */
+.table-contracts th:nth-child(2),
+.table-contracts td:nth-child(2) {
+  width: 60%;
+  word-break: break-word;
+}
+
+/* Дата размещения */
+.table-contracts th:nth-child(3),
+.table-contracts td:nth-child(3) {
+  width: 15%;
+  white-space: nowrap;
+}
+
+/* Цена */
+.table-contracts th:last-child,
+.table-contracts td:last-child {
+  width: 20%;
+  text-align: right;
+}
+
+/* Подсветка при наведении */
+.table-contracts tbody tr:hover {
+  background-color: var(--md-typeset-table-row--hover-bg, rgba(0, 0, 0, 0.03));
+}
