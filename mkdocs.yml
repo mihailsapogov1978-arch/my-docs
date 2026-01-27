@@ -54,14 +54,12 @@ markdown_extensions:
 nav:
   - Главная: index.md
   - Мероприятия:
-    - 2026: Meropriyatia/2026/
-    - 2025: Meropriyatia/2025/
-    - 2024: Meropriyatia/2024/
-    - 2023: Meropriyatia/2023/
-    - 2022: Meropriyatia/2022/
-    - 2021: Meropriyatia/2021/
-    - 2020: Meropriyatia/2020/
+    - 2026: Meropriyatia/2026/index.md
+    - 2025: Meropriyatia/2025/index.md
+    - 2024: Meropriyatia/2024/index.md
+    - 2023: Meropriyatia/2023/index.md
+    - 2022: Meropriyatia/2022/index.md
+    - 2021: Meropriyatia/2021/index.md
+    - 2020: Meropriyatia/2020/index.md
   - Инструкции:
-    - Настройка прав на документооборот ГИС Смета ЯНАО: Nastroyka-prav-Interfeys-Dokumentooborot/index.md
-    - Руководство ГИС Смета ЯНАО для администратора: RA-LK-2024_YANAO/index.md
-    - Первое подключение к ГИС "Смета ЯНАО": Pervoe_podkluchenie/index.md
+    - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie/index.md
