@@ -5,32 +5,29 @@ import sys
 import re
 import os
 
-def fetch_contract(reestr_number):
+def fetch_contract_details(reestr_number):
+    """Получает детали конкретного контракта с zakupki.gov.ru"""
     url = f"https://zakupki.gov.ru/epz/contract/contractCard/common-info.html?reestrNumber={reestr_number}"
     
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
     
-    print(f"Запрашиваем данные для реестрового номера: {reestr_number}", file=sys.stderr)
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    
-    soup = BeautifulSoup(response.text, 'html.parser')
-    
     try:
-        # Вспомогательная функция поиска по метке
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
         def find_value(label_text):
             label = soup.find(string=re.compile(label_text))
             if label:
                 parent = label.parent
-                # Ищем следующий элемент с данными
                 value_elem = parent.find_next(['span', 'div'], class_=re.compile(r'cardMainInfo__content|section__info'))
                 if value_elem:
                     return value_elem.get_text(strip=True)
             return "Не указано"
 
-        # Извлечение данных
         data = {
             "reestr_number": reestr_number,
             "status": find_value(r"Статус контракта"),
@@ -43,40 +40,28 @@ def fetch_contract(reestr_number):
             "stages_count": find_value(r"Количество этапов исполнения контракта"),
             "url": url
         }
+        
+        # Улучшаем даты: если "не указана", пытаемся найти в другом месте
+        if data["start_date"] == "Не указано":
+            # Ищем в блоке "Сроки исполнения"
+            period_block = soup.find(string=re.compile(r"Сроки исполнения"))
+            if period_block:
+                next_span = period_block.find_next('span', class_='cardMainInfo__content')
+                if next_span:
+                    text = next_span.get_text(strip=True)
+                    # Пример: "с 14.01.2026 по 28.07.2026"
+                    dates = re.findall(r'\d{2}\.\d{2}\.\d{4}', text)
+                    if len(dates) >= 2:
+                        data["start_date"] = dates[0]
+                        data["end_date"] = dates[1]
+                    elif len(dates) == 1:
+                        data["start_date"] = dates[0]
 
-        # Извлечение этапов
-        stages = []
-        stages_section = soup.find(string=re.compile(r"Этапы исполнения контракта"))
-        if stages_section:
-            stage_rows = stages_section.find_all_next('tr')[1:]  # Пропускаем заголовок
-            for row in stage_rows[:int(data["stages_count"]) if data["stages_count"].isdigit() else 0]:
-                cols = row.find_all('td')
-                if len(cols) >= 4:
-                    stages.append({
-                        "name": cols[0].get_text(strip=True),
-                        "start": cols[1].get_text(strip=True),
-                        "end": cols[2].get_text(strip=True),
-                        "price": cols[3].get_text(strip=True)
-                    })
-
-        data["stages"] = stages
         return data
         
     except Exception as e:
-        print(f"Ошибка при парсинге: {e}", file=sys.stderr)
-        return {
-            "reestr_number": reestr_number,
-            "status": "Ошибка",
-            "contract_date": "Ошибка",
-            "contract_number": "Ошибка",
-            "subject": "Ошибка",
-            "price": "Ошибка",
-            "start_date": "Ошибка",
-            "end_date": "Ошибка",
-            "stages_count": "Ошибка",
-            "stages": [],
-            "url": url
-        }
+        print(f"❌ Ошибка при получении контракта {reestr_number}: {e}")
+        return None
 
 def main():
     if len(sys.argv) < 2:
@@ -86,33 +71,25 @@ def main():
     reestr = sys.argv[1]
     year = sys.argv[2] if len(sys.argv) > 2 else "2026"
     
-    data = fetch_contract(reestr)
+    data = fetch_contract_details(reestr)
+    if not data:
+        return
     
     # Формируем путь к файлу
     output_dir = f"docs/Meropriyatia/{year}"
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, f"tehn-podderzhka-{year}.md")
+    output_path = os.path.join(output_dir, "tehn-podderzhka-2026.md")
     
-    # Формируем таблицу этапов
-    stages_table = ""
-    if data["stages"]:
-        stages_table = "\n## Этапы исполнения контракта\n\n"
-        stages_table += "| Наименование этапа | Начало | Окончание | Цена этапа |\n"
-        stages_table += "|-------------------|--------|-----------|------------|\n"
-        for stage in data["stages"]:
-            stages_table += f"| {stage['name']} | {stage['start']} | {stage['end']} | {stage['price']} |\n"
-    
-    # Записываем файл в UTF-8
-    with open(output_path, "w", encoding="utf-8") as f:
-        content = f"""---
-title: "Техническая поддержка ГИС «Смета ЯНАО» ({year})"
+    # Генерируем Markdown
+    content = f"""---
+title: "{data['subject'][:60]}..."
 reestr_number: {data['reestr_number']}
 year: {year}
 status: "{data['status']}"
 tags: [техподдержка, zakupki.gov.ru]
 ---
 
-# Техническая поддержка ГИС «Смета ЯНАО» ({year})
+# {data['subject']}
 
 ## Основная информация
 
@@ -124,11 +101,8 @@ tags: [техподдержка, zakupki.gov.ru]
 - **Цена контракта**: {data['price']}
 - **Дата начала исполнения**: {data['start_date']}
 - **Дата окончания исполнения**: {data['end_date']}
-- **Количество этапов**: {data['stages_count']}
 
 [Полный контракт на zakupki.gov.ru]({data['url']})
-
-{stages_table}
 
 ## Требования к технической поддержке
 
@@ -144,15 +118,18 @@ tags: [техподдержка, zakupki.gov.ru]
 - ГИС «Региональный электронный бюджет ЯНАО»
 - ГИС «Кадровый учёт»
 
-## Диаграмма процесса
+## План мероприятий
 
-> ⚠️ BPMN-схема находится в разработке.
+Таблица «КАЛЕНДАРНЫЙ ПЛАН» будет добавлена позже.
 
 ## Связанные доработки
 
 - [Первое подключение к ГИС «Смета ЯНАО»](../Pervoe_podkluchenie/index.md)
 - [Настройка прав на документооборот](../Nastroyka-prav-Interfeys-Dokumentooborot/index.md)
 """
+    
+    # Записываем файл
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(content)
     
     print(f"✅ Файл сохранён: {output_path}", file=sys.stderr)
