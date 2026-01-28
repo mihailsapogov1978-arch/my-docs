@@ -16,7 +16,7 @@ title: Мероприятия 2025 года
 <tbody>
 <tr class="contract-row" data-target="contract-1">
 <td>1</td>
-<td>Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО»</td>
+<td>Оказание услуг по технической поддержке программного продукта ГИС Смета ЯНАО</td>
 <td>16.12.2025</td>
 <td style="text-align: right;">40 887 000.00</td>
 </tr>
@@ -34,7 +34,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325016615" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p><a href="contract-0190200000325016615/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -43,7 +43,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-2">
 <td>2</td>
-<td>Оказание услуг по настройке подписания документов разных субъектов учета в едином интерфейсе ГИС «Смета ЯНАО»</td>
+<td>Оказание услуг по настройке подписания документов разных субъектов учета в едином интерфейсе ГИС Смета ЯНАО</td>
 <td>21.11.2025</td>
 <td style="text-align: right;">2 200 000.00</td>
 </tr>
@@ -61,7 +61,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325015002" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -88,7 +88,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325014723" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -97,7 +97,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-4">
 <td>4</td>
-<td>Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета»</td>
+<td>Оказание услуг по настройке программного продукта ГИС Смета ЯНАО в части обеспечения электронного взаимодействия с внешней информационной системой ГИС Единая система кадрового учета</td>
 <td>05.11.2025</td>
 <td style="text-align: right;">5 250 000.00</td>
 </tr>
@@ -115,7 +115,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325014020" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -124,7 +124,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-5">
 <td>5</td>
-<td>Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета»</td>
+<td>Оказание услуг по настройке программного продукта ГИС Смета ЯНАО в части обеспечения электронного взаимодействия с внешней информационной системой ГИС Единая система кадрового учета</td>
 <td>01.10.2025</td>
 <td style="text-align: right;">15 925 000.00</td>
 </tr>
@@ -142,7 +142,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325012020" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -169,7 +169,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325011892" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -178,7 +178,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-7">
 <td>7</td>
-<td>Оказание услуг по настройке программного продукта государственная информационная система «Смета Ямало-Ненецкого автономного округа» в части автоматизации работы наградного отдела аппарата Губернатора Ямало-Ненецкого автономного округа</td>
+<td>Оказание услуг по настройке программного продукта государственная информационная система Смета Ямало-Ненецкого автономного округа в части автоматизации работы наградного отдела аппарата Губернатора Ямало-Ненецкого автономного округа</td>
 <td>01.07.2025</td>
 <td style="text-align: right;">900 000.00</td>
 </tr>
@@ -196,7 +196,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325008201" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -205,7 +205,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-8">
 <td>8</td>
-<td>Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО»</td>
+<td>Оказание услуг по технической поддержке программного продукта ГИС Смета ЯНАО</td>
 <td>05.06.2025</td>
 <td style="text-align: right;">29 095 750.00</td>
 </tr>
@@ -223,7 +223,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325007340" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -232,7 +232,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-9">
 <td>9</td>
-<td>Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО»</td>
+<td>Оказание услуг по миграции баз данных в единую программную платформу ГИС Смета ЯНАО</td>
 <td>28.04.2025</td>
 <td style="text-align: right;">142 100 000.00</td>
 </tr>
@@ -250,7 +250,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325005501" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -277,7 +277,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325005490" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -286,7 +286,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-11">
 <td>11</td>
-<td>Оказание услуг по настройке государственной информационной системы «Смета Ямало-Ненецкого автономного округа» в части отправки электронной отчётности</td>
+<td>Оказание услуг по настройке государственной информационной системы Смета Ямало-Ненецкого автономного округа в части отправки электронной отчётности</td>
 <td>12.02.2025</td>
 <td style="text-align: right;">3 500 000.00</td>
 </tr>
@@ -304,7 +304,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325000989" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -313,7 +313,7 @@ title: Мероприятия 2025 года
 </tr>
 <tr class="contract-row" data-target="contract-12">
 <td>12</td>
-<td>Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО»</td>
+<td>Оказание услуг по миграции баз данных в единую программную платформу ГИС Смета ЯНАО</td>
 <td>11.02.2025</td>
 <td style="text-align: right;">135 500 000.00</td>
 </tr>
@@ -331,7 +331,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325000889" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2025.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
