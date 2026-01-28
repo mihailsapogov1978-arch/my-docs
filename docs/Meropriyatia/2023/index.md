@@ -34,7 +34,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323015416" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -61,7 +61,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323014381" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -88,7 +88,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323011529" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -115,7 +115,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323010919" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -142,7 +142,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323010167" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -151,7 +151,7 @@ title: Мероприятия 2023 года
 </tr>
 <tr class="contract-row" data-target="contract-6">
 <td>6</td>
-<td>Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах</td>
+<td>Оказание услуг по расширению функциональных возможностей программного продукта  Автоматизированная система бюджетного учета Смета в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах</td>
 <td>19.07.2023</td>
 <td style="text-align: right;">1 970 000.00</td>
 </tr>
@@ -169,7 +169,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323008724" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -196,7 +196,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323008594" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -223,7 +223,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323007971" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -232,7 +232,7 @@ title: Мероприятия 2023 года
 </tr>
 <tr class="contract-row" data-target="contract-9">
 <td>9</td>
-<td>Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части реализации функционала «Личный кабинет подотчетного лица»</td>
+<td>Оказание услуг по расширению функциональных возможностей программного продукта  Автоматизированная система бюджетного учета Смета в части реализации функционала Личный кабинет подотчетного лица</td>
 <td>26.06.2023</td>
 <td style="text-align: right;">3 030 000.00</td>
 </tr>
@@ -250,7 +250,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323007970" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -259,7 +259,7 @@ title: Мероприятия 2023 года
 </tr>
 <tr class="contract-row" data-target="contract-10">
 <td>10</td>
-<td>Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах</td>
+<td>Оказание услуг по расширению функциональных возможностей программного продукта  Автоматизированная система бюджетного учета Смета в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах</td>
 <td>26.06.2023</td>
 <td style="text-align: right;">1 970 000.00</td>
 </tr>
@@ -277,7 +277,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323007969" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -304,7 +304,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323003814" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -331,7 +331,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323001948" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -358,7 +358,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323000010" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p><a href="gk_tp_2023.md">Проект ГК</a></p>
+<p></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
