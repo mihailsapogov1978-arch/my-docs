@@ -1,0 +1,289 @@
+/* ===== ТЕСТ РАБОТЫ CSS ===== */
+/* Если видите красную рамку - CSS работает! */
+
+/* ===== ПЛАВНЫЙ СКРОЛЛ ===== */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* ===== ВЫРАВНИВАНИЕ НАВИГАЦИИ ===== */
+.md-nav {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.md-nav__list {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.md-nav__item {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.md-nav__link {
+    margin: 0 !important;
+    padding: 0.4rem 0.8rem !important;
+    line-height: 1.2 !important;
+    min-height: auto !important;
+}
+
+/* Вложенные пункты */
+.md-nav__item .md-nav__item .md-nav__link {
+    padding-left: 1.2rem !important;
+}
+
+/* Активный пункт */
+.md-nav__item--active .md-nav__link {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.custom-large {
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.custom-small {
+    font-size: 0.85em;
+    color: #666;
+}
+
+.custom-highlight {
+    background-color: #fffacd;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.custom-heading {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #2c3e50;
+    border-left: 4px solid #3498db;
+    padding-left: 10px;
+}
+
+.md-typeset h2 {
+    font-size: 1.1em;
+    font-weight: 400;
+    color: #2c3e50;
+    border-left: 4px solid #3498db;
+    padding-left: 10px;
+    margin-top: 1.5em;
+}
+
+.md-typeset h1 {
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+/* Стили для нумерованных шагов в таблице */
+table.steps {
+    border: none;
+    margin: 1em 0;
+}
+
+table.steps td {
+    border: none;
+    padding: 4px 8px;
+    vertical-align: top;
+}
+
+table.steps tr td:first-child {
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+}
+
+table.steps tr {
+    background: transparent;
+}
+
+table.steps tr:hover {
+    background: #f5f5f5;
+}
+
+/* Убрать жирность у цифр в таблице steps */
+table.steps td strong {
+    font-weight: 400 !important;
+}
+
+/* Или у всех ячеек первого столбца */
+table.steps td:first-child {
+    font-weight: 400;
+}
+
+/* stylesheets/extra.css */
+
+.table-contracts {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+
+.table-contracts th,
+.table-contracts td {
+  border: 1px solid var(--md-typeset-table-color, #ddd);
+  padding: 8px 12px;
+  vertical-align: top;
+  text-align: left;
+}
+
+/* Тонкие границы — используем цвет из темы Material */
+.table-contracts th {
+  background-color: var(--md-typeset-table-header-bg, #f9f9f9);
+  font-weight: bold;
+}
+
+/* Узкий столбец № */
+.table-contracts th:first-child,
+.table-contracts td:first-child {
+  width: 5%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Наименование */
+.table-contracts th:nth-child(2),
+.table-contracts td:nth-child(2) {
+  width: 60%;
+  word-break: break-word;
+}
+
+/* Дата размещения */
+.table-contracts th:nth-child(3),
+.table-contracts td:nth-child(3) {
+  width: 15%;
+  white-space: nowrap;
+}
+
+/* Цена */
+.table-contracts th:last-child,
+.table-contracts td:last-child {
+  width: 20%;
+  text-align: right;
+}
+
+/* Подсветка при наведении */
+.table-contracts tbody tr:hover {
+  background-color: var(--md-typeset-table-row--hover-bg, rgba(0, 0, 0, 0.03));
+}
+
+/* Интерактивные карточки */
+.interactive-contracts .contract-card {
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.interactive-contracts .contract-card h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.interactive-contracts .contract-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 16px;
+}
+
+.interactive-contracts .contract-card li {
+  margin-bottom: 4px;
+}
+
+/* Интерактивные карточки */
+.interactive-contracts .contract-card {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  margin-top: 8px;
+  font-size: 0.85em; /* Мельче текст */
+  display: flex;
+  gap: 20px;
+}
+
+.interactive-contracts .contract-info {
+  flex: 1;
+}
+
+.interactive-contracts .contract-links {
+  flex: 1;
+}
+
+.interactive-contracts .contract-card h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.interactive-contracts .contract-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.interactive-contracts .contract-card li {
+  margin-bottom: 3px;
+}
+
+.interactive-contracts .contract-card p {
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+/* --- Универсальная стилизация таблиц в контрактах --- */
+.contract-table,
+table.contract-table,
+.md-typeset table {
+  width: 100% !important;
+  table-layout: auto !important;
+  font-size: 0.82rem;
+  margin-bottom: 1.2rem;
+}
+
+.contract-table th,
+.contract-table td,
+.md-typeset table th,
+.md-typeset table td {
+  padding: 6px 8px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  vertical-align: top;
+}
+
+/* --- Специфика для очень широких таблиц (Таблица 4, 5 и др.) --- */
+.contract-table th:nth-child(4),
+.contract-table td:nth-child(4),
+.contract-table th:nth-child(5),
+.contract-table td:nth-child(5) {
+  font-size: 0.78rem;
+  max-width: 180px;
+}
+
+/* --- Принудительный перенос длинных значений внутри ячеек (например, <GUID>, <Data>) --- */
+.contract-table td code,
+.contract-table td > span {
+  white-space: normal !important;
+  word-break: break-all;
+}
+
+/* --- Защита от горизонтальной прокрутки в контенте --- */
+.md-typeset {
+  overflow-x: visible !important;
+}
+
+/* --- Если таблица всё ещё выходит за границы — делаем её скроллируемой только внутри блока (без полосы у всего документа) */
+.contract-table-wrapper {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+.contract-table-wrapper table {
+  min-width: 100%;
+}

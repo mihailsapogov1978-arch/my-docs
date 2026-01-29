@@ -1,0 +1,62 @@
+dev_addr: 127.0.0.1:8000
+extra_css:
+- stylesheets/extra.css
+extra_javascript:
+- search.js
+markdown_extensions:
+- attr_list
+- admonition
+- toc:
+    permalink: true
+    title: Оглавление
+- pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+- pymdownx.highlight
+nav:
+- Главная: index.md
+- Мероприятия:
+  - 2026: Meropriyatia/2026/index.md
+  - 2025: Meropriyatia/2025/index.md
+  - 2024: Meropriyatia/2024/index.md
+  - 2023: Meropriyatia/2023/index.md
+  - 2022: Meropriyatia/2022/index.md
+  - 2021: Meropriyatia/2021/index.md
+  - 2020: Meropriyatia/2020/index.md
+- Инструкции:
+  - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie/index.md
+plugins:
+- search:
+    lang: ru
+    prebuild_index: true
+    separator: '[\s\-–—_]+'
+site_name: Документация ЦБ ОГВ ЯНАО
+theme:
+  features:
+  - content.tooltips
+  - navigation.sections
+  - navigation.expand
+  - search.highlight
+  - search.suggest
+  font:
+    code: Roboto Mono
+    text: Roboto
+  language: ru
+  name: material
+  palette:
+  - accent: indigo
+    media: '(prefers-color-scheme: light)'
+    primary: indigo
+    scheme: default
+    toggle:
+      icon: material/weather-sunny
+      name: Переключиться на тёмный режим
+  - accent: indigo
+    media: '(prefers-color-scheme: dark)'
+    primary: indigo
+    scheme: slate
+    toggle:
+      icon: material/weather-night
+      name: Переключиться на светлый режим
