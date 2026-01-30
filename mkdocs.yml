@@ -1,8 +1,8 @@
 dev_addr: 127.0.0.1:8000
 extra_css:
-- stylesheets/extra.css
+  - stylesheets/extra.css
 extra_javascript:
-- search.js
+  - search.js
 markdown_extensions:
 - attr_list
 - admonition
@@ -23,6 +23,7 @@ nav:
   - 2020: Meropriyatia/2020/index.md
 - Инструкции:
   - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie/index.md
+  - Настройка УКЭП в ЛК ПОЛ: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
 plugins:
 - git-revision-date-localized:
     timezone: Europe/Moscow
