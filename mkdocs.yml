@@ -22,12 +22,12 @@ nav:
   - 2021: Meropriyatia/2021/index.md
   - 2020: Meropriyatia/2020/index.md
 - Инструкции:
-  - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie/index.md
+  - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
   - Настройка УКЭП в ЛК ПОЛ: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
 plugins:
-- git-revision-date-localized:
-    timezone: Europe/Moscow
-    type: date
+# - git-revision-date-localized:
+#     timezone: Europe/Moscow
+#     type: date
 - search:
     lang: ru
     prebuild_index: true
