@@ -12,18 +12,25 @@ markdown_extensions:
 - pymdownx.superfences
 - pymdownx.highlight
 nav:
-- Главная: index.md
-- Мероприятия:
-  - 2026: Meropriyatia/2026/index.md
-  - 2025: Meropriyatia/2025/index.md
-  - 2024: Meropriyatia/2024/index.md
-  - 2023: Meropriyatia/2023/index.md
-  - 2022: Meropriyatia/2022/index.md
-  - 2021: Meropriyatia/2021/index.md
-  - 2020: Meropriyatia/2020/index.md
-- Инструкции:
-  - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
-  - Настройка УКЭП в ЛК ПОЛ: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
+  - Главная: index.md
+  - Контракты 2019 - 2025:
+    - 2025: Meropriyatia/2025/index.md
+    - 2024: Meropriyatia/2024/index.md
+    - 2023: Meropriyatia/2023/index.md
+    - 2022: Meropriyatia/2022/index.md
+    - 2021: Meropriyatia/2021/index.md
+    - 2020: Meropriyatia/2020/index.md
+  - Проекты 2026:
+    - Дорожная карта: roadmap.md
+    - Личный кабинет и ИИ: lk.md
+    - Интеграция с Тезис: tezis.md
+    - Отдельные доработки: dopfunction.md
+  - Шаблоны и чек-листы: templates.md
+  - Заявки и звонки: call.md
+  - Инструкции:
+    - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
+    - Настройка УКЭП в ЛК ПОЛ: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
+    - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
 plugins:
 # - git-revision-date-localized:
 #     timezone: Europe/Moscow
@@ -35,28 +42,29 @@ plugins:
 site_name: Документация ЦБ ОГВ ЯНАО
 theme:
   features:
-  - content.tooltips
-  - navigation.sections
-  - navigation.expand
-  - search.highlight
-  - search.suggest
+    - content.tooltips
+    - navigation.sections
+    - navigation.expand
+    - navigation.tabs
+    - search.highlight
+    - search.suggest
   font:
     code: Roboto Mono
     text: Roboto
   language: ru
   name: material
   palette:
-  - accent: indigo
-    media: '(prefers-color-scheme: light)'
-    primary: indigo
-    scheme: default
-    toggle:
+    - accent: indigo
+      media: '(prefers-color-scheme: light)'
+      primary: indigo
+      scheme: default
+      toggle:
       icon: material/weather-sunny
       name: Переключиться на тёмный режим
-  - accent: indigo
-    media: '(prefers-color-scheme: dark)'
-    primary: indigo
-    scheme: slate
-    toggle:
+    - accent: indigo
+      media: '(prefers-color-scheme: dark)'
+      primary: indigo
+      scheme: slate
+      toggle:
       icon: material/weather-night
       name: Переключиться на светлый режим

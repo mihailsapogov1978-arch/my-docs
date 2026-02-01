@@ -233,3 +233,53 @@ table.steps td:first-child {
   margin: 0 0 8px 0;
   line-height: 1.3;
 }
+
+/* Увеличиваем отступ под заголовком "Оглавление" */
+.md-sidebar__toc .md-nav__title {
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07); /* опционально: добавить тонкую линию */
+  margin-bottom: 0.8rem; /* если нужно ещё больше пространства */
+}
+
+/* Опционально: жирный шрифт и цвет для акцента */
+.md-sidebar__toc .md-nav__title {
+  font-weight: 600;
+  color: var(--md-default-fg-color--bold);
+}
+
+/* === АДАПТИВНЫЕ ТАБЛИЦЫ ДЛЯ ВСЕХ ОБЫЧНЫХ ТАБЛИЦ === */
+.md-typeset > table {
+  width: 100% !important;
+  table-layout: fixed !important; /* ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ */
+  border-collapse: collapse;
+  margin: 1em 0;
+  display: table; /* ← восстанавливаем семантику таблицы */
+}
+
+.md-typeset > table th,
+.md-typeset > table td {
+  padding: 8px 10px !important;
+  font-size: 0.875rem;
+  vertical-align: top;
+  text-align: left;
+  word-break: break-word !important;
+  overflow-wrap: break-word;
+  white-space: normal !important;
+}
+
+/* === ОТСТУП ПОД "ОГЛАВЛЕНИЕМ" В ПРАВОЙ КОЛОНКЕ === */
+.md-sidebar--secondary .md-nav__title {
+  padding-bottom: 0.5rem !important;
+  margin-bottom: 0.8rem !important;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.07);*/
+  font-weight: 600;
+  color: var(--md-default-fg-color--bold);
+}
+
+/* Автоматическая обёртка при переполнении */
+.md-typeset > div > table {
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

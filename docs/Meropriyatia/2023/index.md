@@ -61,7 +61,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323014381" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000323014381/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -142,7 +142,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323010167" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000323010167/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -223,7 +223,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323007971" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000323007971/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -331,7 +331,7 @@ title: Мероприятия 2023 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323001948" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000323001948/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>

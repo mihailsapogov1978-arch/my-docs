@@ -9,7 +9,7 @@ title: Мероприятия 2025 года
 <tr>
 <th>№</th>
 <th>Наименование</th>
-<th>Дата размещения</th>
+<th>Дата размещения<br> и номер контракта</th>
 <th>Цена</th>
 </tr>
 </thead>
@@ -142,7 +142,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325012020" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000325012020/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -169,7 +169,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325011892" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000325011892/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -196,7 +196,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325008201" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000325008201/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -223,7 +223,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325007340" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000325007340/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -250,7 +250,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325005501" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000325005501/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>
@@ -277,7 +277,7 @@ title: Мероприятия 2025 года
 </div>
 <div class="contract-links">
 <p><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325005490" target="_blank">Полный контракт на zakupki.gov.ru</a></p>
-<p></p>
+<p><a href="contract-0190200000325005490/">Смотреть ТЗ</a></p>
 <h4>План мероприятий</h4>
 <p>План мероприятий будет добавлен позже.</p>
 </div>

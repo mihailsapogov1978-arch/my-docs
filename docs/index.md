@@ -7,3 +7,14 @@
 - Ссылки на контракты и YouGile.
 
 Используйте **поиск** в правом верхнем углу для быстрого нахождения функционала.
+
+# Портал знаний ГИС «Смета ЯНАО»
+
+[:fontawesome-solid-file-contract: Контракты](contracts/) • 
+[:fontawesome-solid-diagram-project: Проекты 2026](projects/) • 
+[:fontawesome-solid-lightbulb: Быстрые решения](quick-guides/)
+
+## Быстрый доступ
+- [Полные инструкции (внешний сайт)](https://smeta-app.yanao.ru/docs)
+- [Техническая поддержка](mailto:support@yanao.ru)
+- [Чат в Teams](msteams://...)
