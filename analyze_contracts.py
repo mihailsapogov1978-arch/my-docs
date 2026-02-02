@@ -6,7 +6,7 @@ from pathlib import Path
 from decimal import Decimal
 
 def format_currency_no_symbol(value: Decimal) -> str:
-    """Форматирует как '1 234 567,00' — без ₽, без жирности"""
+    """Форматирует как '1 234 567,00' — без ₽"""
     s = f"{value:.2f}"
     integer_part, frac_part = s.split('.')
     parts = []
@@ -78,8 +78,27 @@ def load_contracts_from_csv(csv_path: Path):
 
     return contracts_by_year
 
+def categorize_contract(name: str) -> str:
+    """Классификация контрактов по типу работ"""
+    name_lower = name.lower()
+    if 'миграц' in name_lower or 'перенос' in name_lower or 'переезд' in name_lower:
+        return "Миграция данных"
+    elif 'технической поддержк' in name_lower or 'техподдержк' in name_lower or 'сопровождение' in name_lower:
+        return "Техническая поддержка"
+    elif ('настройк' in name_lower or 'развити' in name_lower or 'адаптация' in name_lower or
+          'доработка' in name_lower or 'расширение' in name_lower or 'настройка' in name_lower):
+        return "Настройка/Развитие системы"
+    elif 'предпроектн' in name_lower or 'обследован' in name_lower or 'анализ' in name_lower:
+        return "Предпроектные работы"
+    elif 'лицензи' in name_lower or 'право использован' in name_lower or 'аренда ПО' in name_lower:
+        return "Лицензирование ПО"
+    elif 'консалтинг' in name_lower or 'экспертиза' in name_lower or 'аудит' in name_lower:
+        return "Консалтинг"
+    else:
+        return "Прочее"
+
 def generate_md(contracts_by_year, output_path: Path):
-    years = sorted(contracts_by_year.keys())
+    years = sorted(contracts_by_year.keys(), reverse=True)  # ← обратный порядок: 2025 → 2020
     all_contracts = [c for year in years for c in contracts_by_year[year]]
     total_count = len(all_contracts)
     total_sum = sum(c["price"] for c in all_contracts)
@@ -90,35 +109,35 @@ def generate_md(contracts_by_year, output_path: Path):
     md.append("## Общая статистика")
     md.append("")
 
-    # === ТАБЛИЦА: Год | Контрактов | Сумма ===
+    # === ТАБЛИЦА 1: Год | Контрактов | Сумма ===
     md.append('<div style="overflow-x:auto;">')
-    md.append('<table class="table-stats" style="width:100%; border-collapse:collapse; font-size:0.9em; margin-bottom:20px;">')
+    md.append('<table class="table-stats" style="width:100%; border-collapse:collapse; font-size:0.85em;">')
     md.append("<thead>")
-    md.append('<tr style="background-color:#2c3e50; color:white; font-weight:bold;">')
-    md.append('<th style="padding:10px; text-align:left; width:25%;">Год</th>')
-    md.append('<th style="padding:10px; text-align:center; width:25%;">Контрактов</th>')
-    md.append('<th style="padding:10px; text-align:right; width:50%;">Сумма</th>')
+    md.append('<tr style="background-color:#f5f7fa; font-weight:bold;">')
+    md.append('<th style="padding:6px; text-align:left;">Год</th>')
+    md.append('<th style="padding:6px; text-align:center;">Контрактов</th>')
+    md.append('<th style="padding:6px; text-align:right;">Сумма</th>')
     md.append("</tr>")
     md.append("</thead>")
     md.append("<tbody>")
 
-    for year in years:
+    for year in sorted(contracts_by_year.keys()):  # ← годы в прямом порядке в таблице (2020 → 2025)
         contracts = contracts_by_year[year]
         count = len(contracts)
         year_sum = sum(c["price"] for c in contracts)
         md.append(
-            f'<tr style="border-bottom:1px solid #ddd;">'
-            f'<td style="padding:8px; font-weight:bold;">{year}</td>'
-            f'<td style="padding:8px; text-align:center;">{count}</td>'
-            f'<td style="padding:8px; text-align:right; font-weight:bold;">{format_currency_no_symbol(year_sum)}</td>'
+            f'<tr style="border-bottom:1px solid #eee;">'
+            f'<td style="padding:6px; font-weight:bold;">{year}</td>'  # ← жирный (зелёный)
+            f'<td style="padding:6px; text-align:center;">{count}</td>'  # ← обычный (красный)
+            f'<td style="padding:6px; text-align:right;">{format_currency_no_symbol(year_sum)}</td>'  # ← обычный
             f'</tr>'
         )
 
     md.append(
-        f'<tr style="background-color:#34495e; color:white; font-weight:bold;">'
-        f'<td style="padding:10px;">Итого</td>'
-        f'<td style="padding:10px; text-align:center;">{total_count}</td>'
-        f'<td style="padding:10px; text-align:right;">{format_currency_no_symbol(total_sum)}</td>'
+        f'<tr style="border-bottom:1px solid #eee; background-color:#f8f9fa; font-weight:bold;">'
+        f'<td style="padding:6px;">Итого</td>'  # ← жирный (зелёный)
+        f'<td style="padding:6px; text-align:center;">{total_count}</td>'  # ← обычный
+        f'<td style="padding:6px; text-align:right;">{format_currency_no_symbol(total_sum)}</td>'  # ← обычный
         f'</tr>'
     )
     md.append("</tbody>")
@@ -126,28 +145,7 @@ def generate_md(contracts_by_year, output_path: Path):
     md.append("</div>")
     md.append("")
 
-    # === НОВАЯ ТАБЛИЦА: Распределение по типам работ ===
-    md.append("## Распределение по типам работ")
-    md.append("")
-
-    # Классификация
-    def categorize_contract(name: str) -> str:
-        name_lower = name.lower()
-        if 'миграц' in name_lower or 'перенос' in name_lower or 'переезд' in name_lower:
-            return "Миграция данных"
-        elif 'технической поддержк' in name_lower or 'техподдержк' in name_lower or 'сопровождение' in name_lower:
-            return "Техническая поддержка"
-        elif ('настройк' in name_lower or 'развити' in name_lower or 'адаптация' in name_lower or 'доработка' in name_lower or 'расширение' in name_lower):
-            return "Настройка/Развитие системы"
-        elif 'предпроектн' in name_lower or 'обследован' in name_lower or 'анализ' in name_lower:
-            return "Предпроектные работы"
-        elif 'лицензи' in name_lower or 'право использован' in name_lower or 'аренда ПО' in name_lower:
-            return "Лицензирование ПО"
-        elif 'консалтинг' in name_lower or 'экспертиза' in name_lower or 'аудит' in name_lower:
-            return "Консалтинг"
-        else:
-            return "Прочее"
-
+    # === ТАБЛИЦА 2: Распределение по типам работ ===
     type_stats = {}
     for c in all_contracts:
         cat = categorize_contract(c["name"])
@@ -156,17 +154,18 @@ def generate_md(contracts_by_year, output_path: Path):
         type_stats[cat]["count"] += 1
         type_stats[cat]["sum"] += c["price"]
 
-    # Сортировка: по убыванию суммы
     sorted_types = sorted(type_stats.items(), key=lambda x: x[1]["sum"], reverse=True)
 
+    md.append("## Распределение по типам работ")
+    md.append("")
     md.append('<div style="overflow-x:auto;">')
-    md.append('<table class="table-types" style="width:100%; border-collapse:collapse; font-size:0.9em;">')
+    md.append('<table class="table-types" style="width:100%; border-collapse:collapse; font-size:0.85em;">')
     md.append("<thead>")
-    md.append('<tr style="background-color:#27ae60; color:white; font-weight:bold;">')
-    md.append('<th style="padding:8px; text-align:left;">Тип работ</th>')
-    md.append('<th style="padding:8px; text-align:center;">Контрактов</th>')
-    md.append('<th style="padding:8px; text-align:right;">Сумма</th>')
-    md.append('<th style="padding:8px; text-align:right;">% от общей суммы</th>')
+    md.append('<tr style="background-color:#f5f7fa; font-weight:bold;">')
+    md.append('<th style="padding:6px; text-align:left;">Тип работ</th>')
+    md.append('<th style="padding:6px; text-align:center;">Контрактов</th>')
+    md.append('<th style="padding:6px; text-align:right;">Сумма</th>')
+    md.append('<th style="padding:6px; text-align:right;">% от общей суммы</th>')
     md.append("</tr>")
     md.append("</thead>")
     md.append("<tbody>")
@@ -175,10 +174,10 @@ def generate_md(contracts_by_year, output_path: Path):
         pct = (stats["sum"] / total_sum * 100) if total_sum > 0 else Decimal('0')
         md.append(
             f'<tr style="border-bottom:1px solid #eee;">'
-            f'<td style="padding:6px; font-weight:bold;">{cat}</td>'
-            f'<td style="padding:6px; text-align:center;">{stats["count"]}</td>'
-            f'<td style="padding:6px; text-align:right; font-weight:bold;">{format_currency_no_symbol(stats["sum"])}</td>'
-            f'<td style="padding:6px; text-align:right; color:#27ae60; font-weight:bold;">{pct:.1f}%</td>'
+            f'<td style="padding:6px; font-weight:bold;">{cat}</td>'  # ← жирный (зелёный)
+            f'<td style="padding:6px; text-align:center;">{stats["count"]}</td>'  # ← обычный
+            f'<td style="padding:6px; text-align:right;">{format_currency_no_symbol(stats["sum"])}</td>'  # ← обычный
+            f'<td style="padding:6px; text-align:right; color:#27ae60;">{pct:.1f}%</td>'  # ← обычный
             f'</tr>'
         )
 
@@ -187,7 +186,7 @@ def generate_md(contracts_by_year, output_path: Path):
     md.append("</div>")
     md.append("")
 
-    # === ОСТАЛЬНОЕ: Детальные таблицы по годам — без изменений ===
+    # === ДЕТАЛЬНЫЕ ТАБЛИЦЫ ПО ГОДАМ (в обратном порядке: 2025 → 2020) ===
     for year in years:
         md.append(f"## {year} год")
         md.append("")
@@ -210,7 +209,7 @@ def generate_md(contracts_by_year, output_path: Path):
                 f'<td style="padding:6px; text-align:center;">{idx}</td>'
                 f'<td style="padding:6px; word-break:break-word;">{c["name"]}</td>'
                 f'<td style="padding:6px; text-align:center;">{date_and_num}</td>'
-                f'<td style="padding:6px; text-align:right; white-space:nowrap; font-weight:bold;">{price_str}</td>'
+                f'<td style="padding:6px; text-align:right; white-space:nowrap;">{price_str}</td>'
                 f'</tr>'
             )
         md.append("</tbody>")
