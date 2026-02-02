@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 import re
 import pandas as pd
 from pathlib import Path
@@ -32,6 +31,7 @@ def load_contracts_from_csv(csv_path: Path):
         reg_raw = str(row.get('Реестровый номер закупки', '')).strip()
         if not reg_raw or reg_raw == 'nan':
             continue
+
         reg_clean = ''.join(filter(str.isdigit, reg_raw))
         if len(reg_clean) < 15:
             continue
@@ -44,9 +44,12 @@ def load_contracts_from_csv(csv_path: Path):
         try:
             price_raw = str(row.get('Начальная (максимальная) цена контракта', '')).strip()
             if price_raw and price_raw != 'nan':
-                price_val = Decimal(price_raw)
+                # Обработка российского формата: замена запятой на точку и удаление пробелов
+                price_clean = price_raw.replace(' ', '').replace(',', '.')
+                price_val = Decimal(price_clean)
         except:
             pass
+
         if price_val is None:
             continue
 
@@ -56,14 +59,12 @@ def load_contracts_from_csv(csv_path: Path):
 
         last5 = reg_clean[-5:] if len(reg_clean) >= 5 else reg_clean
         year = extract_year_from_date(date_raw)
-
         contract = {
             "name": name,
             "date": date_raw,
             "last5": last5,
             "price": price_val
         }
-
         if year not in contracts_by_year:
             contracts_by_year[year] = []
         contracts_by_year[year].append(contract)
@@ -88,11 +89,105 @@ def generate_md(contracts_by_year, output_path: Path):
     md.append("")
     md.append("## Общая статистика")
     md.append("")
-    md.append(f"- **Всего контрактов:** {total_count}")
-    md.append(f"- **Общая сумма:** {format_currency_no_symbol(total_sum)}")
+
+    # === ТАБЛИЦА: Год | Контрактов | Сумма ===
+    md.append('<div style="overflow-x:auto;">')
+    md.append('<table class="table-stats" style="width:100%; border-collapse:collapse; font-size:0.9em; margin-bottom:20px;">')
+    md.append("<thead>")
+    md.append('<tr style="background-color:#2c3e50; color:white; font-weight:bold;">')
+    md.append('<th style="padding:10px; text-align:left; width:25%;">Год</th>')
+    md.append('<th style="padding:10px; text-align:center; width:25%;">Контрактов</th>')
+    md.append('<th style="padding:10px; text-align:right; width:50%;">Сумма</th>')
+    md.append("</tr>")
+    md.append("</thead>")
+    md.append("<tbody>")
+
+    for year in years:
+        contracts = contracts_by_year[year]
+        count = len(contracts)
+        year_sum = sum(c["price"] for c in contracts)
+        md.append(
+            f'<tr style="border-bottom:1px solid #ddd;">'
+            f'<td style="padding:8px; font-weight:bold;">{year}</td>'
+            f'<td style="padding:8px; text-align:center;">{count}</td>'
+            f'<td style="padding:8px; text-align:right; font-weight:bold;">{format_currency_no_symbol(year_sum)}</td>'
+            f'</tr>'
+        )
+
+    md.append(
+        f'<tr style="background-color:#34495e; color:white; font-weight:bold;">'
+        f'<td style="padding:10px;">Итого</td>'
+        f'<td style="padding:10px; text-align:center;">{total_count}</td>'
+        f'<td style="padding:10px; text-align:right;">{format_currency_no_symbol(total_sum)}</td>'
+        f'</tr>'
+    )
+    md.append("</tbody>")
+    md.append("</table>")
+    md.append("</div>")
     md.append("")
 
-    # Таблицы по годам — только заголовки ## Год, без списка сверху
+    # === НОВАЯ ТАБЛИЦА: Распределение по типам работ ===
+    md.append("## Распределение по типам работ")
+    md.append("")
+
+    # Классификация
+    def categorize_contract(name: str) -> str:
+        name_lower = name.lower()
+        if 'миграц' in name_lower or 'перенос' in name_lower or 'переезд' in name_lower:
+            return "Миграция данных"
+        elif 'технической поддержк' in name_lower or 'техподдержк' in name_lower or 'сопровождение' in name_lower:
+            return "Техническая поддержка"
+        elif ('настройк' in name_lower or 'развити' in name_lower or 'адаптация' in name_lower or 'доработка' in name_lower or 'расширение' in name_lower):
+            return "Настройка/Развитие системы"
+        elif 'предпроектн' in name_lower or 'обследован' in name_lower or 'анализ' in name_lower:
+            return "Предпроектные работы"
+        elif 'лицензи' in name_lower or 'право использован' in name_lower or 'аренда ПО' in name_lower:
+            return "Лицензирование ПО"
+        elif 'консалтинг' in name_lower or 'экспертиза' in name_lower or 'аудит' in name_lower:
+            return "Консалтинг"
+        else:
+            return "Прочее"
+
+    type_stats = {}
+    for c in all_contracts:
+        cat = categorize_contract(c["name"])
+        if cat not in type_stats:
+            type_stats[cat] = {"count": 0, "sum": Decimal('0')}
+        type_stats[cat]["count"] += 1
+        type_stats[cat]["sum"] += c["price"]
+
+    # Сортировка: по убыванию суммы
+    sorted_types = sorted(type_stats.items(), key=lambda x: x[1]["sum"], reverse=True)
+
+    md.append('<div style="overflow-x:auto;">')
+    md.append('<table class="table-types" style="width:100%; border-collapse:collapse; font-size:0.9em;">')
+    md.append("<thead>")
+    md.append('<tr style="background-color:#27ae60; color:white; font-weight:bold;">')
+    md.append('<th style="padding:8px; text-align:left;">Тип работ</th>')
+    md.append('<th style="padding:8px; text-align:center;">Контрактов</th>')
+    md.append('<th style="padding:8px; text-align:right;">Сумма</th>')
+    md.append('<th style="padding:8px; text-align:right;">% от общей суммы</th>')
+    md.append("</tr>")
+    md.append("</thead>")
+    md.append("<tbody>")
+
+    for cat, stats in sorted_types:
+        pct = (stats["sum"] / total_sum * 100) if total_sum > 0 else Decimal('0')
+        md.append(
+            f'<tr style="border-bottom:1px solid #eee;">'
+            f'<td style="padding:6px; font-weight:bold;">{cat}</td>'
+            f'<td style="padding:6px; text-align:center;">{stats["count"]}</td>'
+            f'<td style="padding:6px; text-align:right; font-weight:bold;">{format_currency_no_symbol(stats["sum"])}</td>'
+            f'<td style="padding:6px; text-align:right; color:#27ae60; font-weight:bold;">{pct:.1f}%</td>'
+            f'</tr>'
+        )
+
+    md.append("</tbody>")
+    md.append("</table>")
+    md.append("</div>")
+    md.append("")
+
+    # === ОСТАЛЬНОЕ: Детальные таблицы по годам — без изменений ===
     for year in years:
         md.append(f"## {year} год")
         md.append("")
@@ -107,24 +202,23 @@ def generate_md(contracts_by_year, output_path: Path):
         md.append("</tr>")
         md.append("</thead>")
         md.append("<tbody>")
-
         for idx, c in enumerate(contracts_by_year[year], 1):
-            date_and_num = f'{c["date"]}<br><span style="font-size:0.85em;">№ {c["last5"]}</span>'
+            date_and_num = f'{c["date"]}<br><span style="font-size:0.85em; font-family:monospace;">№ {c["last5"]}</span>'
             price_str = format_currency_no_symbol(c["price"])
             md.append(
                 f'<tr style="border-bottom:1px solid #eee;">'
                 f'<td style="padding:6px; text-align:center;">{idx}</td>'
                 f'<td style="padding:6px; word-break:break-word;">{c["name"]}</td>'
                 f'<td style="padding:6px; text-align:center;">{date_and_num}</td>'
-                f'<td style="padding:6px; text-align:right; white-space:nowrap;">{price_str}</td>'
+                f'<td style="padding:6px; text-align:right; white-space:nowrap; font-weight:bold;">{price_str}</td>'
                 f'</tr>'
             )
-
         md.append("</tbody>")
         md.append("</table>")
         md.append("</div>")
         md.append("")
 
+    # Сохранение
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(md))
@@ -138,7 +232,6 @@ def main():
     if not csv_path.exists():
         print("❌ CSV не найден")
         return
-
     contracts_by_year = load_contracts_from_csv(csv_path)
     generate_md(contracts_by_year, Path("docs/Meropriyatia/svod_gk.md"))
 
