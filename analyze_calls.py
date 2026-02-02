@@ -1,191 +1,165 @@
 #!/usr/bin/env python3
 """
-Анализ заявок техподдержки из Excel и генерация HTML-отчёта.
-Ожидает файл: docs/calls/calls.xlsx
-Создаёт: calls.html
+Анализ CDR-звонков по ФИО для MkDocs с Material Theme.
+Генерирует docs/calls_by_person.md с Mermaid-диаграммами.
 """
 
 import pandas as pd
+import numpy as np
 from pathlib import Path
-import datetime
 
-# Настройки
+# === Настройки ===
 INPUT_FILE = Path("docs/calls/calls.xlsx")
-OUTPUT_FILE = Path("calls.html")
+OUTPUT_FILE = Path("docs/calls_by_person.md")
 
-# Ожидаемые колонки (адаптируйте под ваш файл)
-EXPECTED_COLUMNS = [
-    "Дата регистрации",
-    "Приоритет",
-    "Тема",
-    "Модуль",
-    "Статус",
-    "Дата закрытия",
-    "Организация"
-]
-
-def load_data():
-    """Загружает и проверяет данные."""
+def load_and_clean_data():
+    """Загружает и очищает CDR-данные."""
     if not INPUT_FILE.exists():
         raise FileNotFoundError(f"Файл не найден: {INPUT_FILE}")
 
-    df = pd.read_excel(INPUT_FILE, engine="openpyxl")
+    # Чтение Excel
+    df = pd.read_excel(INPUT_FILE, engine="openpyxl", dtype=str)
 
-    # Автоопределение колонок, если заголовки в первой строке
-    if not set(EXPECTED_COLUMNS).issubset(df.columns):
-        print("⚠️  Колонки не совпадают. Используемые колонки:")
-        print(df.columns.tolist())
-        # Можно добавить логику маппинга, но пока просто используем то, что есть
+    # Очистка колонок ФИО
+    for col in ["Имя инициатора", "Имя адресата вызова"]:
+        if col in df.columns:
+            df[col] = df[col].fillna("").astype(str).str.strip()
 
-    # Преобразование дат
-    df["Дата регистрации"] = pd.to_datetime(df["Дата регистрации"], errors="coerce")
-    df["Дата закрытия"] = pd.to_datetime(df["Дата закрытия"], errors="coerce")
+    # Преобразование числовых полей
+    numeric_cols = [
+        "Продолжительность вызова",
+        "Число потерянных медиапакетов во вх.вызове",
+        "Число потерянных медиапакетов на исх. участке вызова"
+    ]
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").astype('float64')
 
-    # Вычисление времени решения (в часах)
-    df["Время решения (часы)"] = (
-        (df["Дата закрытия"] - df["Дата регистрации"])
-        .dt.total_seconds() / 3600
-    ).round(1)
+    # Вычисление общих потерь
+    df["Потери всего"] = (
+        df["Число потерянных медиапакетов во вх.вызове"].fillna(0) +
+        df["Число потерянных медиапакетов на исх. участке вызова"].fillna(0)
+    )
 
+    # === Гибкое преобразование дат ===
+    date_cols = ["Дата создания CDR", "Время старта"]
+    for col in date_cols:
+        if col in df.columns:
+            # Пробуем несколько подходов
+            df[col] = pd.to_datetime(
+                df[col],
+                format=None,      # Автоматическое определение формата
+                errors="coerce",  # Некорректные → NaT
+                dayfirst=True     # Приоритет DD.MM.YYYY
+            )
+
+    # Фильтрация записей
+    df = df[
+        (df["Имя инициатора"] != "") &
+        (df["Имя адресата вызова"] != "")
+    ].copy()
+
+    print(f"✅ Загружено {len(df)} записей CDR")
     return df
 
-def generate_html(df):
-    """Генерирует HTML-отчёт."""
+def generate_markdown(df):
+    """Генерирует Markdown-контент с Mermaid-диаграммами."""
     total = len(df)
-    by_priority = df["Приоритет"].value_counts().to_dict()
-    by_module = df["Модуль"].value_counts().head(5).to_dict()
-    by_status = df["Статус"].value_counts().to_dict()
+    successful = df["Результат вызова конечного получателя"].str.contains("Соединение установлено").sum()
+    failed = total - successful
 
-    # Среднее время решения по приоритетам
-    avg_time = df.groupby("Приоритет")["Время решения (часы)"].mean().round(1).to_dict()
+    # Безопасное извлечение периода
+    min_date = df['Дата создания CDR'].min()
+    max_date = df['Дата создания CDR'].max()
+    
+    if pd.isna(min_date) or pd.isna(max_date):
+        date_range = "—"
+    else:
+        date_range = f"{min_date.strftime('%d.%m.%Y')} – {max_date.strftime('%d.%m.%Y')}"
 
-    # Ежедневная динамика
-    daily = df.set_index("Дата регистрации").resample("D").size()
-    daily_str = "\n".join([f'    "{date.strftime("%Y-%m-%d")}": {count},' for date, count in daily.items()])
+    # Статистика по инициаторам
+    initiator_stats = df.groupby("Имя инициатора").agg(
+        calls=("Имя инициатора", "count"),
+        failed=("Результат вызова конечного получателя", lambda x: (x == "Попытка вызова прекращена").sum())
+    ).sort_values("calls", ascending=False).reset_index()
 
-    html = f"""<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Анализ заявок техподдержки</title>
-    <script type="module" src="https://unpkg.com/mermaid@10/dist/mermaid.esm.min.mjs"></script>
-    <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 2rem; }}
-        h1, h2 {{ color: #2c3e50; }}
-        .stats {{ display: flex; gap: 2rem; margin: 2rem 0; }}
-        .stat-box {{ background: #f8f9fa; padding: 1rem; border-radius: 8px; min-width: 120px; }}
-        .stat-value {{ font-size: 1.5em; font-weight: bold; color: #3498db; }}
-        table {{ width: 100%; border-collapse: collapse; margin: 1.5rem 0; }}
-        th, td {{ text-align: left; padding: 0.75rem; border-bottom: 1px solid #eee; }}
-        th {{ background-color: #f8f9fa; }}
-        .priority-1 {{ color: #e74c3c; }}
-        .priority-2 {{ color: #f39c12; }}
-        .priority-3 {{ color: #27ae60; }}
-    </style>
-</head>
-<body>
-    <h1>📊 Анализ заявок технической поддержки</h1>
-    <p>Период: {df['Дата регистрации'].min().strftime('%d.%m.%Y')} – {df['Дата регистрации'].max().strftime('%d.%m.%Y')}</p>
+    top_initiators = initiator_stats.head(10)
+    top_recipients = df.groupby("Имя адресата вызова").size().sort_values(ascending=False).head(15).reset_index()
+    top_recipients.columns = ["ФИО", "Количество"]
 
-    <div class="stats">
-        <div class="stat-box">
-            <div class="stat-value">{total}</div>
-            <div>Всего заявок</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value">{by_priority.get('1', 0)}</div>
-            <div class="priority-1">Приоритет 1</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value">{by_priority.get('2', 0)}</div>
-            <div class="priority-2">Приоритет 2</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value">{by_priority.get('3', 0)}</div>
-            <div class="priority-3">Приоритет 3</div>
-        </div>
-    </div>
+    # === Подготовка данных для Mermaid ===
+    init_labels = []
+    init_values = []
+    for _, row in top_initiators.iterrows():
+        name = str(row["Имя инициатора"]).replace('"', '').replace('\n', ' ').strip()[:15]
+        init_labels.append(f'"{name}"')
+        init_values.append(str(int(row["calls"])))
+    init_labels_str = ", ".join(init_labels)
+    init_values_str = ", ".join(init_values)
 
-    <h2>📈 Динамика заявок</h2>
-    <div class="mermaid">
-gantt
-    title Заявки по дням
-    dateFormat YYYY-MM-DD
-    axisFormat %m-%d
-{daily_str}
-    </div>
+    # === Сборка Markdown по частям ===
+    lines = []
 
-    <h2>🧩 Топ-5 проблемных модулей</h2>
-    <table>
-        <thead>
-            <tr><th>Модуль</th><th>Количество заявок</th></tr>
-        </thead>
-        <tbody>
-"""
-    for module, count in by_module.items():
-        html += f"            <tr><td>{module}</td><td>{count}</td></tr>\n"
+    # Заголовок
+    lines.append("# Анализ CDR-звонков по ФИО\n")
+    lines.append(f"Период: {date_range}\n")
 
-    html += """        </tbody>
-    </table>
+    # Общая статистика
+    lines.append("## 📊 Общая статистика\n")
+    lines.append(f"- **Всего звонков**: {total:,}")
+    lines.append(f"- **Успешные**: {successful:,} ({successful/total*100:.1f}%)")
+    lines.append(f"- **Неудачные**: {failed:,} ({failed/total*100:.1f}%)\n")
 
-    <h2>⏱ Среднее время решения (часы)</h2>
-    <table>
-        <thead>
-            <tr><th>Приоритет</th><th>Среднее время</th></tr>
-        </thead>
-        <tbody>
-"""
+    # Диаграммы
+    lines.append("## 📈 Диаграммы\n")
 
-    for prio in ['1', '2', '3']:
-        time_val = avg_time.get(prio, 0)
-        cls = f"class='priority-{prio}'"
-        html += f"            <tr><td {cls}>Приоритет {prio}</td><td>{time_val}</td></tr>\n"
+    # xychart: Топ-10 инициаторов
+    lines.append("### Топ-10 инициаторов звонков\n")
+    lines.append("```mermaid")
+    lines.append("xychart-beta")
+    lines.append("    title Кол-во звонков (Топ-10)")
+    lines.append("    x-axis \"Инициатор\"")
+    lines.append("    y-axis \"Количество\"")
+    lines.append(f"    line [{init_values_str}]")
+    lines.append(f"    labels [{init_labels_str}]")
+    lines.append("```\n")
 
-    html += """        </tbody>
-    </table>
+    # pie: Распределение по статусам
+    lines.append("### Распределение по статусам\n")
+    lines.append("```mermaid")
+    lines.append("pie")
+    lines.append("    title Успешные vs Неудачные")
+    lines.append(f'    "Успешные": {successful}')
+    lines.append(f'    "Неудачные": {failed}')
+    lines.append("```\n")
 
-    <h2>📋 Статусы заявок</h2>
-    <table>
-        <thead>
-            <tr><th>Статус</th><th>Количество</th></tr>
-        </thead>
-        <tbody>
-"""
+    # Топ-10 инициаторов (таблица)
+    lines.append("## 👥 Топ-10 инициаторов\n")
+    lines.append("| # | ФИО | Звонки | Неудачные |")
+    lines.append("|---|-----|--------|-----------|")
+    for i, (_, row) in enumerate(top_initiators.iterrows()):
+        lines.append(f"| {i+1} | {row['Имя инициатора']} | {int(row['calls'])} | {int(row['failed'])} |")
 
-    for status, count in by_status.items():
-        html += f"            <tr><td>{status}</td><td>{count}</td></tr>\n"
+    # Топ-15 адресатов (таблица)
+    lines.append("\n## 📞 Топ-15 адресатов\n")
+    lines.append("| # | ФИО | Количество |")
+    lines.append("|---|-----|------------|")
+    for i, (_, row) in enumerate(top_recipients.iterrows()):
+        lines.append(f"| {i+1} | {row['ФИО']} | {row['Количество']} |")
 
-    html += """        </tbody>
-    </table>
-
-    <h2>🔍 Рекомендации</h2>
-    <ul>
-        <li>Уделить внимание модулям с наибольшим числом заявок — возможно, требуется дополнительное обучение или доработка</li>
-        <li>Проверить соблюдение SLA по приоритету 1 (должно быть ≤ 4 часов)</li>
-        <li>Анализировать повторяющиеся темы — выявить системные проблемы</li>
-    </ul>
-
-</body>
-</html>
-"""
-    return html
+    return "\n".join(lines)
 
 def main():
     try:
-        df = load_data()
-        if df.empty:
-            print("❌ Файл пустой")
-            return
-
-        html_content = generate_html(df)
+        df = load_and_clean_data()
+        markdown_content = generate_markdown(df)
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            f.write(html_content)
-
-        print(f"✅ Отчёт сохранён: {OUTPUT_FILE.absolute()}")
-
+            f.write(markdown_content)
+        print(f"✅ Отчёт сохранён: {OUTPUT_FILE}")
     except Exception as e:
         print(f"❌ Ошибка: {e}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()
