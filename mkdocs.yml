@@ -14,12 +14,6 @@ markdown_extensions:
 nav:
   - Главная: index.md
   - Контракты 2019 - 2025:
-    - 2025: Meropriyatia/2025/index.md
-    - 2024: Meropriyatia/2024/index.md
-    - 2023: Meropriyatia/2023/index.md
-    - 2022: Meropriyatia/2022/index.md
-    - 2021: Meropriyatia/2021/index.md
-    - 2020: Meropriyatia/2020/index.md
     - Сводная информация: Meropriyatia/svod_gk.md
   - Проекты 2026:
     - Дорожная карта: roadmap.md
