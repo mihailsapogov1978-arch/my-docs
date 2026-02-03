@@ -20,15 +20,14 @@ markdown_extensions:
 
 nav:
   - Главная: index.md
-  - Контракты 2019 - 2025:
-      - Сводная информация: Meropriyatiya/svod_gk.md
+  - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
   - Проекты 2026:
       - Дорожная карта: roadmap.md
       - Личный кабинет и ИИ: lk.md
       - Интеграция с Тезис: tezis.md
       - Отдельные доработки: dopfunction.md
       - Шаблоны и чек-листы: templates.md
-      - Заявки и звонки: call.md
+  - Заявки и звонки: calls.md
   - Инструкции:
       - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
       - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
@@ -39,9 +38,9 @@ plugins:
       lang: ru
       prebuild_index: true
       separator: '[\s\-–—_]+'
-  - git-revision-date-localized:
-      timezone: Europe/Moscow
-      type: date
+  # - git-revision-date-localized:
+  #     timezone: Europe/Moscow
+  #     type: date
 
 site_name: Документация ЦБ ОГВ ЯНАО
 

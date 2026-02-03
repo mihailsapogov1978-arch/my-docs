@@ -1,6 +1,3 @@
-/* ===== ТЕСТ РАБОТЫ CSS ===== */
-/* Если видите красную рамку - CSS работает! */
-
 /* ===== ПЛАВНЫЙ СКРОЛЛ ===== */
 html {
     scroll-behavior: smooth !important;
@@ -32,11 +29,6 @@ html {
 /* Вложенные пункты */
 .md-nav__item .md-nav__item .md-nav__link {
     padding-left: 1.2rem !important;
-}
-
-/* Активный пункт */
-.md-nav__item--active .md-nav__link {
-    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .custom-large {
@@ -282,4 +274,75 @@ table.steps td:first-child {
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+/* ===== СТИЛИ ДЛЯ ЛЕВОГО МЕНЮ (НАВИГАЦИИ) ===== */
+.md-nav__link {
+  /* Шрифт — Roboto (уже задан в theme, но можно уточнить) */
+  font-family: "Roboto", sans-serif;
+  /* Компактный междустрочный интервал */
+  line-height: 1.2 !important;
+  /* Уменьшаем высоту строки — это сжимает пункты */
+  min-height: auto !important;
+  /* Убираем лишние отступы сверху/снизу */
+  padding: 0.35rem 0.8rem !important;
+  /* Немного увеличиваем вес для читаемости (опционально) */
+  font-weight: 400;
+}
+
+/* Активный пункт — синий цвет, как на скриншоте */
+.md-nav__link--active {
+  color: #3498db !important;
+  font-weight: 500 !important; /* если хотите полужирный, как на скриншоте */
+}
+
+/* Вложенные пункты (второй уровень) — чуть больше отступа слева */
+.md-nav__item .md-nav__item .md-nav__link {
+  padding-left: 1.4rem !important;
+}
+
+/* Убираем жирность у заголовков разделов в меню (например, "Контракты 2019–2025") */
+.md-nav__title {
+  font-weight: 500 !important;
+  color: var(--md-default-fg-color--bold);
+}
+
+/* Опционально: ещё более компактный отступ между пунктами (если нужно "плотнее") */
+.md-nav__item {
+  margin: 0 !important;
+}
+
+/* Кнопка "Назад" для страниц контрактов */
+.contract-back-btn {
+  display: inline-block;
+  padding: 816px;
+  background-color: #f5f7fa;
+  color: #2c3e50;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 0.9em;
+}
+.contract-back-btn:hover {
+  background-color: #e3e8ed;
+}
+
+/* Прилипающая ссылка "Вернуться к сводной информации" */
+.back-to-summary-sticky {
+    position: sticky;
+    top: 8px;
+    z-index: 10;
+    background: #f5f7fa;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+.back-to-summary-sticky a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+.back-to-summary-sticky a:hover {
+    text-decoration: underline;
 }
