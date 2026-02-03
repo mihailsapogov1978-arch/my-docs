@@ -3,38 +3,48 @@ extra_css:
   - stylesheets/extra.css
 extra_javascript:
   - search.js
+
 markdown_extensions:
-- attr_list
-- admonition
-- toc:
-    permalink: true
-    title: Оглавление
-- pymdownx.superfences
-- pymdownx.highlight
+  - attr_list
+  - admonition
+  - toc:
+      permalink: true
+      title: Оглавление
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight
+  - codehilite
+
 nav:
   - Главная: index.md
   - Контракты 2019 - 2025:
-    - Сводная информация: Meropriyatia/svod_gk.md
+      - Сводная информация: Meropriyatiya/svod_gk.md
   - Проекты 2026:
-    - Дорожная карта: roadmap.md
-    - Личный кабинет и ИИ: lk.md
-    - Интеграция с Тезис: tezis.md
-    - Отдельные доработки: dopfunction.md
-  - Шаблоны и чек-листы: templates.md
-  - Заявки и звонки: call.md
+      - Дорожная карта: roadmap.md
+      - Личный кабинет и ИИ: lk.md
+      - Интеграция с Тезис: tezis.md
+      - Отдельные доработки: dopfunction.md
+      - Шаблоны и чек-листы: templates.md
+      - Заявки и звонки: call.md
   - Инструкции:
-    - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
-    - Настройка УКЭП в ЛК ПОЛ: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
-    - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
+      - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
+      - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
+      - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
+
 plugins:
-# - git-revision-date-localized:
-#     timezone: Europe/Moscow
-#     type: date
-- search:
-    lang: ru
-    prebuild_index: true
-    separator: '[\s\-–—_]+'
+  - search:
+      lang: ru
+      prebuild_index: true
+      separator: '[\s\-–—_]+'
+  - git-revision-date-localized:
+      timezone: Europe/Moscow
+      type: date
+
 site_name: Документация ЦБ ОГВ ЯНАО
+
 theme:
   features:
     - content.tooltips
@@ -54,12 +64,12 @@ theme:
       primary: indigo
       scheme: default
       toggle:
-      icon: material/weather-sunny
-      name: Переключиться на тёмный режим
+        icon: material/weather-sunny
+        name: Переключиться на тёмный режим
     - accent: indigo
       media: '(prefers-color-scheme: dark)'
       primary: indigo
       scheme: slate
       toggle:
-      icon: material/weather-night
-      name: Переключиться на светлый режим
+        icon: material/weather-night
+        name: Переключиться на светлый режим

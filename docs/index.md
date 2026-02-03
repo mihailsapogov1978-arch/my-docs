@@ -19,9 +19,13 @@
 - [Техническая поддержка](mailto:support@yanao.ru)
 - [Чат в Teams](msteams://...)
 
-flowchart TD
-    A[Christmas] -->|Get money| B(Go shopping)
-    B --> C{Let me think}
-    C -->|One| D[Laptop]
-    C -->|Two| E[iPhone]
-    C -->|Three| F[fa:fa-car Car]
+
+## Flowchart
+```mermaid
+graph LR
+    A[Начало] --> B{Условие}
+    B -->|Да| C[Действие 1]
+    B -->|Нет| D[Действие 2]
+    C --> E[Конец]
+    D --> E
+```
