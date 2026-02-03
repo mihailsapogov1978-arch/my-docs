@@ -311,3 +311,38 @@ table.steps td:first-child {
 .md-nav__item {
   margin: 0 !important;
 }
+
+/* Кнопка "Назад" для страниц контрактов */
+.contract-back-btn {
+  display: inline-block;
+  padding: 816px;
+  background-color: #f5f7fa;
+  color: #2c3e50;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 0.9em;
+}
+.contract-back-btn:hover {
+  background-color: #e3e8ed;
+}
+
+/* Прилипающая ссылка "Вернуться к сводной информации" */
+.back-to-summary-sticky {
+    position: sticky;
+    top: 8px;
+    z-index: 10;
+    background: #f5f7fa;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+.back-to-summary-sticky a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+.back-to-summary-sticky a:hover {
+    text-decoration: underline;
+}

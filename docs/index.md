@@ -10,11 +10,18 @@
 
 # Портал знаний ГИС «Смета ЯНАО»
 
-[:fontawesome-solid-file-contract: Контракты](contracts/) • 
-[:fontawesome-solid-diagram-project: Проекты 2026](projects/) • 
-[:fontawesome-solid-lightbulb: Быстрые решения](quick-guides/)
+[Контракты](contracts/) • 
+[Проекты 2026](projects/) • 
+[Быстрые решения](quick-guides/)
 
 ## Быстрый доступ
 - [Полные инструкции (внешний сайт)](https://smeta-app.yanao.ru/docs)
 - [Техническая поддержка](mailto:support@yanao.ru)
 - [Чат в Teams](msteams://...)
+
+flowchart TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
