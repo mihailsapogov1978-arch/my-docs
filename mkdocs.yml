@@ -17,6 +17,11 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight
   - codehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.details
+  - pymdownx.tasklist
 
 nav:
   - Главная: index.md
@@ -27,7 +32,9 @@ nav:
       - Интеграция с Тезис: tezis.md
       - Отдельные доработки: dopfunction.md
       - Шаблоны и чек-листы: templates.md
-  - Заявки и звонки: calls.md
+  - Заявки и звонки: 
+      - Статистика телефонных вызовов: calls.md
+      - Статистика по заявкам: zayavky.md
   - Инструкции:
       - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
       - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
