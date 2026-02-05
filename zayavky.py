@@ -4,60 +4,15 @@ import os
 def generate_zayavky_report():
     # Чтение файла Excel (лист "Заявки")
     file_path = "zayavky.xlsx"
-    
-    try:
-        # Читаем Excel файл
-        df = pd.read_excel(file_path, sheet_name="Заявки", dtype=str)
-    except Exception as e:
-        print(f"Ошибка при чтении файла: {e}")
-        return
-    
-    # Заполняем NaN значения пустыми строками
-    df = df.fillna('')
-    
-    # Отладочная информация
-    print(f"Всего строк: {len(df)}")
-    print(f"Названия колонок: {list(df.columns)}")
-    
-    # Проверяем, есть ли колонка "Статус"
-    if 'Статус' not in df.columns:
-        print("Колонка 'Статус' не найдена!")
-        # Пробуем найти колонку с другим регистром или пробелами
-        for col in df.columns:
-            if 'статус' in col.lower():
-                print(f"Возможно колонка статусов: '{col}'")
-                df['Статус'] = df[col]
-                break
-    
-    # Очищаем значения в колонке Статус от лишних пробелов и HTML-тегов
-    df['Статус'] = df['Статус'].astype(str).str.strip()
-    
-    # Убираем возможные HTML-теги
-    df['Статус'] = df['Статус'].str.replace(r'<br>', '', regex=True)
-    df['Статус'] = df['Статус'].str.replace(r'<.*?>', '', regex=True)
+    df = pd.read_excel(file_path, sheet_name="Заявки", dtype=str)
     
     # 1. Общая статистика
     total = len(df)
-    
-    # Подсчет статусов
-    status_counts = df['Статус'].value_counts()
-    
-    print("\nРаспределение статусов:")
-    for status, count in status_counts.items():
-        print(f"  '{status}': {count}")
-    
-    # Получаем точные значения
-    resolved = status_counts.get('Решено', 0)
-    in_work = status_counts.get('В работе', 0)
+    resolved = df[df['Статус'] == 'Решено'].shape[0]
+    in_work = df[df['Статус'] == 'В работе'].shape[0]
     
     # 2. Топ-3 активных инициаторов
-    # Очищаем имена инициаторов от лишних пробелов
-    if 'Инициатор' in df.columns:
-        df['Инициатор'] = df['Инициатор'].astype(str).str.strip()
-        initiator_counts = df['Инициатор'].value_counts().head(3)
-    else:
-        print("Колонка 'Инициатор' не найдена!")
-        initiator_counts = pd.Series()
+    initiator_counts = df['Инициатор'].value_counts().head(3)
     
     # Создаем таблицу для топ-3
     top_3_table = "| Инициатор | Количество заявок |\n|:---|---:|\n"
@@ -82,11 +37,10 @@ def generate_zayavky_report():
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(md_content)
     
-    print(f"\n✅ Отчёт сохранён в: {output_path}")
-    print("\nСодержимое файла:")
-    print(md_content)
-    
+    print(f"✅ Отчёт сохранён в: {output_path}")
     return md_content
 
 if __name__ == "__main__":
     report = generate_zayavky_report()
+    print("\nСодержимое файла:")
+    print(report)
