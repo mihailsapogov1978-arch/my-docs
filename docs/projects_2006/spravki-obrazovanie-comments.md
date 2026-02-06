@@ -82,7 +82,21 @@
   <small style="font-size: 0.85em;">Статистика загружается...</small>
 </div>
 
-<!-- Отладка (можно скрыть) -->
+<!-- Информация о подключении -->
+<div id="connection-info" style="margin-top: 20px; padding: 10px; background: #e8f5e8; border-radius: 4px; font-size: 0.8em; color: #2e7d32; border-left: 4px solid #4caf50;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <strong>📝 Информация о подключении:</strong>
+      <div id="connection-status">Проверка подключения...</div>
+    </div>
+    <button onclick="checkConnection()" 
+            style="background: #4caf50; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 0.8em;">
+      Проверить
+    </button>
+  </div>
+</div>
+
+<!-- Отладка -->
 <div id="debug-info" style="margin-top: 20px; padding: 10px; background: #fff3cd; border-radius: 4px; font-size: 0.8em; color: #856404; display: none;">
   <strong>Отладка:</strong>
   <div id="debug-content"></div>
@@ -92,18 +106,15 @@
 
 <script>
 // ================= КОНФИГУРАЦИЯ =================
-const CONFIG = {
+let CONFIG = {
   repoOwner: 'mihailsapogov1978-arch',
-  repoName: 'my-docs',
+  repoName: 'my-docs', // ИЛИ 'spravki-obrazovanie' - какой правильный?
   label: 'Spravky_obr',
-  
-  // Токен будет запрашиваться у пользователя при первом использовании
-  // или взят из localStorage
-  githubToken: null, // <-- Токен удален для безопасности
-  
-  // Спросите у пользователя при первом использовании
-  askForToken: true
+  askForToken: false
 };
+
+// Токен напрямую в коде
+const GITHUB_TOKEN = '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';
 
 // ================= ОТЛАДКА =================
 function showDebugInfo(message) {
@@ -114,70 +125,88 @@ function showDebugInfo(message) {
   debugContent.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
 }
 
+// Обновить статус подключения
+function updateConnectionStatus(message, isError = false) {
+  const statusEl = document.getElementById('connection-status');
+  const infoEl = document.getElementById('connection-info');
+  
+  statusEl.innerHTML = message;
+  
+  if (isError) {
+    infoEl.style.background = '#ffebee';
+    infoEl.style.borderLeftColor = '#f44336';
+    infoEl.style.color = '#c62828';
+  } else {
+    infoEl.style.background = '#e8f5e8';
+    infoEl.style.borderLeftColor = '#4caf50';
+    infoEl.style.color = '#2e7d32';
+  }
+}
+
 // ================= ОСНОВНЫЕ ФУНКЦИИ =================
 
 // Получить токен
 function getGitHubToken() {
-  // Проверяем localStorage
-  const savedToken = localStorage.getItem('github_token');
-  if (savedToken) {
-    showDebugInfo('Используется токен из localStorage');
-    return savedToken;
+  // 1. Встроенный токен
+  if (typeof GITHUB_TOKEN !== 'undefined') {
+    return GITHUB_TOKEN;
   }
   
-  // Запрашиваем у пользователя
-  if (CONFIG.askForToken) {
-    showDebugInfo('Запрашивается токен у пользователя');
-    const token = prompt(
-      'Для автоматического сохранения записей нужен GitHub токен.\n\n' +
-      '1. Перейдите: https://github.com/settings/tokens\n' +
-      '2. Создайте новый токен с правами "repo"\n' +
-      '3. Вставьте его здесь:\n\n' +
-      '(Токен сохранится только в вашем браузере)',
-      ''
-    );
+  // 2. Из GITHUB_CONFIG
+  if (typeof GITHUB_CONFIG !== 'undefined' && GITHUB_CONFIG.token) {
+    // Обновляем CONFIG значениями из GITHUB_CONFIG
+    if (GITHUB_CONFIG.repoOwner) CONFIG.repoOwner = GITHUB_CONFIG.repoOwner;
+    if (GITHUB_CONFIG.repoName) CONFIG.repoName = GITHUB_CONFIG.repoName;
+    if (GITHUB_CONFIG.label) CONFIG.label = GITHUB_CONFIG.label;
     
-    if (token && token.trim()) {
-      localStorage.setItem('github_token', token.trim());
-      showDebugInfo('Токен сохранен в localStorage');
-      return token.trim();
-    }
+    return GITHUB_CONFIG.token;
   }
   
-  showDebugInfo('Токен не найден');
+  // 3. Из localStorage
+  const savedToken = localStorage.getItem('github_token');
+  if (savedToken) return savedToken;
+  
+  // 4. Из URL параметров
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlToken = urlParams.get('token');
+  if (urlToken) {
+    localStorage.setItem('github_token', urlToken);
+    return urlToken;
+  }
+  
   return null;
 }
 
-// Проверить доступность GitHub API
-async function testGitHubAPI() {
-  try {
-    showDebugInfo('Тестирование подключения к GitHub API...');
-    const response = await fetch('https://api.github.com');
-    
-    if (response.ok) {
-      showDebugInfo('GitHub API доступен');
-      return true;
-    } else {
-      showDebugInfo(`GitHub API недоступен: ${response.status}`);
-      return false;
-    }
-  } catch (error) {
-    showDebugInfo(`Ошибка подключения к GitHub API: ${error.message}`);
-    return false;
-  }
-}
 
-// Проверить доступ к репозиторию
-async function testRepoAccess() {
+// Проверить подключение
+async function checkConnection() {
+  updateConnectionStatus('⏳ Проверка подключения...');
+  
   const token = getGitHubToken();
   if (!token) {
-    showDebugInfo('Токен не найден для проверки доступа к репозиторию');
-    return false;
+    updateConnectionStatus('❌ Токен не найден. Проверьте config.js', true);
+    return;
   }
   
   try {
-    showDebugInfo('Проверка доступа к репозиторию...');
-    const response = await fetch(
+    // Проверяем токен
+    const userResponse = await fetch('https://api.github.com/user', {
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    
+    if (!userResponse.ok) {
+      updateConnectionStatus(`❌ Токен недействителен (${userResponse.status})`, true);
+      return;
+    }
+    
+    const userData = await userResponse.json();
+    const username = userData.login || 'неизвестно';
+    
+    // Проверяем доступ к репозиторию
+    const repoResponse = await fetch(
       `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}`,
       {
         headers: {
@@ -187,16 +216,18 @@ async function testRepoAccess() {
       }
     );
     
-    if (response.ok) {
-      showDebugInfo('Доступ к репозиторию есть');
-      return true;
-    } else {
-      showDebugInfo(`Нет доступа к репозиторию: ${response.status}`);
-      return false;
+    if (!repoResponse.ok) {
+      updateConnectionStatus(`❌ Нет доступа к репозиторию (${repoResponse.status})`, true);
+      return;
     }
+    
+    updateConnectionStatus(`✅ Подключено: ${username} → ${CONFIG.repoName}`);
+    
+    // Перезагружаем данные
+    loadLogEntries();
+    
   } catch (error) {
-    showDebugInfo(`Ошибка проверки доступа к репозиторию: ${error.message}`);
-    return false;
+    updateConnectionStatus(`❌ Ошибка: ${error.message}`, true);
   }
 }
 
@@ -210,7 +241,7 @@ async function addEntry(type) {
   
   const token = getGitHubToken();
   if (!token) {
-    showStatus('Требуется GitHub токен для автоматического сохранения', 'error');
+    showStatus('Требуется GitHub токен', 'error');
     return;
   }
   
@@ -218,24 +249,40 @@ async function addEntry(type) {
   
   try {
     const { title, body } = createIssueContent(text, type);
-    showDebugInfo(`Создание issue: ${title.substring(0, 50)}...`);
     
-    const issueId = await createGitHubIssue(title, body, type, token);
+    const response = await fetch(
+      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: title,
+          body: body,
+          labels: [CONFIG.label, type]
+        })
+      }
+    );
     
-    if (issueId) {
+    if (response.ok) {
+      const data = await response.json();
       showStatus('✅ Запись сохранена!', 'success');
       document.getElementById('log-entry').value = '';
-      showDebugInfo(`Issue создан с ID: ${issueId}`);
       
       setTimeout(() => {
         loadLogEntries();
         updateStats();
       }, 1000);
+    } else {
+      const errorText = await response.text();
+      throw new Error(`GitHub API: ${response.status}`);
     }
   } catch (error) {
-    console.error('Ошибка сохранения:', error);
-    showDebugInfo(`Ошибка сохранения: ${error.message}`);
-    showStatus('❌ Ошибка сохранения. Проверьте токен.', 'error');
+    showStatus('❌ Ошибка сохранения', 'error');
+    updateConnectionStatus('❌ Ошибка при сохранении', true);
   }
 }
 
@@ -246,10 +293,10 @@ function createIssueContent(text, type) {
   const dateShort = now.toLocaleDateString('ru-RU');
   
   const types = {
-    note: { icon: '📝', prefix: 'Заметка', color: '#1976d2' },
-    task: { icon: '✅', prefix: 'Задача', color: '#4caf50' },
-    question: { icon: '❓', prefix: 'Вопрос', color: '#ff9800' },
-    idea: { icon: '💡', prefix: 'Идея', color: '#9c27b0' }
+    note: { icon: '📝', prefix: 'Заметка' },
+    task: { icon: '✅', prefix: 'Задача' },
+    question: { icon: '❓', prefix: 'Вопрос' },
+    idea: { icon: '💡', prefix: 'Идея' }
   };
   
   const typeInfo = types[type] || types.note;
@@ -262,59 +309,83 @@ function createIssueContent(text, type) {
   return { title, body };
 }
 
-// Создать Issue через GitHub API
-async function createGitHubIssue(title, body, type, token) {
-  const response = await fetch(
-    `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues`,
-    {
-      method: 'POST',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: title,
-        body: body,
-        labels: [CONFIG.label, type]
-      })
-    }
-  );
+// Закрыть issue
+async function closeIssue(issueNumber, button) {
+  if (!confirm('Закрыть эту запись?')) return;
   
-  if (response.ok) {
-    const data = await response.json();
-    return data.number;
-  } else {
-    const errorText = await response.text();
-    showDebugInfo(`GitHub API error: ${response.status} - ${errorText}`);
-    throw new Error(`GitHub API error: ${response.status}`);
+  const token = getGitHubToken();
+  if (!token) {
+    showStatus('Требуется токен', 'error');
+    return;
   }
+  
+  button.innerHTML = '⏳ Закрываем...';
+  button.disabled = true;
+  button.style.background = '#ccc';
+  
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues/${issueNumber}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ state: 'closed' })
+      }
+    );
+    
+    if (response.ok) {
+      showStatus('✅ Запись закрыта!', 'success');
+      
+      const issueElement = document.getElementById(`issue-${issueNumber}`);
+      issueElement.style.transition = 'opacity 0.3s, max-height 0.3s';
+      issueElement.style.opacity = '0';
+      issueElement.style.maxHeight = '0';
+      issueElement.style.padding = '0';
+      issueElement.style.margin = '0';
+      issueElement.style.overflow = 'hidden';
+      
+      setTimeout(() => {
+        loadLogEntries();
+        updateStats();
+      }, 300);
+    } else {
+      throw new Error(`Ошибка: ${response.status}`);
+    }
+  } catch (error) {
+    showStatus('❌ Ошибка закрытия', 'error');
+    button.innerHTML = '✕ Закрыть';
+    button.disabled = false;
+    button.style.background = '#ff6b6b';
+  }
+}
+
+// Переключить показ закрытых записей
+function toggleShowClosed() {
+  const current = localStorage.getItem('show_closed_issues') === 'true';
+  localStorage.setItem('show_closed_issues', !current);
+  loadLogEntries();
 }
 
 // Загрузить лог записей
 async function loadLogEntries() {
   const container = document.getElementById('log-container');
-  showDebugInfo('Начало загрузки лога...');
+  updateConnectionStatus('⏳ Загрузка записей...');
   
   try {
-    showDebugInfo(`Запрос к API: issues с меткой "${CONFIG.label}"`);
+    const token = getGitHubToken();
+    let apiUrl = `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${encodeURIComponent(CONFIG.label)}&sort=created&direction=desc`;
     
-    // Сначала попробуем без токена (публичный доступ)
-    let apiUrl = `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${encodeURIComponent(CONFIG.label)}&sort=created&direction=desc&per_page=50`;
+    const headers = { 'Accept': 'application/vnd.github.v3+json' };
+    if (token) headers['Authorization'] = `token ${token}`;
     
-    showDebugInfo(`URL запроса: ${apiUrl}`);
-    
-    const response = await fetch(apiUrl, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-    
-    showDebugInfo(`Статус ответа: ${response.status} ${response.statusText}`);
+    const response = await fetch(apiUrl, { headers });
     
     if (response.ok) {
       const issues = await response.json();
-      showDebugInfo(`Получено ${issues.length} записей`);
       
       document.getElementById('last-update').innerHTML = 
         `🕐 ${new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}`;
@@ -324,22 +395,40 @@ async function loadLogEntries() {
           <div style="text-align: center; padding: 30px; color: #666;">
             <div style="font-size: 2em; margin-bottom: 10px;">📭</div>
             <p style="font-size: 0.9em;">Лог пуст. Нет записей с меткой "${CONFIG.label}"</p>
+            <button onclick="checkConnection()" 
+                    style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+              Проверить подключение
+            </button>
           </div>
         `;
+        updateConnectionStatus(`✅ Нет записей с меткой "${CONFIG.label}"`);
         return;
       }
+      
+      const showClosed = localStorage.getItem('show_closed_issues') === 'true';
       
       let html = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
           <h3 style="margin: 0; font-size: 1.1em;">📚 Записи (${issues.length})</h3>
-          <button onclick="loadLogEntries()" 
-                  style="background: #f5f5f5; border: 1px solid #ddd; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em;">
-            🔄 Обновить
-          </button>
+          <div>
+            <button onclick="toggleShowClosed()" 
+                    id="toggle-closed-btn"
+                    style="background: #f5f5f5; border: 1px solid #ddd; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em; margin-right: 8px;">
+              ${showClosed ? '🔽 Скрыть закрытые' : '🔼 Показать закрытые'}
+            </button>
+            <button onclick="loadLogEntries()" 
+                    style="background: #f5f5f5; border: 1px solid #ddd; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em;">
+              🔄 Обновить
+            </button>
+          </div>
         </div>
       `;
       
-      issues.forEach((issue, index) => {
+      let visibleCount = 0;
+      issues.forEach((issue) => {
+        if (issue.state === 'closed' && !showClosed) return;
+        
+        visibleCount++;
         const date = new Date(issue.created_at).toLocaleString('ru-RU', {
           day: 'numeric',
           month: 'short',
@@ -347,41 +436,43 @@ async function loadLogEntries() {
           minute: '2-digit'
         });
         
-        // Определяем тип по меткам
         const typeLabels = issue.labels.filter(l => l.name !== CONFIG.label);
         const typeLabel = typeLabels[0] || { name: 'note' };
         
         const types = {
-          note: { icon: '📝', color: '#f0f7ff', textColor: '#424242' },
-          task: { icon: '✅', color: '#f0f9f0', textColor: '#424242' },
-          question: { icon: '❓', color: '#fff8e1', textColor: '#424242' },
-          idea: { icon: '💡', color: '#f5e6f9', textColor: '#424242' }
+          note: { icon: '📝', color: '#f0f7ff' },
+          task: { icon: '✅', color: '#f0f9f0' },
+          question: { icon: '❓', color: '#fff8e1' },
+          idea: { icon: '💡', color: '#f5e6f9' }
         };
         
         const typeInfo = types[typeLabel.name] || types.note;
-        
-        // Убираем префикс даты из заголовка для отображения
-        let displayTitle = issue.title;
-        const dateMatch = issue.title.match(/^\S+\s+\d{2}\.\d{2}\.\d{4}:\s*/);
-        if (dateMatch) {
-          displayTitle = issue.title.substring(dateMatch[0].length);
-        }
-        
-        // Убираем иконку из заголовка
-        const iconMatch = displayTitle.match(/^[^\w\s]+\s/);
-        if (iconMatch) {
-          displayTitle = displayTitle.substring(iconMatch[0].length);
-        }
+        const closedStyle = issue.state === 'closed' ? 'opacity: 0.7; background: #f9f9f9;' : '';
         
         html += `
-          <div style="background: ${typeInfo.color}; border-radius: 6px; padding: 12px; margin-bottom: 10px; position: relative; border-left: 4px solid ${getTypeBorderColor(typeLabel.name)};">
-            <div style="display: flex; align-items: flex-start; gap: 10px;">
-              <div style="font-size: 1.2em; flex-shrink: 0; padding-top: 2px;">
+          <div id="issue-${issue.number}" 
+               style="background: ${typeInfo.color}; border-radius: 6px; padding: 12px; margin-bottom: 10px; position: relative; ${closedStyle}">
+            
+            ${issue.state === 'closed' ? `
+              <div style="position: absolute; top: 8px; right: 8px; background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.7em; font-weight: bold;">
+                ✓ ЗАКРЫТО
+              </div>
+            ` : `
+              <div style="position: absolute; top: 8px; right: 8px;">
+                <button onclick="closeIssue(${issue.number}, this)" 
+                        style="background: #ff6b6b; color: white; border: none; padding: 4px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8em;">
+                  ✕ Закрыть
+                </button>
+              </div>
+            `}
+            
+            <div style="display: flex; align-items: flex-start; gap: 10px; margin-right: 80px;">
+              <div style="font-size: 1.2em; padding-top: 2px;">
                 ${typeInfo.icon}
               </div>
               
               <div style="flex-grow: 1;">
-                <div style="color: ${typeInfo.textColor}; background: rgba(255,255,255,0.7); padding: 8px 10px; border-radius: 4px; margin-bottom: 10px; font-size: 0.95em; line-height: 1.4;">
+                <div style="background: rgba(255,255,255,0.7); padding: 8px 10px; border-radius: 4px; margin-bottom: 10px; font-size: 0.95em;">
                   ${formatIssueBody(issue.body)}
                 </div>
                 
@@ -391,9 +482,6 @@ async function loadLogEntries() {
                     <span style="margin-left: 10px;">
                       ${issue.state === 'open' ? '🔵 Открыто' : '✅ Закрыто'}
                     </span>
-                    ${issue.comments > 0 ? 
-                      `<span style="margin-left: 10px;">💬 ${issue.comments}</span>` : 
-                      ''}
                   </div>
                   
                   <div>
@@ -409,79 +497,84 @@ async function loadLogEntries() {
         `;
       });
       
+      if (visibleCount === 0) {
+        html += `
+          <div style="text-align: center; padding: 20px; color: #666; background: #f9f9f9; border-radius: 6px;">
+            <div style="font-size: 2em; margin-bottom: 10px;">📭</div>
+            <p style="margin: 0; font-size: 0.9em;">Нет открытых записей</p>
+            <button onclick="toggleShowClosed()" 
+                    style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+              Показать закрытые записи
+            </button>
+          </div>
+        `;
+      }
+      
       container.innerHTML = html;
-      showDebugInfo('Лог успешно загружен и отображен');
+      updateConnectionStatus(`✅ Загружено ${issues.length} записей`);
+      
     } else {
       const errorText = await response.text();
-      showDebugInfo(`Ошибка API: ${response.status} - ${errorText}`);
       container.innerHTML = `
         <div style="background: #ffebee; padding: 15px; border-radius: 6px; text-align: center;">
           <div style="font-size: 2em; margin-bottom: 10px;">⚠️</div>
           <p style="margin: 0; color: #c62828; font-size: 0.9em;">
-            Ошибка загрузки лога: ${response.status}
+            Ошибка ${response.status}: ${getErrorMessage(response.status)}
           </p>
           <p style="margin: 10px 0 0 0; color: #666; font-size: 0.8em;">
-            Проверьте название репозитория и метку
+            ${getErrorDescription(response.status)}
           </p>
-          <button onclick="testConnection()"
-                  style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px; font-size: 0.85em;">
+          <button onclick="checkConnection()"
+                  style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
             Проверить подключение
           </button>
         </div>
       `;
+      
+      updateConnectionStatus(`❌ Ошибка ${response.status}`, true);
     }
   } catch (error) {
-    console.error('Ошибка загрузки лога:', error);
-    showDebugInfo(`Ошибка загрузки: ${error.message}`);
     container.innerHTML = `
       <div style="background: #ffebee; padding: 15px; border-radius: 6px; text-align: center;">
         <div style="font-size: 2em; margin-bottom: 10px;">🚫</div>
         <p style="margin: 0; color: #c62828; font-size: 0.9em;">
-          Не удалось загрузить лог
-        </p>
-        <p style="margin: 10px 0 0 0; color: #666; font-size: 0.8em;">
-          ${error.message}
+          Ошибка сети: ${error.message}
         </p>
       </div>
     `;
+    updateConnectionStatus(`❌ Ошибка сети`, true);
   }
 }
 
-// Функция проверки подключения
-function testConnection() {
-  showDebugInfo('Запуск теста подключения...');
-  
-  Promise.all([
-    testGitHubAPI(),
-    testRepoAccess()
-  ]).then(([apiAvailable, repoAccess]) => {
-    if (apiAvailable && repoAccess) {
-      showStatus('✅ Подключение к GitHub работает', 'success');
-      loadLogEntries();
-    } else if (!apiAvailable) {
-      showStatus('❌ GitHub API недоступен', 'error');
-    } else {
-      showStatus('❌ Нет доступа к репозиторию', 'error');
-    }
-  });
+// Получить описание ошибки
+function getErrorMessage(status) {
+  switch(status) {
+    case 401: return 'Неавторизован';
+    case 403: return 'Доступ запрещен';
+    case 404: return 'Не найдено';
+    default: return `Ошибка ${status}`;
+  }
 }
 
-// Получить цвет границы для типа
-function getTypeBorderColor(type) {
-  const colors = {
-    note: '#1976d2',
-    task: '#4caf50',
-    question: '#ff9800',
-    idea: '#9c27b0'
-  };
-  return colors[type] || '#666';
+function getErrorDescription(status) {
+  switch(status) {
+    case 401: return 'Токен недействителен или отсутствует';
+    case 403: return 'У токена нет прав доступа к репозиторию';
+    case 404: return 'Репозиторий не найден';
+    default: return 'Проверьте настройки в config.js';
+  }
 }
 
 // Обновить статистику
 async function updateStats() {
   try {
+    const token = getGitHubToken();
+    const headers = { 'Accept': 'application/vnd.github.v3+json' };
+    if (token) headers['Authorization'] = `token ${token}`;
+    
     const response = await fetch(
-      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${CONFIG.label}`
+      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${CONFIG.label}`,
+      { headers }
     );
     
     if (response.ok) {
@@ -512,7 +605,7 @@ async function updateStats() {
       `;
     }
   } catch (error) {
-    console.error('Ошибка загрузки статистики:', error);
+    console.error('Ошибка статистики:', error);
   }
 }
 
@@ -560,27 +653,19 @@ function showStatus(message, type) {
 // ================= ИНИЦИАЛИЗАЦИЯ =================
 
 document.addEventListener('DOMContentLoaded', function() {
-  showDebugInfo('Страница загружена');
-  
-  // Включаем отладку
-  document.getElementById('debug-info').style.display = 'block';
-  
-  const token = getGitHubToken();
-  if (!token && CONFIG.askForToken) {
-    setTimeout(() => {
-      const setupToken = getGitHubToken();
-      if (setupToken) {
-        showStatus('✅ Токен сохранен! Можно добавлять записи.', 'success');
-      }
-    }, 1000);
+  // Проверяем наличие config.js
+  if (typeof GITHUB_CONFIG === 'undefined') {
+    updateConnectionStatus('⚠️ Файл config.js не загружен', true);
+  } else {
+    updateConnectionStatus('⏳ Проверка подключения...');
+    setTimeout(checkConnection, 500);
   }
   
   // Загружаем данные
-  showDebugInfo('Начало загрузки данных...');
   loadLogEntries();
   updateStats();
   
-  // Автообновление каждые 30 секунд
+  // Автообновление
   setInterval(() => {
     loadLogEntries();
     updateStats();
@@ -589,18 +674,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Фокус на поле ввода
   document.getElementById('log-entry').focus();
   
-  // Добавляем обработчик Enter (Ctrl+Enter для отправки)
+  // Ctrl+Enter для отправки
   document.getElementById('log-entry').addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.key === 'Enter') {
       addEntry('note');
     }
   });
-  
-  // Кнопка для тестирования подключения
-  const testBtn = document.createElement('button');
-  testBtn.innerHTML = '🔧 Тест подключения';
-  testBtn.style = 'background: #6c757d; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8em; margin-top: 10px;';
-  testBtn.onclick = testConnection;
-  document.getElementById('debug-info').appendChild(testBtn);
 });
 </script>
+
+<!-- Подключаем config.js -->
+<script src="config.js" type="text/javascript"></script>
