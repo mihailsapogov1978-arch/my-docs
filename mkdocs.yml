@@ -27,7 +27,10 @@ nav:
   - Главная: index.md
   - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
   - Проекты 2026:
-      - Дорожная карта: roadmap.md
+      - Дорожная карта: projects_2006/roadmap.md
+      - Справки Образование: 
+        - Документация: projects_2006/spravky_educaition.md
+        - Комментарии: projects_2006/spravki-obrazovanie-comments.md
       - Личный кабинет и ИИ: lk.md
       - Интеграция с Тезис: tezis.md
       - Отдельные доработки: dopfunction.md
@@ -39,7 +42,6 @@ nav:
       - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
       - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
       - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
-
 plugins:
   - search:
       lang: ru
@@ -56,7 +58,7 @@ theme:
     - content.tooltips
     - navigation.sections
     - navigation.expand
-    - navigation.tabs
+    #- navigation.tabs
     - search.highlight
     - search.suggest
   font:
