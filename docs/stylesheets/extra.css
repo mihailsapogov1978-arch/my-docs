@@ -281,9 +281,9 @@ table.steps td:first-child {
   /* Шрифт — Roboto (уже задан в theme, но можно уточнить) */
   font-family: "Roboto", sans-serif;
   /* Компактный междустрочный интервал */
-  line-height: 1.2 !important;
+  /* line-height: 1.2 !important; */
   /* Уменьшаем высоту строки — это сжимает пункты */
-  min-height: auto !important;
+  /* min-height: auto !important; */
   /* Убираем лишние отступы сверху/снизу */
   padding: 0.35rem 0.8rem !important;
   /* Немного увеличиваем вес для читаемости (опционально) */
@@ -345,4 +345,44 @@ table.steps td:first-child {
 }
 .back-to-summary-sticky a:hover {
     text-decoration: underline;
+}
+
+/* Минимальные изменения для вложенных пунктов */
+.md-nav__item .md-nav__item .md-nav__link {
+    padding-left: 1.6rem !important; /* чуть больше, чем сейчас */
+}
+
+.md-nav__item .md-nav__item .md-nav__item .md-nav__link {
+    padding-left: 2.4rem !important; /* ещё больше для третьего уровня */
+}
+
+/* ===== КОМПАКТНЫЙ МЕЖДУСТРОЧНЫЙ ИНТЕРВАЛ В ЛЕВОМ МЕНЮ ===== */
+.md-nav__link {
+    line-height: 1.1 !important; /* уменьшаем интервал между строками */
+    padding-top: 0.2rem !important; /* уменьшаем отступ сверху */
+    padding-bottom: 0.2rem !important; /* уменьшаем отступ снизу */
+}
+
+/* Уменьшаем отступы между пунктами меню */
+.md-nav__item {
+    margin-bottom: 0 !important;
+}
+
+/* ===== КОМПАКТНЫЙ ИНТЕРВАЛ В ПРАВОМ ОГЛАВЛЕНИИ (TOC) ===== */
+.md-sidebar--secondary .md-nav__link {
+    line-height: 1.1 !important;
+    padding-top: 0.15rem !important;
+    padding-bottom: 0.15rem !important;
+}
+
+/* Уменьшаем отступы между пунктами в TOC */
+.md-sidebar--secondary .md-nav__item {
+    margin-bottom: .6em !important;
+}
+
+/* Дополнительно: уменьшаем отступы у заголовков разделов */
+.md-nav__title {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    margin-bottom: 0.2rem !important;
 }

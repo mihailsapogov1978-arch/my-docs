@@ -18,8 +18,8 @@ markdown_extensions:
   - pymdownx.highlight
   - codehilite
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:pymdownx.emoji.twemoji
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - pymdownx.details
   - pymdownx.tasklist
 
@@ -27,18 +27,18 @@ nav:
   - Главная: index.md
   - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
   - Проекты 2026:
-      - Дорожная карта: projects_2006/roadmap.md
-      - Справки Образование: 
-        - Документация: projects_2006/spravky_educaition.md
-        - Комментарии: projects_2006/spravki-obrazovanie-comments.md
-      - Личный кабинет и ИИ: lk.md
-      - Интеграция с Тезис: tezis.md
-      - Отдельные доработки: dopfunction.md
-      - Шаблоны и чек-листы: templates.md
-  - Заявки и звонки: 
-      - Статистика телефонных вызовов: calls.md
-      - Статистика по заявкам: zayavky.md
-  - Инструкции:
+    - Дорожная карта: projects_2006/roadmap.md
+    - Справки Образование:
+      - Документация: projects_2006/spravki_obrazovanie/spravky_educaition.md
+      - Комментарии: projects_2006/spravki_obrazovanie/spravki-obrazovanie-comments.md
+    - Личный кабинет и ИИ: lk.md
+    - Интеграция с Тезис: tezis.md
+    - Отдельные доработки: dopfunction.md
+    - Шаблоны и чек-листы: templates.md
+    - Заявки и звонки:
+        - Статистика по звонкам: calls/calls.md
+        - Статистика по заявкам: calls/zayavky.md
+    - Инструкции:
       - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
       - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
       - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
