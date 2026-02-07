@@ -1,28 +1,28 @@
 [
     ← Назад к документации
 ](../spravky_educaition/)
-    🕐 Автообновление
 
-📝 Лог проекта "Справки Образование"
-⚡
-Автоматическое сохранение
-Просто пишите — всё сохраняется без открытия GitHub
-➕ Новая запись
-Текст записи:
-Тип записи:
-        📝 Заметка
-      
-        ✅ Задача
-      
-        ❓ Вопрос
-      
-        💡 Идея
-      
-    Ctrl+Enter для быстрой отправки заметки
+📝 Лог проекта "Справки Образование"  
+🕐 Автообновление  
+⚡ Автоматическое сохранение  
+Просто пишите — всё сохраняется без открытия GitHub  
 
-<div id="token-prompt" style="display: none; background: #e3f2fd; padding: 16px; border-radius: 8px; margin-bottom: 20px;">
+➕ Новая запись  
+<textarea id="log-entry" placeholder="Текст записи..." style="width: 100%; height: 80px; padding: 8px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+
+<div style="margin: 8px 0;">
+  <label><input type="radio" name="entry-type" value="note" checked> 📝 Заметка</label>
+  <label><input type="radio" name="entry-type" value="task"> ✅ Задача</label>
+  <label><input type="radio" name="entry-type" value="question"> ❓ Вопрос</label>
+  <label><input type="radio" name="entry-type" value="idea"> 💡 Идея</label>
+</div>
+
+<button onclick="addEntry()" style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Отправить</button>
+<small>Ctrl+Enter для быстрой отправки заметки</small>
+
+<div id="token-prompt" style="display: none; background: #e3f2fd; padding: 16px; border-radius: 8px; margin: 20px 0;">
   <h3>🔑 Авторизация в GitHub</h3>
-  <p>Для работы с логом требуется Personal Access Token с правами <code>repo</code>.</p>
+  <p>Для работы с логом требуется <strong>Personal Access Token</strong> с правами <code>repo</code>.</p>
   <input type="password" id="github-token-input" placeholder="Введите ваш GitHub Token..." style="width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px;">
   <button onclick="saveToken()" style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Сохранить и продолжить</button>
   <p style="font-size: 0.85em; color: #666; margin-top: 8px;">
@@ -30,17 +30,17 @@
   </p>
 </div>
 
-⏳
-Загрузка лога...
-Статистика загружается...
-📝 Информация о подключении:
-Проверка подключения...
-      Проверить
-
-<div id="debug-info" style="display: none; margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 4px;">
-  <strong>Отладка:</strong>
-  <div id="debug-content"></div>
+<div id="connection-info" style="padding: 12px; border-left: 4px solid #4caf50; margin: 20px 0; background: #e8f5e8; border-radius: 4px;">
+  <strong id="connection-status">⏳ Проверка подключения...</strong>
 </div>
+
+<div id="add-status"></div>
+
+<h3>Статистика</h3>
+<div id="stats" style="padding: 10px; background: #f9f9f9; border-radius: 4px; margin: 10px 0;">Загрузка...</div>
+
+<h3>Лог записей</h3>
+<div id="log-container">⏳ Загрузка лога...</div>
 
 <script>
 // ================= КОНФИГУРАЦИЯ =================
@@ -151,12 +151,14 @@ async function checkConnection() {
 }
 
 // Добавить запись
-async function addEntry(type) {
+async function addEntry() {
   const text = document.getElementById('log-entry').value.trim();
   if (!text) {
-    alert('Введите текст записи');
+    showStatus('Введите текст записи', 'error');
     return;
   }
+  
+  const type = document.querySelector('input[name="entry-type"]:checked').value;
   
   const token = getGitHubToken();
   if (!token) {
@@ -164,7 +166,6 @@ async function addEntry(type) {
     return;
   }
   
-  // ... остальной код addEntry без изменений ...
   showStatus('Сохранение...', 'loading');
   
   try {
@@ -312,18 +313,11 @@ async function loadLogEntries() {
     if (response.ok) {
       const issues = await response.json();
       
-      document.getElementById('last-update').innerHTML = 
-        `🕐 ${new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}`;
-      
       if (issues.length === 0) {
         container.innerHTML = `
           <div style="text-align: center; padding: 30px; color: #666;">
             <div style="font-size: 2em; margin-bottom: 10px;">📭</div>
             <p style="font-size: 0.9em;">Лог пуст. Нет записей с меткой "${CONFIG.label}"</p>
-            <button onclick="checkConnection()" 
-                    style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
-              Проверить подключение
-            </button>
           </div>
         `;
         updateConnectionStatus(`✅ Нет записей с меткой "${CONFIG.label}"`);
@@ -337,7 +331,6 @@ async function loadLogEntries() {
           <h3 style="margin: 0; font-size: 1.1em;">📚 Записи (${issues.length})</h3>
           <div>
             <button onclick="toggleShowClosed()" 
-                    id="toggle-closed-btn"
                     style="background: #f5f5f5; border: 1px solid #ddd; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em; margin-right: 8px;">
               ${showClosed ? '🔽 Скрыть закрытые' : '🔼 Показать закрытые'}
             </button>
@@ -439,7 +432,6 @@ async function loadLogEntries() {
       updateConnectionStatus(`✅ Загружено ${issues.length} записей`);
       
     } else {
-      // ... обработка ошибок без изменений ...
       container.innerHTML = `
         <div style="background: #ffebee; padding: 15px; border-radius: 6px; text-align: center;">
           <div style="font-size: 2em; margin-bottom: 10px;">⚠️</div>
@@ -455,7 +447,6 @@ async function loadLogEntries() {
           </button>
         </div>
       `;
-      
       updateConnectionStatus(`❌ Ошибка ${response.status}`, true);
     }
   } catch (error) {
@@ -468,6 +459,42 @@ async function loadLogEntries() {
       </div>
     `;
     updateConnectionStatus(`❌ Ошибка сети`, true);
+  }
+}
+
+// Обновить статистику
+async function updateStats() {
+  const token = getGitHubToken();
+  if (!token) return;
+  
+  try {
+    const headers = { 
+      'Accept': 'application/vnd.github.v3+json',
+      'Authorization': `token ${token}`
+    };
+    
+    const response = await fetch(
+      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${CONFIG.label}`,
+      { headers }
+    );
+    
+    if (response.ok) {
+      const issues = await response.json();
+      const openIssues = issues.filter(i => i.state === 'open').length;
+      const closedIssues = issues.filter(i => i.state === 'closed').length;
+      const completed = issues.length > 0 ? Math.round((closedIssues / issues.length) * 100) : 0;
+      
+      document.getElementById('stats').innerHTML = `
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+          <div><div style="font-size: 1.2em; font-weight: bold;">${issues.length}</div><div style="font-size: 0.8em; color: #666;">Всего</div></div>
+          <div><div style="font-size: 1.2em; font-weight: bold; color: #1976d2;">${openIssues}</div><div style="font-size: 0.8em; color: #666;">Открыто</div></div>
+          <div><div style="font-size: 1.2em; font-weight: bold; color: #4caf50;">${closedIssues}</div><div style="font-size: 0.8em; color: #666;">Закрыто</div></div>
+          <div><div style="font-size: 1.2em; font-weight: bold; color: #9c27b0;">${completed}%</div><div style="font-size: 0.8em; color: #666;">Выполнено</div></div>
+        </div>
+      `;
+    }
+  } catch (error) {
+    console.error('Ошибка статистики:', error);
   }
 }
 
@@ -502,7 +529,7 @@ function showStatus(message, type) {
   };
    
   statusDiv.innerHTML = `
-    <div style="background: ${colors[type]}; color: white; padding: 8px 12px; border-radius: 4px; font-size: 0.9em;">
+    <div style="background: ${colors[type]}; color: white; padding: 8px 12px; border-radius: 4px; font-size: 0.9em; margin: 10px 0;">
       ${message}
     </div>
   `;
@@ -532,45 +559,6 @@ function getErrorDescription(status) {
   }
 }
 
-// Обновить статистику
-async function updateStats() {
-  const token = getGitHubToken();
-  if (!token) return;
-  
-  try {
-    const headers = { 
-      'Accept': 'application/vnd.github.v3+json',
-      'Authorization': `token ${token}`
-    };
-    
-    const response = await fetch(
-      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${CONFIG.label}`,
-      { headers }
-    );
-    
-    if (response.ok) {
-      const issues = await response.json();
-      const openIssues = issues.filter(i => i.state === 'open').length;
-      const closedIssues = issues.filter(i => i.state === 'closed').length;
-      const completed = issues.length > 0 ? Math.round((closedIssues / issues.length) * 100) : 0;
-      
-      const statsEl = document.getElementById('stats');
-      if (statsEl) {
-        statsEl.innerHTML = `
-          <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-            <div><div style="font-size: 1.2em; font-weight: bold;">${issues.length}</div><div style="font-size: 0.8em; color: #666;">Всего</div></div>
-            <div><div style="font-size: 1.2em; font-weight: bold; color: #1976d2;">${openIssues}</div><div style="font-size: 0.8em; color: #666;">Открыто</div></div>
-            <div><div style="font-size: 1.2em; font-weight: bold; color: #4caf50;">${closedIssues}</div><div style="font-size: 0.8em; color: #666;">Закрыто</div></div>
-            <div><div style="font-size: 1.2em; font-weight: bold; color: #9c27b0;">${completed}%</div><div style="font-size: 0.8em; color: #666;">Выполнено</div></div>
-          </div>
-        `;
-      }
-    }
-  } catch (error) {
-    console.error('Ошибка статистики:', error);
-  }
-}
-
 // ================= ИНИЦИАЛИЗАЦИЯ =================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -593,17 +581,11 @@ document.addEventListener('DOMContentLoaded', function() {
     updateStats();
   }, 30000);
   
-  // Фокус на поле ввода
-  const logEntry = document.getElementById('log-entry');
-  if (logEntry) logEntry.focus();
-  
   // Ctrl+Enter для отправки
-  if (logEntry) {
-    logEntry.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'Enter') {
-        addEntry('note');
-      }
-    });
-  }
+  document.getElementById('log-entry').addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'Enter') {
+      addEntry();
+    }
+  });
 });
 </script>
