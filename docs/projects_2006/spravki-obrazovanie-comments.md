@@ -1,134 +1,91 @@
-<div style="max-width: 800px; margin: 0 auto;">
-
-<!-- Навигация -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;">
-  <a href="../spravky_educaition/" 
-     style="color: #1976d2; text-decoration: none; display: flex; align-items: center; gap: 6px; font-size: 0.9em;">
+[
     ← Назад к документации
-  </a>
-  
-  <span style="color: #666; font-size: 0.85em;" id="last-update">
+](../spravky_educaition/)
     🕐 Автообновление
-  </span>
-</div>
 
-<h1 style="margin-bottom: 15px; font-size: 1.5em;">📝 Лог проекта "Справки Образование"</h1>
-
-<div style="background: #f0f7ff; padding: 12px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #1976d2;">
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <div style="font-size: 1.2em;">⚡</div>
-    <div style="font-size: 0.9em;">
-      <strong>Автоматическое сохранение</strong>
-      <div style="color: #666; font-size: 0.85em;">Просто пишите — всё сохраняется без открытия GitHub</div>
-    </div>
-  </div>
-</div>
-
-<!-- Форма для добавления -->
-<div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #ddd;">
-  <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 1.1em;">➕ Новая запись</h3>
-  
-  <div style="margin-bottom: 12px;">
-    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9em;">Текст записи:</label>
-    <textarea id="log-entry" 
-              placeholder="Что нового по проекту? Какие задачи выполнены? Что нужно обсудить?"
-              rows="3"
-              style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95em; font-family: inherit;"></textarea>
-  </div>
-  
-  <div style="margin-bottom: 12px;">
-    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9em;">Тип записи:</label>
-    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-      <button onclick="addEntry('note')"
-              style="background: #1976d2; color: white; padding: 8px 12px; 
-                     border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; flex: 1; min-width: 80px;">
+📝 Лог проекта "Справки Образование"
+⚡
+Автоматическое сохранение
+Просто пишите — всё сохраняется без открытия GitHub
+➕ Новая запись
+Текст записи:
+Тип записи:
         📝 Заметка
-      </button>
-      <button onclick="addEntry('task')"
-              style="background: #4caf50; color: white; padding: 8px 12px; 
-                     border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; flex: 1; min-width: 80px;">
+      
         ✅ Задача
-      </button>
-      <button onclick="addEntry('question')"
-              style="background: #ff9800; color: white; padding: 8px 12px; 
-                     border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; flex: 1; min-width: 80px;">
+      
         ❓ Вопрос
-      </button>
-      <button onclick="addEntry('idea')"
-              style="background: #9c27b0; color: white; padding: 8px 12px; 
-                     border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; flex: 1; min-width: 80px;">
+      
         💡 Идея
-      </button>
-    </div>
-  </div>
-  
-  <div id="add-status" style="margin-top: 10px; font-size: 0.85em;"></div>
-  
-  <div style="font-size: 0.8em; color: #666; margin-top: 10px; padding-top: 8px; border-top: 1px solid #e0e0e0;">
+      
     Ctrl+Enter для быстрой отправки заметки
-  </div>
+
+<div id="token-prompt" style="display: none; background: #e3f2fd; padding: 16px; border-radius: 8px; margin-bottom: 20px;">
+  <h3>🔑 Авторизация в GitHub</h3>
+  <p>Для работы с логом требуется Personal Access Token с правами <code>repo</code>.</p>
+  <input type="password" id="github-token-input" placeholder="Введите ваш GitHub Token..." style="width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px;">
+  <button onclick="saveToken()" style="background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Сохранить и продолжить</button>
+  <p style="font-size: 0.85em; color: #666; margin-top: 8px;">
+    Токен хранится только в вашем браузере (<code>localStorage</code>). Он <strong>не передаётся на сервер</strong> и не попадает в Git.
+  </p>
 </div>
 
-<!-- Лог записей -->
-<div id="log-container">
-  <div style="text-align: center; padding: 30px; color: #666;">
-    <div style="font-size: 2em; margin-bottom: 10px;">⏳</div>
-    <p style="font-size: 0.9em;">Загрузка лога...</p>
-  </div>
-</div>
-
-<!-- Статистика -->
-<div id="stats" style="margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 6px; text-align: center;">
-  <small style="font-size: 0.85em;">Статистика загружается...</small>
-</div>
-
-<!-- Информация о подключении -->
-<div id="connection-info" style="margin-top: 20px; padding: 10px; background: #e8f5e8; border-radius: 4px; font-size: 0.8em; color: #2e7d32; border-left: 4px solid #4caf50;">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <div>
-      <strong>📝 Информация о подключении:</strong>
-      <div id="connection-status">Проверка подключения...</div>
-    </div>
-    <button onclick="checkConnection()" 
-            style="background: #4caf50; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 0.8em;">
+⏳
+Загрузка лога...
+Статистика загружается...
+📝 Информация о подключении:
+Проверка подключения...
       Проверить
-    </button>
-  </div>
-</div>
 
-<!-- Отладка -->
-<div id="debug-info" style="margin-top: 20px; padding: 10px; background: #fff3cd; border-radius: 4px; font-size: 0.8em; color: #856404; display: none;">
+<div id="debug-info" style="display: none; margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 4px;">
   <strong>Отладка:</strong>
   <div id="debug-content"></div>
 </div>
 
-</div>
-
 <script>
 // ================= КОНФИГУРАЦИЯ =================
-let CONFIG = {
+const CONFIG = {
   repoOwner: 'mihailsapogov1978-arch',
-  repoName: 'my-docs', // ИЛИ 'spravki-obrazovanie' - какой правильный?
-  label: 'Spravky_obr',
-  askForToken: false
+  repoName: 'my-docs',
+  label: 'Spravky_obr'
 };
 
-// Токен напрямую в коде
-const GITHUB_TOKEN = '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';
+// ================= ОСНОВНЫЕ ФУНКЦИИ =================
 
-// ================= ОТЛАДКА =================
-function showDebugInfo(message) {
-  const debugDiv = document.getElementById('debug-info');
-  const debugContent = document.getElementById('debug-content');
+// Получить токен из localStorage
+function getGitHubToken() {
+  return localStorage.getItem('github_token');
+}
+
+// Сохранить токен и скрыть форму
+function saveToken() {
+  const tokenInput = document.getElementById('github-token-input');
+  const token = tokenInput.value.trim();
   
-  debugDiv.style.display = 'block';
-  debugContent.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+  if (!token) {
+    alert('Пожалуйста, введите токен.');
+    return;
+  }
+  
+  localStorage.setItem('github_token', token);
+  document.getElementById('token-prompt').style.display = 'none';
+  checkConnection();
+  loadLogEntries();
+  updateStats();
+}
+
+// Показать форму ввода токена
+function showTokenPrompt() {
+  document.getElementById('token-prompt').style.display = 'block';
+  document.getElementById('log-container').innerHTML = '<p>Введите токен для доступа к записям.</p>';
 }
 
 // Обновить статус подключения
 function updateConnectionStatus(message, isError = false) {
   const statusEl = document.getElementById('connection-status');
   const infoEl = document.getElementById('connection-info');
+  
+  if (!statusEl || !infoEl) return;
   
   statusEl.innerHTML = message;
   
@@ -143,53 +100,17 @@ function updateConnectionStatus(message, isError = false) {
   }
 }
 
-// ================= ОСНОВНЫЕ ФУНКЦИИ =================
-
-// Получить токен
-function getGitHubToken() {
-  // 1. Встроенный токен
-  if (typeof GITHUB_TOKEN !== 'undefined') {
-    return GITHUB_TOKEN;
-  }
-  
-  // 2. Из GITHUB_CONFIG
-  if (typeof GITHUB_CONFIG !== 'undefined' && GITHUB_CONFIG.token) {
-    // Обновляем CONFIG значениями из GITHUB_CONFIG
-    if (GITHUB_CONFIG.repoOwner) CONFIG.repoOwner = GITHUB_CONFIG.repoOwner;
-    if (GITHUB_CONFIG.repoName) CONFIG.repoName = GITHUB_CONFIG.repoName;
-    if (GITHUB_CONFIG.label) CONFIG.label = GITHUB_CONFIG.label;
-    
-    return GITHUB_CONFIG.token;
-  }
-  
-  // 3. Из localStorage
-  const savedToken = localStorage.getItem('github_token');
-  if (savedToken) return savedToken;
-  
-  // 4. Из URL параметров
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlToken = urlParams.get('token');
-  if (urlToken) {
-    localStorage.setItem('github_token', urlToken);
-    return urlToken;
-  }
-  
-  return null;
-}
-
-
 // Проверить подключение
 async function checkConnection() {
-  updateConnectionStatus('⏳ Проверка подключения...');
-  
   const token = getGitHubToken();
   if (!token) {
-    updateConnectionStatus('❌ Токен не найден. Проверьте config.js', true);
+    showTokenPrompt();
     return;
   }
   
+  updateConnectionStatus('⏳ Проверка подключения...');
+  
   try {
-    // Проверяем токен
     const userResponse = await fetch('https://api.github.com/user', {
       headers: {
         'Authorization': `token ${token}`,
@@ -199,13 +120,13 @@ async function checkConnection() {
     
     if (!userResponse.ok) {
       updateConnectionStatus(`❌ Токен недействителен (${userResponse.status})`, true);
+      showTokenPrompt();
       return;
     }
     
     const userData = await userResponse.json();
     const username = userData.login || 'неизвестно';
     
-    // Проверяем доступ к репозиторию
     const repoResponse = await fetch(
       `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}`,
       {
@@ -218,16 +139,14 @@ async function checkConnection() {
     
     if (!repoResponse.ok) {
       updateConnectionStatus(`❌ Нет доступа к репозиторию (${repoResponse.status})`, true);
+      showTokenPrompt();
       return;
     }
     
     updateConnectionStatus(`✅ Подключено: ${username} → ${CONFIG.repoName}`);
-    
-    // Перезагружаем данные
-    loadLogEntries();
-    
   } catch (error) {
     updateConnectionStatus(`❌ Ошибка: ${error.message}`, true);
+    showTokenPrompt();
   }
 }
 
@@ -235,16 +154,17 @@ async function checkConnection() {
 async function addEntry(type) {
   const text = document.getElementById('log-entry').value.trim();
   if (!text) {
-    showStatus('Введите текст записи', 'error');
+    alert('Введите текст записи');
     return;
   }
   
   const token = getGitHubToken();
   if (!token) {
-    showStatus('Требуется GitHub токен', 'error');
+    showTokenPrompt();
     return;
   }
   
+  // ... остальной код addEntry без изменений ...
   showStatus('Сохранение...', 'loading');
   
   try {
@@ -268,7 +188,6 @@ async function addEntry(type) {
     );
     
     if (response.ok) {
-      const data = await response.json();
       showStatus('✅ Запись сохранена!', 'success');
       document.getElementById('log-entry').value = '';
       
@@ -277,7 +196,6 @@ async function addEntry(type) {
         updateStats();
       }, 1000);
     } else {
-      const errorText = await response.text();
       throw new Error(`GitHub API: ${response.status}`);
     }
   } catch (error) {
@@ -315,7 +233,7 @@ async function closeIssue(issueNumber, button) {
   
   const token = getGitHubToken();
   if (!token) {
-    showStatus('Требуется токен', 'error');
+    showTokenPrompt();
     return;
   }
   
@@ -373,14 +291,21 @@ function toggleShowClosed() {
 // Загрузить лог записей
 async function loadLogEntries() {
   const container = document.getElementById('log-container');
+  if (!container) return;
+  
+  const token = getGitHubToken();
+  if (!token) {
+    showTokenPrompt();
+    return;
+  }
+  
   updateConnectionStatus('⏳ Загрузка записей...');
   
   try {
-    const token = getGitHubToken();
     let apiUrl = `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${encodeURIComponent(CONFIG.label)}&sort=created&direction=desc`;
     
     const headers = { 'Accept': 'application/vnd.github.v3+json' };
-    if (token) headers['Authorization'] = `token ${token}`;
+    headers['Authorization'] = `token ${token}`;
     
     const response = await fetch(apiUrl, { headers });
     
@@ -460,7 +385,7 @@ async function loadLogEntries() {
             ` : `
               <div style="position: absolute; top: 8px; right: 8px;">
                 <button onclick="closeIssue(${issue.number}, this)" 
-                        style="background: #ff6b6b; color: white; border: none; padding: 4px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8em;">
+                         style="background: #ff6b6b; color: white; border: none; padding: 4px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8em;">
                   ✕ Закрыть
                 </button>
               </div>
@@ -514,7 +439,7 @@ async function loadLogEntries() {
       updateConnectionStatus(`✅ Загружено ${issues.length} записей`);
       
     } else {
-      const errorText = await response.text();
+      // ... обработка ошибок без изменений ...
       container.innerHTML = `
         <div style="background: #ffebee; padding: 15px; border-radius: 6px; text-align: center;">
           <div style="font-size: 2em; margin-bottom: 10px;">⚠️</div>
@@ -546,69 +471,6 @@ async function loadLogEntries() {
   }
 }
 
-// Получить описание ошибки
-function getErrorMessage(status) {
-  switch(status) {
-    case 401: return 'Неавторизован';
-    case 403: return 'Доступ запрещен';
-    case 404: return 'Не найдено';
-    default: return `Ошибка ${status}`;
-  }
-}
-
-function getErrorDescription(status) {
-  switch(status) {
-    case 401: return 'Токен недействителен или отсутствует';
-    case 403: return 'У токена нет прав доступа к репозиторию';
-    case 404: return 'Репозиторий не найден';
-    default: return 'Проверьте настройки в config.js';
-  }
-}
-
-// Обновить статистику
-async function updateStats() {
-  try {
-    const token = getGitHubToken();
-    const headers = { 'Accept': 'application/vnd.github.v3+json' };
-    if (token) headers['Authorization'] = `token ${token}`;
-    
-    const response = await fetch(
-      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${CONFIG.label}`,
-      { headers }
-    );
-    
-    if (response.ok) {
-      const issues = await response.json();
-      const openIssues = issues.filter(i => i.state === 'open').length;
-      const closedIssues = issues.filter(i => i.state === 'closed').length;
-      const completed = issues.length > 0 ? Math.round((closedIssues / issues.length) * 100) : 0;
-      
-      document.getElementById('stats').innerHTML = `
-        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-          <div>
-            <div style="font-size: 1.2em; font-weight: bold;">${issues.length}</div>
-            <div style="font-size: 0.8em; color: #666;">Всего</div>
-          </div>
-          <div>
-            <div style="font-size: 1.2em; font-weight: bold; color: #1976d2;">${openIssues}</div>
-            <div style="font-size: 0.8em; color: #666;">Открыто</div>
-          </div>
-          <div>
-            <div style="font-size: 1.2em; font-weight: bold; color: #4caf50;">${closedIssues}</div>
-            <div style="font-size: 0.8em; color: #666;">Закрыто</div>
-          </div>
-          <div>
-            <div style="font-size: 1.2em; font-weight: bold; color: #9c27b0;">${completed}%</div>
-            <div style="font-size: 0.8em; color: #666;">Выполнено</div>
-          </div>
-        </div>
-      `;
-    }
-  } catch (error) {
-    console.error('Ошибка статистики:', error);
-  }
-}
-
 // ================= ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =================
 
 function formatIssueBody(text) {
@@ -631,12 +493,14 @@ function formatIssueBody(text) {
 
 function showStatus(message, type) {
   const statusDiv = document.getElementById('add-status');
+  if (!statusDiv) return;
+  
   const colors = {
     success: '#4caf50',
     error: '#f44336',
     loading: '#ff9800'
   };
-  
+   
   statusDiv.innerHTML = `
     <div style="background: ${colors[type]}; color: white; padding: 8px 12px; border-radius: 4px; font-size: 0.9em;">
       ${message}
@@ -650,12 +514,70 @@ function showStatus(message, type) {
   }
 }
 
+function getErrorMessage(status) {
+  switch(status) {
+    case 401: return 'Неавторизован';
+    case 403: return 'Доступ запрещен';
+    case 404: return 'Не найдено';
+    default: return `Ошибка ${status}`;
+  }
+}
+
+function getErrorDescription(status) {
+  switch(status) {
+    case 401: return 'Токен недействителен или отсутствует';
+    case 403: return 'У токена нет прав доступа к репозиторию';
+    case 404: return 'Репозиторий не найден';
+    default: return 'Проверьте настройки';
+  }
+}
+
+// Обновить статистику
+async function updateStats() {
+  const token = getGitHubToken();
+  if (!token) return;
+  
+  try {
+    const headers = { 
+      'Accept': 'application/vnd.github.v3+json',
+      'Authorization': `token ${token}`
+    };
+    
+    const response = await fetch(
+      `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/issues?labels=${CONFIG.label}`,
+      { headers }
+    );
+    
+    if (response.ok) {
+      const issues = await response.json();
+      const openIssues = issues.filter(i => i.state === 'open').length;
+      const closedIssues = issues.filter(i => i.state === 'closed').length;
+      const completed = issues.length > 0 ? Math.round((closedIssues / issues.length) * 100) : 0;
+      
+      const statsEl = document.getElementById('stats');
+      if (statsEl) {
+        statsEl.innerHTML = `
+          <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <div><div style="font-size: 1.2em; font-weight: bold;">${issues.length}</div><div style="font-size: 0.8em; color: #666;">Всего</div></div>
+            <div><div style="font-size: 1.2em; font-weight: bold; color: #1976d2;">${openIssues}</div><div style="font-size: 0.8em; color: #666;">Открыто</div></div>
+            <div><div style="font-size: 1.2em; font-weight: bold; color: #4caf50;">${closedIssues}</div><div style="font-size: 0.8em; color: #666;">Закрыто</div></div>
+            <div><div style="font-size: 1.2em; font-weight: bold; color: #9c27b0;">${completed}%</div><div style="font-size: 0.8em; color: #666;">Выполнено</div></div>
+          </div>
+        `;
+      }
+    }
+  } catch (error) {
+    console.error('Ошибка статистики:', error);
+  }
+}
+
 // ================= ИНИЦИАЛИЗАЦИЯ =================
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Проверяем наличие config.js
-  if (typeof GITHUB_CONFIG === 'undefined') {
-    updateConnectionStatus('⚠️ Файл config.js не загружен', true);
+  // Проверяем токен
+  const token = getGitHubToken();
+  if (!token) {
+    showTokenPrompt();
   } else {
     updateConnectionStatus('⏳ Проверка подключения...');
     setTimeout(checkConnection, 500);
@@ -672,16 +594,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 30000);
   
   // Фокус на поле ввода
-  document.getElementById('log-entry').focus();
+  const logEntry = document.getElementById('log-entry');
+  if (logEntry) logEntry.focus();
   
   // Ctrl+Enter для отправки
-  document.getElementById('log-entry').addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.key === 'Enter') {
-      addEntry('note');
-    }
-  });
+  if (logEntry) {
+    logEntry.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'Enter') {
+        addEntry('note');
+      }
+    });
+  }
 });
 </script>
-
-<!-- Подключаем config.js -->
-<script src="config.js" type="text/javascript"></script>
