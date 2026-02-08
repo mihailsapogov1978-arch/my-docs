@@ -1,15 +1,12 @@
 name: 🔄 Автообновление дорожной карты
 
 on:
-  # Запускать по расписанию (каждые 6 часов)
   schedule:
     - cron: '0 */6 * * *'
   
-  # Запускать при событиях в задачах
   issues:
     types: [opened, closed, labeled, unlabeled, assigned, unassigned]
   
-  # Добавить кнопку "Run workflow" в интерфейсе
   workflow_dispatch:
     inputs:
       reason:
@@ -50,7 +47,7 @@ jobs:
           git status
           
           if git diff --cached --exit-code --quiet; then
-            echo "ℹ️ No changes to commit"
+            echo "ℹ️ Нет изменений для коммита"
             exit 0
           fi
           
