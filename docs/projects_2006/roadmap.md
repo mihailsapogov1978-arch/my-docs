@@ -240,6 +240,51 @@
     padding-left: 0 !important;
 }
 
+/* ===== МАРКЕРЫ ДЛЯ ЛОГА В TOC ===== */
+#toc-log-display ul {
+    list-style-type: none !important;
+    padding-left: 0 !important;
+}
+
+#toc-log-display li {
+    list-style-type: none !important;
+    padding-left: 24px !important;
+    position: relative;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* БАЗОВЫЙ МАРКЕР — СЕРЫЙ КРУЖОК (НЕ НАЧАТО) */
+#toc-log-display li::before {
+    content: "○";
+    position: absolute;
+    left: 0;
+    color: #95a5a6;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/* ВЫПОЛНЕНО — ЗЕЛЁНАЯ ГАЛОЧКА */
+#toc-log-display li.done::before {
+    content: "✓";
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* В РАБОТЕ — ЖЁЛТЫЙ КРУЖОК */
+#toc-log-display li.work::before {
+    content: "●";
+    color: #f39c12;
+    font-size: 14px;
+}
+
+/* ГОТОВО К ТЕСТИРОВАНИЮ — СИНЯЯ ГАЛОЧКА (ОПЦИОНАЛЬНО) */
+#toc-log-display li.test::before {
+    content: "◉";
+    color: #3498db;
+    font-size: 14px;
+}
 </style>
 
 <!-- ЛЕГЕНДА -->
@@ -255,10 +300,12 @@
     <div id="log-1" class="project-log">
         <h4>Интеграция с Тэзис</h4>
         <ul>
-            <li>02.10.25 — Провели ВКС, условились использовать СНИЛС как идентификатор</li>
-            <li>15.10.25 — Направлен проект ТЗ на согласование</li>
-            <li>25.10.25 — Получены замечания от заказчика</li>
-            <li>05.11.25 — Доработано ТЗ, повторное согласование</li>
+            <li class = "done">02.10.25 — Разработана бизнес-модель взаимодействия</li>
+            <li class = "done">02.10.25 — Согласованы тезисы</li>
+            <li class = "done">26.01.26 — Разработаны и согласованы форматы ЭД</li>
+            <li class = "done">26.01.26 — Проведен ВКС</li>
+            <li class = "work">25.10.25 — Подготовка ТЗ</li>
+            <li class = "test">17.02.26 — Запланирован ВКС</li>
             <li>20.11.25 — ТЗ утверждено</li>
             <li>10.12.25 — Старт разработки</li>
             <li>15.01.26 — Готово к тестированию</li>
@@ -268,10 +315,11 @@
     <div id="log-2" class="project-log">
         <h4>Интеграция ЛК/Сметы с сервисом по предоставлению справок</h4>
         <ul>
-            <li>05.12.25 — ВКС с заказчиком</li>
-            <li>18.12.25 — Определены форматы обмена</li>
-            <li>25.01.26 — Подготовлен прототип</li>
-            <li>01.02.26 — Начало интеграционных тестов</li>
+            <li class = "done">03.01.2026 Проект ТЗ высланы Евдокимову и Орлову. Принято в работу.</li>
+            <li class = "done">30.01.2026 В ТЗ внесены правки - добавлен СНИЛС.</li>
+            <li class = "done">03.02.2026 Провели ВКС - меняем логику работы</li>
+            <li class = "work">06.02.2026 В ТЗ внесены правки, высланы в Техфаргос.</li>
+            
         </ul>
     </div>
     
@@ -304,8 +352,8 @@
     <tr>
         <td>1</td>
         <td>Интеграция с Тэзис</td>
-        <td class = "status-work">10.02.26<br>Ставер</td>
-        <td>01.03.26</td>
+        <td class = "status-done">10.02.26<br>Ставер</td>
+        <td class = "status-work">01.03.26</td>
         <td>15.03.26</td>
         <td>01.04.26</td>
         <td>20.04.26</td>
