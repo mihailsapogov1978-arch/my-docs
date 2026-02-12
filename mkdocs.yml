@@ -27,7 +27,7 @@ nav:
   - Главная: index.md
   - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
   - Проекты 2026:
-    - Дорожная карта: roadmap.md
+    - Дорожная карта: projects_2006/roadmap.md
     - Справки Образование:
       - Документация: projects_2006/spravki_obrazovanie/spravky_educaition.md
       - Комментарии: projects_2006/spravki_obrazovanie/spravki-obrazovanie-comments.md

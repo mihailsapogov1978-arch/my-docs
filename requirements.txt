@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-material
+docx2python
+python-docx
+beautifulsoup4
+html2text
