@@ -38,10 +38,6 @@ nav:
     - Заявки и звонки:
         - Статистика по звонкам: calls/calls.md
         - Статистика по заявкам: calls/zayavky.md
-    - Инструкции:
-      - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
-      - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
-      - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
 plugins:
   - search:
       lang: ru
