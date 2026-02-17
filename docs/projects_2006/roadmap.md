@@ -852,7 +852,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // ===== НАСТРОЙКИ GITHUB =====
-    const GITHUB_TOKEN = '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'; 
+    const GITHUB_TOKEN = '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'; 
     const GITHUB_REPO = 'mihailsapogov1978-arch/my-docs';
     const GITHUB_PATH = 'docs/projects_2006/roadmap.md';
     const GITHUB_BRANCH = 'main';
@@ -1264,7 +1264,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Ошибка:', error);
             showNotification('❌ Ошибка: ' + error.message, 'error');
         } finally {
-            addBtn.textContent = '💾 Добавить и сохранить';
+            addBtn.textContent = 'Добавить и сохранить';
             addBtn.disabled = false;
         }
     }
@@ -1314,7 +1314,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- ФОРМА ДОБАВЛЕНИЯ НОВЫХ ЗАПИСЕЙ -->
             <div id="log-add-form-container" class="log-add-form">
                 <div class="log-add-title">
-                    <span>➕ Добавить запись</span>
+                    <span>Добавить запись</span>
                 </div>
                 
                 <div class="form-grid">
@@ -1426,7 +1426,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!cell.querySelector('.log-icon')) {
                 cell.style.cursor = 'pointer';
                 cell.style.position = 'relative';
-                cell.innerHTML = cell.innerHTML + ' <span class="log-icon" style="font-size: 12px; color: #3498db; margin-left: 5px;">📋</span>';
+                cell.innerHTML = cell.innerHTML + ' <span class="log-icon" style="font-size: 12px; color: #3498db; margin-left: 5px;"></span>';
             }
             
             cell.addEventListener('click', function(e) {
