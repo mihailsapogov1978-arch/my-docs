@@ -1,11 +1,19 @@
 dev_addr: 127.0.0.1:8000
+
 extra_css:
   - stylesheets/extra.css
+
 extra_javascript:
   - search.js
 
 markdown_extensions:
   - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom:
+          - "material"  # Включает Material Icons
   - admonition
   - toc:
       permalink: true
@@ -17,35 +25,33 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight
   - codehilite
-  - pymdownx.emoji:
-      emoji_index: !!python/name:pymdownx.emoji.twemoji
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - pymdownx.details
   - pymdownx.tasklist
 
 nav:
   - Главная: index.md
   - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
-  - Проекты 2026:
-    - Дорожная карта: projects_2006/roadmap.md
-    - Справки Образование:
-      - Документация: projects_2006/spravki_obrazovanie/spravky_educaition.md
-      - Комментарии: projects_2006/spravki_obrazovanie/spravki-obrazovanie-comments.md
-    - Личный кабинет и ИИ: lk.md
-    - Интеграция с Тезис: tezis.md
-    - Отдельные доработки: dopfunction.md
-    - Шаблоны и чек-листы: templates.md
-    - Заявки и звонки:
-        - Статистика по звонкам: calls/calls.md
-        - Статистика по заявкам: calls/zayavky.md
+  - Дорожная карта: projects_2006/roadmap.md
+  - Справки Образование: projects_2006/spravki_obrazovanie/spravky_educaition.md
+  - Личный кабинет и ИИ: projects_2006/lk.md
+  - Отдельные доработки: dopfunction.md
+  - Шаблоны и чек-листы: templates.md
+  - Заявки и звонки:
+    - Статистика по звонкам: calls/calls.md
+    - Статистика по заявкам: calls/zayavky.md
+  - Инструкции:
+    - Первое подключение к ГИС "Смета ЯНАО": instr/first_podkl/firstpodkl.md
+    - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
+    - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
+
 plugins:
   - search:
       lang: ru
       prebuild_index: true
-      separator: '[\s\-–—_]+'
-  # - git-revision-date-localized:
-  #     timezone: Europe/Moscow
-  #     type: date
+      separator: '[\s-–—_]+'
+  - git-revision-date-localized:
+      timezone: Europe/Moscow
+      type: date
 
 site_name: Документация ЦБ ОГВ ЯНАО
 
@@ -54,7 +60,7 @@ theme:
     - content.tooltips
     - navigation.sections
     - navigation.expand
-    #- navigation.tabs
+    # - navigation.tabs
     - search.highlight
     - search.suggest
   font:

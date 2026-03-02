@@ -4,70 +4,18 @@ html {
 }
 
 /* ===== ВЫРАВНИВАНИЕ НАВИГАЦИИ ===== */
-.md-nav {
-    margin: 0 !important;
-    padding: 0 !important;
-}
 
-.md-nav__list {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.md-nav__item {
-    margin: 0 !important;
-    padding: 0 !important;
-}
 
 .md-nav__link {
     margin: 0 !important;
-    padding: 0.4rem 0.8rem !important;
+    padding: 0.4rem 0.1em !important;
     line-height: 1.2 !important;
-    min-height: auto !important;
+   
 }
 
-/* Вложенные пункты */
-.md-nav__item .md-nav__item .md-nav__link {
-    padding-left: 1.2rem !important;
-}
 
-.custom-large {
-    font-size: 1.4em;
-    font-weight: 500;
-}
 
-.custom-small {
-    font-size: 0.85em;
-    color: #666;
-}
 
-.custom-highlight {
-    background-color: #fffacd;
-    padding: 2px 6px;
-    border-radius: 3px;
-}
-
-.custom-heading {
-    font-size: 1.8em;
-    font-weight: 400;
-    color: #2c3e50;
-    border-left: 4px solid #3498db;
-    padding-left: 10px;
-}
-
-.md-typeset h2 {
-    font-size: 1.1em;
-    font-weight: 400;
-    color: #2c3e50;
-    border-left: 4px solid #3498db;
-    padding-left: 10px;
-    margin-top: 1.5em;
-}
-
-.md-typeset h1 {
-    font-size: 1.5em;
-    font-weight: 400;
-}
 
 /* Стили для нумерованных шагов в таблице */
 table.steps {
@@ -280,13 +228,6 @@ table.steps td:first-child {
 .md-nav__link {
   /* Шрифт — Roboto (уже задан в theme, но можно уточнить) */
   font-family: "Roboto", sans-serif;
-  /* Компактный междустрочный интервал */
-  line-height: 1.2 !important;
-  /* Уменьшаем высоту строки — это сжимает пункты */
-  min-height: auto !important;
-  /* Убираем лишние отступы сверху/снизу */
-  padding: 0.35rem 0.8rem !important;
-  /* Немного увеличиваем вес для читаемости (опционально) */
   font-weight: 400;
 }
 
@@ -345,4 +286,62 @@ table.steps td:first-child {
 }
 .back-to-summary-sticky a:hover {
     text-decoration: underline;
+}
+
+/* Минимальные изменения для вложенных пунктов */
+
+
+/* ===== КОМПАКТНЫЙ МЕЖДУСТРОЧНЫЙ ИНТЕРВАЛ В ЛЕВОМ МЕНЮ ===== */
+.md-nav__link {
+    line-height: 1.1 !important; /* уменьшаем интервал между строками */
+    padding-top: 0.2rem !important; /* уменьшаем отступ сверху */
+    padding-bottom: 0.2rem !important; /* уменьшаем отступ снизу */
+}
+
+/* Уменьшаем отступы между пунктами меню */
+.md-nav__item {
+    margin-bottom: 0 !important;
+}
+
+/* ===== КОМПАКТНЫЙ ИНТЕРВАЛ В ПРАВОМ ОГЛАВЛЕНИИ (TOC) ===== */
+.md-sidebar--secondary .md-nav__link {
+    line-height: 1.1 !important;
+    padding-top: 0.15rem !important;
+    padding-bottom: 0.15rem !important;
+}
+
+/* Уменьшаем отступы между пунктами в TOC */
+.md-sidebar--secondary .md-nav__item {
+    margin-bottom: .6em !important;
+}
+
+/* Дополнительно: уменьшаем отступы у заголовков разделов */
+.md-nav__title {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    margin-bottom: 0.2rem !important;
+}
+
+.md-nav__item--section>.md-nav__link{
+  font-weight: 500;
+  color: #333!important;
+}
+
+/* ===== УМЕНЬШЕНИЕ ОТСТУПА 2-ГО УРОВНЯ ===== */
+.md-nav__item .md-nav__item .md-nav__link {
+    padding-left: 0.8rem !important;  /* Было 1.2rem или 1.4rem - уменьшаем */
+}
+
+/* Для 3-го уровня (если есть) */
+.md-nav__item .md-nav__item .md-nav__item .md-nav__link {
+    padding-left: 0.8rem !important;
+}
+
+/* Растягиваем изображения на всю ширину */
+
+.image-full {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block;
+  margin: 0 auto;
 }

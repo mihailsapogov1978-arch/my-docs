@@ -1,51 +1,5 @@
 # Сводная информация по государственным контрактам
 
-## Общая статистика
-
-<div style="overflow-x:auto;">
-<table class="table-stats" style="width:100%; border-collapse:collapse; font-size:0.85em;">
-<thead>
-<tr style="background-color:#f5f7fa; font-weight:bold;">
-<th style="padding:6px; text-align:left;">Год</th>
-<th style="padding:6px; text-align:center;">Контрактов</th>
-<th style="padding:6px; text-align:right;">Сумма</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2020</td><td style="padding:6px; text-align:center;">8</td><td style="padding:6px; text-align:right;">14 929 200,00</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2021</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">9 558 000,00</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2022</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">12 495 750,00</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2023</td><td style="padding:6px; text-align:center;">13</td><td style="padding:6px; text-align:right;">50 321 750,00</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2024</td><td style="padding:6px; text-align:center;">16</td><td style="padding:6px; text-align:right;">104 806 600,00</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2025</td><td style="padding:6px; text-align:center;">12</td><td style="padding:6px; text-align:right;">389 657 750,00</td></tr>
-<tr style="border-bottom:1px solid #eee; background-color:#f8f9fa; font-weight:bold;"><td style="padding:6px;">Итого</td><td style="padding:6px; text-align:center;">59</td><td style="padding:6px; text-align:right;">581 769 050,00</td></tr>
-</tbody>
-</table>
-</div>
-
-## Распределение по типам работ
-
-<div style="overflow-x:auto;">
-<table class="table-types" style="width:100%; border-collapse:collapse; font-size:0.85em;">
-<thead>
-<tr style="background-color:#f5f7fa; font-weight:bold;">
-<th style="padding:6px; text-align:left;">Тип работ</th>
-<th style="padding:6px; text-align:center;">Контрактов</th>
-<th style="padding:6px; text-align:right;">Сумма</th>
-<th style="padding:6px; text-align:right;">% от общей суммы</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Миграция данных</td><td style="padding:6px; text-align:center;">13</td><td style="padding:6px; text-align:right;">342 393 600,00</td><td style="padding:6px; text-align:right; color:#27ae60;">58.9%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Техническая поддержка</td><td style="padding:6px; text-align:center;">14</td><td style="padding:6px; text-align:right;">136 335 450,00</td><td style="padding:6px; text-align:right; color:#27ae60;">23.4%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Настройка/Развитие системы</td><td style="padding:6px; text-align:center;">25</td><td style="padding:6px; text-align:right;">79 770 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">13.7%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Прочее</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">13 170 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">2.3%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Предпроектные работы</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">8 100 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">1.4%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Консалтинг</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">2 000 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">0.3%</td></tr>
-</tbody>
-</table>
-</div>
-
 ## 2025 год
 
 <div style="overflow-x:auto;">
@@ -498,6 +452,54 @@
   <td style="padding:6px; text-align:center;">05.02.2020<br>№ 00774<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320000774" target="_blank">ГК на zakupki.gov.ru</a><br><a href="../2020/contract-0190200000320000774/">Смотреть ТЗ</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 800 000,00</td>
 </tr>
+</tbody>
+</table>
+
+
+</div>
+
+## Общая статистика
+
+<div style="overflow-x:auto;">
+<table class="table-stats" style="width:100%; border-collapse:collapse; font-size:0.85em;">
+<thead>
+<tr style="background-color:#f5f7fa; font-weight:bold;">
+<th style="padding:6px; text-align:left;">Год</th>
+<th style="padding:6px; text-align:center;">Контрактов</th>
+<th style="padding:6px; text-align:right;">Сумма</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2020</td><td style="padding:6px; text-align:center;">8</td><td style="padding:6px; text-align:right;">14 929 200,00</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2021</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">9 558 000,00</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2022</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">12 495 750,00</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2023</td><td style="padding:6px; text-align:center;">13</td><td style="padding:6px; text-align:right;">50 321 750,00</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2024</td><td style="padding:6px; text-align:center;">16</td><td style="padding:6px; text-align:right;">104 806 600,00</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2025</td><td style="padding:6px; text-align:center;">12</td><td style="padding:6px; text-align:right;">389 657 750,00</td></tr>
+<tr style="border-bottom:1px solid #eee; background-color:#f8f9fa; font-weight:bold;"><td style="padding:6px;">Итого</td><td style="padding:6px; text-align:center;">59</td><td style="padding:6px; text-align:right;">581 769 050,00</td></tr>
+</tbody>
+</table>
+</div>
+
+## Распределение по типам работ
+
+<div style="overflow-x:auto;">
+<table class="table-types" style="width:100%; border-collapse:collapse; font-size:0.85em;">
+<thead>
+<tr style="background-color:#f5f7fa; font-weight:bold;">
+<th style="padding:6px; text-align:left;">Тип работ</th>
+<th style="padding:6px; text-align:center;">Контрактов</th>
+<th style="padding:6px; text-align:right;">Сумма</th>
+<th style="padding:6px; text-align:right;">% от общей суммы</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Миграция данных</td><td style="padding:6px; text-align:center;">13</td><td style="padding:6px; text-align:right;">342 393 600,00</td><td style="padding:6px; text-align:right; color:#27ae60;">58.9%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Техническая поддержка</td><td style="padding:6px; text-align:center;">14</td><td style="padding:6px; text-align:right;">136 335 450,00</td><td style="padding:6px; text-align:right; color:#27ae60;">23.4%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Настройка/Развитие системы</td><td style="padding:6px; text-align:center;">25</td><td style="padding:6px; text-align:right;">79 770 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">13.7%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Прочее</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">13 170 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">2.3%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Предпроектные работы</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">8 100 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">1.4%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Консалтинг</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">2 000 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">0.3%</td></tr>
 </tbody>
 </table>
 </div>

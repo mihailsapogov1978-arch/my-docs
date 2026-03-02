@@ -337,3 +337,22 @@ table.steps td:first-child {
     padding-left: 0.8rem !important;
 }
 
+/* Растягиваем изображения на всю ширину */
+
+.image-full {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Цвета для иконок в инструкции ГИС "Смета ЯНАО" */
+.icon-download { color: #4CAF50; }      /* Зелёный */
+.icon-vipnet { color: #E91E63; }        /* Розовый */
+.icon-crypto { color: #9C27B0; }        /* Фиолетовый */
+.icon-windows { color: #00A4EF; }       /* Синий */
+.icon-redos { color: #DA291C; }         /* Красный */
+.icon-test { color: #FF9800; }          /* Оранжевый */
+.icon-tls { color: #009688; }           /* Бирюзовый */
+.icon-warning { color: #FF9800; }       /* Оранжевый */
+.icon-info { color: #2196F3; }          /* Синий */

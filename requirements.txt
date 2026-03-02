@@ -1,6 +1,1 @@
-mkdocs
-mkdocs-material
-docx2python
-python-docx
-beautifulsoup4
-html2text
+python-docx==1.1.0
