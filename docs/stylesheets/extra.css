@@ -3,20 +3,7 @@ html {
     scroll-behavior: smooth !important;
 }
 
-/* ===== ВЫРАВНИВАНИЕ НАВИГАЦИИ ===== */
-
-
-.md-nav__link {
-    margin: 0 !important;
-    padding: 0.4rem 0.1em !important;
-    line-height: 1.2 !important;
-   
-}
-
-
-
-
-
+/* ===== СТИЛИ ДЛЯ ТАБЛИЦ ===== */
 /* Стили для нумерованных шагов в таблице */
 table.steps {
     border: none;
@@ -48,224 +35,150 @@ table.steps td strong {
     font-weight: 400 !important;
 }
 
-/* Или у всех ячеек первого столбца */
 table.steps td:first-child {
     font-weight: 400;
 }
 
-/* stylesheets/extra.css */
-
+/* Таблица контрактов */
 .table-contracts {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1em 0;
-  font-size: 0.9em;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.9em;
 }
 
 .table-contracts th,
 .table-contracts td {
-  border: 1px solid var(--md-typeset-table-color, #ddd);
-  padding: 8px 12px;
-  vertical-align: top;
-  text-align: left;
+    border: 1px solid var(--md-typeset-table-color, #ddd);
+    padding: 8px 12px;
+    vertical-align: top;
+    text-align: left;
 }
 
-/* Тонкие границы — используем цвет из темы Material */
 .table-contracts th {
-  background-color: var(--md-typeset-table-header-bg, #f9f9f9);
-  font-weight: bold;
+    background-color: var(--md-typeset-table-header-bg, #f9f9f9);
+    font-weight: bold;
 }
 
-/* Узкий столбец № */
 .table-contracts th:first-child,
 .table-contracts td:first-child {
-  width: 5%;
-  text-align: center;
-  white-space: nowrap;
+    width: 5%;
+    text-align: center;
+    white-space: nowrap;
 }
 
-/* Наименование */
 .table-contracts th:nth-child(2),
 .table-contracts td:nth-child(2) {
-  width: 60%;
-  word-break: break-word;
+    width: 60%;
+    word-break: break-word;
 }
 
-/* Дата размещения */
 .table-contracts th:nth-child(3),
 .table-contracts td:nth-child(3) {
-  width: 15%;
-  white-space: nowrap;
+    width: 15%;
+    white-space: nowrap;
 }
 
-/* Цена */
 .table-contracts th:last-child,
 .table-contracts td:last-child {
-  width: 20%;
-  text-align: right;
+    width: 20%;
+    text-align: right;
 }
 
-/* Подсветка при наведении */
 .table-contracts tbody tr:hover {
-  background-color: var(--md-typeset-table-row--hover-bg, rgba(0, 0, 0, 0.03));
+    background-color: var(--md-typeset-table-row--hover-bg, rgba(0, 0, 0, 0.03));
 }
 
 /* Интерактивные карточки */
 .interactive-contracts .contract-card {
-  padding: 16px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-  margin-top: 8px;
-}
-
-.interactive-contracts .contract-card h4 {
-  margin-top: 0;
-  margin-bottom: 12px;
-}
-
-.interactive-contracts .contract-card ul {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 16px;
-}
-
-.interactive-contracts .contract-card li {
-  margin-bottom: 4px;
-}
-
-/* Интерактивные карточки */
-.interactive-contracts .contract-card {
-  padding: 12px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-  margin-top: 8px;
-  font-size: 0.85em; /* Мельче текст */
-  display: flex;
-  gap: 20px;
+    padding: 12px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    margin-top: 8px;
+    font-size: 0.85em;
+    display: flex;
+    gap: 20px;
 }
 
 .interactive-contracts .contract-info {
-  flex: 1;
+    flex: 1;
 }
 
 .interactive-contracts .contract-links {
-  flex: 1;
+    flex: 1;
 }
 
 .interactive-contracts .contract-card h4 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 0.95em;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 0.95em;
 }
 
 .interactive-contracts .contract-card ul {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 12px;
-  line-height: 1.3;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 12px;
+    line-height: 1.3;
 }
 
 .interactive-contracts .contract-card li {
-  margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 
 .interactive-contracts .contract-card p {
-  margin: 0 0 8px 0;
-  line-height: 1.3;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
 }
 
-/* Увеличиваем отступ под заголовком "Оглавление" */
-.md-sidebar__toc .md-nav__title {
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07); /* опционально: добавить тонкую линию */
-  margin-bottom: 0.8rem; /* если нужно ещё больше пространства */
-}
-
-/* Опционально: жирный шрифт и цвет для акцента */
-.md-sidebar__toc .md-nav__title {
-  font-weight: 600;
-  color: var(--md-default-fg-color--bold);
-}
-
-/* === АДАПТИВНЫЕ ТАБЛИЦЫ ДЛЯ ВСЕХ ОБЫЧНЫХ ТАБЛИЦ === */
+/* === АДАПТИВНЫЕ ТАБЛИЦЫ === */
 .md-typeset > table {
-  width: 100% !important;
-  table-layout: fixed !important; /* ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ */
-  border-collapse: collapse;
-  margin: 1em 0;
-  display: table; /* ← восстанавливаем семантику таблицы */
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+    margin: 1em 0;
+    display: table;
 }
 
 .md-typeset > table th,
 .md-typeset > table td {
-  padding: 8px 10px !important;
-  font-size: 0.875rem;
-  vertical-align: top;
-  text-align: left;
-  word-break: break-word !important;
-  overflow-wrap: break-word;
-  white-space: normal !important;
+    padding: 8px 10px !important;
+    font-size: 0.875rem;
+    vertical-align: top;
+    text-align: left;
+    word-break: break-word !important;
+    overflow-wrap: break-word;
+    white-space: normal !important;
 }
 
-/* === ОТСТУП ПОД "ОГЛАВЛЕНИЕМ" В ПРАВОЙ КОЛОНКЕ === */
+/* === ОТСТУП ПОД "ОГЛАВЛЕНИЕМ" === */
 .md-sidebar--secondary .md-nav__title {
-  padding-bottom: 0.5rem !important;
-  margin-bottom: 0.8rem !important;
-  /* border-bottom: 1px solid rgba(0, 0, 0, 0.07);*/
-  font-weight: 600;
-  color: var(--md-default-fg-color--bold);
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 0.8rem !important;
+    font-weight: 600;
+    color: var(--md-default-fg-color--bold);
 }
 
 /* Автоматическая обёртка при переполнении */
 .md-typeset > div > table {
-  max-width: 100%;
-  display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* ===== СТИЛИ ДЛЯ ЛЕВОГО МЕНЮ (НАВИГАЦИИ) ===== */
-.md-nav__link {
-  /* Шрифт — Roboto (уже задан в theme, но можно уточнить) */
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-}
-
-/* Активный пункт — синий цвет, как на скриншоте */
-.md-nav__link--active {
-  color: #3498db !important;
-  font-weight: 500 !important; /* если хотите полужирный, как на скриншоте */
-}
-
-/* Вложенные пункты (второй уровень) — чуть больше отступа слева */
-.md-nav__item .md-nav__item .md-nav__link {
-  padding-left: 1.4rem !important;
-}
-
-/* Убираем жирность у заголовков разделов в меню (например, "Контракты 2019–2025") */
-.md-nav__title {
-  font-weight: 500 !important;
-  color: var(--md-default-fg-color--bold);
-}
-
-/* Опционально: ещё более компактный отступ между пунктами (если нужно "плотнее") */
-.md-nav__item {
-  margin: 0 !important;
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Кнопка "Назад" для страниц контрактов */
 .contract-back-btn {
-  display: inline-block;
-  padding: 816px;
-  background-color: #f5f7fa;
-  color: #2c3e50;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-bottom: 16px;
-  font-size: 0.9em;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f5f7fa;
+    color: #2c3e50;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 0.9em;
 }
 .contract-back-btn:hover {
-  background-color: #e3e8ed;
+    background-color: #e3e8ed;
 }
 
 /* Прилипающая ссылка "Вернуться к сводной информации" */
@@ -288,209 +201,142 @@ table.steps td:first-child {
     text-decoration: underline;
 }
 
-/* Минимальные изменения для вложенных пунктов */
-
-
-/* ===== КОМПАКТНЫЙ МЕЖДУСТРОЧНЫЙ ИНТЕРВАЛ В ЛЕВОМ МЕНЮ ===== */
-.md-nav__link {
-    line-height: 1.1 !important; /* уменьшаем интервал между строками */
-    padding-top: 0.2rem !important; /* уменьшаем отступ сверху */
-    padding-bottom: 0.2rem !important; /* уменьшаем отступ снизу */
-}
-
-/* Уменьшаем отступы между пунктами меню */
-.md-nav__item {
-    margin-bottom: 0 !important;
-}
-
-/* ===== КОМПАКТНЫЙ ИНТЕРВАЛ В ПРАВОМ ОГЛАВЛЕНИИ (TOC) ===== */
-.md-sidebar--secondary .md-nav__link {
-    line-height: 1.1 !important;
-    padding-top: 0.15rem !important;
-    padding-bottom: 0.15rem !important;
-}
-
-/* Уменьшаем отступы между пунктами в TOC */
-.md-sidebar--secondary .md-nav__item {
-    margin-bottom: .6em !important;
-}
-
-/* Дополнительно: уменьшаем отступы у заголовков разделов */
-.md-nav__title {
-    padding-top: 0.3rem !important;
-    padding-bottom: 0.3rem !important;
-    margin-bottom: 0.2rem !important;
-}
-
-.md-nav__item--section>.md-nav__link{
-  font-weight: 500;
-  color: #333!important;
-}
-
-/* ===== УМЕНЬШЕНИЕ ОТСТУПА 2-ГО УРОВНЯ ===== */
-.md-nav__item .md-nav__item .md-nav__link {
-    padding-left: 0.8rem !important;  /* Было 1.2rem или 1.4rem - уменьшаем */
-}
-
-/* Для 3-го уровня (если есть) */
-.md-nav__item .md-nav__item .md-nav__item .md-nav__link {
-    padding-left: 0.8rem !important;
-}
-
 /* Растягиваем изображения на всю ширину */
-
 .image-full {
-  width: 100% !important;
-  max-width: 100% !important;
-  display: block;
-  margin: 0 auto;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Цвета для иконок в инструкции ГИС "Смета ЯНАО" */
-.icon-download { color: #4CAF50; }      /* Зелёный */
-.icon-vipnet { color: #E91E63; }        /* Розовый */
-.icon-crypto { color: #9C27B0; }        /* Фиолетовый */
-.icon-windows { color: #00A4EF; }       /* Синий */
-.icon-redos { color: #DA291C; }         /* Красный */
-.icon-test { color: #FF9800; }          /* Оранжевый */
-.icon-tls { color: #009688; }           /* Бирюзовый */
-.icon-warning { color: #FF9800; }       /* Оранжевый */
-.icon-info { color: #2196F3; }          /* Синий */
+.icon-download { color: #4CAF50; }
+.icon-vipnet { color: #E91E63; }
+.icon-crypto { color: #9C27B0; }
+.icon-windows { color: #00A4EF; }
+.icon-redos { color: #DA291C; }
+.icon-test { color: #FF9800; }
+.icon-tls { color: #009688; }
+.icon-warning { color: #FF9800; }
+.icon-info { color: #2196F3; }
 
-
-/* ========================================
-   1. ТОНКИЕ ГРАНИЦЫ ДЛЯ КНОПОК
-   ======================================== */
+/* ===== СТИЛИ ДЛЯ КНОПОК ===== */
 .md-button {
-  border-width: 1px !important;        /* Тонкая граница */
-  border-radius: 4px !important;       /* Скругление углов */
-  padding: 0.5em 1em !important;       /* Отступы внутри кнопки */
-  font-size: 0.7rem !important;        /* Размер шрифта */
-  transition: all 0.2s ease !important;
+    border-width: 1px !important;
+    border-radius: 4px !important;
+    padding: 0.5em 1em !important;
+    font-size: 0.7rem !important;
+    transition: all 0.2s ease !important;
 }
 
 .md-button:hover {
-  transform: translateY(-1px);         /* Легкий подъем при наведении */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Цвета для кнопок скачивания */
 .btn-redos {
-  border-color: #DA291C !important;
-  color: #DA291C !important;
-  background: transparent !important;
+    border-color: #DA291C !important;
+    color: #DA291C !important;
+    background: transparent !important;
 }
 
 .btn-redos:hover {
-  background: #DA291C !important;
-  color: #fff !important;
+    background: #DA291C !important;
+    color: #fff !important;
 }
 
 .btn-windows {
-  border-color: #00A4EF !important;
-  color: #00A4EF !important;
-  background: transparent !important;
+    border-color: #00A4EF !important;
+    color: #00A4EF !important;
+    background: transparent !important;
 }
 
 .btn-windows:hover {
-  background: #00A4EF !important;
-  color: #fff !important;
+    background: #00A4EF !important;
+    color: #fff !important;
 }
 
-/* ========================================
-   2. СТИЛИЗАЦИЯ ВКЛАДОК (TABS)
-   ======================================== */
-/* Контейнер вкладок */
+/* ===== СТИЛИЗАЦИЯ ВКЛАДОК (TABS) ===== */
 .tabbed-set {
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  overflow: hidden;
-  margin: 1.5em 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1.5em 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-/* Заголовки вкладок */
 .tabbed-labels {
-  display: flex;
-  background: #f5f5f5;
-  border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .tabbed-labels label {
-  padding: 0.75em 1.5em;
-  cursor: pointer;
-  font-weight: 500;
-  color: #666;
-  border-right: 1px solid #e0e0e0;
-  transition: all 0.2s ease;
-  background: #f5f5f5;
+    padding: 0.75em 1.5em;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    border-right: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+    background: #f5f5f5;
 }
 
 .tabbed-labels label:last-child {
-  border-right: none;
+    border-right: none;
 }
 
-/* Активная вкладка */
 .tabbed-labels label:hover {
-  background: #eeeeee;
-  color: #333;
+    background: #eeeeee;
+    color: #333;
 }
 
 .tabbed-labels label.tabbed-control--active {
-  background: #fff;
-  color: #2196F3;
-  border-bottom: 2px solid #2196F3;
-  margin-bottom: -1px;
+    background: #fff;
+    color: #2196F3;
+    border-bottom: 2px solid #2196F3;
+    margin-bottom: -1px;
 }
 
-/* Содержимое вкладок */
 .tabbed-content {
-  background: #fff;
-  padding: 1.5em;
+    background: #fff;
+    padding: 1.5em;
 }
 
-/* ========================================
-   3. АЛЬТЕРНАТИВА: ВКЛАДКИ-КНОПКИ
-   ======================================== */
-/* Если хотите чтобы вкладки выглядели как кнопки */
-.tabbed-set-alt .tabbed-labels label {
-  background: #fff;
-  border: 1px solid #ddd;
-  margin: 0 0.25em;
-  border-radius: 4px 4px 0 0;
-  font-size: 0.85rem;
-}
-
-.tabbed-set-alt .tabbed-labels label.tabbed-control--active {
-  background: #2196F3;
-  color: #fff;
-  border-color: #2196F3;
-}
-
-/* ========================================
-   4. ЦВЕТНЫЕ АКЦЕНТЫ ДЛЯ ОС
-   ======================================== */
-/* Для РЕД ОС - красный акцент */
+/* Цветные акценты для ОС */
 .tabbed-set .tabbed-labels label:nth-child(1) {
-  border-top: 3px solid #DA291C;
+    border-top: 3px solid #DA291C;
 }
 
-/* Для Windows - синий акцент */
 .tabbed-set .tabbed-labels label:nth-child(2) {
-  border-top: 3px solid #00A4EF;
+    border-top: 3px solid #00A4EF;
 }
 
-/* ========================================
-   5. АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ
-   ======================================== */
+/* Адаптивность для мобильных */
 @media screen and (max-width: 768px) {
-  .tabbed-labels label {
-    padding: 0.5em 1em;
-    font-size: 0.8rem;
-  }
-  
-  .md-button {
-    width: 100%;
-    margin: 0.25em 0;
-  }
+    .tabbed-labels label {
+        padding: 0.5em 1em;
+        font-size: 0.8rem;
+    }
+    
+    .md-button {
+        width: 100%;
+        margin: 0.25em 0;
+    }
+}
+
+/* ===== ИСПРАВЛЕНИЕ МЕНЮ (УБИРАЕМ ЛИШНЮЮ ЖИРНОСТЬ) ===== */
+/* Возвращаем стандартные стили Material Theme для меню */
+.md-nav__link {
+    font-weight: 400 !important;
+}
+
+/* Активный пункт меню — только цвет, без жирности */
+.md-nav__link--active {
+    font-weight: 400 !important;
+    
+}
+
+/* Убираем жирность у секций */
+.md-nav__item--section > .md-nav__link {
+    font-weight: 400 !important;
 }

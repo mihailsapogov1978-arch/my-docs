@@ -34,17 +34,17 @@ nav:
   - Главная: index.md
   - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
   - Дорожная карта: projects_2006/roadmap.md
-  - Справки Образование: projects_2006/spravki_obrazovanie/spravky_educaition.md
-  - Личный кабинет и ИИ: projects_2006/lk.md
-  - Отдельные доработки: dopfunction.md
-  - Шаблоны и чек-листы: templates.md
+  - Проекты: 
+      - Справки Образование: projects_2006/spravki_obrazovanie/spravky_educaition.md
+      - Личный кабинет и ИИ: projects_2006/lk.md
+      - Отдельные доработки: dopfunction.md
   - Заявки и звонки:
-    - Статистика по звонкам: calls/calls.md
-    - Статистика по заявкам: calls/zayavky.md
+      - Статистика по звонкам: calls/calls.md
+      - Статистика по заявкам: calls/zayavky.md
   - Инструкции:
-    - Первое подключение к ГИС "Смета ЯНАО": instr/first_podkl/firstpodkl.md
-    - Настройка УКЭП в ЛК пол: instr/ukep-lk-pol/ukep--lk-pol.md
-    - Сервис подотчетного лица. Руководство администратора: instr/ra-lk/ra-lk-yanao.md
+      - Первое подключение к ГИС "Смета ЯНАО": instr/first_podkl/firstpodkl.md
+      - Настройка УКЭП в ЛК пол: instr/ukep-lk-pol/ukep--lk-pol.md
+      - Сервис подотчетного лица. Руководство администратора: instr/ra-lk/ra-lk-yanao.md
 
 plugins:
   - search:
@@ -62,7 +62,7 @@ theme:
     - content.tooltips
     - navigation.sections
     - navigation.expand
-    # - navigation.tabs
+    - navigation.tabs
     - search.highlight
     - search.suggest
   font:
