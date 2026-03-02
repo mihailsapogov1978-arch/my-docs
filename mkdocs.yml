@@ -7,6 +7,8 @@ extra_javascript:
   - search.js
 
 markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
@@ -41,8 +43,8 @@ nav:
     - Статистика по заявкам: calls/zayavky.md
   - Инструкции:
     - Первое подключение к ГИС "Смета ЯНАО": instr/first_podkl/firstpodkl.md
-    - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
-    - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
+    - Настройка УКЭП в ЛК пол: instr/ukep-lk-pol/ukep--lk-pol.md
+    - Сервис подотчетного лица. Руководство администратора: instr/ra-lk/ra-lk-yanao.md
 
 plugins:
   - search:
