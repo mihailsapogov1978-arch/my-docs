@@ -36,15 +36,17 @@ nav:
   - Дорожная карта: projects_2006/roadmap.md
   - Проекты: 
       - Справки Образование: projects_2006/spravki_obrazovanie/spravky_educaition.md
-      - Личный кабинет и ИИ: projects_2006/lk.md
-      - Отдельные доработки: dopfunction.md
+      - Личный кабинет и ИИ:
+          - Настройка модуля: projects_2006/lk/lk.md
+          - Extraction studio РП: projects_2006/lk/extraction_studio/user_guide.md
+          
   - Заявки и звонки:
       - Статистика по звонкам: calls/calls.md
       - Статистика по заявкам: calls/zayavky.md
-  - Инструкции:
-      - Первое подключение к ГИС "Смета ЯНАО": instr/first_podkl/firstpodkl.md
-      - Настройка УКЭП в ЛК пол: instr/ukep-lk-pol/ukep--lk-pol.md
-      - Сервис подотчетного лица. Руководство администратора: instr/ra-lk/ra-lk-yanao.md
+      - Инструкции:
+          - Первое подключение к ГИС "Смета ЯНАО": instr/first_podkl/firstpodkl.md
+          - Настройка УКЭП в ЛК пол: instr/ukep-lk-pol/ukep--lk-pol.md
+          - Сервис подотчетного лица. Руководство администратора: instr/ra-lk/ra-lk-yanao.md
 
 plugins:
   - search:
@@ -62,7 +64,7 @@ theme:
     - content.tooltips
     - navigation.sections
     - navigation.expand
-    - navigation.tabs
+    # - navigation.tabs
     - search.highlight
     - search.suggest
   font:
