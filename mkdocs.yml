@@ -7,6 +7,7 @@ extra_javascript:
   - search.js
 
 markdown_extensions:
+  - md_in_html
   - pymdownx.tabbed:
       alternate_style: true
   - attr_list
@@ -26,23 +27,26 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight
+  - pymdownx.superfences
+  - tables
   - codehilite
   - pymdownx.details
   - pymdownx.tasklist
 
 nav:
   - Главная: index.md
-  - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
-  - Дорожная карта: projects_2006/roadmap.md
+  - Контракты 2019 - 2026: Meropriyatia/svod_gk.md
+  - Карта мероприятий: projects_2006/roadmap.md
+  - Еженедельные задачи: tascs.md
   - Проекты: 
-      - Справки Образование: projects_2006/spravki_obrazovanie/spravky_educaition.md
+      #- Справки Образование: projects_2006/spravki_obrazovanie/spravky_educaition.md
       - Личный кабинет и ИИ:
-          - Настройка модуля: projects_2006/lk/lk.md
-          - Extraction studio РП: projects_2006/lk/extraction_studio/user_guide.md
-          
-  - Заявки и звонки:
-      - Статистика по звонкам: calls/calls.md
-      - Статистика по заявкам: calls/zayavky.md
+          - Настройка модуля ES: projects_2006/lk/lk.md
+          - Руков-о пользователя ES: projects_2006/lk/extraction_studio/user_guide.md
+      - API: api.md        
+      - Заявки и звонки:
+          - Статистика по звонкам: calls/calls.md
+          - Статистика по заявкам: calls/zayavky.md
       - Инструкции:
           - Первое подключение к ГИС "Смета ЯНАО": instr/first_podkl/firstpodkl.md
           - Настройка УКЭП в ЛК пол: instr/ukep-lk-pol/ukep--lk-pol.md
@@ -56,6 +60,8 @@ plugins:
   - git-revision-date-localized:
       timezone: Europe/Moscow
       type: date
+      locale: ru
+      fallback_to_build_date: false
 
 site_name: Документация ЦБ ОГВ ЯНАО
 
