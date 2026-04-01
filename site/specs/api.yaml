@@ -1,0 +1,385 @@
+openapi: 3.0.3
+info:
+  title: API ГИС «Смета ЯНАО»
+  description: |
+    Интерактивная документация по API системы ГИС «Смета ЯНАО».
+    
+    ## Аутентификация
+    Для доступа к API используется **Basic Authentication**.
+    
+    ## Формат данных
+    Все запросы и ответы выполняются в формате **JSON**.
+    
+    ## Контакты
+    * Email: smeta-support@yanao.ru
+    * Телефон: +7 (34932) 4-XX-XX
+  version: 1.0.0
+  contact:
+    name: Техническая поддержка ГИС «Смета ЯНАО»
+    email: smeta-support@yanao.ru
+  license:
+    name: Лицензия на использование
+    url: https://yanao.ru/license
+
+servers:
+  - url: https://api.smeta.yanao.ru/v1
+    description: Продакшен-сервер
+  - url: https://test-api.smeta.yanao.ru/v1
+    description: Тестовый сервер
+
+tags:
+  - name: Контракты
+    description: Операции с государственными контрактами
+  - name: Мероприятия
+    description: Управление мероприятиями
+  - name: Отчёты
+    description: Формирование и выгрузка отчётов
+  - name: Пользователи
+    description: Управление учётными записями
+
+paths:
+  /contracts:
+    get:
+      tags:
+        - Контракты
+      summary: Получить список контрактов
+      description: Возвращает список всех доступных контрактов с возможностью фильтрации
+      parameters:
+        - name: year
+          in: query
+          description: Год контракта
+          required: false
+          schema:
+            type: integer
+            example: 2025
+        - name: status
+          in: query
+          description: Статус контракта
+          required: false
+          schema:
+            type: string
+            enum:
+              - active
+              - completed
+              - cancelled
+            example: active
+        - name: limit
+          in: query
+          description: Количество записей
+          required: false
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Общее количество записей
+                    example: 150
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contract'
+        '401':
+          description: Ошибка аутентификации
+        '403':
+          description: Недостаточно прав
+
+    post:
+      tags:
+        - Контракты
+      summary: Создать новый контракт
+      description: Создание нового государственного контракта
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractCreate'
+      responses:
+        '201':
+          description: Контракт успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+        '400':
+          description: Ошибка валидации данных
+        '401':
+          description: Ошибка аутентификации
+
+  /contracts/{contractId}:
+    get:
+      tags:
+        - Контракты
+      summary: Получить информацию о контракте
+      description: Возвращает полную информацию о конкретном контракте
+      parameters:
+        - name: contractId
+          in: path
+          description: Уникальный идентификатор контракта
+          required: true
+          schema:
+            type: string
+            example: '0190200000325011892'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+        '404':
+          description: Контракт не найден
+
+  /events:
+    get:
+      tags:
+        - Мероприятия
+      summary: Получить список мероприятий
+      description: Возвращает список мероприятий по контракту
+      parameters:
+        - name: contractId
+          in: query
+          description: Идентификатор контракта
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+
+  /reports/generate:
+    post:
+      tags:
+        - Отчёты
+      summary: Сформировать отчёт
+      description: Генерация отчёта по заданным параметрам
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reportType
+                - dateFrom
+                - dateTo
+              properties:
+                reportType:
+                  type: string
+                  description: Тип отчёта
+                  enum:
+                    - financial
+                    - progress
+                    - summary
+                  example: financial
+                dateFrom:
+                  type: string
+                  format: date
+                  description: Дата начала периода
+                  example: '2025-01-01'
+                dateTo:
+                  type: string
+                  format: date
+                  description: Дата окончания периода
+                  example: '2025-12-31'
+                contractIds:
+                  type: array
+                  description: Список идентификаторов контрактов
+                  items:
+                    type: string
+                  example:
+                    - '0190200000325011892'
+                    - '0190200000325012020'
+                format:
+                  type: string
+                  description: Формат выгрузки
+                  enum:
+                    - pdf
+                    - xlsx
+                    - csv
+                  default: pdf
+      responses:
+        '200':
+          description: Отчёт успешно сформирован
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reportId:
+                    type: string
+                    description: Идентификатор отчёта
+                    example: 'RPT-2025-001'
+                  downloadUrl:
+                    type: string
+                    description: Ссылка для скачивания
+                    example: 'https://api.smeta.yanao.ru/v1/reports/RPT-2025-001/download'
+                  expiresAt:
+                    type: string
+                    format: date-time
+                    description: Время истечения ссылки
+                    example: '2025-03-11T23:59:59Z'
+
+components:
+  schemas:
+    Contract:
+      type: object
+      description: Информация о государственном контракте
+      properties:
+        id:
+          type: string
+          description: Уникальный номер контракта
+          example: '0190200000325011892'
+        number:
+          type: string
+          description: Номер контракта
+          example: '11892'
+        date:
+          type: string
+          format: date
+          description: Дата заключения
+          example: '2025-01-15'
+        customer:
+          type: string
+          description: Заказчик
+          example: 'Департамент образования ЯНАО'
+        contractor:
+          type: string
+          description: Исполнитель
+          example: 'ООО "Образовательные технологии"'
+        amount:
+          type: number
+          format: double
+          description: Сумма контракта (руб.)
+          example: 1500000.00
+        currency:
+          type: string
+          description: Валюта
+          enum:
+            - RUB
+            - USD
+            - EUR
+          default: RUB
+          example: RUB
+        status:
+          type: string
+          description: Статус контракта
+          enum:
+            - active
+            - completed
+            - cancelled
+          example: active
+        startDate:
+          type: string
+          format: date
+          description: Дата начала исполнения
+          example: '2025-02-01'
+        endDate:
+          type: string
+          format: date
+          description: Дата окончания исполнения
+          example: '2025-12-31'
+        description:
+          type: string
+          description: Предмет контракта
+          example: 'Оказание услуг по повышению квалификации педагогических работников'
+
+    ContractCreate:
+      type: object
+      description: Данные для создания контракта
+      required:
+        - customer
+        - contractor
+        - amount
+        - startDate
+        - endDate
+      properties:
+        customer:
+          type: string
+          description: Наименование заказчика
+          example: 'Департамент образования ЯНАО'
+        contractor:
+          type: string
+          description: Наименование исполнителя
+          example: 'ООО "Образовательные технологии"'
+        amount:
+          type: number
+          format: double
+          description: Сумма контракта
+          minimum: 0
+          example: 1500000.00
+        startDate:
+          type: string
+          format: date
+          example: '2025-02-01'
+        endDate:
+          type: string
+          format: date
+          example: '2025-12-31'
+        description:
+          type: string
+          description: Предмет контракта
+          example: 'Оказание услуг по повышению квалификации'
+
+    Event:
+      type: object
+      description: Мероприятие по контракту
+      properties:
+        id:
+          type: integer
+          description: Идентификатор мероприятия
+          example: 12345
+        name:
+          type: string
+          description: Наименование мероприятия
+          example: 'Курс повышения квалификации "Современные образовательные технологии"'
+        startDate:
+          type: string
+          format: date-time
+          description: Дата и время начала
+          example: '2025-03-15T09:00:00Z'
+        endDate:
+          type: string
+          format: date-time
+          description: Дата и время окончания
+          example: '2025-03-20T17:00:00Z'
+        location:
+          type: string
+          description: Место проведения
+          example: 'г. Салехард, ул. Ленина, д. 15'
+        participantsCount:
+          type: integer
+          description: Количество участников
+          example: 25
+        status:
+          type: string
+          enum:
+            - planned
+            - in_progress
+            - completed
+            - cancelled
+          example: planned
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic Authentication с использованием логина и пароля
+
+security:
+  - basicAuth: []

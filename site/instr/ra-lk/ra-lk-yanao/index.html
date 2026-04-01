@@ -1,0 +1,2147 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../ukep-lk-pol/ukep--lk-pol/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Сервис подотчетного лица. Руководство администратора - Документация ЦБ ОГВ ЯНАО</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="../../.." title="Документация ЦБ ОГВ ЯНАО" class="md-header__button md-logo" aria-label="Документация ЦБ ОГВ ЯНАО" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Документация ЦБ ОГВ ЯНАО
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Сервис подотчетного лица. Руководство администратора
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Переключиться на тёмный режим"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключиться на тёмный режим" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Переключиться на светлый режим"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключиться на светлый режим" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Документация ЦБ ОГВ ЯНАО" class="md-nav__button md-logo" aria-label="Документация ЦБ ОГВ ЯНАО" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Документация ЦБ ОГВ ЯНАО
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Главная
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Meropriyatia/svod_gk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контракты 2019 - 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects_2006/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Карта мероприятий
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tascs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Еженедельные задачи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Проекты
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Проекты
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Личный кабинет и ИИ
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Личный кабинет и ИИ
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects_2006/lk/lk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Настройка модуля ES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects_2006/lk/extraction_studio/user_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Руков-о пользователя ES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Заявки и звонки
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Заявки и звонки
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calls/calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Статистика по звонкам
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calls/zayavky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Статистика по заявкам
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкции
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Инструкции
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../first_podkl/firstpodkl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Первое подключение к ГИС "Смета ЯНАО"
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ukep-lk-pol/ukep--lk-pol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Настройка УКЭП в ЛК пол
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервис подотчетного лица. Руководство администратора
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервис подотчетного лица. Руководство администратора
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Оглавление">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Оглавление
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройки для сводной базы данных
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройки для сводной базы данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка файла подключения для сводной базы данных
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка списка учреждений для работы с ЛК сотрудника
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка РМ «Личный кабинет сотрудника»
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройка РМ «Личный кабинет сотрудника»">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка видимости секций в интерфейсе «Личный кабинет сотрудника»
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка установочных параметров
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройка установочных параметров">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка срока отображения ссылок на расчетные листы
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ограничений по объему вложений
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание операций
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Описание операций">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Порядок регистрации и администрирования пользователей
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Порядок регистрации и администрирования пользователей">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание входа в ЛК сотрудника
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание авторизации и аутентификации пользователей через ЕСИА
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Администрирование учетных записей пользователей
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аудит действий пользователей ЛК сотрудника
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ЭДО для документа «Заявка обоснование»
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ЭДО для документа «Командирование (сведения)»
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ЭДО для документа «Авансовый отчет»
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка Бизнес-процессов (Карта маршрута)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-workspaceex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки плагина и хост-приложения WorkspaceEX
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Описание установки плагина и хост-приложения WorkspaceEX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки плагина
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки расширения в онлайн режиме
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки расширения в оффлайн режиме
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки хост приложения
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание настройки для работы страницы «Документы для подписания»
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Описание настройки для работы страницы «Документы для подписания»">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание настройки работы со страницей «Документы для подписания»
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#push-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание настройки отправки push-уведомлений
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Оглавление">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Оглавление
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройки для сводной базы данных
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройки для сводной базы данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка файла подключения для сводной базы данных
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка списка учреждений для работы с ЛК сотрудника
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка РМ «Личный кабинет сотрудника»
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройка РМ «Личный кабинет сотрудника»">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка видимости секций в интерфейсе «Личный кабинет сотрудника»
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка установочных параметров
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройка установочных параметров">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка срока отображения ссылок на расчетные листы
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ограничений по объему вложений
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание операций
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Описание операций">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Порядок регистрации и администрирования пользователей
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Порядок регистрации и администрирования пользователей">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание входа в ЛК сотрудника
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание авторизации и аутентификации пользователей через ЕСИА
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Администрирование учетных записей пользователей
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аудит действий пользователей ЛК сотрудника
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ЭДО для документа «Заявка обоснование»
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ЭДО для документа «Командирование (сведения)»
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка ЭДО для документа «Авансовый отчет»
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка Бизнес-процессов (Карта маршрута)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-workspaceex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки плагина и хост-приложения WorkspaceEX
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Описание установки плагина и хост-приложения WorkspaceEX">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки плагина
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки расширения в онлайн режиме
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки расширения в оффлайн режиме
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание установки хост приложения
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание настройки для работы страницы «Документы для подписания»
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Описание настройки для работы страницы «Документы для подписания»">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание настройки работы со страницей «Документы для подписания»
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#push-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Описание настройки отправки push-уведомлений
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Сервис подотчетного лица. Руководство администратора</h1>
+
+<p>Подсистема бюджетного (бухгалтерского) учета и отчетности
+в части реализации веб-приложения
+«Сервис подотчетного лица»</p>
+<p><strong>Перечень терминов и сокращений</strong></p>
+<table>
+<thead>
+<tr>
+<th>Сокращение (термин)</th>
+<th>Определение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>БД</td>
+<td>База данных</td>
+</tr>
+<tr>
+<td>ДО</td>
+<td>Документооборот</td>
+</tr>
+<tr>
+<td>ИНН</td>
+<td>Индивидуальный номер налогоплательщика</td>
+</tr>
+<tr>
+<td>КСП</td>
+<td>Код структурного подразделения</td>
+</tr>
+<tr>
+<td>КЭП</td>
+<td>Квалифицированная электронная подпись</td>
+</tr>
+<tr>
+<td>ЛК</td>
+<td>Веб-приложение «Сервис подотчетного лица»</td>
+</tr>
+<tr>
+<td>ОГРН</td>
+<td>Основной государственный регистрационный номер</td>
+</tr>
+<tr>
+<td>НДО</td>
+<td>Настройка документооборота</td>
+</tr>
+<tr>
+<td>Подсистема, Система</td>
+<td>Подсистема бюджетного (бухгалтерского) учета АС «Смета»</td>
+</tr>
+<tr>
+<td>РМ</td>
+<td>Рабочее место</td>
+</tr>
+<tr>
+<td>СНИЛС</td>
+<td>Страховой номер индивидуального лицевого счёта</td>
+</tr>
+<tr>
+<td>ЭД</td>
+<td>Электронный документ</td>
+</tr>
+<tr>
+<td>ЭДО</td>
+<td>Электронный документооборот</td>
+</tr>
+<tr>
+<td>ЭП</td>
+<td>Электронная подпись</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">Введение<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Настоящий документ включает описание работы администраторов с функционалом «Личный кабинет сотрудника», который предназначен для доступа к сервисам самообслуживания сотрудника учреждения, основанный на использовании web-технологий.</p>
+<h2 id="_2">Настройки для сводной базы данных<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">Настройка файла подключения для сводной базы данных<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Сводная БД – это отдельная БД, используемая для выполнения настроек по сбору информации с других подключений сервера и для ведения учета по пользователям веб-приложения.</p>
+<div class="admonition warning">
+<p class="admonition-title">Внимание!</p>
+<p>Наименование может быть использовано другое по усмотрению Администратора.</p>
+</div>
+<p>Пример настройки сводной БД показан на рисунке 1.</p>
+<p><img alt="Рисунок 1 – Пример настройки сводной БД" src="../assets/DSND6GU9HLSJ_152706_1.png" /></p>
+<p>В файле подключения конечной и сводной БД должно быть указано общее подключение, как показано на рисунке 2.</p>
+<p><img alt="Рисунок 2 – Пример настройки общего подключения" src="../assets/DSND6GU9HLSJ_152706_2.png" /></p>
+<h3 id="_4">Настройка списка учреждений для работы с ЛК сотрудника<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>Список учреждений, сотрудники которых будут подключены к ЛК, настраивается на сводной БД в режиме «Установки системы»/закладка «Настройка учреждений», как показано на рисунке 3. Для каждого учреждения в поле «Настройка подключения» должно быть заполнено соответствующее наименование файла подключения на сервере.</p>
+<p><img alt="Рисунок 3 – Вкладка «Настройки учреждения»" src="../assets/DSND6GU9HLSJ_152706_3.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Внимание!</p>
+<p>Каждое учреждение должно быть заведено как организация в интерфейсе «Справочник организации» с обязательным указанием ИНН данной организации.</p>
+</div>
+<p>В сводной базе для КСП Учреждения необходимо в поле «КСП сводной базы» прописать код КСП этого учреждения в конечной базе, пример представлен на рисунке 4.</p>
+<p><img alt="Рисунок 4 – Установка кода конечной базы в сводном подключении" src="../assets/DSND6GU9HLSJ_152706_4.png" /></p>
+<p>В конечной базе для КСП учреждения в поле «КСП сводной базы» необходимо указать код КСП данного учреждения из сводной базы, пример представлен на рисунке 5.</p>
+<p><img alt="Рисунок 5 – Установка кода сводной базы в настройках учреждения" src="../assets/DSND6GU9HLSJ_152706_5.png" /></p>
+<h2 id="_5">Настройка РМ «Личный кабинет сотрудника»<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>Настройка РМ предварительно осуществляется разработчиком функционала ЛК на секции «Настройки системы»/«Настройка рабочих мест»/«Настройка рабочих мест», как показано на рисунке 6.</p>
+<p><img alt="Рисунок 6 – Интерфейс «Настройка рабочих мест»" src="../assets/DSND6GU9HLSJ_152706_6.png" /></p>
+<p>По умолчанию РМ включает все секции функционала ЛК. Настройка видимости может быть изменена Администратором для каждого учреждения отдельно.</p>
+<h3 id="_6">Настройка видимости секций в интерфейсе «Личный кабинет сотрудника»<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>Запрет видимости секций для сотрудников каждого учреждения устанавливается на сводной базе данных в режиме «Установки системы»/закладка «Настройка учреждений» поле «Скрытые секции ЛК» (множественный выбор), как показано на рисунке 7.</p>
+<p><img alt="Рисунок 7 – Поле «Скрытые секции ЛК»" src="../assets/DSND6GU9HLSJ_152706_7.png" /></p>
+<p>На сводном подключении в порядке регистрации сотрудников будет вестись список учетных записей сотрудников (описание в 2.1).</p>
+<h2 id="_7">Настройка установочных параметров<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">Настройка срока отображения ссылок на расчетные листы<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>Количество месяцев, за которое выполняется отображение ссылок на расчетные листы на секции «Заработная плата» в интерфейсе «Личный кабинет сотрудника», устанавливается конфигурационном реестре на РМ «Конфигуратор» – «Конфигурация/Программы/Личный кабинет/Установки» параметр «Срок РЛ (месяцы)» (по умолчанию установлено 6 месяцев).</p>
+<h3 id="_9">Настройка ограничений по объему вложений<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>Максимальный размер файлов, прикрепляемых к документам, в интерфейсе «Личный кабинет сотрудника» устанавливается конфигурационном реестре на РМ «Конфигуратор» – Конфигурация/Программы/Личный кабинет/Установки» параметр «Размер приложений (байт)» (по умолчанию установлено 5242880 (5 Мб)).</p>
+<h2 id="_10">Описание операций<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">Порядок регистрации и администрирования пользователей<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h4 id="_12">Описание входа в ЛК сотрудника<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>Работа в ЛК сотрудника осуществляется посредством web-браузера (браузерная версия) с использованием web-интерфейсов и в мобильном приложении.</p>
+<p>Доступ в браузерную версию осуществляется по адресу: https://smeta.yanao.ru,</p>
+<p>Ссылка для скачивания приложения в RuStore: https://apps.rustore.ru/app/com.krista.smeta_personal_account.</p>
+<h4 id="_13">Описание авторизации и аутентификации пользователей через ЕСИА<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p>Авторизация и аутентификация пользователей web–приложения и мобильного приложения ЛК сотрудника выполняется посредством ЕСИА. При выполнении запроса со стороны ЕСИА в Систему поступают данные по параметрам scope:</p>
+<p><strong>Данные о пользователе:</strong>
+- <code>snils</code> – СНИЛС сотрудника;
+- <code>fullname</code> – полное фамилия имя отчество сотрудника;
+- <code>usr_org</code> – идентификатор организации сотрудника;</p>
+<p><strong>Данные об организации:</strong>
+- <code>org_inn</code> – ИНН организации;
+- <code>org_ogrn</code> – ОГРН организации;
+- <code>org_kpp</code> – КПП организации.</p>
+<p>По параметрам <code>snils</code>, <code>fullname</code>, <code>org_inn</code> выполняется определение данного пользователя как сотрудника учреждения в Системе. При первичной загрузке параметра <code>snils</code> осуществляется регистрация пользователя в ЭД «Учетные записи» на сводной базе Системы.</p>
+<div class="admonition warning">
+<p class="admonition-title">Внимание!</p>
+<p>При определении пользователя как сотрудника выполняется проверка на наличие даты увольнения. Если по данным Системы сотрудник уволен на дату входа в ЛК, то доступ к Личному кабинету блокируется, выводится соответствующее сообщение: «Доступ к личному кабинету заблокирован в связи с увольнением».</p>
+</div>
+<p>Параметры подключения к ЕСИА настраиваются в конфигурационном реестре РМ «Конфигуратор» – «Конфигурация/Программы/Личный кабинет/ЕСИА»:</p>
+<ol>
+<li><code>мнем. сист</code> – указывается мнемоника системы: 350002;</li>
+<li><code>Адрес ЕСИА</code> – указывается URL окна входа ЕСИА (для подключения к рабочему контуру используется https://esia.gosuslugi.ru/);</li>
+<li><code>Номер сертификата</code> – указывается номер сертификата, с которым зарегистрирована ЕЦИС на тех. портале ЕСИА;</li>
+<li><code>Пароль</code> – пароль к закрытой части сертификата;</li>
+<li><code>Права</code> – параметры scope, которые используются при авторизации из ЕСИА;</li>
+<li><code>Сервер инт.</code> – указывается URL окна входа в Личный кабинет сотрудника;</li>
+<li><code>Способ авт.</code> – указывается способ авторизации пользователя из ЕСИА: по СНИЛС и ИНН/КПП организации</li>
+<li><code>Тип входа</code> – указывается тип входа: авторизация + регистрация;</li>
+</ol>
+<h3 id="_14">Администрирование учетных записей пользователей<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>На РМ «Конфигуратор» секция «ABL Help» в ЭД «Учетные записи», описанной в таблице 2 и представленной на рисунке 8, осуществляется хранение информации о пользователях ЛК сотрудника.</p>
+<p><img alt="Рисунок 8 – ЭД «Учётные записи»" src="../assets/DSND6GU9HLSJ_152706_8.png" /></p>
+<p><strong>Таблица 2 – Поля интерфейса ввода «Учётные записи»</strong></p>
+<table>
+<thead>
+<tr>
+<th>Поле интерфейса</th>
+<th>Описание</th>
+<th>Способ ввода значения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>№ п/п</td>
+<td>Порядковый номер</td>
+<td>Автоматическая генерация. Корректировка вручную</td>
+</tr>
+<tr>
+<td>Дата</td>
+<td>Дата регистрации пользователя</td>
+<td>Автоматическое заполнение</td>
+</tr>
+<tr>
+<td>Фамилия</td>
+<td>Фамилия пользователя</td>
+<td>Автоматическое заполнение</td>
+</tr>
+<tr>
+<td>Имя</td>
+<td>Имя пользователя</td>
+<td>Автоматическое заполнение</td>
+</tr>
+<tr>
+<td>Отчество</td>
+<td>Отчество</td>
+<td>Автоматическое заполнение</td>
+</tr>
+<tr>
+<td>КСП</td>
+<td>Учреждение (КСП)</td>
+<td>Автоматическое заполнение</td>
+</tr>
+<tr>
+<td>СНИЛС</td>
+<td>СНИЛС пользователя</td>
+<td>Автоматическое заполнение</td>
+</tr>
+<tr>
+<td>Серийник</td>
+<td>Серийный номер ЭП пользователя</td>
+<td>Автоматическое заполнение при первичном подписании документов пользователем в ЛК</td>
+</tr>
+<tr>
+<td>ВыданПо</td>
+<td>Конечная дата действия ЭП пользователя</td>
+<td>Автоматическое заполнение при первичном подписании документов пользователем в ЛК</td>
+</tr>
+<tr>
+<td>Token</td>
+<td>Токен мобильного приложения</td>
+<td>Автоматическое заполнение при первичном входе в мобильно приложение. Используется для отправки push-уведомлений</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_15">Аудит действий пользователей ЛК сотрудника<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>Для мониторинга действий пользователей ЛК в плане изменения данных и выявления некорректных действий предназначена закладка «Аудит пользователя».</p>
+<p>Система аудита работы пользователей доступна на РМ «Администратор» на секции «Администрирование», представлена на рисунке 9, и РМ «Конфигуратор» на секции «Настройки системы» («Администратор»).</p>
+<p><img alt="Рисунок 9 – Закладка «Аудит пользователя»" src="../assets/DSND6GU9HLSJ_152706_9.png" /></p>
+<p>Система фиксирует такие события, как запуск программы (вход/выход из Системы), выбор интерфейса (переход по рабочим местам и выбор типов документов), выполнение различных программ на меню и кнопках, вызовы диалогов, ошибки интерфейса, добавление данных, изменение данных, удаление данных, ошибки БД.</p>
+<p>Определить фиксируемые события можно в диалоговом окне по кнопке «Параметры отслеживания» на верхней панели меню, как показано на рисунке 10.</p>
+<p><img alt="Рисунок 10 – Параметры отслеживания" src="../assets/DSND6GU9HLSJ_152706_10.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Внимание!</p>
+<p>Только после выбора фиксируемых событий Система будет регистрировать данные для аудита.</p>
+</div>
+<p>Здесь же можно запретить запуск Системы с определенных рабочих станций.</p>
+<p>Для выборки журнала аудита можно задать параметры, представленные в таблице 3, а в табличной части журнала отображаются данные, представленные в таблице 4.</p>
+<p><strong>Таблица 3 – Параметры выборки журнала аудита</strong></p>
+<table>
+<thead>
+<tr>
+<th>Имя параметра</th>
+<th>Значение параметра</th>
+<th>Способ ввода значения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Начало</td>
+<td>Начальная дата выборки данных аудита</td>
+<td>Ввод с клавиатуры по маске даты, ввод из календаря</td>
+</tr>
+<tr>
+<td>Конец</td>
+<td>Конечная дата выборки данных аудита</td>
+<td>Ввод с клавиатуры по маске даты, ввод из календаря</td>
+</tr>
+<tr>
+<td>Событие</td>
+<td>Ограничение выборки данных аудита по совершенным событиям, возможные значения: «Запуск программы»; «Выбор интерфейса»; «Выполнение»; «Вызов диалога»; «Ошибки интерфейса»; «Добавление данных»; «Изменение данных»; «Удаление данных»; «Ошибки базы данных»</td>
+<td>Выпадающий список значений</td>
+</tr>
+<tr>
+<td>Конфигурация</td>
+<td>Ограничение выборки данных аудита по конфигурации, на которой выполнялись события</td>
+<td>Выпадающий список значений</td>
+</tr>
+<tr>
+<td>Организация</td>
+<td>Ограничение выборки данных аудита по организации, в которой выполнялись события</td>
+<td>Выпадающий список значений</td>
+</tr>
+<tr>
+<td>Пользователь</td>
+<td>Ограничение выборки данных аудита по пользователю, выполнившему события</td>
+<td>Выпадающий список значений</td>
+</tr>
+<tr>
+<td>IP-Адрес</td>
+<td>Ограничение выборки данных аудита по IP-адресу компьютера, с которого выполнялись события</td>
+<td>Выпадающий список значений</td>
+</tr>
+<tr>
+<td>Компьютер</td>
+<td>Ограничение выборки данных аудита по имени компьютера, с которого выполнялись события</td>
+<td>Выпадающий список значений</td>
+</tr>
+<tr>
+<td>Сервер</td>
+<td>Ограничение выборки данных аудита по имени сервера</td>
+<td>Выпадающий список значений</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Таблица 4 – Поля табличной части Журнала аудита</strong></p>
+<table>
+<thead>
+<tr>
+<th>Наименование поля</th>
+<th>Значение поля</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Время</td>
+<td>Дата и время выполненного действия</td>
+</tr>
+<tr>
+<td>Конфигурация</td>
+<td>Конфигурация, на которой выполнялось действие</td>
+</tr>
+<tr>
+<td>Организация</td>
+<td>Организация, в которой выполнялось действие</td>
+</tr>
+<tr>
+<td>Пользователь</td>
+<td>Пользователь, выполнивший действие</td>
+</tr>
+<tr>
+<td>IP-Адрес</td>
+<td>IP-адрес компьютера, с которого выполнилось действие</td>
+</tr>
+<tr>
+<td>Компьютер</td>
+<td>Имя компьютера, с которого выполнилось действие, либо DeviceId для мобильного приложения</td>
+</tr>
+<tr>
+<td>Событие</td>
+<td>Тип действия, выполненного пользователем в Системе</td>
+</tr>
+<tr>
+<td>Тип объекта</td>
+<td>Инициализация объекта, над которым выполнялось действие</td>
+</tr>
+<tr>
+<td>Значение объекта</td>
+<td>Значение объекта, над которым выполнялось действие</td>
+</tr>
+<tr>
+<td>Информация</td>
+<td>Информация по выполненному действию над объектом</td>
+</tr>
+<tr>
+<td>Дополнительно</td>
+<td>Уточняющая информация</td>
+</tr>
+<tr>
+<td>Количество</td>
+<td>Количество обработанных однотипных объектов, над которыми выполнялось действие</td>
+</tr>
+<tr>
+<td>Версия клиента</td>
+<td>Версия клиентской части пользователя Системы, тип и версия операционной системы для мобильного приложения</td>
+</tr>
+<tr>
+<td>Рабочий сервер</td>
+<td>Адрес внутреннего сервера Системы</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_16">Настройка ЭДО для документа «Заявка обоснование»<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p>Настройка ЭДО для документа «Заявка-обоснование» выполняются администратором Системы в документе «Настройка документооборота» (РМ «Конфигуратор», РМ «Администратор», секция «Документооборот») путем загрузки настройки через сервис.</p>
+<p>На всех статусах, кроме «Закрыт», предусмотрена возможность отклонить документ путем перевода его в статус «Отклонен» (при необходимости любое ответственное лицо может заполнить причину отклонения в поле «Причина отклонения» ЭД «Заявка обоснование»).</p>
+<p><img alt="Рисунок 11 – Схема ЭДО для ЭД «Заявка-обоснование»" src="../assets/DSND6GU9HLSJ_152706_11.png" /></p>
+<h2 id="_17">Настройка ЭДО для документа «Командирование (сведения)»<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<p>Настройку ЭДО документа «Командирование (сведения)» можно импортировать с помощью сервиса «Импортировать настройки ДО», как представлено на рисунке 12.</p>
+<p><img alt="Рисунок 12 – Сервис импорта настроек ЭДО" src="../assets/DSND6GU9HLSJ_152706_12.png" /></p>
+<p>В диалоге параметров, представленном на рисунке 13, необходимо выбрать значение параметра «Тип документа» из выпадающего списка, установить флаг-галку у соответствующего документа в параметре «Настройки ДО» и нажать кнопку «Выбрать», как показано на рисунке 13.</p>
+<p><img alt="Рисунок 13 – Окно параметров сервиса «Импортировать настройки ДО»" src="../assets/DSND6GU9HLSJ_152706_13.png" /></p>
+<p>После работы сервиса автоматически создается ЭД «Настройка документооборота» с типом документа «Командирование (сведения)», представленный на рисунке 14.</p>
+<p><img alt="Рисунок 14 – Настройка ЭДО для документа «Командирование (сведения)»" src="../assets/DSND6GU9HLSJ_152706_14.png" /></p>
+<p>Обязательным условием работоспособности переходов документов ЛК, является предоставление права на переход право группе «ОУ», представленным на рисунке 15.</p>
+<p><img alt="Рисунок 15 – Добавление права на переход для пользователей ЛК" src="../assets/DSND6GU9HLSJ_152706_15.png" /></p>
+<h2 id="_18">Настройка ЭДО для документа «Авансовый отчет»<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<p>Права на переход (смена статусов) для документа «Авансовый отчет» настраиваются администратором Системы в документе «Настройка документооборота» (РМ «Конфигуратор», секция «Документооборот»), представленным на рисунке 16. Так же есть автозагрузка настройки ЭДО из конфигурации. Обязательным условием для работы с документом из ЛК сотрудника является наличие прав на переход для группы «ПЛК».</p>
+<p><img alt="Рисунок 16 – Настройка ЭДО для документа «Авансовый отчет»" src="../assets/DSND6GU9HLSJ_152706_16.png" /></p>
+<h2 id="-">Настройка Бизнес-процессов (Карта маршрута)<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
+<p>В узле реестра «Учетная политика/Настройки бизнес процессов» добавлены узлы для включения документов в общие бизнес-процессы, которые содержат перечень ЭД, как показано на рисунке 17.</p>
+<p><img alt="Рисунок 17 – Настройка бизнес-процессов" src="../assets/DSND6GU9HLSJ_152706_17.png" /></p>
+<p><strong>Параметры:</strong>
+- <strong>Активный</strong> = флаг галка; Включение механизма;
+- <strong>Карта процесса</strong> = автоматическая генерация (При добавлении нового БП, выполняем программу «Построить карту маршрута»);
+- <strong>Скрытый</strong> = скрытие карты маршрута;</p>
+<p>В параметрах указана очередность подписания документа и учетные формы настроек ДО.</p>
+<p>Если настройка ДО отсутствует у документа то параметр «Учетные формы» не добавляем, как показано на рисунке 18.</p>
+<p><img alt="Рисунок 18 – Включение перечня документов для настройки БП" src="../assets/DSND6GU9HLSJ_152706_18.png" /></p>
+<p>В настройках НДО в поле «Параметры» должно быть значение «Заполнить состояние», как показано на рисунке 19.</p>
+<p><img alt="Рисунок 19 – Включение перечня документов для настройки БП" src="../assets/DSND6GU9HLSJ_152706_19.png" /></p>
+<p>Для отображения статусов Карты маршрута реализована возможность смены наименований переходов, как показано на рисунке 20.</p>
+<p><img alt="Рисунок 20 – Наименование переходов в настройке НДО" src="../assets/DSND6GU9HLSJ_152706_20.png" /></p>
+<p>Версия НДО должна быть не ниже=1;</p>
+<p>Узел «Опции» содержит значения об уведомлении пользователя с ролью «Наблюдатель», как показано на рисунке 21.</p>
+<p><img alt="Рисунок 21 – Включение уведомления пользователю с ролью «Наблюдатель»" src="../assets/DSND6GU9HLSJ_152706_21.png" /></p>
+<p>Настройки узлов и данные хранятся в конечном подключении.</p>
+<p>При отправке документа из Личного кабинета создается ЭД «Событие учёта», как показано на рисунке 22.</p>
+<p><img alt="Рисунок 22 – ЭД «Событие учёта»" src="../assets/DSND6GU9HLSJ_152706_22.png" /></p>
+<p>Вкладка «Наблюдатели» заполняется пользователем Личного кабинета автоматически;</p>
+<p>Сведения о пользователе записывается в документ «Сведения о пользователях», как показано на рисунке 23.</p>
+<p><img alt="Рисунок 23 – «Сведения о пользователях»" src="../assets/DSND6GU9HLSJ_152706_23.png" /></p>
+<p>Бизнес-процесс «Командировка» включает в себя такие документы, как:
+1. Командирование (Сведения);
+2. Финансовое обеспечение;
+3. Решение о командировании;</p>
+<p>Схема процесса изображена на рисунке 24.</p>
+<p><img alt="Рисунок 24 – Бизнес-процесс «Командировка»" src="../assets/DSND6GU9HLSJ_152706_24.png" /></p>
+<p>ПОЛ отправил в систему ЭД «Командирование (Сведения)», далее в системе будут создаваться уже ЭД «Решение о командировании» и «Финансовое обеспечение» и на основании «ЭД «Командирование (Сведения)» после подписания ЭД «Решение о командировании» и «Приказ о командировке». ЭД «Настройка бизнес-процессов» позволит мониторить прохождение данных документов по маршруту подписания и отображать полную карту прохождения. От Начала (Подписание ПОЛом ЭД «Командирование сведения») до Конечной точки (Утверждение ЭД «Приказа о командировке» руководителем).</p>
+<p>Проверить работу можно по нажатию кнопки на документах наследованных от ПоляНастройкиЭЦП, пример рабочей настройки представлен на рисунке 25.</p>
+<p><img alt="Рисунок 25 – Проверка работоспособности настройки маршрута" src="../assets/DSND6GU9HLSJ_152706_25.png" /></p>
+<p>Чтобы была возможность построения карты маршрута необходимо включить этот параметр (должна быть выполнена корректно настройка с нумерацией прямых переходов и указанием ролей).</p>
+<h2 id="-workspaceex">Описание установки плагина и хост-приложения WorkspaceEX<a class="headerlink" href="#-workspaceex" title="Permanent link">&para;</a></h2>
+<p>Для подписания документов КЭП, если нет активированного ключа, нужно в ЛК сотрудника указать номер через кнопку на вкладке «Основные реквизиты», как показано на рисунке 26.</p>
+<p><img alt="Рисунок 26 – Кнопка «Добавить КЭП» на вкладке «Основные реквизиты»" src="../assets/DSND6GU9HLSJ_152706_26.png" /></p>
+<p>Так же при отсутствии активированного ключа КЭП на ПК при попытке подписать документ будет выдавать ошибку, как показано на рисунке 27.</p>
+<p><img alt="Рисунок 27 – Ошибка ключа сертификата пользователя на ПК" src="../assets/DSND6GU9HLSJ_152706_27.png" /></p>
+<p>При поиске доступных КЭП на ПК идет проверка на ФИО пользователя и срок действия сертификата.</p>
+<p>КЭП будет записан в учетную запись пользователя, как показано на рисунке 28.</p>
+<p><img alt="Рисунок 28 – Учетная запись пользователя Личного кабинета" src="../assets/DSND6GU9HLSJ_152706_28.png" /></p>
+<p>Для активации КЭП пользователя ЛК необходимо на РМ установить плагин и хост-приложения WorkspaceEX.</p>
+<h3 id="_19">Описание установки плагина<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>Для подписания в ЛК документов КЭП необходимо установить плагин, как показано на рисунке 29. При попытке отправить заявление с подписью КЭП выйдет окно предупреждения с ссылкой на скачивание и установку плагина.</p>
+<p><img alt="Рисунок 29 – Окно предупреждения работы расширений для использования КЭП" src="../assets/DSND6GU9HLSJ_152706_29.png" /></p>
+<p>Далее при переходе по ссылке следуя инструкции устанавливается расширение, как показано на рисунке 30. Расширение можно установить как в онлайн так и в оффлайн режимах.</p>
+<p><img alt="Рисунок 30 – Управление расширениями браузера для работы КЭП" src="../assets/DSND6GU9HLSJ_152706_30.png" /></p>
+<h3 id="_20">Описание установки расширения в онлайн режиме<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>В окне установки Крипто-плагина ниже после установки расширения, будет ссылка на скачивание расширения из магазина приложений, его необходимо установить, следуя инструкции на рисунке 31.</p>
+<p><img alt="Рисунок 31 – Ссылка на скачивание приложения через магазин расширения" src="../assets/DSND6GU9HLSJ_152706_31.png" /></p>
+<p>При переходе по ссылке нажимаем кнопку «Установить» как показано на рисунке 32.</p>
+<p><img alt="Рисунок 32 – Установка приложения через магазин расширения" src="../assets/DSND6GU9HLSJ_152706_32.png" /></p>
+<h3 id="_21">Описание установки расширения в оффлайн режиме<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>В окне установки Крипто-плагина ниже после установки расширения, будет ссылка на скачивание расширения в оффлайн режиме, его необходимо установить, следуя инструкции на рисунке 33.</p>
+<p><img alt="Рисунок 33 – Ссылка для скачивания расширения оффлайн" src="../assets/DSND6GU9HLSJ_152706_33.png" /></p>
+<p>Далее переходим по ссылке <code>chrome://extensions/</code> включаем режим разработчика, и скачиваем только что скачанный файл в окно браузера. Подтверждаем установку, как показано на рисунке 34.</p>
+<p><img alt="Рисунок 34 – Установка оффлайн расширения" src="../assets/DSND6GU9HLSJ_152706_34.png" /></p>
+<h3 id="_22">Описание установки хост приложения<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>В окне установки Крипто-плагина ниже после установки расширения, будет ссылка на скачивание хост приложения, его необходимо установить, следуя инструкции на рисунке 35.</p>
+<p><img alt="Рисунок 35 – Ссылка на скачивание хост-приложения" src="../assets/DSND6GU9HLSJ_152706_35.png" /></p>
+<p>Загружаем скаченный файл. В окне установки, нажимаем кнопку «Установить», как показано на рисунке 36.</p>
+<p><img alt="Рисунок 36 – Установка хост-приложения" src="../assets/DSND6GU9HLSJ_152706_36.png" /></p>
+<p>После установки необходимо перезайти в браузер.</p>
+<h2 id="_23">Описание настройки для работы страницы «Документы для подписания»<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<p>Секция «Документы для подписания» предназначена для работы с ЭД «Лист голосования», созданными для реализации бизнес-процессов по Приказу 61н МФ РФ.</p>
+<p>Описание полей ввода документа «Документы для подписания» с типом «Голосование» представлено в таблице 5.</p>
+<p><strong>Таблица 5 – Описание полей документа «Лист голосования»</strong></p>
+<table>
+<thead>
+<tr>
+<th>Поле интерфейса</th>
+<th>Описание</th>
+<th>Способ ввода значения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Основные реквизиты документа</strong></td>
+<td><strong>Основные реквизиты документа</strong></td>
+<td><strong>Основные реквизиты документа</strong></td>
+</tr>
+<tr>
+<td>Дата</td>
+<td>Порядковый номер</td>
+<td>Дата ЭД, по которому сформированы листы голосования. Не редактируемое.</td>
+</tr>
+<tr>
+<td>Учреждение</td>
+<td>Учреждение (КСП)</td>
+<td>Скрытое поле. Автоматическое значение</td>
+</tr>
+<tr>
+<td><strong>Таблица-детализация «Голосование»</strong></td>
+<td><strong>Таблица-детализация «Голосование»</strong></td>
+<td><strong>Таблица-детализация «Голосование»</strong></td>
+</tr>
+<tr>
+<td>Блок информации по объекту голосования</td>
+<td>Наименование объекта голосования и резолюция по объекту</td>
+<td>Автоматическое значение. Не редактируемое.</td>
+</tr>
+<tr>
+<td>Голосую «ЗА»</td>
+<td>Выбор значения при положительно решении</td>
+<td>Установка флаг-галки. Можно сразу по всем объектам установить «За», достаточно нажать кнопку «Подписать и отправить».</td>
+</tr>
+<tr>
+<td>Голосую «Против»</td>
+<td>Выбор значения при положительно решении</td>
+<td>Установка флаг-галки. Можно сразу по всем объектам установить «Против», достаточно нажать кнопку «Отклонить». При голосе «Против» обязательно приложить файл особого мнения.</td>
+</tr>
+<tr>
+<td>Комментарий</td>
+<td>Комментарий</td>
+<td>Ввод вручную</td>
+</tr>
+<tr>
+<td>Приложения. Загрузка файла особого мнения по кнопке</td>
+<td>Приложения. Загрузка файла особого мнения по кнопке</td>
+<td>Приложения. Загрузка файла особого мнения по кнопке</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_24">Описание настройки работы со страницей «Документы для подписания»<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>В файле подключения конечной и сводной базы должно быть указано общее подключение, как показано на рисунке 37.</p>
+<p><img alt="Рисунок 37 – Настройка подключения для хранения листов голосования" src="../assets/DSND6GU9HLSJ_152706_37.png" /></p>
+<p>Для проведения процедуры голосования в АС «Смета» должна быть активна настройка документооборота, согласно Приказу МФ РФ 61н. В сводной и конечной базах. Для тех групп пользователей, которые будут подписывать документы через единое окно подписания, установить вид согласования, как показано на рисунке 38.</p>
+<p><img alt="Рисунок 38 – Настройка подписания через ЕОП" src="../assets/DSND6GU9HLSJ_152706_38.png" /></p>
+<p>В сводной базе для КСП Учреждения необходимо в поле "КСП сводной базы" прописать код КСП этого учреждения в конечной базе, пример представлен на рисунке 39.</p>
+<p><img alt="Рисунок 39 – Настройка КСП в сводном подключении" src="../assets/DSND6GU9HLSJ_152706_39.png" /></p>
+<p>В конечной базе для КСП учреждения в поле "КСП сводной базы" необходимо указать код КСП данного учреждения из сводной базы, пример представлен на рисунке 40.</p>
+<p><img alt="Рисунок 40 – Настройка КСП в конечном подключении" src="../assets/DSND6GU9HLSJ_152706_40.png" /></p>
+<p>Для подписания документов КЭП, если нет активированного ключа нужно в Личном кабинете сотрудника указать номер через кнопку на вкладке «Основные реквизиты», как описано в разделе 2.6.</p>
+<h2 id="push-">Описание настройки отправки push-уведомлений<a class="headerlink" href="#push-" title="Permanent link">&para;</a></h2>
+<p>В настройках НДО на переходах, должен быть указан способ уведомления =«Push(Android)», как показано на рисунке 41.</p>
+<p><img alt="Рисунок 41 – Установка способа отправки в настройке НДО" src="../assets/DSND6GU9HLSJ_152706_41.png" /></p>
+<ul>
+<li>Пользователь должен быть авторизирован в RuStore;</li>
+<li>На устройстве пользователя должна быть установлена актуальная версия RuStore.</li>
+</ul>
+<p>На мобильном устройстве пользователя необходимо разрешить приложению «Личный кабинет сотрудника» фоновую отправку уведомлений, как показано на рисунке 42.</p>
+<p><img alt="Рисунок 42 – Настройка фоновой отправки уведомлений на мобильном устройстве" src="../assets/DSND6GU9HLSJ_152706_42.png" /></p>
+<p>Приложению RuStore разрешен доступ к работе в фоновом режиме. Без этого разрешения push-уведомления будут приходить, но со значительной задержкой.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Последнее обновление">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="5 марта 2026 г. 15:46:50 MSK">5 марта 2026 г.</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.tooltips", "navigation.sections", "navigation.expand", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../search.js"></script>
+      
+    
+  </body>
+</html>

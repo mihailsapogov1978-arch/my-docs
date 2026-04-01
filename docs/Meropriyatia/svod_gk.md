@@ -1,5 +1,28 @@
 # Сводная информация по государственным контрактам
 
+## 2026 год
+
+<div style="overflow-x:auto;">
+<table class="table-contracts" style="width:100%; border-collapse:collapse; font-size:0.85em;">
+<thead>
+<tr style="background-color:#f5f7fa; font-weight:bold;">
+  <th style="width:3%; padding:6px; text-align:center;">№</th>
+  <th style="width:55%; padding:6px; text-align:left;">Наименование</th>
+  <th style="width:21%; padding:6px; text-align:center;">Дата размещения<br>и номер контракта</th>
+  <th style="width:21%; padding:6px; text-align:right;">Цена</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #eee;">
+  <td style="padding:6px; text-align:center;">1</td>
+  <td style="padding:6px;">Оказание услуг по настройке механизма электронного взаимодействия с ГИС «Единая система кадрового учета» в учреждениях, использующих для ведения бухгалтерского учета ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px; text-align:center;">24.02.2026<br>№ 15001<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326001501" target="_blank">ГК на zakupki.gov.ru</a><br><a href="../2026/contract-0190200000326001501/">Смотреть ТЗ</a></td>
+  <td style="padding:6px; text-align:right; white-space:nowrap;">22 750 000,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+
 ## 2025 год
 
 <div style="overflow-x:auto;">
@@ -372,7 +395,7 @@
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
   <td style="padding:6px;">Оказание услуг по развитию системы бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти ЯНАО в части настройки ГИС "Смета ЯНАО" по обеспечению электронного взаимодействия с внешней информационной системой</td>
-  <td style="padding:6px; text-align:center;">01.11.2021<br>№ 1577<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000321011577" target="_blank">ГК на zakupki.gov.ru</a><br><a href="../2021/contract-0190200000321011577/">Смотреть ТЗ</a></td>
+  <td style="padding:6px; text-align:center;">01.11.2021<br>№ 11577<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000321011577" target="_blank">ГК на zakupki.gov.ru</a><br><a href="../2021/contract-0190200000321011577/">Смотреть ТЗ</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
@@ -442,7 +465,7 @@
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">7</td>
-  <td style="padding:6px;">Оказание консалтинговых услуг для создания и сопровождения проекта по эффективному, устойчивому развитию централизации ведения бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти Ямало-Ненецкого автономного округа.</td>
+  <td style="padding:6px;">Оказание консалтинговых услуг для создания и сопровождения проекта по эффективному, устойчивому развитию централизации ведения бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти Ямало-Ненецкого автономного округа</td>
   <td style="padding:6px; text-align:center;">25.03.2020<br>№ 02979<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320002979" target="_blank">ГК на zakupki.gov.ru</a><br><a href="../2020/contract-0190200000320002979/">Смотреть ТЗ</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
@@ -454,8 +477,6 @@
 </tr>
 </tbody>
 </table>
-
-
 </div>
 
 ## Общая статистика
@@ -476,7 +497,8 @@
 <tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2023</td><td style="padding:6px; text-align:center;">13</td><td style="padding:6px; text-align:right;">50 321 750,00</td></tr>
 <tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2024</td><td style="padding:6px; text-align:center;">16</td><td style="padding:6px; text-align:right;">104 806 600,00</td></tr>
 <tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2025</td><td style="padding:6px; text-align:center;">12</td><td style="padding:6px; text-align:right;">389 657 750,00</td></tr>
-<tr style="border-bottom:1px solid #eee; background-color:#f8f9fa; font-weight:bold;"><td style="padding:6px;">Итого</td><td style="padding:6px; text-align:center;">59</td><td style="padding:6px; text-align:right;">581 769 050,00</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">2026</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">22 750 000,00</td></tr>
+<tr style="border-bottom:1px solid #eee; background-color:#f8f9fa; font-weight:bold;"><td style="padding:6px;">Итого</td><td style="padding:6px; text-align:center;">60</td><td style="padding:6px; text-align:right;">604 519 050,00</td></tr>
 </tbody>
 </table>
 </div>
@@ -494,11 +516,11 @@
 </tr>
 </thead>
 <tbody>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Миграция данных</td><td style="padding:6px; text-align:center;">13</td><td style="padding:6px; text-align:right;">342 393 600,00</td><td style="padding:6px; text-align:right; color:#27ae60;">58.9%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Техническая поддержка</td><td style="padding:6px; text-align:center;">14</td><td style="padding:6px; text-align:right;">136 335 450,00</td><td style="padding:6px; text-align:right; color:#27ae60;">23.4%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Настройка/Развитие системы</td><td style="padding:6px; text-align:center;">25</td><td style="padding:6px; text-align:right;">79 770 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">13.7%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Прочее</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">13 170 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">2.3%</td></tr>
-<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Предпроектные работы</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">8 100 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">1.4%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Миграция данных</td><td style="padding:6px; text-align:center;">13</td><td style="padding:6px; text-align:right;">342 393 600,00</td><td style="padding:6px; text-align:right; color:#27ae60;">56.6%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Техническая поддержка</td><td style="padding:6px; text-align:center;">14</td><td style="padding:6px; text-align:right;">136 335 450,00</td><td style="padding:6px; text-align:right; color:#27ae60;">22.6%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Настройка/Развитие системы</td><td style="padding:6px; text-align:center;">26</td><td style="padding:6px; text-align:right;">102 520 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">17.0%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Прочее</td><td style="padding:6px; text-align:center;">5</td><td style="padding:6px; text-align:right;">13 170 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">2.2%</td></tr>
+<tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Предпроектные работы</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">8 100 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">1.3%</td></tr>
 <tr style="border-bottom:1px solid #eee;"><td style="padding:6px; font-weight:bold;">Консалтинг</td><td style="padding:6px; text-align:center;">1</td><td style="padding:6px; text-align:right;">2 000 000,00</td><td style="padding:6px; text-align:right; color:#27ae60;">0.3%</td></tr>
 </tbody>
 </table>

@@ -340,3 +340,77 @@ table.steps td:first-child {
 .md-nav__item--section > .md-nav__link {
     font-weight: 400 !important;
 }
+
+/* Стили для таблиц */
+.md-typeset table:not([class]) {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    font-size: 0.7rem;
+    border-collapse: collapse; /* Убираем двойные границы */
+}
+
+/* Заголовок таблицы - серый фон */
+.md-typeset table:not([class]) thead th {
+    background-color: #e4e2e2; /* Светло-серый цвет */
+    border: 1px solid #c9c6c6;    /* Темно-серые границы */
+    padding: 0.6em 0.1em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Все ячейки таблицы - границы */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+    border: 1px solid #c9c4c4;
+    padding: 0.5em 0.4em;
+    vertical-align: top;
+}
+
+/* Первая колонка № п/п - узкая */
+.md-typeset table:not([class]) th:first-child,
+.md-typeset table:not([class]) td:first-child {
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    text-align: center;
+    padding: 0.5em 0.3em;
+}
+
+/* Остальные колонки */
+.md-typeset table:not([class]) th:nth-child(2),
+.md-typeset table:not([class]) td:nth-child(2) {
+    width: 15%;
+}
+
+.md-typeset table:not([class]) th:nth-child(3),
+.md-typeset table:not([class]) td:nth-child(3) {
+    width: 15%;
+}
+
+.md-typeset table:not([class]) th:nth-child(4),
+.md-typeset table:not([class]) td:nth-child(4) {
+    width: 38%;
+}
+
+.md-typeset table:not([class]) th:nth-child(5),
+.md-typeset table:not([class]) td:nth-child(5) {
+    width: 25%;
+}
+
+/* Перенос текста в ячейках */
+.md-typeset table:not([class]) td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Убираем горизонтальную прокрутку */
+.md-typeset__table {
+    overflow-x: visible !important;
+    padding-right: 0;
+}
+
+.md-typeset {
+    overflow-x: visible;
+}

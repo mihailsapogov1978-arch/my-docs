@@ -37,6 +37,7 @@ nav:
   - Главная: index.md
   - Контракты 2019 - 2026: Meropriyatia/svod_gk.md
   - Карта мероприятий: projects_2006/roadmap.md
+  - Распределение обязанностей: duties.md
   - Еженедельные задачи: tascs.md
   - Проекты: 
       #- Справки Образование: projects_2006/spravki_obrazovanie/spravky_educaition.md
@@ -58,6 +59,7 @@ plugins:
       prebuild_index: true
       separator: '[\s-–—_]+'
   - git-revision-date-localized:
+      fallback_to_build_date: true
       timezone: Europe/Moscow
       type: date
       locale: ru

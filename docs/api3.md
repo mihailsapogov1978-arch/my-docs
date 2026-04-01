@@ -1,3 +1,5 @@
+Последнее обновление: {{ git_revision_date_localized }}
+
 
 ---
 
@@ -11,10 +13,10 @@ title: "{{ method }} {{ path }}"
 description: "{{ краткое_описание }}"
 status: stable  # stable | beta | deprecated
 ---
-```
+
 # `{{ METHOD }} {{ path }}` — {{ Краткое название }}
 
-🟢 Статус: {{ Стабильно/Бета/Устарело }} | 🔄 Обновлено: {{ git_revision_date }}
+🟢 Статус: {{ Стабильно/Бета/Устарело }} | 🔄 Обновлено: {{ git_revision_date_localized }}
 
 ## 📋 Метаданные
 
