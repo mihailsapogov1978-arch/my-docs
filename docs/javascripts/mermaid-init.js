@@ -1,18 +1,28 @@
-document$.subscribe(() => {
+function initMermaid() {
+  if (typeof mermaid === "undefined") {
+    return;
+  }
+
+  const isDark =
+    document.body.getAttribute("data-md-color-scheme") === "slate";
+
   mermaid.initialize({
-    startOnLoad: true,
-    theme: 'default',
-    themeVariables: {
-      primaryColor: '#ff6600',
-      primaryTextColor: '#fff',
-      primaryBorderColor: '#7c0000',
-      lineColor: '#F8B229',
-      secondaryColor: '#006100',
-      tertiaryColor: '#fff'
+    startOnLoad: false,
+    theme: isDark ? "dark" : "default",
+  });
+
+  const nodes = document.querySelectorAll(".mermaid");
+  nodes.forEach((node) => {
+    if (node.getAttribute("data-processed")) {
+      node.removeAttribute("data-processed");
     }
   });
-  
-  mermaid.run({
-    querySelector: '.mermaid'
-  });
-})
+
+  mermaid.run({ querySelector: ".mermaid" });
+}
+
+if (typeof document$ !== "undefined") {
+  document$.subscribe(initMermaid);
+} else {
+  document.addEventListener("DOMContentLoaded", initMermaid);
+}

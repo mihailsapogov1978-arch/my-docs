@@ -29,7 +29,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install PyGitHub Jinja2
-          pip list
       
       - name: Generate roadmap
         env:

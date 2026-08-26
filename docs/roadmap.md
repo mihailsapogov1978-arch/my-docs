@@ -1,34 +1,26 @@
 # 🗓 План реализации миграции в ГИС «Смета ЯНАО» (2025–2026)
 
-> ⚡ Обновлено: 08.02.2026 21:40
+> ⚡ Обновлено: 26.08.2026 21:35
 
 ---
 
 ## 📊 Общий прогресс проекта
 
-<div style="display: flex; gap: 20px; margin: 20px 0;">
-<div style="flex: 1; background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #0057B8;">
-<strong>📦 Этап 1: Подготовка и согласование</strong><br>
-<div style="background:#e0e0e0;height:8px;border-radius:4px;overflow:hidden">
-  <div style="width:100%;background:#0057B8;height:100%"></div>
+<div class="roadmap-progress">
+<div class="roadmap-card">
+<strong>Этап 1: Подготовка и согласование</strong>
+<div class="roadmap-bar"><span style="width:100%"></span></div>
+<span>3 из 3 задач</span>
 </div>
-<span style="font-size:0.9em;color:#666;">3 из 3 задач</span>
+<div class="roadmap-card">
+<strong>Этап 2: Разработка и тестирование</strong>
+<div class="roadmap-bar"><span style="width:50%"></span></div>
+<span>1 завершено, 1 в работе</span>
 </div>
-
-<div style="flex: 1; background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #FF9800;">
-<strong>⚙️ Этап 2: Разработка и тестирование</strong><br>
-<div style="background:#e0e0e0;height:8px;border-radius:4px;overflow:hidden">
-  <div style="width:50%;background:#FF9800;height:100%"></div>
-</div>
-<span style="font-size:0.9em;color:#666;">1 завершено, 1 в работе</span>
-</div>
-
-<div style="flex: 1; background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #F44336;">
-<strong>🧪 Этап 3: Тестирование и внедрение</strong><br>
-<div style="background:#e0e0e0;height:8px;border-radius:4px;overflow:hidden">
-  <div style="width:0%;background:#F44336;height:100%"></div>
-</div>
-<span style="font-size:0.9em;color:#666;">1 задач запланировано</span>
+<div class="roadmap-card">
+<strong>Этап 3: Тестирование и внедрение</strong>
+<div class="roadmap-bar"><span style="width:0%"></span></div>
+<span>1 задач запланировано</span>
 </div>
 </div>
 
@@ -61,7 +53,7 @@
 ## ⚙️ Этап 2: Разработка и тестирование
 
 <details>
-<summary><strong>🔸 {s2_in_progress} в работе, ✅ {s2_done} завершено</strong></summary>
+<summary><strong>🔸 1 в работе, ✅ 1 завершено</strong></summary>
 
 - **Сервис группового администрирования прав**
   - Статус: 🔸 В работе
@@ -80,7 +72,7 @@
 ## 🧪 Этап 3: Тестирование и внедрение
 
 <details>
-<summary><strong>🔴 {s3_planned} задач запланировано</strong></summary>
+<summary><strong>🔴 1 задач запланировано</strong></summary>
 
 - **Тестовые испытания (тестовая среда)**
   - Статус: 🔴 Запланировано

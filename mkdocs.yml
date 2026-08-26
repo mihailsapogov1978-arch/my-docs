@@ -1,12 +1,52 @@
+site_name: Документация ЦБ ОГВ ЯНАО
+site_url: https://mihailsapogov1978-arch.github.io/my-docs/
+site_description: Портал знаний ГИС «Смета ЯНАО»
 dev_addr: 127.0.0.1:8000
+use_directory_urls: true
+
+theme:
+  name: material
+  language: ru
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - content.tooltips
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - toc.follow
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Переключиться на тёмный режим
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Переключиться на светлый режим
+
 extra_css:
   - stylesheets/extra.css
+
 extra_javascript:
-  - search.js
+  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
+  - javascripts/contracts.js
+  - javascripts/project-log.js
 
 markdown_extensions:
   - attr_list
   - admonition
+  - tables
   - toc:
       permalink: true
       title: Оглавление
@@ -15,17 +55,39 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.highlight
-  - codehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
   - pymdownx.emoji:
-      emoji_index: !!python/name:pymdownx.emoji.twemoji
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.details
-  - pymdownx.tasklist
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search:
+      lang: ru
+      separator: '[\s\-–—_]+'
+
+validation:
+  nav:
+    omitted_files: info
+    not_found: warn
+    absolute_links: ignore
+  links:
+    not_found: warn
+    anchors: info
+    absolute_links: ignore
+    unrecognized_links: warn
+
+not_in_nav: |
+  calls_by_person.md
+  Meropriyatia/**/contract-*.md
+  Meropriyatia/**/index.md
 
 nav:
   - Главная: index.md
-  - Контракты 2019 - 2025: Meropriyatia/svod_gk.md
+  - Контракты 2019–2025: Meropriyatia/svod_gk.md
   - Проекты 2026:
     - Дорожная карта: roadmap.md
     - Справки Образование:
@@ -36,48 +98,9 @@ nav:
     - Отдельные доработки: dopfunction.md
     - Шаблоны и чек-листы: templates.md
     - Заявки и звонки:
-        - Статистика по звонкам: calls/calls.md
-        - Статистика по заявкам: calls/zayavky.md
+      - Статистика по звонкам: calls/calls.md
+      - Статистика по заявкам: calls/zayavky.md
     - Инструкции:
-      - Первое подключение к ГИС "Смета ЯНАО": instrukt/Pervoe_podkluchenie.md
-      - Настройка УКЭП в ЛК пол: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
+      - Первое подключение к ГИС «Смета ЯНАО»: instrukt/Pervoe_podkluchenie.md
+      - Настройка УКЭП в ЛК ПОЛ: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
       - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
-plugins:
-  - search:
-      lang: ru
-      prebuild_index: true
-      separator: '[\s\-–—_]+'
-  # - git-revision-date-localized:
-  #     timezone: Europe/Moscow
-  #     type: date
-
-site_name: Документация ЦБ ОГВ ЯНАО
-
-theme:
-  features:
-    - content.tooltips
-    - navigation.sections
-    - navigation.expand
-    #- navigation.tabs
-    - search.highlight
-    - search.suggest
-  font:
-    code: Roboto Mono
-    text: Roboto
-  language: ru
-  name: material
-  palette:
-    - accent: indigo
-      media: '(prefers-color-scheme: light)'
-      primary: indigo
-      scheme: default
-      toggle:
-        icon: material/weather-sunny
-        name: Переключиться на тёмный режим
-    - accent: indigo
-      media: '(prefers-color-scheme: dark)'
-      primary: indigo
-      scheme: slate
-      toggle:
-        icon: material/weather-night
-        name: Переключиться на светлый режим

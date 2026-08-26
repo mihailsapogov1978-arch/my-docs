@@ -510,7 +510,8 @@ def generate_zayavky_report():
 if __name__ == "__main__":
     # Пути к файлам
     excel_file = "zayavky_all.xlsx"
-    md_file = "docs/zayavky.md"
+    md_file = os.path.join("docs", "calls", "zayavky.md")
+    os.makedirs(os.path.dirname(md_file), exist_ok=True)
     
     print("="*60)
     print("🚀 ЗАПУСК ГЕНЕРАЦИИ ОТЧЕТА")

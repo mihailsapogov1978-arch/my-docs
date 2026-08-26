@@ -37,29 +37,21 @@ md = f"""# 🗓 План реализации миграции в ГИС «См�
 
 ## 📊 Общий прогресс проекта
 
-<div style="display: flex; gap: 20px; margin: 20px 0;">
-<div style="flex: 1; background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #0057B8;">
-<strong>📦 Этап 1: Подготовка и согласование</strong><br>
-<div style="background:#e0e0e0;height:8px;border-radius:4px;overflow:hidden">
-  <div style="width:100%;background:#0057B8;height:100%"></div>
+<div class="roadmap-progress">
+<div class="roadmap-card">
+<strong>Этап 1: Подготовка и согласование</strong>
+<div class="roadmap-bar"><span style="width:100%"></span></div>
+<span>{s1_done} из {len(s1)} задач</span>
 </div>
-<span style="font-size:0.9em;color:#666;">{s1_done} из {len(s1)} задач</span>
+<div class="roadmap-card">
+<strong>Этап 2: Разработка и тестирование</strong>
+<div class="roadmap-bar"><span style="width:{int((s2_done/len(s2))*100) if s2 else 0}%"></span></div>
+<span>{s2_done} завершено, {s2_in_progress} в работе</span>
 </div>
-
-<div style="flex: 1; background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #FF9800;">
-<strong>⚙️ Этап 2: Разработка и тестирование</strong><br>
-<div style="background:#e0e0e0;height:8px;border-radius:4px;overflow:hidden">
-  <div style="width:{int((s2_done/len(s2))*100) if s2 else 0}%;background:#FF9800;height:100%"></div>
-</div>
-<span style="font-size:0.9em;color:#666;">{s2_done} завершено, {s2_in_progress} в работе</span>
-</div>
-
-<div style="flex: 1; background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #F44336;">
-<strong>🧪 Этап 3: Тестирование и внедрение</strong><br>
-<div style="background:#e0e0e0;height:8px;border-radius:4px;overflow:hidden">
-  <div style="width:0%;background:#F44336;height:100%"></div>
-</div>
-<span style="font-size:0.9em;color:#666;">{s3_planned} задач запланировано</span>
+<div class="roadmap-card">
+<strong>Этап 3: Тестирование и внедрение</strong>
+<div class="roadmap-bar"><span style="width:0%"></span></div>
+<span>{s3_planned} задач запланировано</span>
 </div>
 </div>
 
@@ -80,7 +72,8 @@ md += """</details>
 
 ## ⚙️ Этап 2: Разработка и тестирование
 
-<details>
+"""
+md += f"""<details>
 <summary><strong>🔸 {s2_in_progress} в работе, ✅ {s2_done} завершено</strong></summary>
 
 """
@@ -93,7 +86,8 @@ md += """</details>
 
 ## 🧪 Этап 3: Тестирование и внедрение
 
-<details>
+"""
+md += f"""<details>
 <summary><strong>🔴 {s3_planned} задач запланировано</strong></summary>
 
 """
@@ -107,4 +101,4 @@ md += """</details>
 with open("docs/roadmap.md", "w", encoding="utf-8") as f:
     f.write(md)
 
-print("✅ docs/roadmap.md обновлён.")
+print("docs/roadmap.md updated.")

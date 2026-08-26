@@ -30,7 +30,7 @@ def generate_zayavky_report():
 {top_3_table}"""
     
     # Сохраняем в файл
-    output_dir = "docs"
+    output_dir = os.path.join("docs", "calls")
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "zayavky.md")
     

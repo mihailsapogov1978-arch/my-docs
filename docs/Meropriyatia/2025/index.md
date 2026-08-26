@@ -1,10 +1,9 @@
-[← Вернуться к сводной таблице](../svod_gk.md)
-
 ---
-<a href="../../svod_gk.md" class="contract-back-btn">← Вернуться к сводной таблице</a>
-
 title: Мероприятия 2025 года
 ---
+
+[← Вернуться к сводной таблице](../svod_gk.md)
+
 # Мероприятия 2025 года
 Список контрактов за 2025 год:
 <div class="interactive-contracts">
@@ -345,27 +344,3 @@ title: Мероприятия 2025 года
 </tbody>
 </table>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const rows = document.querySelectorAll('.contract-row');
-    let currentOpen = null;
-    rows.forEach(row => {
-        row.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const detailsRow = document.getElementById(targetId);
-            // Закрываем текущую открытую карточку
-            if (currentOpen && currentOpen !== detailsRow) {
-                currentOpen.style.display = 'none';
-            }
-            // Переключаем состояние выбранной карточки
-            if (detailsRow.style.display === 'none' || detailsRow.style.display === '') {
-                detailsRow.style.display = 'table-row';
-                currentOpen = detailsRow;
-            } else {
-                detailsRow.style.display = 'none';
-                currentOpen = null;
-            }
-        });
-    });
-});
-</script>

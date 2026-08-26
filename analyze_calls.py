@@ -81,7 +81,7 @@ def get_last_30_days_data(df):
     
     return period_data, start_date, last_date
 
-def analyze_calls_csv(file_path, output_path="docs/calls.md"):
+def analyze_calls_csv(file_path, output_path="docs/calls/calls.md"):
     # Список сотрудников отдела СР и ТП
     sr_tp_employees = [
         "Ставер Андрей Петрович",
@@ -521,7 +521,7 @@ if __name__ == "__main__":
             exit(1)
     
     # Путь для сохранения отчета
-    output_path = "docs/calls.md"
+    output_path = "docs/calls/calls.md"
     
     # Создаем директорию docs, если её нет
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
