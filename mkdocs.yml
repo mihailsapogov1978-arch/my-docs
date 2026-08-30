@@ -1,6 +1,6 @@
 site_name: Документация ЦБ ОГВ ЯНАО
 site_url: https://mihailsapogov1978-arch.github.io/my-docs/
-site_description: Портал знаний ГИС «Смета ЯНАО»
+site_description: Документация ЦБ ОГВ ЯНАО
 dev_addr: 127.0.0.1:8000
 use_directory_urls: true
 
@@ -44,12 +44,15 @@ extra_javascript:
   - javascripts/project-log.js
 
 markdown_extensions:
+  - md_in_html
   - attr_list
   - admonition
   - tables
   - toc:
       permalink: true
       title: Оглавление
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -68,6 +71,11 @@ plugins:
   - search:
       lang: ru
       separator: '[\s\-–—_]+'
+  # - git-revision-date-localized:
+  #     timezone: Europe/Moscow
+  #     type: date
+  #     locale: ru
+  #     fallback_to_build_date: False
 
 validation:
   nav:
@@ -80,27 +88,11 @@ validation:
     absolute_links: ignore
     unrecognized_links: warn
 
-not_in_nav: |
-  calls_by_person.md
-  Meropriyatia/**/contract-*.md
-  Meropriyatia/**/index.md
-
 nav:
   - Главная: index.md
-  - Контракты 2019–2025: Meropriyatia/svod_gk.md
-  - Проекты 2026:
-    - Дорожная карта: roadmap.md
-    - Справки Образование:
-      - Документация: projects_2006/spravki_obrazovanie/spravky_educaition.md
-      - Комментарии: projects_2006/spravki_obrazovanie/spravki-obrazovanie-comments.md
-    - Личный кабинет и ИИ: lk.md
-    - Интеграция с Тезис: tezis.md
-    - Отдельные доработки: dopfunction.md
-    - Шаблоны и чек-листы: templates.md
-    - Заявки и звонки:
-      - Статистика по звонкам: calls/calls.md
-      - Статистика по заявкам: calls/zayavky.md
-    - Инструкции:
-      - Первое подключение к ГИС «Смета ЯНАО»: instrukt/Pervoe_podkluchenie.md
-      - Настройка УКЭП в ЛК ПОЛ: instrukt/Nastroyka-UKEP-v-servise-LK-POL.md
-      - Сервис подотчетного лица. Руководство администратора: instrukt/poladmin.md
+  - Контракты 2019–2026: Contracts/svod_gk.md
+  - Карта мероприятий: projects_2026/roadmap.md
+  - Распределение обязанностей: duties.md
+  - Заявки и звонки:
+    - Статистика по звонкам: calls/calls.md
+    - Статистика по заявкам: calls/zayavky.md
