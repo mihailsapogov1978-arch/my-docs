@@ -6,14 +6,10 @@
 
 ## Разделы
 
-- [Сводная информация по контрактам](Meropriyatia/svod_gk.md)
-- [Карта мероприятий](projects_2006/roadmap.md)
+- [Сводная информация по контрактам](Contracts/svod_gk.md)
+- [Карта мероприятий](projects_2026/roadmap.md)
 - [Распределение обязанностей](duties.md)
-- [Еженедельные задачи](tascs.md)
-- [Настройка модуля ES](projects_2006/lk/lk.md)
-- [API](api.md)
-- [Статистика по звонкам](calls/calls.md)
-- [Первое подключение к ГИС «Смета ЯНАО»](instr/first_podkl/firstpodkl.md)
+- [Статистика по звонкам](calls/zayavky.md)
 
 ## Быстрый доступ
 

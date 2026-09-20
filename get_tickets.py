@@ -3,15 +3,40 @@ import time
 import csv
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Загрузка переменных окружения
+load_dotenv()
 
 # ========== НАСТРОЙКИ ==========
-USERNAME = "mdsapogov@yanao.ru"
-PASSWORD = "Ntyybc123"
+USERNAME = os.getenv("HELP_USERNAME", "mdsapogov@yanao.ru")
+PASSWORD = os.getenv("HELP_PASSWORD")  # Требуется установка через .env или переменную окружения
 LOGIN_URL = "https://help.krista.ru/login"
 EXPORT_URL = "https://help.krista.ru/deferredFiles/6700409a-9318-4d39-b9f0-d2917f44ef40"
 
 DOWNLOAD_DIR = os.path.join(os.getcwd(), "downloads_tickets")
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+
+
+def detect_encoding(filepath):
+    """Определение кодировки файла"""
+    encodings = ["utf-8-sig", "utf-8", "windows-1251", "cp1251"]
+    for enc in encodings:
+        try:
+            with open(filepath, "r", encoding=enc) as f:
+                f.read()
+            return enc
+        except (UnicodeDecodeError, UnicodeError):
+            continue
+    return "utf-8"
+
+
+def escape_html(text):
+    """Экранирование HTML-символов для защиты от XSS"""
+    import html
+    if not text:
+        return ''
+    return html.escape(str(text))
 
 def login_and_download():
     """Авторизация и скачивание файла"""
@@ -87,17 +112,16 @@ def parse_tickets(csv_path):
     """Парсинг CSV с автоопределением кодировки"""
     print("\n  📊 Парсинг заявок...")
     
-    encodings = ["utf-8-sig", "utf-8", "windows-1251", "cp1251"]
+    encoding = detect_encoding(csv_path)
     content = None
     
-    for enc in encodings:
-        try:
-            with open(csv_path, "r", encoding=enc) as f:
-                content = f.read()
-            print(f"  ✅ Кодировка: {enc}")
-            break
-        except:
-            continue
+    try:
+        with open(csv_path, "r", encoding=encoding) as f:
+            content = f.read()
+        print(f"  ✅ Кодировка: {encoding}")
+    except Exception as e:
+        print(f"  ❌ Не удалось прочитать файл: {e}")
+        return []
     
     if content is None:
         print("  ❌ Не удалось прочитать файл")
@@ -107,25 +131,26 @@ def parse_tickets(csv_path):
     try:
         reader = csv.DictReader(content.splitlines(), delimiter=";")
         tickets = list(reader)
-    except:
+    except Exception as e:
         try:
             reader = csv.DictReader(content.splitlines(), delimiter=",")
             tickets = list(reader)
-        except Exception as e:
-            print(f"  ❌ Ошибка парсинга: {e}")
+        except Exception as e2:
+            print(f"  ❌ Ошибка парсинга: {e2}")
             return []
     
     print(f"  ✅ Обработано заявок: {len(tickets)}")
     return tickets
 
 def generate_html(tickets):
-    """Генерация HTML-страницы"""
+    """Генерация HTML-страницы с экранированием данных для защиты от XSS"""
     print("\n  📄 Генерация HTML...")
     
     html = f"""<!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Заявки help.krista.ru</title>
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
@@ -164,14 +189,14 @@ def generate_html(tickets):
     
     if tickets:
         for key in tickets[0].keys():
-            html += f"<th>{key}</th>"
+            html += f"<th>{escape_html(key)}</th>"
     
     html += "</tr></thead><tbody>"
     
     for t in tickets:
         html += "<tr>"
         for value in t.values():
-            html += f"<td>{value}</td>"
+            html += f"<td>{escape_html(value)}</td>"
         html += "</tr>"
     
     html += """
