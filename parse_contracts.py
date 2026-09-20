@@ -5,7 +5,11 @@ from collections import defaultdict
 
 # ========== НАСТРОЙКИ ==========
 CSV_FILE = "downloads_csv/contracts_8901038364.csv"  # исходный CSV
-OUTPUT_MD = "docs/Meropriyatia/svod_gk.md"               # результат
+OUTPUT_DIR = "docs/Contracts"  # директория для выходных файлов
+OUTPUT_MD = os.path.join(OUTPUT_DIR, "svod_gk.md")  # результат
+
+# Создаём директорию если не существует
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Сопоставление типа работ по ключевым словам в названии
 TYPE_MAPPING = {

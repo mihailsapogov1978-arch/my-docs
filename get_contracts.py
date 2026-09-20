@@ -7,16 +7,28 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from dotenv import load_dotenv
+
+# Загрузка переменных окружения
+load_dotenv()
 
 # ========== НАСТРОЙКИ ==========
-INN = "8901038364"
+INN = os.getenv("ZAKUPKI_INN", "8901038364")
 BASE_URL = "https://zakupki.gov.ru"
 
 # Прямая ссылка на скачивание (все 67 записей)
-DOWNLOAD_URL = "https://zakupki.gov.ru/epz/order/orderCsvSettings/download.html?searchString=8901038364&from=1&to=67&placementCsv=true&registryNumberCsv=true&stepOrderPlacementCsv=true&methodOrderPurchaseCsv=true&nameOrderCsv=true&purchaseNumbersCsv=true&numberLotCsv=true&nameLotCsv=true&maxContractPriceCsv=true&currencyCodeCsv=true&maxPriceContractCurrencyCsv=true&currencyCodeContractCurrencyCsv=true&scopeOkdpCsv=true&scopeOkpdCsv=true&scopeOkpd2Csv=true&scopeKtruCsv=true&ea615ItemCsv=true&customerNameCsv=true&organizationOrderPlacementCsv=true&publishDateCsv=true&lastDateChangeCsv=true&startDateRequestCsv=true&endDateRequestCsv=true&ea615DateCsv=true&featureOrderPlacementCsv=true"
+DOWNLOAD_URL = f"https://zakupki.gov.ru/epz/order/orderCsvSettings/download.html?searchString={INN}&from=1&to=67&placementCsv=true&registryNumberCsv=true&stepOrderPlacementCsv=true&methodOrderPurchaseCsv=true&nameOrderCsv=true&purchaseNumbersCsv=true&numberLotCsv=true&nameLotCsv=true&maxContractPriceCsv=true&currencyCodeCsv=true&maxPriceContractCurrencyCsv=true&currencyCodeContractCurrencyCsv=true&scopeOkdpCsv=true&scopeOkpdCsv=true&scopeOkpd2Csv=true&scopeKtruCsv=true&ea615ItemCsv=true&customerNameCsv=true&organizationOrderPlacementCsv=true&publishDateCsv=true&lastDateChangeCsv=true&startDateRequestCsv=true&endDateRequestCsv=true&ea615DateCsv=true&featureOrderPlacementCsv=true"
 
 DOWNLOAD_DIR = os.path.join(os.getcwd(), "downloads_csv")
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+
+
+def escape_html(text):
+    """Экранирование HTML-символов для защиты от XSS"""
+    import html
+    if not text:
+        return ''
+    return html.escape(str(text))
 
 # ========== НАСТРОЙКА БРАУЗЕРА (Headless) ==========
 def setup_driver(headless=True):
@@ -127,7 +139,7 @@ def generate_html(contracts):
         years.setdefault(year, []).append(c)
     
     html = f"""<!DOCTYPE html>
-<html>
+<html lang="ru">
 <head><meta charset="UTF-8"><title>Контракты ИНН {INN}</title>
 <style>
     *{{margin:0;padding:0;box-sizing:border-box}}
@@ -160,16 +172,16 @@ def generate_html(contracts):
 """
     
     for year in sorted(years.keys(), reverse=True):
-        html += f'<div class="year-section"><div class="year-title">📅 {year} <span>{len(years[year])}</span></div><div class="cards">'
+        html += f'<div class="year-section"><div class="year-title">📅 {escape_html(year)} <span>{len(years[year])}</span></div><div class="cards">'
         for c in years[year]:
             stage = c.get('stage', '')
             badge = 'Завершен' if 'завершена' in stage.lower() else 'Отменен' if 'отменено' in stage.lower() else stage[:20] if stage else '—'
             html += f"""
             <div class="card">
-                <div class="name">{c.get('name', 'Без названия')}</div>
-                <div class="meta"><span>Метод: {c.get('method', '—')}</span><span>Статус: <span class="badge">{badge}</span></span></div>
-                <div class="meta"><span>Дата: {c.get('publish_date', '—')}</span><span>ИКЗ: {c.get('ikz', '—')}</span></div>
-                <div class="price">{c.get('price', '0')} ₽</div>
+                <div class="name">{escape_html(c.get('name', 'Без названия'))}</div>
+                <div class="meta"><span>Метод: {escape_html(c.get('method', '—'))}</span><span>Статус: <span class="badge">{escape_html(badge)}</span></span></div>
+                <div class="meta"><span>Дата: {escape_html(c.get('publish_date', '—'))}</span><span>ИКЗ: {escape_html(c.get('ikz', '—'))}</span></div>
+                <div class="price">{escape_html(c.get('price', '0'))} ₽</div>
             </div>"""
         html += "</div></div>"
     
