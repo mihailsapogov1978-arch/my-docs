@@ -21,15 +21,14 @@
 }
 .legend-color.done { background-color: #90ee90; }
 .legend-color.work { background-color: #f0e085; }
-.legend-color.plan { background-color: #bde0fe; }
 .legend-color.wait { background-color: #ffffff; border: 1px solid #ccc; }
 
+/* ===== ЦВЕТА СТАТУСОВ ===== */
 .status-done { background-color: #90ee90 !important; }
 .status-work { background-color: #f0e085 !important; }
-.status-plan { background-color: #bde0fe !important; }
 .status-wait { background-color: #ffffff !important; }
 
-/* ===== ТАБЛИЦА КАК В ПРИМЕРЕ ===== */
+/* ===== ТАБЛИЦА ===== */
 .project-table {
     border-collapse: collapse;
     width: 100%;
@@ -62,9 +61,9 @@
     white-space: normal;
     text-align: center;
     vertical-align: middle;
-} 
+}
 
-/* ===== ОСТАЛЬНЫЕ ЗАГОЛОВКИ — ВЕРТИКАЛЬНЫЕ ===== */
+/* ===== ОСТАЛЬНЫЕ ЗАГОЛОВКИ — ВЕРТИКАЛЬНЫЕ С ПЕРЕНОСОМ ===== */
 .project-table th:nth-child(3),
 .project-table th:nth-child(4),
 .project-table th:nth-child(5),
@@ -73,13 +72,15 @@
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
-    font-size: 14px;
-    height: 120px;
-    white-space: nowrap;
+    font-size: 12px;
+    height: 140px;
+    white-space: normal;
+    word-break: break-word;
     line-height: 1.1;
+    padding: 6px 2px;
 }
 
-/* ===== ЯЧЕЙКИ — БЕЛЫЙ ФОН, УВЕЛИЧЕННАЯ ВЫСОТА ===== */
+/* ===== ЯЧЕЙКИ ===== */
 .project-table td {
     padding: 6px 3px;
     border: 1px solid #e0e4e8;
@@ -87,24 +88,29 @@
     height: 40px;
     word-wrap: break-word;
     background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    position: relative;
 }
 
-/* ===== ПРИНУДИТЕЛЬНАЯ ШИРИНА КОЛОНОК ===== */
+/* ===== ШИРИНА КОЛОНОК ===== */
 .project-table th:nth-child(1) { width: 38px; }
-.project-table td:nth-child(1) { 
-    width: 28px; 
-    text-align: center; 
+.project-table td:nth-child(1) {
+    width: 28px;
+    text-align: center;
     font-weight: 500;
     font-size: 11px;
+    cursor: default;
 }
 
 .project-table th:nth-child(2) { width: 200px; }
-.project-table td:nth-child(2) { 
-    width: 250px; 
-    padding-left: 8px; 
-    font-weight: normal; 
+.project-table td:nth-child(2) {
+    width: 250px;
+    padding-left: 8px;
+    font-weight: normal;
     white-space: normal;
     font-size: 12px;
+    cursor: default;
 }
 
 .project-table th:nth-child(3) { width: 48px; }
@@ -132,6 +138,39 @@
 .project-table tbody tr:hover td {
     background-color: #fafbfc;
 }
+
+/* ===== КРАСНАЯ РАМКА ===== */
+.highlight-red {
+    outline: 2px solid #e74c3c;
+    outline-offset: -2px;
+}
+
+/* ===== ВЫПАДАЮЩИЙ СПИСОК ЦВЕТОВ ===== */
+.color-dropdown {
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 6px;
+    display: flex;
+    gap: 6px;
+}
+.color-dropdown .color-option {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: transform 0.1s;
+}
+.color-dropdown .color-option:hover {
+    transform: scale(1.15);
+}
+.color-option[data-color="done"] { background-color: #90ee90; }
+.color-option[data-color="work"] { background-color: #f0e085; }
+.color-option[data-color="wait"] { background-color: #ffffff; }
 </style>
 
 <div class="legend">
@@ -144,16 +183,12 @@
         <span>В работе</span>
     </div>
     <div class="legend-item">
-        <div class="legend-color plan"></div>
-        <span>Запланировано</span>
-    </div>
-    <div class="legend-item">
         <div class="legend-color wait"></div>
         <span>Не начато</span>
     </div>
 </div>
 
-<table class="project-table">
+<table class="project-table" id="projectTable">
     <thead>
         <tr>
             <th>№</th>
@@ -169,7 +204,7 @@
         <tr>
             <td>1</td>
             <td>Интеграция с Тэзис</td>
-            <td class="status-done">10.02.26<br>Ставер</td>
+            <td class="status-done highlight-red">10.02.26<br>Ставер</td>
             <td class="status-work">01.03.26</td>
             <td>15.03.26</td>
             <td>01.04.26</td>
@@ -277,4 +312,143 @@
     </tbody>
 </table>
 
----
+<script>
+(function() {
+    const STORAGE_KEY = 'roadmap_statuses_v2';
+    const TABLE_SELECTOR = '#projectTable';
+    const CELL_SELECTOR = 'td';
+    const COLOR_COLUMNS_START = 3;
+
+    function loadStatuses() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : {};
+        } catch (e) {
+            console.warn('Не удалось загрузить статусы:', e);
+            return {};
+        }
+    }
+
+    function saveStatuses(statuses) {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(statuses));
+        } catch (e) {
+            console.warn('Не удалось сохранить статусы:', e);
+        }
+    }
+
+    function applySavedStatuses() {
+        const statuses = loadStatuses();
+        const table = document.querySelector(TABLE_SELECTOR);
+        if (!table) return;
+
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach((row, rowIndex) => {
+            const cells = row.querySelectorAll(CELL_SELECTOR);
+            cells.forEach((cell, colIndex) => {
+                if (colIndex < COLOR_COLUMNS_START - 1) return;
+                const key = rowIndex + '_' + colIndex;
+                if (statuses[key]) {
+                    cell.classList.remove('status-done', 'status-work', 'status-wait');
+                    cell.classList.add('status-' + statuses[key]);
+                }
+            });
+        });
+    }
+
+    function createDropdown() {
+        const dropdown = document.createElement('div');
+        dropdown.className = 'color-dropdown';
+        dropdown.style.display = 'none';
+
+        const colors = [
+            { name: 'done', label: 'Выполнено' },
+            { name: 'work', label: 'В работе' },
+            { name: 'wait', label: 'Не начато' }
+        ];
+
+        colors.forEach(color => {
+            const option = document.createElement('div');
+            option.className = 'color-option';
+            option.dataset.color = color.name;
+            option.title = color.label;
+            dropdown.appendChild(option);
+        });
+
+        document.body.appendChild(dropdown);
+        return dropdown;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.querySelector(TABLE_SELECTOR);
+        if (!table) return;
+
+        const dropdown = createDropdown();
+        let activeCell = null;
+
+        applySavedStatuses();
+
+        table.addEventListener('click', function(e) {
+            const cell = e.target.closest('td');
+            if (!cell) return;
+
+            const row = cell.parentElement;
+            const cells = Array.from(row.children);
+            const colIndex = cells.indexOf(cell);
+
+            if (colIndex < COLOR_COLUMNS_START - 1) return;
+
+            e.stopPropagation();
+
+            if (activeCell === cell && dropdown.style.display === 'flex') {
+                dropdown.style.display = 'none';
+                activeCell = null;
+                return;
+            }
+
+            cell.classList.remove('highlight-red');
+            activeCell = cell;
+
+            const rect = cell.getBoundingClientRect();
+            dropdown.style.display = 'flex';
+            dropdown.style.left = (rect.left + window.scrollX) + 'px';
+            dropdown.style.top = (rect.bottom + window.scrollY + 4) + 'px';
+        });
+
+        dropdown.addEventListener('click', function(e) {
+            const option = e.target.closest('.color-option');
+            if (!option || !activeCell) return;
+
+            const color = option.dataset.color;
+
+            activeCell.classList.remove('status-done', 'status-work', 'status-wait');
+            activeCell.classList.add('status-' + color);
+
+            const table = document.querySelector(TABLE_SELECTOR);
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            const rowIndex = rows.indexOf(activeCell.parentElement);
+            const colIndex = Array.from(activeCell.parentElement.children).indexOf(activeCell);
+            const key = rowIndex + '_' + colIndex;
+
+            const statuses = loadStatuses();
+            statuses[key] = color;
+            saveStatuses(statuses);
+
+            dropdown.style.display = 'none';
+            activeCell = null;
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!dropdown.contains(e.target) && !e.target.closest(TABLE_SELECTOR)) {
+                dropdown.style.display = 'none';
+                activeCell = null;
+            }
+        });
+
+        window.addEventListener('scroll', function() {
+            dropdown.style.display = 'none';
+            activeCell = null;
+        });
+    });
+})();
+</script>
