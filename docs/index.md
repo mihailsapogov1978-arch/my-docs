@@ -2,5 +2,5 @@
 
 Добро пожаловать.
 
-- [Карта мероприятий](roadmap.md)
-- [Контракты 2019–2026](Contracts/contracts.md)
+- [Карта мероприятий](projects_2026/roadmap.md)
+- [Контракты 2019–2026](Contracts/svod_gk.md)

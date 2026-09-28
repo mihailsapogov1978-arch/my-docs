@@ -16,7 +16,7 @@
         <link rel="prev" href="../../Contracts/svod_gk/">
       
       
-        <link rel="next" href="../../duties/">
+        <link rel="next" href="../../calls/zayavky/">
       
       
         
@@ -240,33 +240,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Главная
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../Contracts/svod_gk/" class="md-nav__link">
         
   
@@ -331,115 +304,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../duties/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Распределение обязанностей
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Заявки и звонки
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Заявки и звонки
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../calls/calls.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Статистика по звонкам
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../calls/zayavky/" class="md-nav__link">
         
   
@@ -456,14 +320,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -818,147 +674,6 @@
     </tbody>
 </table>
 
-<script>
-(function() {
-    const STORAGE_KEY = 'roadmap_statuses_v2';
-    const TABLE_SELECTOR = '#projectTable';
-    const CELL_SELECTOR = 'td';
-    const COLOR_COLUMNS_START = 3;
-
-    function loadStatuses() {
-        try {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            return raw ? JSON.parse(raw) : {};
-        } catch (e) {
-            console.warn('Не удалось загрузить статусы:', e);
-            return {};
-        }
-    }
-
-    function saveStatuses(statuses) {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(statuses));
-        } catch (e) {
-            console.warn('Не удалось сохранить статусы:', e);
-        }
-    }
-
-    function applySavedStatuses() {
-        const statuses = loadStatuses();
-        const table = document.querySelector(TABLE_SELECTOR);
-        if (!table) return;
-
-        const rows = table.querySelectorAll('tbody tr');
-        rows.forEach((row, rowIndex) => {
-            const cells = row.querySelectorAll(CELL_SELECTOR);
-            cells.forEach((cell, colIndex) => {
-                if (colIndex < COLOR_COLUMNS_START - 1) return;
-                const key = rowIndex + '_' + colIndex;
-                if (statuses[key]) {
-                    cell.classList.remove('status-done', 'status-work', 'status-wait');
-                    cell.classList.add('status-' + statuses[key]);
-                }
-            });
-        });
-    }
-
-    function createDropdown() {
-        const dropdown = document.createElement('div');
-        dropdown.className = 'color-dropdown';
-        dropdown.style.display = 'none';
-
-        const colors = [
-            { name: 'done', label: 'Выполнено' },
-            { name: 'work', label: 'В работе' },
-            { name: 'wait', label: 'Не начато' }
-        ];
-
-        colors.forEach(color => {
-            const option = document.createElement('div');
-            option.className = 'color-option';
-            option.dataset.color = color.name;
-            option.title = color.label;
-            dropdown.appendChild(option);
-        });
-
-        document.body.appendChild(dropdown);
-        return dropdown;
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.querySelector(TABLE_SELECTOR);
-        if (!table) return;
-
-        const dropdown = createDropdown();
-        let activeCell = null;
-
-        applySavedStatuses();
-
-        table.addEventListener('click', function(e) {
-            const cell = e.target.closest('td');
-            if (!cell) return;
-
-            const row = cell.parentElement;
-            const cells = Array.from(row.children);
-            const colIndex = cells.indexOf(cell);
-
-            if (colIndex < COLOR_COLUMNS_START - 1) return;
-
-            e.stopPropagation();
-
-            if (activeCell === cell && dropdown.style.display === 'flex') {
-                dropdown.style.display = 'none';
-                activeCell = null;
-                return;
-            }
-
-            cell.classList.remove('highlight-red');
-            activeCell = cell;
-
-            const rect = cell.getBoundingClientRect();
-            dropdown.style.display = 'flex';
-            dropdown.style.left = (rect.left + window.scrollX) + 'px';
-            dropdown.style.top = (rect.bottom + window.scrollY + 4) + 'px';
-        });
-
-        dropdown.addEventListener('click', function(e) {
-            const option = e.target.closest('.color-option');
-            if (!option || !activeCell) return;
-
-            const color = option.dataset.color;
-
-            activeCell.classList.remove('status-done', 'status-work', 'status-wait');
-            activeCell.classList.add('status-' + color);
-
-            const table = document.querySelector(TABLE_SELECTOR);
-            const rows = Array.from(table.querySelectorAll('tbody tr'));
-            const rowIndex = rows.indexOf(activeCell.parentElement);
-            const colIndex = Array.from(activeCell.parentElement.children).indexOf(activeCell);
-            const key = rowIndex + '_' + colIndex;
-
-            const statuses = loadStatuses();
-            statuses[key] = color;
-            saveStatuses(statuses);
-
-            dropdown.style.display = 'none';
-            activeCell = null;
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!dropdown.contains(e.target) && !e.target.closest(TABLE_SELECTOR)) {
-                dropdown.style.display = 'none';
-                activeCell = null;
-            }
-        });
-
-        window.addEventListener('scroll', function() {
-            dropdown.style.display = 'none';
-            activeCell = null;
-        });
-    });
-})();
-</script>
-
 
 
 
@@ -1025,6 +740,8 @@
         <script src="../../javascripts/contracts.js"></script>
       
         <script src="../../javascripts/project-log.js"></script>
+      
+        <script src="../../javascripts/roadmap-sync.js"></script>
       
     
   </body>
