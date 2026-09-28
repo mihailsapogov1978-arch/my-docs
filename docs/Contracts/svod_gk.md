@@ -15,49 +15,49 @@
 <tbody>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">1</td>
-  <td style="padding:6px;">Оказание услуг по настройке ГИС «Смета ЯНАО» в части электронного взаимодействия (интеграции) с внешней информационной системой ГИС «Имущество ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100220016201244">Оказание услуг по настройке ГИС «Смета ЯНАО» в части электронного взаимодействия (интеграции) с внешней информационной системой ГИС «Имущество ЯНАО» (№ 08695)</td>
   <td style="padding:6px; text-align:center;">29.07.2026<br>№ 08695<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326008695" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 000 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">2</td>
-  <td style="padding:6px;">Оказание услуг по настройке ГИС «Смета ЯНАО» в части электронного взаимодействия (интеграции) с внешней информационной системой ГИС «АПК»</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100260016201244">Оказание услуг по настройке ГИС «Смета ЯНАО» в части электронного взаимодействия (интеграции) с внешней информационной системой ГИС «АПК» (№ 08693)</td>
   <td style="padding:6px; text-align:center;">29.07.2026<br>№ 08693<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326008693" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 800 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
-  <td style="padding:6px;">Оказание услуг по настройке электронного взаимодействия ГИС «Смета ЯНАО» с сервисом по предоставлению справок о прохождении обучения в общеобразовательном учреждении</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100210016201244">Оказание услуг по настройке электронного взаимодействия ГИС «Смета ЯНАО» с сервисом по предоставлению справок о прохождении обучения в общеобразовательном учреждении (№ 08299)</td>
   <td style="padding:6px; text-align:center;">22.07.2026<br>№ 08299<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326008299" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 400 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">4</td>
-  <td style="padding:6px;">Оказание услуг по настройке ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ИС «КТГ-Услуга»</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100270016201244">Оказание услуг по настройке ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ИС «КТГ-Услуга» (№ 08298)</td>
   <td style="padding:6px; text-align:center;">22.07.2026<br>№ 08298<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326008298" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">900 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">5</td>
-  <td style="padding:6px;">Оказание услуг по настройке в ГИС «Смета ЯНАО» функционала в части учета, начисления и расчетов по плате, которую родители (законные представители) ежемесячно платят дошкольной образовательной организации за присмотр и уход за ребёнком (далее – родительская плата), компенсационных выплат по родительской плате, а также учет расчетов по платным услугам образовательных учреждений</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100230016201244">Оказание услуг по настройке в ГИС «Смета ЯНАО» функционала в части учета, начисления и расчетов по плате, которую родители (законные представители) ежемесячно платят дошкольной образовательной организации за присмотр и уход за ребёнком (далее – родительская плата), компенсационных выплат по родительской плате, а также учет расчетов по платным услугам образовательных учреждений (№ 07812)</td>
   <td style="padding:6px; text-align:center;">06.07.2026<br>№ 07812<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326007812" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 200 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">6</td>
-  <td style="padding:6px;">Оказание услуг по слиянию в ГИС «Смета ЯНАО» баз данных учреждений</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100280016201244">Оказание услуг по слиянию в ГИС «Смета ЯНАО» баз данных учреждений (№ 07811)</td>
   <td style="padding:6px; text-align:center;">06.07.2026<br>№ 07811<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326007811" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">4 000 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">7</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100190016202244">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО» (№ 06735)</td>
   <td style="padding:6px; text-align:center;">05.06.2026<br>№ 06735<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326006735" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">40 886 750,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">8</td>
-  <td style="padding:6px;">Оказание услуг по настройке механизма электронного взаимодействия с ГИС «Единая система кадрового учета» в учреждениях, использующих для ведения бухгалтерского учета ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '262890103836489010100100200026201244">Оказание услуг по настройке механизма электронного взаимодействия с ГИС «Единая система кадрового учета» в учреждениях, использующих для ведения бухгалтерского учета ГИС «Смета ЯНАО» (№ 01501)</td>
   <td style="padding:6px; text-align:center;">24.02.2026<br>№ 01501<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000326001501" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">22 750 000,00</td>
 </tr>
@@ -80,73 +80,73 @@
 <tbody>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">1</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100140026202244">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО» (№ 16615)</td>
   <td style="padding:6px; text-align:center;">16.12.2025<br>№ 16615<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325016615" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">40 887 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">2</td>
-  <td style="padding:6px;">Оказание услуг по настройке подписания документов разных субъектов учета в едином интерфейсе ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100210016201244">Оказание услуг по настройке подписания документов разных субъектов учета в едином интерфейсе ГИС «Смета ЯНАО» (№ 15002)</td>
   <td style="padding:6px; text-align:center;">21.11.2025<br>№ 15002<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325015002" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 200 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
-  <td style="padding:6px;">Оказание услуг по предоставлению права использования программного обеспечения для ГИС "Смета ЯНАО"</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100300025829244">Оказание услуг по предоставлению права использования программного обеспечения для ГИС "Смета ЯНАО" (№ 14723)</td>
   <td style="padding:6px; text-align:center;">17.11.2025<br>№ 14723<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325014723" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 100 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">4</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета»</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100160026201244">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета» (№ 14020)</td>
   <td style="padding:6px; text-align:center;">05.11.2025<br>№ 14020<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325014020" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">5 250 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">5</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета»</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100160016201244">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета» (№ 12020)</td>
   <td style="padding:6px; text-align:center;">01.10.2025<br>№ 12020<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325012020" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">15 925 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">6</td>
-  <td style="padding:6px;">Оказание услуг по предоставлению права использования программного обеспечения для ГИС "Смета ЯНАО"</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100300015829244">Оказание услуг по предоставлению права использования программного обеспечения для ГИС "Смета ЯНАО" (№ 11892)</td>
   <td style="padding:6px; text-align:center;">29.09.2025<br>№ 11892<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325011892" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 100 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">7</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта государственная информационная система «Смета Ямало-Ненецкого автономного округа» в части автоматизации работы наградного отдела аппарата Губернатора Ямало-Ненецкого автономного округа</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100230016201244">Оказание услуг по настройке программного продукта государственная информационная система «Смета Ямало-Ненецкого автономного округа» в части автоматизации работы наградного отдела аппарата Губернатора Ямало-Ненецкого автономного округа (№ 08201)</td>
   <td style="padding:6px; text-align:center;">01.07.2025<br>№ 08201<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325008201" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">900 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">8</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100140016202244">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО» (№ 07340)</td>
   <td style="padding:6px; text-align:center;">05.06.2025<br>№ 07340<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325007340" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">29 095 750,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">9</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100150016201244">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО» (№ 05501)</td>
   <td style="padding:6px; text-align:center;">28.04.2025<br>№ 05501<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325005501" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">142 100 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">10</td>
-  <td style="padding:6px;">Оказание услуг по проведению предпроектного обследования локальных информационных систем бухгалтерского учета, используемых муниципальными учреждениями и органами местного самоуправления</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100290016201244">Оказание услуг по проведению предпроектного обследования локальных информационных систем бухгалтерского учета, используемых муниципальными учреждениями и органами местного самоуправления (№ 05490)</td>
   <td style="padding:6px; text-align:center;">28.04.2025<br>№ 05490<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325005490" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">8 100 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">11</td>
-  <td style="padding:6px;">Оказание услуг по настройке государственной информационной системы «Смета Ямало-Ненецкого автономного округа» в части отправки электронной отчётности</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100180016201244">Оказание услуг по настройке государственной информационной системы «Смета Ямало-Ненецкого автономного округа» в части отправки электронной отчётности (№ 00989)</td>
   <td style="padding:6px; text-align:center;">12.02.2025<br>№ 00989<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325000989" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">12</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '252890103836489010100100150026201244">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО» (№ 00889)</td>
   <td style="padding:6px; text-align:center;">11.02.2025<br>№ 00889<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000325000889" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">135 500 000,00</td>
 </tr>
@@ -169,97 +169,97 @@
 <tbody>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">1</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта государственной информационной системы «Смета Ямало-Ненецкого автономного округа»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100250016202244">Оказание услуг по технической поддержке программного продукта государственной информационной системы «Смета Ямало-Ненецкого автономного округа» (№ 16434)</td>
   <td style="padding:6px; text-align:center;">19.12.2024<br>№ 16434<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324016434" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">16 728 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">2</td>
-  <td style="padding:6px;">Выполнение работ по развитию государственной информационной системы «Смета Ямало-Ненецкого автономного округа»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100180016201244">Выполнение работ по развитию государственной информационной системы «Смета Ямало-Ненецкого автономного округа» (№ 13169)</td>
   <td style="padding:6px; text-align:center;">02.11.2024<br>№ 13169<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324013169" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">13 555 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Имущество ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100160016201244">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Имущество ЯНАО» (№ 10530)</td>
   <td style="padding:6px; text-align:center;">11.09.2024<br>№ 10530<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324010530" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 300 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">4</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100130056201244">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО» (№ 10456)</td>
   <td style="padding:6px; text-align:center;">09.09.2024<br>№ 10456<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324010456" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 300 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">5</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100120036202244">Оказание услуг по технической поддержке программного продукта ГИС «Смета ЯНАО» (№ 10303)</td>
   <td style="padding:6px; text-align:center;">04.09.2024<br>№ 10303<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324010303" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">8 610 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">6</td>
-  <td style="padding:6px;">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа"</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100110026201244">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа" (№ 08570)</td>
   <td style="padding:6px; text-align:center;">08.07.2024<br>№ 08570<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324008570" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 300 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">7</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100130046201244">Оказание услуг по миграции баз данных в единую программную платформу ГИС «Смета ЯНАО» (№ 08648)</td>
   <td style="padding:6px; text-align:center;">08.07.2024<br>№ 08648<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324008648" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 740 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">8</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100140016201244">Оказание услуг по настройке программного продукта ГИС «Смета ЯНАО» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Единая система кадрового учета» (№ 08571)</td>
   <td style="padding:6px; text-align:center;">08.07.2024<br>№ 08571<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324008571" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">4 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">9</td>
-  <td style="padding:6px;">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа"</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100110046201244">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа" (№ 08651)</td>
   <td style="padding:6px; text-align:center;">08.07.2024<br>№ 08651<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324008651" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">10</td>
-  <td style="padding:6px;">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа"</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100110036201244">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа" (№ 08597)</td>
   <td style="padding:6px; text-align:center;">08.07.2024<br>№ 08597<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324008597" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">11</td>
-  <td style="padding:6px;">Оказание услуги по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100130036201244">Оказание услуги по миграции баз данных в единую программную платформу (№ 06972)</td>
   <td style="padding:6px; text-align:center;">03.06.2024<br>№ 06972<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324006972" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">8 553 600,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">12</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта «Автоматизированная система бюджетного учета «Смета»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100120026202244">Оказание услуг по технической поддержке программного продукта «Автоматизированная система бюджетного учета «Смета» (№ 06490)</td>
   <td style="padding:6px; text-align:center;">23.05.2024<br>№ 06490<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324006490" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">8 610 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">13</td>
-  <td style="padding:6px;">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа"</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100110016201244">Оказание услуг по настройке государственной информационной системы "Смета Ямало-Ненецкого автономного округа" (№ 06966)</td>
   <td style="padding:6px; text-align:center;">03.06.2024<br>№ 06966<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324006966" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">14</td>
-  <td style="padding:6px;">Оказание услуги по миграции баз данных в единую программную платформу («Автоматизированная система бюджетного учета «Смета»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100130016201244">Оказание услуги по миграции баз данных в единую программную платформу («Автоматизированная система бюджетного учета «Смета» (№ 03947)</td>
   <td style="padding:6px; text-align:center;">29.03.2024<br>№ 03947<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324003947" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">13 800 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">15</td>
-  <td style="padding:6px;">Оказание услуги по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100130026201244">Оказание услуги по миграции баз данных в единую программную платформу (№ 03051)</td>
   <td style="padding:6px; text-align:center;">13.03.2024<br>№ 03051<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324003051" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">8 640 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">16</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта «Автоматизированная система бюджетного учета «Смета»</td>
+  <td style="padding:6px;" title="ИКЗ: '242890103836489010100100120016202244">Оказание услуг по технической поддержке программного продукта «Автоматизированная система бюджетного учета «Смета» (№ 02639)</td>
   <td style="padding:6px; text-align:center;">06.03.2024<br>№ 02639<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000324002639" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">5 670 000,00</td>
 </tr>
@@ -282,79 +282,79 @@
 <tbody>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">1</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100190016201244">Оказание услуг по миграции баз данных в единую программную платформу (№ 15416)</td>
   <td style="padding:6px; text-align:center;">25.12.2023<br>№ 15416<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323015416" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">7 360 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">2</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета"</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100180016202244">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета" (№ 14381)</td>
   <td style="padding:6px; text-align:center;">05.12.2023<br>№ 14381<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323014381" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">5 390 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100130056201244">Оказание услуг по миграции баз данных в единую программную платформу (№ 11529)</td>
   <td style="padding:6px; text-align:center;">13.10.2023<br>№ 11529<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323011529" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">780 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">4</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100130046201244">Оказание услуг по миграции баз данных в единую программную платформу (№ 10919)</td>
   <td style="padding:6px; text-align:center;">25.09.2023<br>№ 10919<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323010919" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">780 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">5</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета"</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100120036202244">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета" (№ 10167)</td>
   <td style="padding:6px; text-align:center;">04.09.2023<br>№ 10167<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323010167" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">4 311 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">6</td>
-  <td style="padding:6px;">Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100160026201244">Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах (№ 08724)</td>
   <td style="padding:6px; text-align:center;">19.07.2023<br>№ 08724<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323008724" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 970 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">7</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100130036201244">Оказание услуг по миграции баз данных в единую программную платформу (№ 08594)</td>
   <td style="padding:6px; text-align:center;">14.07.2023<br>№ 08594<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323008594" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">6 240 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">8</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета"</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100120026202244">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета" (№ 07971)</td>
   <td style="padding:6px; text-align:center;">26.06.2023<br>№ 07971<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323007971" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">4 335 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">9</td>
-  <td style="padding:6px;">Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части реализации функционала «Личный кабинет подотчетного лица»</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100170016201244">Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части реализации функционала «Личный кабинет подотчетного лица» (№ 07970)</td>
   <td style="padding:6px; text-align:center;">26.06.2023<br>№ 07970<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323007970" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 030 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">10</td>
-  <td style="padding:6px;">Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100160016201244">Оказание услуг по расширению функциональных возможностей программного продукта  «Автоматизированная система бюджетного учета «Смета» в части администрирования доходов и обеспечения электронного взаимодействия с государственной информационной системой о государственных и муниципальных платежах (№ 07969)</td>
   <td style="padding:6px; text-align:center;">26.06.2023<br>№ 07969<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323007969" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 970 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">11</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100130026201244">Оказание услуг по миграции баз данных в единую программную платформу (№ 03814)</td>
   <td style="padding:6px; text-align:center;">30.03.2023<br>№ 03814<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323003814" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">6 800 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">12</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета"</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100120016202244">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета" (№ 01948)</td>
   <td style="padding:6px; text-align:center;">21.02.2023<br>№ 01948<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323001948" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 555 750,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">13</td>
-  <td style="padding:6px;">Оказание услуг по миграции баз данных в единую программную платформу</td>
+  <td style="padding:6px;" title="ИКЗ: '232890103836489010100100130016201244">Оказание услуг по миграции баз данных в единую программную платформу (№ 00010)</td>
   <td style="padding:6px; text-align:center;">13.01.2023<br>№ 00010<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000323000010" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">5 800 000,00</td>
 </tr>
@@ -377,31 +377,31 @@
 <tbody>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">1</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета"</td>
+  <td style="padding:6px;" title="ИКЗ: '222890103836489010100100190016202244">Оказание услуг по технической поддержке программного продукта "Автоматизированная система бюджетного учета "Смета" (№ 15657)</td>
   <td style="padding:6px; text-align:center;">23.12.2022<br>№ 15657<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000322015657" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 555 750,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">2</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта "Автоматизированная система бюджетного учета "Смета"</td>
+  <td style="padding:6px;" title="ИКЗ: '222890103836489010100100150026201244">Оказание услуг по настройке программного продукта "Автоматизированная система бюджетного учета "Смета" (№ 11605)</td>
   <td style="padding:6px; text-align:center;">21.10.2022<br>№ 11605<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000322011605" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 640 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта «Автоматизированная система бюджетного учета «Смета» в части электронного взаимодействия с внешней автоматизированной информационной системой «Управление жилищным фондом Ямало-Ненецкого автономного округа»</td>
+  <td style="padding:6px;" title="ИКЗ: '222890103836489010100100180016201244">Оказание услуг по настройке программного продукта «Автоматизированная система бюджетного учета «Смета» в части электронного взаимодействия с внешней автоматизированной информационной системой «Управление жилищным фондом Ямало-Ненецкого автономного округа» (№ 11156)</td>
   <td style="padding:6px; text-align:center;">14.10.2022<br>№ 11156<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000322011156" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 000 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">4</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта «Автоматизированная система бюджетного учета «Смета» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Имущество ЯНАО»</td>
+  <td style="padding:6px;" title="ИКЗ: '222890103836489010100100140016201244">Оказание услуг по настройке программного продукта «Автоматизированная система бюджетного учета «Смета» в части обеспечения электронного взаимодействия с внешней информационной системой ГИС «Имущество ЯНАО» (№ 08580)</td>
   <td style="padding:6px; text-align:center;">27.07.2022<br>№ 08580<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000322008580" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">5</td>
-  <td style="padding:6px;">Оказание услуг по настройке программного продукта «Автоматизированная система бюджетного учета «Смета» по обеспечению электронного взаимодействия с внешними информационными системами в сфере закупок</td>
+  <td style="padding:6px;" title="ИКЗ: '222890103836489010100100130016201244">Оказание услуг по настройке программного продукта «Автоматизированная система бюджетного учета «Смета» по обеспечению электронного взаимодействия с внешними информационными системами в сфере закупок (№ 06833)</td>
   <td style="padding:6px; text-align:center;">07.06.2022<br>№ 06833<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000322006833" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 800 000,00</td>
 </tr>
@@ -424,31 +424,31 @@
 <tbody>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">1</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта АС "Смета" в рамках реализации мероприятия по централизации бухгалтерского (бюджетного) учета и формированию бухгалтерской (бюджетной) отчетности за органы государственной власти Ямало-Ненецкого автономного округа</td>
+  <td style="padding:6px;" title="ИКЗ: '212890103836489010100100160016202244">Оказание услуг по технической поддержке программного продукта АС "Смета" в рамках реализации мероприятия по централизации бухгалтерского (бюджетного) учета и формированию бухгалтерской (бюджетной) отчетности за органы государственной власти Ямало-Ненецкого автономного округа (№ 14513)</td>
   <td style="padding:6px; text-align:center;">21.12.2021<br>№ 14513<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000321014513" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 358 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">2</td>
-  <td style="padding:6px;">Оказание услуг по развитию системы бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти ЯНАО в части настройки государственной информационной системы «Смета Ямало-Ненецкого автономного округа» по обеспечению электронного взаимодействия с внешней информационной системой</td>
+  <td style="padding:6px;" title="ИКЗ: '212890103836489010100100150026201244">Оказание услуг по развитию системы бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти ЯНАО в части настройки государственной информационной системы «Смета Ямало-Ненецкого автономного округа» по обеспечению электронного взаимодействия с внешней информационной системой (№ 11577)</td>
   <td style="padding:6px; text-align:center;">01.11.2021<br>№ 11577<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000321011577" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
-  <td style="padding:6px;">Оказание услуг по развитию системы бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти ЯНАО в части настройки государственной информационной системы «Смета Ямало-Ненецкого автономного округа» по обеспечению электронного взаимодействия с внешней информационной системой</td>
+  <td style="padding:6px;" title="ИКЗ: '212890103836489010100100150016201244">Оказание услуг по развитию системы бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти ЯНАО в части настройки государственной информационной системы «Смета Ямало-Ненецкого автономного округа» по обеспечению электронного взаимодействия с внешней информационной системой (№ 10728)</td>
   <td style="padding:6px; text-align:center;">15.10.2021<br>№ 10728<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000321010728" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">4</td>
-  <td style="padding:6px;">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти Ямало-Ненецкого автономного округа к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий («тонкий» клиент)</td>
+  <td style="padding:6px;" title="ИКЗ: '212890103836489010100100090026201244">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти Ямало-Ненецкого автономного округа к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий («тонкий» клиент) (№ 01884)</td>
   <td style="padding:6px; text-align:center;">05.03.2021<br>№ 01884<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000321001884" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 200 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">5</td>
-  <td style="padding:6px;">Оказание консалтинговых услуг для создания и сопровождения проекта по формированию единой цифровой среды органов государственной власти Ямало-Ненецкого автономного округа</td>
+  <td style="padding:6px;" title="ИКЗ: '212890103836489010100100140017022244">Оказание консалтинговых услуг для создания и сопровождения проекта по формированию единой цифровой среды органов государственной власти Ямало-Ненецкого автономного округа (№ 00504)</td>
   <td style="padding:6px; text-align:center;">02.02.2021<br>№ 00504<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000321000504" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">2 000 000,00</td>
 </tr>
@@ -471,49 +471,49 @@
 <tbody>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">1</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта АС "Смета" в рамках реализации мероприятия по централизации бухгалтерского (бюджетного) учета и формированию бухгалтерской (бюджетной) отчетности за органы государственной власти Ямало-Ненецкого автономного округа.</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100100026202244">Оказание услуг по технической поддержке программного продукта АС "Смета" в рамках реализации мероприятия по централизации бухгалтерского (бюджетного) учета и формированию бухгалтерской (бюджетной) отчетности за органы государственной власти Ямало-Ненецкого автономного округа. (№ 13731)</td>
   <td style="padding:6px; text-align:center;">01.12.2020<br>№ 13731<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320013731" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 229 200,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">2</td>
-  <td style="padding:6px;">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти Ямало-Ненецкого автономного округа к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий («тонкий» клиент)</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100020076201244">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти Ямало-Ненецкого автономного округа к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий («тонкий» клиент) (№ 08781)</td>
   <td style="padding:6px; text-align:center;">21.08.2020<br>№ 08781<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320008781" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">3</td>
-  <td style="padding:6px;">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти Ямало-Ненецкого автономного округа к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий («тонкий» клиент)</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100020066201244">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти Ямало-Ненецкого автономного округа к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий («тонкий» клиент) (№ 08802)</td>
   <td style="padding:6px; text-align:center;">21.08.2020<br>№ 08802<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320008802" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">4</td>
-  <td style="padding:6px;">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий ("тонкий" клиент)</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100020056201244">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий ("тонкий" клиент) (№ 03487)</td>
   <td style="padding:6px; text-align:center;">30.03.2020<br>№ 03487<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320003487" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 200 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">5</td>
-  <td style="padding:6px;">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий ("тонкий" клиент)</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100020046201244">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей органов государственной власти к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий ("тонкий" клиент) (№ 03495)</td>
   <td style="padding:6px; text-align:center;">30.03.2020<br>№ 03495<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320003495" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 200 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">6</td>
-  <td style="padding:6px;">Оказание услуг по технической поддержке программного продукта АС "Смета" в рамках реализации мероприятия по централизации бухгалтерского (бюджетного) учета и формированию бухгалтерской (бюджетной) отчетности за органы государственной власти Ямало-Ненецкого автономного округа</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100040026202244">Оказание услуг по технической поддержке программного продукта АС "Смета" в рамках реализации мероприятия по централизации бухгалтерского (бюджетного) учета и формированию бухгалтерской (бюджетной) отчетности за органы государственной власти Ямало-Ненецкого автономного округа (№ 02713)</td>
   <td style="padding:6px; text-align:center;">20.03.2020<br>№ 02713<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320002713" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">3 000 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">7</td>
-  <td style="padding:6px;">Оказание консалтинговых услуг для создания и сопровождения проекта по эффективному, устойчивому развитию централизации ведения бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти Ямало-Ненецкого автономного округа.</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100090017022244">Оказание консалтинговых услуг для создания и сопровождения проекта по эффективному, устойчивому развитию централизации ведения бухгалтерского (бюджетного) учета и формирования бухгалтерской (бюджетной) отчетности в органах государственной власти Ямало-Ненецкого автономного округа. (№ 02979)</td>
   <td style="padding:6px; text-align:center;">25.03.2020<br>№ 02979<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320002979" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 500 000,00</td>
 </tr>
 <tr style="border-bottom:1px solid #eee;">
   <td style="padding:6px; text-align:center;">8</td>
-  <td style="padding:6px;">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей исполнительных органов государственной власти к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий ("тонкий" клиент)</td>
+  <td style="padding:6px;" title="ИКЗ: '202890103836489010100100020026201244">Оказание услуг по развитию Единой системы управления бюджетным процессом Ямало-Ненецкого автономного округа в части подключения пользователей исполнительных органов государственной власти к личному кабинету и подсистеме бухгалтерского учета и отчетности для обеспечения процесса ведения бухгалтерского учета и составления отчетности на основе web-технологий ("тонкий" клиент) (№ 00774)</td>
   <td style="padding:6px; text-align:center;">05.02.2020<br>№ 00774<br><a href="https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber=0190200000320000774" target="_blank">ГК на zakupki.gov.ru</a></td>
   <td style="padding:6px; text-align:right; white-space:nowrap;">1 800 000,00</td>
 </tr>

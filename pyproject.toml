@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mkdocs-roadmap-save-plugin"
+version = "1.0.0"
+description = "MkDocs plugin: save roadmap cell edits back to markdown source (visible to all LAN users)"
+requires-python = ">=3.8"
+dependencies = ["mkdocs>=1.5"]
+
+[project.entry-points."mkdocs.plugins"]
+roadmap_save = "roadmap_save_plugin:RoadmapSavePlugin"
+
+[tool.setuptools]
+packages = ["roadmap_save_plugin"]

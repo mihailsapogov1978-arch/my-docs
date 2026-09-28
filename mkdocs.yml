@@ -1,7 +1,7 @@
 site_name: Документация ЦБ ОГВ ЯНАО
 site_url: https://mihailsapogov1978-arch.github.io/my-docs/
 site_description: Документация ЦБ ОГВ ЯНАО
-dev_addr: 127.0.0.1:8000
+dev_addr: 0.0.0.0:8000
 use_directory_urls: true
 
 theme:
@@ -42,6 +42,7 @@ extra_javascript:
   - javascripts/mermaid-init.js
   - javascripts/contracts.js
   - javascripts/project-log.js
+  - javascripts/roadmap-editor.js
 
 markdown_extensions:
   - md_in_html
@@ -71,6 +72,10 @@ plugins:
   - search:
       lang: ru
       separator: '[\s\-–—_]+'
+  # Плагин сохранения roadmap: редактирование ячеек в браузере пишет
+  # изменения обратно в docs/projects_2026/roadmap.md (видно всем после F5).
+  - roadmap_save:
+      source: projects_2026/roadmap.md
   # - git-revision-date-localized:
   #     timezone: Europe/Moscow
   #     type: date
@@ -89,10 +94,6 @@ validation:
     unrecognized_links: warn
 
 nav:
-  - Главная: index.md
   - Контракты 2019–2026: Contracts/svod_gk.md
   - Карта мероприятий: projects_2026/roadmap.md
-  - Распределение обязанностей: duties.md
-  - Заявки и звонки:
-    - Статистика по звонкам: calls/calls.md
-    - Статистика по заявкам: calls/zayavky.md
+  - Статистика по заявкам: calls/zayavky.md

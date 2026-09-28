@@ -122,6 +122,9 @@
 .project-table th:nth-child(7) { width: 48px; }
 .project-table td:nth-child(7) { width: 48px; text-align: center; font-size: 11px; }
 
+/* ===== ПРИНУДИТЕЛЬНАЯ ШИРИНА КОЛОНОК ===== */
+.project-table th:nth-child(1) { width: 38px; }
+
 /* ===== ВСЕ ЯЧЕЙКИ — БЕЛЫЙ ФОН ===== */
 .project-table tbody tr:nth-child(even) td,
 .project-table tbody tr:nth-child(odd) td {
@@ -132,7 +135,27 @@
 .project-table tbody tr:hover td {
     background-color: #fafbfc;
 }
+
+/* приоритет у классов статуса — иначе перекрываются правилом выше */
+.project-table tbody tr:hover td.status-done { background-color: #90ee90 !important; }
+.project-table tbody tr:hover td.status-work  { background-color: #f0e085 !important; }
+.project-table tbody tr:hover td.status-plan  { background-color: #bde0fe !important; }
+
+/* подсветка ячейки в режиме редактирования */
+.project-table td.cell-editing {
+    outline: 2px solid #3f51b5;
+    outline-offset: -2px;
+    cursor: text;
+}
+
+.edit-hint {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 12px;
+}
 </style>
+
+<p class="edit-hint">💡 Кликните по ячейке таблицы, чтобы изменить её содержимое или цвет (кнопки ✕ / ✓). Изменения сохраняются в файл <code>roadmap.md</code> — после сохранения mkdocs перезастроит сайт, и у коллег страница обновится по F5.</p>
 
 <div class="legend">
     <div class="legend-item">

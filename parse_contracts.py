@@ -84,8 +84,15 @@ def parse_contracts(csv_path):
                 # Короткий номер (последние 5 цифр)
                 short_number = reg_number[-5:] if reg_number else ''
                 
+                # Идентификационный код закупки (ИКЗ) - уникальный идентификатор
+                ikz = row.get('Идентификационный код закупки', '').strip()
+                
                 # Название
                 name = row.get('Наименование закупки', '').strip()
+                
+                # Формируем уникальное название: исходное название + короткий номер
+                # Это позволит различать контракты с одинаковыми названиями
+                unique_name = f"{name} (№ {short_number})"
                 
                 # Цена
                 price_raw = row.get('Начальная (максимальная) цена контракта', '0')
@@ -119,7 +126,9 @@ def parse_contracts(csv_path):
                 contracts.append({
                     'reg_number': reg_number,
                     'short_number': short_number,
+                    'ikz': ikz,
                     'name': name,
+                    'unique_name': unique_name,
                     'price': price_formatted,
                     'price_float': price_float,
                     'publish_date': publish_date,
@@ -181,9 +190,13 @@ def generate_md(contracts):
         md += """<tbody>\n"""
         
         for i, c in enumerate(year_contracts, 1):
+            # Добавляем ИКЗ в title для возможности полной идентификации
+            ikz_short = c.get('ikz', '')[:20] + '...' if len(c.get('ikz', '')) > 20 else c.get('ikz', '')
+            title_attr = f' title="ИКЗ: {c.get("ikz", "")}"' if c.get('ikz') else ''
+            
             md += f"""<tr style="border-bottom:1px solid #eee;">\n"""
             md += f"""  <td style="padding:6px; text-align:center;">{i}</td>\n"""
-            md += f"""  <td style="padding:6px;">{c['name']}</td>\n"""
+            md += f"""  <td style="padding:6px;"{title_attr}>{c['unique_name']}</td>\n"""
             md += f"""  <td style="padding:6px; text-align:center;">{c['publish_date']}<br>№ {c['short_number']}<br><a href="{c['link']}" target="_blank">ГК на zakupki.gov.ru</a></td>\n"""
             md += f"""  <td style="padding:6px; text-align:right; white-space:nowrap;">{c['price']}</td>\n"""
             md += f"""</tr>\n"""
