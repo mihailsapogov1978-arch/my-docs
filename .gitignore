@@ -40,4 +40,4 @@ htmlcov/
 *$py.class
 *.so
 .Python
-```
+```site/
