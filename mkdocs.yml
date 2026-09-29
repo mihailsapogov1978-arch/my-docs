@@ -91,5 +91,7 @@ validation:
 
 nav:
   - Контракты 2019–2026: Contracts/svod_gk.md
+  - Планы информатизации: plans/plans.md
   - Карта мероприятий: projects_2026/roadmap.md
   - Статистика по заявкам: calls/zayavky.md
+    
