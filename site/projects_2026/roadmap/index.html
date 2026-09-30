@@ -390,44 +390,6 @@
 
 <h1 id="2026">План проектов на 2026 год<a class="headerlink" href="#2026" title="Permanent link">&para;</a></h1>
 <style>
-/* ===== ПЛИТКИ СВОДКИ ===== */
-.summary {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0 25px 0;
-}
-.summary-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 18px 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    border-left: 5px solid #3182ce;
-}
-.summary-card .label {
-    font-size: 13px;
-    color: #4a5568;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-}
-.summary-card .value {
-    font-size: 32px;
-    font-weight: 700;
-    color: #2c3e50;
-    line-height: 1;
-}
-.summary-card.done  { border-left-color: #38a169; }
-.summary-card.work  { border-left-color: #e6b800; }
-.summary-card.late  { border-left-color: #e53e3e; }
-.summary-card.done .value { color: #2f855a; }
-.summary-card.work .value { color: #b7791f; }
-.summary-card.late .value { color: #c53030; }
-
-@media (max-width: 720px) {
-    .summary { grid-template-columns: repeat(2, 1fr); }
-}
-
 /* ===== КОМПАКТНАЯ ТАБЛИЦА РУКОВОДИТЕЛЯ ===== */
 .boss-table {
     width: 100%;
@@ -439,6 +401,7 @@
     border-radius: 10px;
     overflow: hidden;
     table-layout: fixed;
+    margin-top: 20px;
 }
 .boss-table th {
     background: #f5f7fa;
@@ -460,7 +423,7 @@
 .boss-table tr:last-child td { border-bottom: none; }
 .boss-table tr:hover td { background: #fafbfc; }
 
-/* ===== SELECT / INPUT В ТАБЛИЦЕ ===== */
+/* ===== SELECT / INPUT ===== */
 .boss-select,
 .boss-input {
     width: 100%;
@@ -485,11 +448,11 @@
     border-color: #3182ce;
 }
 
-/* цветной select статуса — перекрашивается через JS */
-select.status-select option { background: #fff; color: #2c3e50; }
-select.status-select.status-done { background: #90ee90; }
-select.status-select.status-work { background: #f0e085; }
-select.status-select.status-late { background: #f5a6a6; }
+/* ===== ЦВЕТА СТАТУСОВ ===== */
+select.status-select.status-soglasovanie { background: #bde0fe; }
+select.status-select.status-torgi         { background: #f8c8d4; }
+select.status-select.status-raboty        { background: #f0e085; }
+select.status-select.status-done          { background: #90ee90; }
 
 /* ===== РАСКРЫВАЮЩИЙСЯ БЛОК ДЕТАЛИЗАЦИИ ===== */
 details.details-block {
@@ -575,314 +538,124 @@ details.details-block[open] > summary::before { content: "▾ "; }
 .project-table td:nth-child(n+3) { width: 48px; text-align: center; font-size: 11px; }
 </style>
 
-<!-- ==================== СВОДКА ДЛЯ РУКОВОДИТЕЛЯ ==================== -->
-<div class="summary" id="summary">
-    <div class="summary-card">
-        <div class="label">Всего</div>
-        <div class="value" id="sum-total">—</div>
-    </div>
-    <div class="summary-card work">
-        <div class="label">В работе</div>
-        <div class="value" id="sum-work">—</div>
-    </div>
-    <div class="summary-card late">
-        <div class="label">Просрочено</div>
-        <div class="value" id="sum-late">—</div>
-    </div>
-    <div class="summary-card done">
-        <div class="label">Готово</div>
-        <div class="value" id="sum-done">—</div>
-    </div>
-</div>
-
 <!-- ==================== КОМПАКТНАЯ ТАБЛИЦА ==================== -->
 <table class="boss-table" id="bossTable">
     <thead>
         <tr>
             <th style="width:32px;">№</th>
             <th>Мероприятие</th>
-            <th style="width:130px;">Ответственный</th>
-            <th style="width:130px;">Этап</th>
             <th style="width:130px;">Срок реализации</th>
-            <th style="width:120px;">Статус</th>
+            <th style="width:180px;">Статус</th>
         </tr>
     </thead>
     <tbody>
-        <tr data-key="1" data-status="work" data-deadline="2026-04-20">
+        <tr data-key="1" data-status="torgi" data-deadline="2026-04-20">
             <td>1</td>
             <td>Интеграция с Тэзис</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-04-20"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-04-20">
-            </td>
-            <td>
-                <select class="boss-select status-select status-work" data-field="status">
-                    <option value="late">Просрочено</option>
-                    <option value="work" selected>В работе</option>
+                <select class="boss-select status-select status-torgi" data-field="status">
+                    <option value="soglasovanie">Согласование ТЗ</option>
+                    <option value="torgi" selected>Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="2" data-status="work" data-deadline="2026-04-15">
+        <tr data-key="2" data-status="torgi" data-deadline="2026-04-15">
             <td>2</td>
             <td>Интеграция ЛК/Сметы с сервисом по предоставлению справок</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-04-15"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-04-15">
-            </td>
-            <td>
-                <select class="boss-select status-select status-work" data-field="status">
-                    <option value="late">Просрочено</option>
-                    <option value="work" selected>В работе</option>
+                <select class="boss-select status-select status-torgi" data-field="status">
+                    <option value="soglasovanie">Согласование ТЗ</option>
+                    <option value="torgi" selected>Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="3" data-status="late" data-deadline="2026-05-05">
+        <tr data-key="3" data-status="soglasovanie" data-deadline="2026-05-05">
             <td>3</td>
             <td>Интеграция имущества</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-05"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-05-05">
-            </td>
-            <td>
-                <select class="boss-select status-select status-late" data-field="status">
-                    <option value="late" selected>Просрочено</option>
-                    <option value="work">В работе</option>
+                <select class="boss-select status-select status-soglasovanie" data-field="status">
+                    <option value="soglasovanie" selected>Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="4" data-status="work" data-deadline="2026-04-12">
+        <tr data-key="4" data-status="soglasovanie" data-deadline="2026-04-12">
             <td>4</td>
             <td>Интеграция АПК</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-04-12"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-04-12">
-            </td>
-            <td>
-                <select class="boss-select status-select status-work" data-field="status">
-                    <option value="late">Просрочено</option>
-                    <option value="work" selected>В работе</option>
+                <select class="boss-select status-select status-soglasovanie" data-field="status">
+                    <option value="soglasovanie" selected>Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="5" data-status="work" data-deadline="2026-04-18">
+        <tr data-key="5" data-status="torgi" data-deadline="2026-04-18">
             <td>5</td>
             <td>Интеграция Росдормонитор</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-04-18"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-04-18">
-            </td>
-            <td>
-                <select class="boss-select status-select status-work" data-field="status">
-                    <option value="late">Просрочено</option>
-                    <option value="work" selected>В работе</option>
+                <select class="boss-select status-select status-torgi" data-field="status">
+                    <option value="soglasovanie">Согласование ТЗ</option>
+                    <option value="torgi" selected>Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="6" data-status="late" data-deadline="2026-05-05">
+        <tr data-key="6" data-status="soglasovanie" data-deadline="2026-05-05">
             <td>6</td>
             <td>Настройка Родительской платы</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-05"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-05-05">
-            </td>
-            <td>
-                <select class="boss-select status-select status-late" data-field="status">
-                    <option value="late" selected>Просрочено</option>
-                    <option value="work">В работе</option>
+                <select class="boss-select status-select status-soglasovanie" data-field="status">
+                    <option value="soglasovanie" selected>Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="7" data-status="late" data-deadline="2026-05-10">
+        <tr data-key="7" data-status="soglasovanie" data-deadline="2026-05-10">
             <td>7</td>
             <td>Настройка Опеки и попечительства</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-10"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-05-10">
-            </td>
-            <td>
-                <select class="boss-select status-select status-late" data-field="status">
-                    <option value="late" selected>Просрочено</option>
-                    <option value="work">В работе</option>
+                <select class="boss-select status-select status-soglasovanie" data-field="status">
+                    <option value="soglasovanie" selected>Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="8" data-status="late" data-deadline="2026-05-15">
+        <tr data-key="8" data-status="soglasovanie" data-deadline="2026-05-15">
             <td>8</td>
             <td>Интеграция с медицинскими инф. системами</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-15"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-05-15">
-            </td>
-            <td>
-                <select class="boss-select status-select status-late" data-field="status">
-                    <option value="late" selected>Просрочено</option>
-                    <option value="work">В работе</option>
+                <select class="boss-select status-select status-soglasovanie" data-field="status">
+                    <option value="soglasovanie" selected>Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
@@ -891,138 +664,54 @@ details.details-block[open] > summary::before { content: "▾ "; }
         <tr data-key="9" data-status="done" data-deadline="2026-05-20">
             <td>9</td>
             <td>Интеграция с ГИС ЕСКУ</td>
-            <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-05-20">
-            </td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-20"></td>
             <td>
                 <select class="boss-select status-select status-done" data-field="status">
-                    <option value="late">Просрочено</option>
-                    <option value="work">В работе</option>
+                    <option value="soglasovanie">Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done" selected>Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="10" data-status="late" data-deadline="2026-05-25">
+        <tr data-key="10" data-status="soglasovanie" data-deadline="2026-05-25">
             <td>10</td>
             <td>Техподдержка ГИС "Смета ЯНАО"</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-25"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-05-25">
-            </td>
-            <td>
-                <select class="boss-select status-select status-late" data-field="status">
-                    <option value="late" selected>Просрочено</option>
-                    <option value="work">В работе</option>
+                <select class="boss-select status-select status-soglasovanie" data-field="status">
+                    <option value="soglasovanie" selected>Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="11" data-status="work" data-deadline="2026-06-05">
+        <tr data-key="11" data-status="done" data-deadline="2026-06-05">
             <td>11</td>
             <td>Слияние баз</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-06-05"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-06-05">
-            </td>
-            <td>
-                <select class="boss-select status-select status-work" data-field="status">
-                    <option value="late">Просрочено</option>
-                    <option value="work" selected>В работе</option>
-                    <option value="done">Выполнено</option>
+                <select class="boss-select status-select status-done" data-field="status">
+                    <option value="soglasovanie">Согласование ТЗ</option>
+                    <option value="torgi">Торги</option>
+                    <option value="raboty">Работы по ГК</option>
+                    <option value="done" selected>Выполнено</option>
                 </select>
             </td>
         </tr>
 
-        <tr data-key="12" data-status="work" data-deadline="2026-06-08">
+        <tr data-key="12" data-status="torgi" data-deadline="2026-06-08">
             <td>12</td>
             <td>Настройка контроля колич-х и качественных показателей обработки документов ИИ</td>
+            <td><input type="date" class="boss-input" data-field="deadline" value="2026-06-08"></td>
             <td>
-                <select class="boss-select" data-field="assignee">
-                    <option value="">—</option>
-                    <option>Сапогов М.Д.</option>
-                    <option>Мулявин Я.В.</option>
-                    <option>Чечеткин М.И.</option>
-                    <option>Кошик В.И.</option>
-                    <option>Роганова А.А.</option>
-                    <option>Худышкин С.Н.</option>
-                    <option>Гасанов С.Н.</option>
-                </select>
-            </td>
-            <td>
-                <select class="boss-select" data-field="stage">
-                    <option value="">—</option>
-                    <option>Согласование ТЗ</option>
-                    <option>Торги</option>
-                    <option>Тестирование</option>
-                </select>
-            </td>
-            <td>
-                <input type="date" class="boss-input" data-field="deadline" value="2026-06-08">
-            </td>
-            <td>
-                <select class="boss-select status-select status-work" data-field="status">
-                    <option value="late">Просрочено</option>
-                    <option value="work" selected>В работе</option>
+                <select class="boss-select status-select status-torgi" data-field="status">
+                    <option value="soglasovanie">Согласование ТЗ</option>
+                    <option value="torgi" selected>Торги</option>
+                    <option value="raboty">Работы по ГК</option>
                     <option value="done">Выполнено</option>
                 </select>
             </td>
@@ -1121,73 +810,47 @@ details.details-block[open] > summary::before { content: "▾ "; }
 
   // ====== СОСТОЯНИЕ ======
   const state = {
-    statuses:  {},   // "1".."12" -> "done"|"work"|"late"
-    assignees: {},   // "1".."12" -> ФИО
-    stages:    {},   // "1".."12" -> "Согласование ТЗ"|"Торги"|"Тестирование"
+    statuses:  {},   // "1".."12" -> "soglasovanie"|"torgi"|"raboty"|"done"
     deadlines: {}    // "1".."12" -> "YYYY-MM-DD"
   };
 
   const rows = document.querySelectorAll('#bossTable tbody tr');
 
-  // ====== 1. Сводка ======
-  function recalcSummary() {
-    let total = rows.length, work = 0, done = 0, late = 0;
-    rows.forEach(tr => {
-      const s = tr.dataset.status || 'work';
-      if (s === 'work') work++;
-      if (s === 'done') done++;
-      if (s === 'late') late++;
-    });
-    document.getElementById('sum-total').textContent = total;
-    document.getElementById('sum-work').textContent  = work;
-    document.getElementById('sum-late').textContent  = late;
-    document.getElementById('sum-done').textContent  = done;
-  }
-
-  // ====== 2. Применение цвета к select статуса ======
+  // ====== 1. Цвет статуса ======
   function applyStatusColor(sel) {
-    sel.classList.remove('status-done', 'status-work', 'status-late');
+    sel.classList.remove('status-soglasovanie','status-torgi','status-raboty','status-done');
     sel.classList.add('status-' + sel.value);
   }
 
-  // ====== 3. Первичная инициализация из data-атрибутов ======
+  // ====== 2. Инициализация из data-атрибутов ======
   rows.forEach(tr => {
     const key = tr.dataset.key;
-    state.statuses[key]  = tr.dataset.status || 'work';
+    state.statuses[key]  = tr.dataset.status || 'soglasovanie';
     state.deadlines[key] = tr.dataset.deadline || '';
-
-    // статус — select
     const statusSel = tr.querySelector('select[data-field="status"]');
     if (statusSel) applyStatusColor(statusSel);
   });
 
-  recalcSummary();
-
-  // ====== 4. Обработчики ======
+  // ====== 3. Обработчики ======
   document.querySelectorAll('#bossTable select, #bossTable input').forEach(el => {
     el.addEventListener('change', function () {
       const tr    = this.closest('tr');
       const key   = tr.dataset.key;
       const field = this.dataset.field;
 
-      if (field === 'assignee') {
-        state.assignees[key] = this.value;
-      } else if (field === 'stage') {
-        state.stages[key] = this.value;
-      } else if (field === 'deadline') {
+      if (field === 'deadline') {
         state.deadlines[key] = this.value;
         tr.dataset.deadline = this.value;
       } else if (field === 'status') {
         state.statuses[key] = this.value;
         tr.dataset.status = this.value;
         applyStatusColor(this);
-        recalcSummary();
       }
       saveState();
     });
   });
 
-  // ====== 5. Загрузка сохранённых значений ======
+  // ====== 4. Загрузка сохранённых значений ======
   fetch('/api/statuses', { cache: 'no-store' })
     .then(r => r.ok ? r.json() : {})
     .then(saved => {
@@ -1202,18 +865,6 @@ details.details-block[open] > summary::before { content: "▾ "; }
           state.statuses[k] = val;
         });
       }
-      if (saved.assignees) {
-        Object.keys(saved.assignees).forEach(k => {
-          const sel = document.querySelector('#bossTable tbody tr[data-key="' + k + '"] select[data-field="assignee"]');
-          if (sel) { sel.value = saved.assignees[k]; state.assignees[k] = saved.assignees[k]; }
-        });
-      }
-      if (saved.stages) {
-        Object.keys(saved.stages).forEach(k => {
-          const sel = document.querySelector('#bossTable tbody tr[data-key="' + k + '"] select[data-field="stage"]');
-          if (sel) { sel.value = saved.stages[k]; state.stages[k] = saved.stages[k]; }
-        });
-      }
       if (saved.deadlines) {
         Object.keys(saved.deadlines).forEach(k => {
           const inp = document.querySelector('#bossTable tbody tr[data-key="' + k + '"] input[data-field="deadline"]');
@@ -1225,11 +876,10 @@ details.details-block[open] > summary::before { content: "▾ "; }
           }
         });
       }
-      recalcSummary();
     })
     .catch(() => {});
 
-  // ====== 6. Сохранение ======
+  // ====== 5. Сохранение ======
   let saveTimer = null;
   function saveState() {
     clearTimeout(saveTimer);

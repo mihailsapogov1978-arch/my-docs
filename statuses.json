@@ -1,0 +1,18 @@
+{
+  "statuses": {
+    "1": "soglasovanie",
+    "2": "raboty",
+    "3": "raboty",
+    "4": "done",
+    "5": "soglasovanie",
+    "6": "raboty",
+    "7": "late",
+    "8": "late",
+    "9": "done",
+    "10": "late",
+    "11": "torgi",
+    "12": "work"
+  },
+  "assignees": {},
+  "stages": {}
+}
