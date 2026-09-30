@@ -21,19 +21,34 @@ from urllib.parse import urlparse
 # ---------- Настройки ----------
 PORT = 8000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SITE_DIR = os.path.join(BASE_DIR, 'site')          # что раздаём как статику
+SITE_DIR = os.path.join(BASE_DIR, 'site')              # что раздаём как статику
 STATUS_FILE = os.path.join(BASE_DIR, 'statuses.json')  # где храним статусы
+
+DEFAULT_STATE = {"statuses": {}, "assignees": {}, "stages": {}}
 
 
 def load_statuses():
     if not os.path.exists(STATUS_FILE):
-        return {}
+        return dict(DEFAULT_STATE)
     try:
         with open(STATUS_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            data = json.load(f)
     except Exception as e:
         print('Не удалось прочитать statuses.json:', e)
-        return {}
+        return dict(DEFAULT_STATE)
+
+    if not isinstance(data, dict):
+        return dict(DEFAULT_STATE)
+
+    # Миграция старого формата (плоский словарь) в новый
+    if 'statuses' not in data and 'assignees' not in data and 'stages' not in data:
+        data = {"statuses": data, "assignees": {}, "stages": {}}
+    else:
+        data.setdefault('statuses', {})
+        data.setdefault('assignees', {})
+        data.setdefault('stages', {})
+
+    return data
 
 
 def save_statuses(data):
@@ -63,7 +78,6 @@ class Handler(SimpleHTTPRequestHandler):
         if path == '/api/statuses':
             self._send_json(load_statuses())
             return
-        # отдаём статику из SITE_DIR
         super().do_GET()
 
     # ---------- POST ----------
@@ -84,6 +98,13 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_json({'error': 'expected object'}, 400)
             return
 
+        # допускаем только известные ключи верхнего уровня
+        data = {
+            'statuses':  data.get('statuses',  {}) if isinstance(data.get('statuses'),  dict) else {},
+            'assignees': data.get('assignees', {}) if isinstance(data.get('assignees'), dict) else {},
+            'stages':    data.get('stages',    {}) if isinstance(data.get('stages'),    dict) else {},
+        }
+
         try:
             save_statuses(data)
         except Exception as e:
@@ -92,10 +113,9 @@ class Handler(SimpleHTTPRequestHandler):
 
         self._send_json({'ok': True})
 
-    # ---------- немного тишины в консоли ----------
+    # ---------- тишина в консоли ----------
     def log_message(self, fmt, *args):
         msg = fmt % args
-        # не засоряем вывод частыми GET-ами
         if '/api/statuses' in msg or ' 200 ' not in msg:
             sys.stderr.write('%s - - [%s] %s\n' % (
                 self.address_string(),

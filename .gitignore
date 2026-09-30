@@ -41,3 +41,6 @@ htmlcov/
 *.so
 .Python
 ```site/
+# Локальное состояние карты мероприятий
+statuses.json
+statuses.json.tmp
