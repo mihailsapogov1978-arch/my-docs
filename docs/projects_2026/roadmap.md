@@ -1,12 +1,12 @@
-# План проектов на 2026 год
+# Реализация проектов в 2026 году
 
 <style>
-/* ===== КОМПАКТНАЯ ТАБЛИЦА РУКОВОДИТЕЛЯ ===== */
+/* ===== ОСНОВНАЯ ТАБЛИЦА ===== */
 .boss-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 12px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: inherit;
+    font-size: 14px;               /* как в plans.md */
     background: #fff;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border-radius: 10px;
@@ -19,17 +19,14 @@
     color: #2c3e50;
     font-weight: 600;
     text-align: left;
-    padding: 8px 10px;
+    padding: 10px 12px;
     border-bottom: 1px solid #e0e4e8;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
 }
 .boss-table td {
-    padding: 6px 8px;
+    padding: 10px 12px;
     border-bottom: 1px solid #eef2f6;
     vertical-align: middle;
-    font-size: 12px;
+    /* font-size не задаём — наследует 14px */
 }
 .boss-table tr:last-child td { border-bottom: none; }
 .boss-table tr:hover td { background: #fafbfc; }
@@ -39,9 +36,9 @@
 .boss-input {
     width: 100%;
     box-sizing: border-box;
-    font-size: 11px;
     font-family: inherit;
-    padding: 3px 4px;
+    font-size: 14px;               /* как у таблицы */
+    padding: 6px 8px;
     border: 1px solid #cfd6dd;
     border-radius: 6px;
     background: #fff;
@@ -65,22 +62,22 @@ select.status-select.status-torgi         { background: #f8c8d4; }
 select.status-select.status-raboty        { background: #f0e085; }
 select.status-select.status-done          { background: #90ee90; }
 
-/* ===== РАСКРЫВАЮЩИЙСЯ БЛОК ДЕТАЛИЗАЦИИ ===== */
+/* ===== ДЕТАЛИЗАЦИЯ ===== */
 details.details-block {
     margin-top: 40px;
     border: 1px solid #e0e4e8;
     border-radius: 10px;
-    padding: 12px 18px;
+    padding: 14px 20px;
     background: #fafbfc;
 }
 details.details-block > summary {
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;               /* как в plans.md */
     font-weight: 600;
     color: #2c3e50;
     outline: none;
     list-style: none;
-    padding: 4px 0;
+    padding: 6px 0;
 }
 details.details-block > summary::-webkit-details-marker { display: none; }
 details.details-block > summary::before { content: "▸ "; color: #3182ce; }
@@ -94,28 +91,28 @@ details.details-block[open] > summary::before { content: "▾ "; }
 .project-table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 11px;
-    line-height: 1.2;
+    line-height: 1.3;
     table-layout: fixed;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: inherit;
+    font-size: 14px;               /* как в plans.md */
     background: #fff;
     margin-top: 12px;
 }
 .project-table th {
     background-color: #f5f7fa;
     color: #2c3e50;
-    padding: 4px 2px;
+    padding: 8px 4px;
     font-weight: 500;
     text-align: center;
     border: 1px solid #e0e4e8;
     vertical-align: middle;
     word-wrap: break-word;
+    /* font-size не задаём — наследует 14px */
 }
 .project-table th:nth-child(1),
 .project-table th:nth-child(2) {
     writing-mode: horizontal-tb;
-    font-size: 14px;
-    height: 36px;
+    height: 44px;
     white-space: normal;
 }
 .project-table th:nth-child(3),
@@ -126,43 +123,44 @@ details.details-block[open] > summary::before { content: "▾ "; }
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
-    font-size: 12px;
-    height: 140px;
+    height: 160px;
     white-space: normal;
     word-break: break-word;
-    line-height: 1.1;
-    padding: 6px 2px;
+    line-height: 1.15;
+    padding: 8px 3px;
+    /* font-size не задаём — наследует 14px */
 }
 .project-table td {
-    padding: 6px 3px;
+    padding: 8px 6px;
     border: 1px solid #e0e4e8;
     vertical-align: middle;
-    height: 40px;
+    height: 48px;
     word-wrap: break-word;
     background-color: #ffffff;
+    /* font-size не задаём — наследует 14px */
 }
-.project-table th:nth-child(1) { width: 38px; }
-.project-table td:nth-child(1) { width: 28px; text-align: center; font-weight: 500; font-size: 11px; }
-.project-table th:nth-child(2) { width: 200px; }
-.project-table td:nth-child(2) { width: 250px; padding-left: 8px; white-space: normal; font-size: 12px; }
-.project-table th:nth-child(n+3) { width: 48px; }
-.project-table td:nth-child(n+3) { width: 48px; text-align: center; font-size: 11px; }
+.project-table th:nth-child(1) { width: 40px; }
+.project-table td:nth-child(1) { width: 34px; text-align: center; font-weight: 500; }
+.project-table th:nth-child(2) { width: 220px; }
+.project-table td:nth-child(2) { width: 260px; padding-left: 10px; white-space: normal; }
+.project-table th:nth-child(n+3) { width: 52px; }
+.project-table td:nth-child(n+3) { width: 52px; text-align: center; }
 </style>
 
 <!-- ==================== КОМПАКТНАЯ ТАБЛИЦА ==================== -->
 <table class="boss-table" id="bossTable">
     <thead>
         <tr>
-            <th style="width:32px;">№</th>
+            <th style="width:40px;">№</th>
             <th>Мероприятие</th>
-            <th style="width:130px;">Срок реализации</th>
-            <th style="width:180px;">Статус</th>
+            <th style="width:135px;">Срок реализации</th>
+            <th style="width:170px;">Статус</th>
         </tr>
     </thead>
     <tbody>
         <tr data-key="1" data-status="torgi" data-deadline="2026-04-20">
             <td>1</td>
-            <td>Интеграция с Тэзис</td>
+            <td>Интеграция ГИС "Смета ЯНАО" с РСЭД "Тэзис"</td>
             <td><input type="date" class="boss-input" data-field="deadline" value="2026-04-20"></td>
             <td>
                 <select class="boss-select status-select status-torgi" data-field="status">
@@ -190,7 +188,7 @@ details.details-block[open] > summary::before { content: "▾ "; }
 
         <tr data-key="3" data-status="soglasovanie" data-deadline="2026-05-05">
             <td>3</td>
-            <td>Интеграция имущества</td>
+            <td>Интеграция ГИС "Смета ЯНАО" с ГИС "Имущество"</td>
             <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-05"></td>
             <td>
                 <select class="boss-select status-select status-soglasovanie" data-field="status">
@@ -204,7 +202,7 @@ details.details-block[open] > summary::before { content: "▾ "; }
 
         <tr data-key="4" data-status="soglasovanie" data-deadline="2026-04-12">
             <td>4</td>
-            <td>Интеграция АПК</td>
+            <td>Интеграция ГИС "Смета ЯНАО" с ГИС "АПК"</td>
             <td><input type="date" class="boss-input" data-field="deadline" value="2026-04-12"></td>
             <td>
                 <select class="boss-select status-select status-soglasovanie" data-field="status">
@@ -218,7 +216,7 @@ details.details-block[open] > summary::before { content: "▾ "; }
 
         <tr data-key="5" data-status="torgi" data-deadline="2026-04-18">
             <td>5</td>
-            <td>Интеграция Росдормонитор</td>
+            <td>Интеграция ГИС "Смета ЯНАО" с КТГ-Услуга (Росдормонитор)</td>
             <td><input type="date" class="boss-input" data-field="deadline" value="2026-04-18"></td>
             <td>
                 <select class="boss-select status-select status-torgi" data-field="status">
@@ -260,7 +258,7 @@ details.details-block[open] > summary::before { content: "▾ "; }
 
         <tr data-key="8" data-status="soglasovanie" data-deadline="2026-05-15">
             <td>8</td>
-            <td>Интеграция с медицинскими инф. системами</td>
+            <td>Интеграция ГИС "Смета ЯНАО" с медицинскими инф. системами</td>
             <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-15"></td>
             <td>
                 <select class="boss-select status-select status-soglasovanie" data-field="status">
@@ -274,7 +272,7 @@ details.details-block[open] > summary::before { content: "▾ "; }
 
         <tr data-key="9" data-status="done" data-deadline="2026-05-20">
             <td>9</td>
-            <td>Интеграция с ГИС ЕСКУ</td>
+            <td>Интеграция ГИС "Смета ЯНАО" с ГИС ЕСКУ</td>
             <td><input type="date" class="boss-input" data-field="deadline" value="2026-05-20"></td>
             <td>
                 <select class="boss-select status-select status-done" data-field="status">
@@ -310,20 +308,6 @@ details.details-block[open] > summary::before { content: "▾ "; }
                     <option value="torgi">Торги</option>
                     <option value="raboty">Работы по ГК</option>
                     <option value="done" selected>Выполнено</option>
-                </select>
-            </td>
-        </tr>
-
-        <tr data-key="12" data-status="torgi" data-deadline="2026-06-08">
-            <td>12</td>
-            <td>Настройка контроля колич-х и качественных показателей обработки документов ИИ</td>
-            <td><input type="date" class="boss-input" data-field="deadline" value="2026-06-08"></td>
-            <td>
-                <select class="boss-select status-select status-torgi" data-field="status">
-                    <option value="soglasovanie">Согласование ТЗ</option>
-                    <option value="torgi" selected>Торги</option>
-                    <option value="raboty">Работы по ГК</option>
-                    <option value="done">Выполнено</option>
                 </select>
             </td>
         </tr>
@@ -450,8 +434,9 @@ details.details-block[open] > summary::before { content: "▾ "; }
       const field = this.dataset.field;
 
       if (field === 'deadline') {
-        state.deadlines[key] = this.value;
-        tr.dataset.deadline = this.value;
+        const val = this.value || '';
+        state.deadlines[key] = val;
+        tr.dataset.deadline = val;
       } else if (field === 'status') {
         state.statuses[key] = this.value;
         tr.dataset.status = this.value;
@@ -502,5 +487,39 @@ details.details-block[open] > summary::before { content: "▾ "; }
       }).catch(() => {});
     }, 150);
   }
+
+  // ====== 6. Проверка прав: только с EDIT_IP можно редактировать ======
+  fetch('/api/config', { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : { can_edit: false })
+    .then(cfg => {
+      if (cfg.can_edit) return;   // права есть — ничего не блокируем
+
+      // Права нет: блокируем все поля и показываем предупреждение
+      document.querySelectorAll('#bossTable select, #bossTable input').forEach(el => {
+        el.disabled = true;
+        el.style.background = '#f5f7fa';
+        el.style.color = '#7a869a';
+        el.style.cursor = 'not-allowed';
+        el.style.opacity = '0.75';
+      });
+
+      const warn = document.createElement('div');
+      warn.textContent =
+        'Режим просмотра. Редактирование доступно только с рабочего места администратора.';
+      warn.style.cssText =
+        'background:#fff3cd; color:#856404; padding:10px 14px;' +
+        'border:1px solid #ffeeba; border-radius:8px;' +
+        'margin: 0 0 16px 0; font-size:14px;';
+      const table = document.getElementById('bossTable');
+      if (table && table.parentNode) {
+        table.parentNode.insertBefore(warn, table);
+      }
+    })
+    .catch(() => {
+      // Сервер недоступен — на всякий случай блокируем редактирование
+      document.querySelectorAll('#bossTable select, #bossTable input').forEach(el => {
+        el.disabled = true;
+      });
+    });
 })();
 </script>

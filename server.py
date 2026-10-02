@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Раздаёт собранный сайт MkDocs (папка site/) + API для статусов.
+Раздаёт собранный сайт MkDocs (папка site/) + API для статусов и сроков.
 
 Запуск:
     mkdocs build            # один раз (или после правок)
@@ -10,7 +10,8 @@
 Открыть:
     http://<IP>:8000/                 → главная MkDocs
     http://<IP>:8000/roadmap/         → страница карты мероприятий
-    http://<IP>:8000/api/statuses     → JSON со статусами
+    http://<IP>:8000/api/statuses     → JSON со статусами и сроками
+    http://<IP>:8000/api/config       → права текущего клиента
 """
 import json
 import os
@@ -21,10 +22,18 @@ from urllib.parse import urlparse
 # ---------- Настройки ----------
 PORT = 8000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SITE_DIR = os.path.join(BASE_DIR, 'site')              # что раздаём как статику
-STATUS_FILE = os.path.join(BASE_DIR, 'statuses.json')  # где храним статусы
+SITE_DIR = os.path.join(BASE_DIR, 'site')
+STATUS_FILE = os.path.join(BASE_DIR, 'statuses.json')
 
-DEFAULT_STATE = {"statuses": {}, "assignees": {}, "stages": {}}
+# IP-адрес, с которого разрешено редактирование
+EDIT_IP = '10.18.32.139'
+
+DEFAULT_STATE = {
+    "statuses":  {},
+    "deadlines": {},
+    "assignees": {},
+    "stages":    {},
+}
 
 
 def load_statuses():
@@ -41,12 +50,16 @@ def load_statuses():
         return dict(DEFAULT_STATE)
 
     # Миграция старого формата (плоский словарь) в новый
-    if 'statuses' not in data and 'assignees' not in data and 'stages' not in data:
-        data = {"statuses": data, "assignees": {}, "stages": {}}
+    if ('statuses' not in data
+            and 'deadlines' not in data
+            and 'assignees' not in data
+            and 'stages' not in data):
+        data = {"statuses": data, "deadlines": {}, "assignees": {}, "stages": {}}
     else:
-        data.setdefault('statuses', {})
+        data.setdefault('statuses',  {})
+        data.setdefault('deadlines', {})
         data.setdefault('assignees', {})
-        data.setdefault('stages', {})
+        data.setdefault('stages',    {})
 
     return data
 
@@ -56,6 +69,14 @@ def save_statuses(data):
     with open(tmp, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     os.replace(tmp, STATUS_FILE)
+
+
+def get_client_ip(handler):
+    """Возвращает реальный IP клиента с учётом X-Forwarded-For."""
+    xff = handler.headers.get('X-Forwarded-For')
+    if xff:
+        return xff.split(',')[0].strip()
+    return handler.client_address[0]
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -75,9 +96,20 @@ class Handler(SimpleHTTPRequestHandler):
     # ---------- GET ----------
     def do_GET(self):
         path = urlparse(self.path).path
+
         if path == '/api/statuses':
             self._send_json(load_statuses())
             return
+
+        if path == '/api/config':
+            client_ip = get_client_ip(self)
+            can_edit = (client_ip == EDIT_IP)
+            self._send_json({
+                'can_edit':  can_edit,
+                'client_ip': client_ip,
+            })
+            return
+
         super().do_GET()
 
     # ---------- POST ----------
@@ -85,6 +117,15 @@ class Handler(SimpleHTTPRequestHandler):
         path = urlparse(self.path).path
         if path != '/api/statuses':
             self.send_error(404, 'Not found')
+            return
+
+        # ---- Проверка IP: только EDIT_IP может писать ----
+        client_ip = get_client_ip(self)
+        if client_ip != EDIT_IP:
+            self._send_json({
+                'error': 'forbidden',
+                'client_ip': client_ip,
+            }, 403)
             return
 
         length = int(self.headers.get('Content-Length', 0))
@@ -98,15 +139,22 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_json({'error': 'expected object'}, 400)
             return
 
-        # допускаем только известные ключи верхнего уровня
-        data = {
+        # Допускаем только известные ключи верхнего уровня
+        clean = {
             'statuses':  data.get('statuses',  {}) if isinstance(data.get('statuses'),  dict) else {},
+            'deadlines': data.get('deadlines', {}) if isinstance(data.get('deadlines'), dict) else {},
             'assignees': data.get('assignees', {}) if isinstance(data.get('assignees'), dict) else {},
             'stages':    data.get('stages',    {}) if isinstance(data.get('stages'),    dict) else {},
         }
 
+        # Мержим с текущим состоянием, чтобы не терять поля, которых нет в запросе
+        current = load_statuses()
+        for key in ('statuses', 'deadlines', 'assignees', 'stages'):
+            current.setdefault(key, {})
+            current[key].update(clean[key])
+
         try:
-            save_statuses(data)
+            save_statuses(current)
         except Exception as e:
             self._send_json({'error': str(e)}, 500)
             return
@@ -116,7 +164,7 @@ class Handler(SimpleHTTPRequestHandler):
     # ---------- тишина в консоли ----------
     def log_message(self, fmt, *args):
         msg = fmt % args
-        if '/api/statuses' in msg or ' 200 ' not in msg:
+        if '/api/statuses' in msg or '/api/config' in msg or ' 200 ' not in msg:
             sys.stderr.write('%s - - [%s] %s\n' % (
                 self.address_string(),
                 self.log_date_time_string(),
@@ -132,10 +180,12 @@ def main():
 
     os.chdir(SITE_DIR)
     server = ThreadingHTTPServer(('0.0.0.0', PORT), Handler)
-    print(f'Сервер запущен.')
-    print(f'  Сайт:    http://0.0.0.0:{PORT}/')
-    print(f'  API:     http://0.0.0.0:{PORT}/api/statuses')
-    print(f'  Статусы: {STATUS_FILE}')
+    print('Сервер запущен.')
+    print(f'  Сайт:            http://0.0.0.0:{PORT}/')
+    print(f'  API статусов:    http://0.0.0.0:{PORT}/api/statuses')
+    print(f'  API конфигурации:http://0.0.0.0:{PORT}/api/config')
+    print(f'  Файл состояния:  {STATUS_FILE}')
+    print(f'  IP для правки:   {EDIT_IP}')
     try:
         server.serve_forever()
     except KeyboardInterrupt:

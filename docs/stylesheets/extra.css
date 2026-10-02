@@ -216,3 +216,10 @@ table.steps td strong {
   height: 100%;
   background: var(--md-primary-fg-color);
 }
+
+/* ============================================
+   Скрыть заголовок бокового меню (дублирует site_name)
+   ============================================ */
+.md-nav--primary > .md-nav__title {
+  display: none;
+}
