@@ -6,7 +6,7 @@
 
 Каждый месяц = один H2 → попадает в правый TOC.
 Аккордеон сотрудников:
-    СВЁРНУТО:  ФИО   Звонков N   Задач M   Заявок K   Резолюций R
+    СВЁРНУТО:  ФИО · Звонков N · Заявок K · Задач M › · Резолюций R
     РАЗВЁРНУТО: полный список задач
 
 Сотрудники без задач в отчёт не попадают.
@@ -208,10 +208,19 @@ def render_employees(calls, employees):
 
         chips = [
             f'<span class="chip calls">Звонков: <b>{calls_val}</b></span>',
-            f'<span class="chip tasks">Задач: <b>{n_tasks}</b></span>',
         ]
+        # Заявок — идёт вторым
         if e.get('tickets') is not None:
             chips.append(f'<span class="chip tickets">Заявок: <b>{e["tickets"]}</b></span>')
+        else:
+            chips.append('<span class="chip tickets"></span>')
+
+        # Задач — третьим, с маркером раскрытия
+        chips.append(
+            f'<span class="chip tasks">Задач: <b>{n_tasks}</b>'
+            '<span class="emp-toggle"></span></span>'
+        )
+
         if e.get('resolutions') is not None:
             chips.append(f'<span class="chip res">Резолюций: <b>{e["resolutions"]}</b></span>')
 
@@ -230,16 +239,15 @@ def render_employees(calls, employees):
             '</details>'
         )
 
-        header = (
-            '<div class="emp-total">'
-            '<span class="emp-total-name">Отдел СРТП</span>'
-            f'<span class="emp-total-cell">Сотрудников: <b>{len(employees)}</b></span>'
-            f'<span class="emp-total-cell">Звонков: <b>{total_calls}</b></span>'
-            f'<span class="emp-total-cell">Задач: <b>{total_tasks}</b></span>'
-            f'<span class="emp-total-cell">Заявок: <b>{total_tickets}</b></span>'
-            f'<span class="emp-total-cell">Резолюций: <b>{total_resolutions}</b></span>'
-            '</div>'
-        )
+    header = (
+        '<div class="emp-total">'
+        f'<span class="emp-total-name">Отдел СРТП<br><small>Сотрудников: {len(employees)}</small></span>'
+        f'<span class="emp-total-cell">Звонков: <b>{total_calls}</b></span>'
+        f'<span class="emp-total-cell">Заявок: <b>{total_tickets}</b></span>'
+        f'<span class="emp-total-cell">Задач: <b>{total_tasks}</b></span>'
+        f'<span class="emp-total-cell">Резолюций: <b>{total_resolutions}</b></span>'
+        '</div>'
+    )
 
     return (
         '<div markdown="1">\n\n'
@@ -257,10 +265,11 @@ STYLES = '''<style>
 .md-typeset .emp-summary,
 .emp-summary {
     display: grid !important;
-    /*          ФИО    Сотрудников  Звонков  Задач   Заявок   Резолюций */
-    grid-template-columns: 1fr  120px  130px  110px  110px  120px;
+    /*          ФИО      Звонков   Заявок   Задач    Резолюций */
+    grid-template-columns: 180px 130px 140px 140px 120px;
+    justify-content: start !important;
+    column-gap: 12px !important;
     align-items: center !important;
-    gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -271,17 +280,27 @@ STYLES = '''<style>
     border: 1px solid #bee3f8;
     border-radius: 8px;
     margin: 10px 0 12px 0 !important;
+    padding: 4px 0 !important;
     font-size: 13px;
     color: #2c5282;
 }
 .emp-total > span {
-    padding: 10px 8px;
+    padding: 6px 8px;
     white-space: nowrap;
 }
 .emp-total-name {
     padding-left: 14px !important;
     font-weight: 600;
     color: #2b6cb0;
+    white-space: normal;
+}
+.emp-total-name small {
+    display: block;
+    font-weight: 400;
+    font-size: 11px;
+    color: #4a5568;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
 }
 .emp-total b { color: #2b6cb0; }
 
@@ -293,7 +312,6 @@ STYLES = '''<style>
     overflow: hidden;
     background: #fff;
 }
-
 .md-typeset .emp-row,
 .emp-row {
     border: none !important;
@@ -305,7 +323,6 @@ STYLES = '''<style>
 }
 .emp-row:last-child { border-bottom: none !important; }
 
-/* Summary — тоже grid, те же колонки */
 .md-typeset .emp-summary,
 .emp-summary {
     cursor: pointer;
@@ -318,18 +335,31 @@ STYLES = '''<style>
     border: none !important;
     padding-inline-start: 0 !important;
 }
-
-/* Все маркеры summary — убрать */
-.md-typeset .emp-summary::-webkit-details-marker,
-.emp-summary::-webkit-details-marker { display: none !important; }
-.md-typeset .emp-summary::marker,
-.emp-summary::marker { display: none !important; content: "" !important; }
-.md-typeset .emp-summary::before,
-.emp-summary::before { display: none !important; content: none !important; }
-
 .emp-summary:hover { background: #f7fafc; }
 
-/* Без синей рамки фокуса */
+/* Полностью убираем все псевдоэлементы и встроенные маркеры summary */
+.md-typeset .emp-summary::before,
+.emp-summary::before,
+.md-typeset .emp-summary::after,
+.emp-summary::after,
+.md-typeset .emp-summary::marker,
+.emp-summary::marker,
+.md-typeset .emp-summary::-webkit-details-marker,
+.emp-summary::-webkit-details-marker {
+    display: none !important;
+    content: none !important;
+}
+.md-typeset details.emp-row > summary::before,
+.md-typeset details.emp-row > summary::after {
+    display: none !important;
+    content: none !important;
+}
+.md-typeset .emp-summary > svg,
+.md-typeset .emp-summary .md-icon,
+.md-typeset .emp-summary .twemoji {
+    display: none !important;
+}
+
 .md-typeset .emp-row:focus,
 .md-typeset .emp-row:focus-visible,
 .md-typeset .emp-row:focus-within,
@@ -340,24 +370,44 @@ STYLES = '''<style>
     border-color: transparent !important;
 }
 
-/* ===== Ячейки строки ===== */
+/* === Единственный маркер раскрытия — внутри чипа "Задач" === */
+.md-typeset .chip.tasks .emp-toggle {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    vertical-align: middle;
+}
+.md-typeset .chip.tasks .emp-toggle::after {
+    content: "›";
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 16px;
+    line-height: 1;
+    color: #3182ce;
+    transition: transform 0.15s;
+    transform: translateY(-1px);
+}
+.md-typeset .emp-row[open] .chip.tasks .emp-toggle::after {
+    transform: translateY(-1px) rotate(90deg);
+}
+
 .emp-summary > span {
     padding: 10px 8px;
     vertical-align: middle;
     white-space: nowrap;
 }
-
 .md-typeset .emp-name,
 .emp-name {
     font-weight: 700;
     color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     padding-left: 14px !important;
     text-align: left;
 }
 
-/* Чипы — «раскрываем» в те же ячейки grid-сетки */
+/* Класс больше не используется */
+.emp-arrow { display: none !important; }
+
 .emp-chips { display: contents !important; }
 
 .md-typeset .chip,
@@ -378,7 +428,6 @@ STYLES = '''<style>
 .chip.tickets{ color: #744210; }
 .chip.res    { color: #6b46c1; }
 
-/* ===== Тело раскрытой карточки ===== */
 .md-typeset .emp-body,
 .emp-body {
     padding: 4px 14px 12px 14px !important;
@@ -393,13 +442,13 @@ STYLES = '''<style>
 }
 .emp-tasks li { margin-bottom: 4px; }
 
-/* Узкие экраны */
 @media (max-width: 900px) {
     .emp-total,
     .md-typeset .emp-summary,
     .emp-summary {
         grid-template-columns: 1fr !important;
         gap: 6px !important;
+        justify-content: stretch !important;
     }
     .emp-total > span,
     .emp-summary > span { padding: 4px 14px; }

@@ -16,6 +16,8 @@
         <link rel="prev" href="../projects_2026/roadmap/">
       
       
+        <link rel="next" href="../zayavky/">
+      
       
         
       
@@ -25,7 +27,7 @@
     
     
       
-        <title>Отчёты - Проекты ЦБ ОГВ ЯНАО</title>
+        <title>Отчёты отдела СРиТП - Проекты ЦБ ОГВ ЯНАО</title>
       
     
     
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Отчёты
+              Отчёты отдела СРиТП
             
           </span>
         </div>
@@ -362,7 +364,7 @@
   <span class="md-ellipsis">
     
   
-    Отчёты
+    Отчёты отдела СРиТП
   
 
     
@@ -380,7 +382,7 @@
   <span class="md-ellipsis">
     
   
-    Отчёты
+    Отчёты отдела СРиТП
   
 
     
@@ -442,6 +444,60 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zayavky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Заявки
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dorabotky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Функциональные доработки
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -528,10 +584,11 @@
 .md-typeset .emp-summary,
 .emp-summary {
     display: grid !important;
-    /*          ФИО    Сотрудников  Звонков  Задач   Заявок   Резолюций */
-    grid-template-columns: 1fr  120px  130px  110px  110px  120px;
+    /*          ФИО      Звонков   Заявок   Задач    Резолюций */
+    grid-template-columns: 180px 130px 140px 140px 120px;
+    justify-content: start !important;
+    column-gap: 12px !important;
     align-items: center !important;
-    gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -542,17 +599,27 @@
     border: 1px solid #bee3f8;
     border-radius: 8px;
     margin: 10px 0 12px 0 !important;
+    padding: 4px 0 !important;
     font-size: 13px;
     color: #2c5282;
 }
 .emp-total > span {
-    padding: 10px 8px;
+    padding: 6px 8px;
     white-space: nowrap;
 }
 .emp-total-name {
     padding-left: 14px !important;
     font-weight: 600;
     color: #2b6cb0;
+    white-space: normal;
+}
+.emp-total-name small {
+    display: block;
+    font-weight: 400;
+    font-size: 11px;
+    color: #4a5568;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
 }
 .emp-total b { color: #2b6cb0; }
 
@@ -564,7 +631,6 @@
     overflow: hidden;
     background: #fff;
 }
-
 .md-typeset .emp-row,
 .emp-row {
     border: none !important;
@@ -576,7 +642,6 @@
 }
 .emp-row:last-child { border-bottom: none !important; }
 
-/* Summary — тоже grid, те же колонки */
 .md-typeset .emp-summary,
 .emp-summary {
     cursor: pointer;
@@ -589,18 +654,31 @@
     border: none !important;
     padding-inline-start: 0 !important;
 }
-
-/* Все маркеры summary — убрать */
-.md-typeset .emp-summary::-webkit-details-marker,
-.emp-summary::-webkit-details-marker { display: none !important; }
-.md-typeset .emp-summary::marker,
-.emp-summary::marker { display: none !important; content: "" !important; }
-.md-typeset .emp-summary::before,
-.emp-summary::before { display: none !important; content: none !important; }
-
 .emp-summary:hover { background: #f7fafc; }
 
-/* Без синей рамки фокуса */
+/* Полностью убираем все псевдоэлементы и встроенные маркеры summary */
+.md-typeset .emp-summary::before,
+.emp-summary::before,
+.md-typeset .emp-summary::after,
+.emp-summary::after,
+.md-typeset .emp-summary::marker,
+.emp-summary::marker,
+.md-typeset .emp-summary::-webkit-details-marker,
+.emp-summary::-webkit-details-marker {
+    display: none !important;
+    content: none !important;
+}
+.md-typeset details.emp-row > summary::before,
+.md-typeset details.emp-row > summary::after {
+    display: none !important;
+    content: none !important;
+}
+.md-typeset .emp-summary > svg,
+.md-typeset .emp-summary .md-icon,
+.md-typeset .emp-summary .twemoji {
+    display: none !important;
+}
+
 .md-typeset .emp-row:focus,
 .md-typeset .emp-row:focus-visible,
 .md-typeset .emp-row:focus-within,
@@ -611,24 +689,44 @@
     border-color: transparent !important;
 }
 
-/* ===== Ячейки строки ===== */
+/* === Единственный маркер раскрытия — внутри чипа "Задач" === */
+.md-typeset .chip.tasks .emp-toggle {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    vertical-align: middle;
+}
+.md-typeset .chip.tasks .emp-toggle::after {
+    content: "›";
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 16px;
+    line-height: 1;
+    color: #3182ce;
+    transition: transform 0.15s;
+    transform: translateY(-1px);
+}
+.md-typeset .emp-row[open] .chip.tasks .emp-toggle::after {
+    transform: translateY(-1px) rotate(90deg);
+}
+
 .emp-summary > span {
     padding: 10px 8px;
     vertical-align: middle;
     white-space: nowrap;
 }
-
 .md-typeset .emp-name,
 .emp-name {
     font-weight: 700;
     color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     padding-left: 14px !important;
     text-align: left;
 }
 
-/* Чипы — «раскрываем» в те же ячейки grid-сетки */
+/* Класс больше не используется */
+.emp-arrow { display: none !important; }
+
 .emp-chips { display: contents !important; }
 
 .md-typeset .chip,
@@ -649,7 +747,6 @@
 .chip.tickets{ color: #744210; }
 .chip.res    { color: #6b46c1; }
 
-/* ===== Тело раскрытой карточки ===== */
 .md-typeset .emp-body,
 .emp-body {
     padding: 4px 14px 12px 14px !important;
@@ -664,13 +761,13 @@
 }
 .emp-tasks li { margin-bottom: 4px; }
 
-/* Узкие экраны */
 @media (max-width: 900px) {
     .emp-total,
     .md-typeset .emp-summary,
     .emp-summary {
         grid-template-columns: 1fr !important;
         gap: 6px !important;
+        justify-content: stretch !important;
     }
     .emp-total > span,
     .emp-summary > span { padding: 4px 14px; }
@@ -687,10 +784,10 @@
 <h1 id="_1">Отчёты отдела СРТП<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="2026">Сентябрь 2026<a class="headerlink" href="#2026" title="Permanent link">&para;</a></h2>
 <div>
-<div class="emp-total"><span class="emp-total-name">Отдел СРТП</span><span class="emp-total-cell">Сотрудников: <b>7</b></span><span class="emp-total-cell">Звонков: <b>2873</b></span><span class="emp-total-cell">Задач: <b>43</b></span><span class="emp-total-cell">Заявок: <b>47</b></span><span class="emp-total-cell">Резолюций: <b>9</b></span></div>
+<div class="emp-total"><span class="emp-total-name">Отдел СРТП<br><small>Сотрудников: 7</small></span><span class="emp-total-cell">Звонков: <b>2873</b></span><span class="emp-total-cell">Заявок: <b>47</b></span><span class="emp-total-cell">Задач: <b>43</b></span><span class="emp-total-cell">Резолюций: <b>9</b></span></div>
 <div class="emp-list">
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Сапогов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>513</b></span><span class="chip tasks">Задач: <b>9</b></span><span class="chip tickets">Заявок: <b>8</b></span><span class="chip res">Резолюций: <b>9</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Сапогов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>513</b></span><span class="chip tickets">Заявок: <b>8</b></span><span class="chip tasks">Задач: <b>9</b><span class="emp-toggle"></span></span><span class="chip res">Резолюций: <b>9</b></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Подготовил изменения в Положение о ГИС &quot;Смета ЯНАО&quot;</li>
@@ -706,7 +803,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Мулявин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>151</b></span><span class="chip tasks">Задач: <b>6</b></span><span class="chip tickets">Заявок: <b>8</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Мулявин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>151</b></span><span class="chip tickets">Заявок: <b>8</b></span><span class="chip tasks">Задач: <b>6</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Завершена проработка перехода на «Астрал»: подготовлены итоговые материалы и дорожная карта, уточнены вопросы с НПО «Криста», задача закрыта в РСЭД «ТЕЗИС».</li>
@@ -719,7 +816,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Кошик</span><span class="emp-chips"><span class="chip calls">Звонков: <b>325</b></span><span class="chip tasks">Задач: <b>9</b></span><span class="chip tickets">Заявок: <b>2</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Кошик</span><span class="emp-chips"><span class="chip calls">Звонков: <b>325</b></span><span class="chip tickets">Заявок: <b>2</b></span><span class="chip tasks">Задач: <b>9</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Аудит по использованию Сметы и подготовка общего свода (Надымский р-н - 77, Губкинский - 47, Салехард - 57, Пуровский р-н - 64).</li>
@@ -735,7 +832,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Худышкин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>313</b></span><span class="chip tasks">Задач: <b>7</b></span><span class="chip tickets">Заявок: <b>3</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Худышкин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>313</b></span><span class="chip tickets">Заявок: <b>3</b></span><span class="chip tasks">Задач: <b>7</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Консультирование и техническая поддержка муниципальных образований по вопросам подключения, настройки и эксплуатации централизованной ГИС «Смета ЯНАО». Анализ используемых настроек и функционала, выявление участков, требующих дополнительной настройки или консультационного сопровождения.</li>
@@ -749,7 +846,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Чечеткин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>1104</b></span><span class="chip tasks">Задач: <b>6</b></span><span class="chip tickets">Заявок: <b>20</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Чечеткин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>1104</b></span><span class="chip tickets">Заявок: <b>20</b></span><span class="chip tasks">Задач: <b>6</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Приказы на доступ ОУ - 6</li>
@@ -762,7 +859,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Гасанов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>89</b></span><span class="chip tasks">Задач: <b>3</b></span><span class="chip tickets">Заявок: <b>1</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Гасанов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>89</b></span><span class="chip tickets">Заявок: <b>1</b></span><span class="chip tasks">Задач: <b>3</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>до 11.09 находился в отпуске, Акутализация сдений в &quot;Реестр Оферт&quot;</li>
@@ -772,7 +869,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Роганова</span><span class="emp-chips"><span class="chip calls">Звонков: <b>378</b></span><span class="chip tasks">Задач: <b>3</b></span><span class="chip tickets">Заявок: <b>5</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Роганова</span><span class="emp-chips"><span class="chip calls">Звонков: <b>378</b></span><span class="chip tickets">Заявок: <b>5</b></span><span class="chip tasks">Задач: <b>3</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Обработано приказов на временное / постоянное распределения обязанностей сотрудников ЦБ в Смете - 7 шт.</li>
@@ -785,10 +882,10 @@
 </div>
 <h2 id="2026_1">Август 2026<a class="headerlink" href="#2026_1" title="Permanent link">&para;</a></h2>
 <div>
-<div class="emp-total"><span class="emp-total-name">Отдел СРТП</span><span class="emp-total-cell">Сотрудников: <b>5</b></span><span class="emp-total-cell">Звонков: <b>1923</b></span><span class="emp-total-cell">Задач: <b>20</b></span><span class="emp-total-cell">Заявок: <b>54</b></span><span class="emp-total-cell">Резолюций: <b>13</b></span></div>
+<div class="emp-total"><span class="emp-total-name">Отдел СРТП<br><small>Сотрудников: 5</small></span><span class="emp-total-cell">Звонков: <b>1923</b></span><span class="emp-total-cell">Заявок: <b>54</b></span><span class="emp-total-cell">Задач: <b>20</b></span><span class="emp-total-cell">Резолюций: <b>13</b></span></div>
 <div class="emp-list">
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Сапогов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>803</b></span><span class="chip tasks">Задач: <b>6</b></span><span class="chip tickets">Заявок: <b>24</b></span><span class="chip res">Резолюций: <b>13</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Сапогов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>803</b></span><span class="chip tickets">Заявок: <b>24</b></span><span class="chip tasks">Задач: <b>6</b><span class="emp-toggle"></span></span><span class="chip res">Резолюций: <b>13</b></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Проводилась подготовка ТЗ на выполнение работ по интеграции с РСЭД Тезис</li>
@@ -801,7 +898,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Кошик</span><span class="emp-chips"><span class="chip calls">Звонков: <b>45</b></span><span class="chip tasks">Задач: <b>1</b></span><span class="chip tickets">Заявок: <b>2</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Кошик</span><span class="emp-chips"><span class="chip calls">Звонков: <b>45</b></span><span class="chip tickets">Заявок: <b>2</b></span><span class="chip tasks">Задач: <b>1</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Сбор статистики по муниципалитетам - использования интеграции по направлениям: МИР, ПП, ЭДО, СФР, Имущество и т.п.</li>
@@ -809,7 +906,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Худышкин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>206</b></span><span class="chip tasks">Задач: <b>6</b></span><span class="chip tickets">Заявок: <b>13</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Худышкин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>206</b></span><span class="chip tickets">Заявок: <b>13</b></span><span class="chip tasks">Задач: <b>6</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Работа Техфоргосом, Мароп и Аппаратом Губернатора для утверждения и построения рабочего процесса (консолидация информации всеми сторонами) интеграции с ЕСКУ.</li>
@@ -822,7 +919,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Чечеткин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>677</b></span><span class="chip tasks">Задач: <b>3</b></span><span class="chip tickets">Заявок: <b>7</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Чечеткин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>677</b></span><span class="chip tickets">Заявок: <b>7</b></span><span class="chip tasks">Задач: <b>3</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Предоставление доступа сотрудника ОУ - 3 приказа;</li>
@@ -832,7 +929,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Мулявин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>192</b></span><span class="chip tasks">Задач: <b>4</b></span><span class="chip tickets">Заявок: <b>8</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Мулявин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>192</b></span><span class="chip tickets">Заявок: <b>8</b></span><span class="chip tasks">Задач: <b>4</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Проведена работа по переходу на «Астрал»: изучены текущий и целевой бизнес-процессы сдачи отчётности, собрана обратная связь пользователей и уточнены вопросы с НПО «Криста». Подготовлены дорожная карта перехода и BPMN-схемы процессов работы через «Контур» и «Астрал».</li>
@@ -846,10 +943,10 @@
 </div>
 <h2 id="2026_2">Июль 2026<a class="headerlink" href="#2026_2" title="Permanent link">&para;</a></h2>
 <div>
-<div class="emp-total"><span class="emp-total-name">Отдел СРТП</span><span class="emp-total-cell">Сотрудников: <b>9</b></span><span class="emp-total-cell">Звонков: <b>2350</b></span><span class="emp-total-cell">Задач: <b>26</b></span><span class="emp-total-cell">Заявок: <b>27</b></span><span class="emp-total-cell">Резолюций: <b>13</b></span></div>
+<div class="emp-total"><span class="emp-total-name">Отдел СРТП<br><small>Сотрудников: 9</small></span><span class="emp-total-cell">Звонков: <b>2350</b></span><span class="emp-total-cell">Заявок: <b>27</b></span><span class="emp-total-cell">Задач: <b>26</b></span><span class="emp-total-cell">Резолюций: <b>13</b></span></div>
 <div class="emp-list">
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Ставер</span><span class="emp-chips"><span class="chip calls">Звонков: <b>354</b></span><span class="chip tasks">Задач: <b>1</b></span><span class="chip tickets">Заявок: <b>1</b></span><span class="chip res">Резолюций: <b>11</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Ставер</span><span class="emp-chips"><span class="chip calls">Звонков: <b>354</b></span><span class="chip tickets">Заявок: <b>1</b></span><span class="chip tasks">Задач: <b>1</b><span class="emp-toggle"></span></span><span class="chip res">Резолюций: <b>11</b></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Проведены консультации на тему ввода нового функционала с разработчиками Сметы; с департаментом ИТ и связи на тему мероприятий по плану информатизации; методологами на тему бизнес-процессов действующих интеграций в целях выявления ошибок в пограничных зонах ответственности. Выполнена настройка и тестирование авторизации через ЕСИА в ЛК ПОЛ</li>
@@ -857,7 +954,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Сапогов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>99</b></span><span class="chip tasks">Задач: <b>3</b></span><span class="chip tickets">Заявок: <b>3</b></span><span class="chip res">Резолюций: <b>2</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Сапогов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>99</b></span><span class="chip tickets">Заявок: <b>3</b></span><span class="chip tasks">Задач: <b>3</b><span class="emp-toggle"></span></span><span class="chip res">Резолюций: <b>2</b></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Актуализировано и направлено на согласование ТЗ на выполнение работ по интеграции с РСЭД Тезис с учетом замечаний от ДИТиС. Работа по размещению предварительного ПИ на 2027 год.</li>
@@ -867,7 +964,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Обмолова</span><span class="emp-chips"><span class="chip calls">Звонков: <b>448</b></span><span class="chip tasks">Задач: <b>1</b></span><span class="chip tickets">Заявок: <b>0</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Обмолова</span><span class="emp-chips"><span class="chip calls">Звонков: <b>448</b></span><span class="chip tickets">Заявок: <b>0</b></span><span class="chip tasks">Задач: <b>1</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Исправление ошибок при синхронизации с ЕСКУ; Работа с муниципальными учреждениям Здравоохранения ЯНАО, подготовка к полугодовой отчетности</li>
@@ -875,7 +972,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Кошик</span><span class="emp-chips"><span class="chip calls">Звонков: <b>180</b></span><span class="chip tasks">Задач: <b>2</b></span><span class="chip tickets">Заявок: <b>1</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Кошик</span><span class="emp-chips"><span class="chip calls">Звонков: <b>180</b></span><span class="chip tickets">Заявок: <b>1</b></span><span class="chip tasks">Задач: <b>2</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Сбор статистики по муниципалитетам - использования интеграции по направлениям: МИР, ПП, ЭДО, СФР, Имущество и т.п.</li>
@@ -884,7 +981,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Худышкин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>32</b></span><span class="chip tasks">Задач: <b>2</b></span><span class="chip tickets">Заявок: <b>0</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Худышкин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>32</b></span><span class="chip tickets">Заявок: <b>0</b></span><span class="chip tasks">Задач: <b>2</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Сбор статистики предоставленных муниципалитетами актов о принятии работ по интеграции с ЕСКУ</li>
@@ -893,7 +990,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Гасанов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>171</b></span><span class="chip tasks">Задач: <b>3</b></span><span class="chip tickets">Заявок: <b>2</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Гасанов</span><span class="emp-chips"><span class="chip calls">Звонков: <b>171</b></span><span class="chip tickets">Заявок: <b>2</b></span><span class="chip tasks">Задач: <b>3</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Сбор статистики по муниципалитетам - использования интеграции по направлениям: МИР, ПП, ЭДО, СФР, Имущество и т.п.</li>
@@ -903,7 +1000,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Чечеткин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>501</b></span><span class="chip tasks">Задач: <b>5</b></span><span class="chip tickets">Заявок: <b>3</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Чечеткин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>501</b></span><span class="chip tickets">Заявок: <b>3</b></span><span class="chip tasks">Задач: <b>5</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Дежурство 4-5 июля по запросу отдела подготовки отчетности на совещание;</li>
@@ -915,7 +1012,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Роганова</span><span class="emp-chips"><span class="chip calls">Звонков: <b>431</b></span><span class="chip tasks">Задач: <b>3</b></span><span class="chip tickets">Заявок: <b>7</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Роганова</span><span class="emp-chips"><span class="chip calls">Звонков: <b>431</b></span><span class="chip tickets">Заявок: <b>7</b></span><span class="chip tasks">Задач: <b>3</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Обработано приказов на временное / постоянное распределения обязанностей сотрудников ЦБ в Смете - 6 шт.</li>
@@ -925,7 +1022,7 @@
 </div>
 </details>
 <details class="emp-row">
-<summary class="emp-summary"><span class="emp-name">Мулявин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>134</b></span><span class="chip tasks">Задач: <b>6</b></span><span class="chip tickets">Заявок: <b>10</b></span></span></summary>
+<summary class="emp-summary"><span class="emp-name">Мулявин</span><span class="emp-chips"><span class="chip calls">Звонков: <b>134</b></span><span class="chip tickets">Заявок: <b>10</b></span><span class="chip tasks">Задач: <b>6</b><span class="emp-toggle"></span></span></span></summary>
 <div class="emp-body">
 <ul class="emp-tasks">
 <li>Проведён анализ ошибок интеграции с ЕСКУ по 50 организациям: обработано около 100 тыс. записей, выявлены основные типы и частота ошибок, подготовлен отчёт.</li>
