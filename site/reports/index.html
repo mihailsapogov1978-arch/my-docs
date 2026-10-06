@@ -579,12 +579,10 @@
 
 
 <style>
-/* ===== Единая сетка колонок для шапки и строк ===== */
 .emp-total,
 .md-typeset .emp-summary,
 .emp-summary {
     display: grid !important;
-    /*          ФИО      Звонков   Заявок   Задач    Резолюций */
     grid-template-columns: 180px 130px 140px 140px 120px;
     justify-content: start !important;
     column-gap: 12px !important;
@@ -593,7 +591,6 @@
     padding: 0 !important;
 }
 
-/* ===== Шапка отдела ===== */
 .emp-total {
     background: #ebf8ff;
     border: 1px solid #bee3f8;
@@ -603,27 +600,11 @@
     font-size: 13px;
     color: #2c5282;
 }
-.emp-total > span {
-    padding: 6px 8px;
-    white-space: nowrap;
-}
-.emp-total-name {
-    padding-left: 14px !important;
-    font-weight: 600;
-    color: #2b6cb0;
-    white-space: normal;
-}
-.emp-total-name small {
-    display: block;
-    font-weight: 400;
-    font-size: 11px;
-    color: #4a5568;
-    margin-top: 2px;
-    letter-spacing: 0.02em;
-}
+.emp-total > span { padding: 6px 8px; white-space: nowrap; }
+.emp-total-name { padding-left: 14px !important; font-weight: 600; color: #2b6cb0; white-space: normal; }
+.emp-total-name small { display: block; font-weight: 400; font-size: 11px; color: #4a5568; margin-top: 2px; letter-spacing: 0.02em; }
 .emp-total b { color: #2b6cb0; }
 
-/* ===== Список сотрудников ===== */
 .emp-list {
     margin: 16px 0;
     border: 1px solid #e2e8f0;
@@ -656,7 +637,6 @@
 }
 .emp-summary:hover { background: #f7fafc; }
 
-/* Полностью убираем все псевдоэлементы и встроенные маркеры summary */
 .md-typeset .emp-summary::before,
 .emp-summary::before,
 .md-typeset .emp-summary::after,
@@ -689,7 +669,6 @@
     border-color: transparent !important;
 }
 
-/* === Единственный маркер раскрытия — внутри чипа "Задач" === */
 .md-typeset .chip.tasks .emp-toggle {
     display: inline-flex;
     align-items: center;
@@ -710,11 +689,7 @@
     transform: translateY(-1px) rotate(90deg);
 }
 
-.emp-summary > span {
-    padding: 10px 8px;
-    vertical-align: middle;
-    white-space: nowrap;
-}
+.emp-summary > span { padding: 10px 8px; vertical-align: middle; white-space: nowrap; }
 .md-typeset .emp-name,
 .emp-name {
     font-weight: 700;
@@ -724,9 +699,7 @@
     text-align: left;
 }
 
-/* Класс больше не используется */
 .emp-arrow { display: none !important; }
-
 .emp-chips { display: contents !important; }
 
 .md-typeset .chip,
@@ -741,7 +714,6 @@
     width: auto !important;
 }
 .chip b { font-weight: 700; }
-
 .chip.calls  { color: #2b6cb0; }
 .chip.tasks  { color: #2c7a7b; }
 .chip.tickets{ color: #744210; }
@@ -754,11 +726,7 @@
     font-size: 12.5px;
     color: #2d3748;
 }
-.emp-tasks {
-    margin: 0;
-    padding-left: 18px;
-    line-height: 1.5;
-}
+.emp-tasks { margin: 0; padding-left: 18px; line-height: 1.5; }
 .emp-tasks li { margin-bottom: 4px; }
 
 @media (max-width: 900px) {

@@ -3,15 +3,15 @@
     "1": "soglasovanie",
     "2": "raboty",
     "3": "raboty",
-    "4": "done",
+    "4": "raboty",
     "5": "done",
     "6": "raboty",
-    "7": "raboty",
-    "8": "soglasovanie",
+    "7": "postanovka",
+    "8": "postanovka",
     "9": "done",
     "10": "done",
     "11": "torgi",
-    "12": "work"
+    "12": "torgi"
   },
   "assignees": {},
   "stages": {},
@@ -19,14 +19,424 @@
     "1": "2026-12-10",
     "2": "2026-11-01",
     "3": "2026-12-25",
-    "4": "2026-04-12",
-    "5": "2026-04-18",
+    "4": "2026-12-25",
+    "5": "2026-07-22",
     "6": "2026-12-25",
     "7": "2026-11-25",
     "8": "2026-05-15",
-    "9": "2026-05-20",
+    "9": "2026-06-01",
     "10": "2026-04-24",
     "11": "2026-12-01",
-    "12": "2026-06-08"
+    "12": "2026-06-30"
+  },
+  "details": {
+    "1": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "Финэк",
+          "date": "2026-02-10",
+          "done": true
+        },
+        "2": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "Изменили КОСГУ на 226",
+          "date": "2026-08-03",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "",
+          "date": "2026-03-15",
+          "done": false
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-01",
+          "done": false
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-20",
+          "done": false
+        }
+      }
+    },
+    "2": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "ФИНЭК",
+          "date": "2026-02-05",
+          "done": true
+        },
+        "2": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "",
+          "date": "2027-06-20",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "ГК от 29.07.2026 № 08693",
+          "date": "2026-07-29",
+          "done": true
+        },
+        "4": {
+          "assignee": "Мулявин Я.В.",
+          "comment": "работы по доступу к витрине данных ГИС \"Ямал Образование\"(через СМЭВ) с РЦОКО",
+          "date": "2026-09-21",
+          "done": true
+        },
+        "5": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-04-15",
+          "done": false
+        }
+      }
+    },
+    "3": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "Финэк",
+          "date": "2026-02-12",
+          "done": true
+        },
+        "2": {
+          "assignee": "Обмолова В.В.",
+          "comment": "",
+          "date": "2026-03-05",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "ГК от 29.07.2026\n№ 08695",
+          "date": "2026-03-20",
+          "done": true
+        },
+        "4": {
+          "assignee": "НПО Криста",
+          "comment": "",
+          "date": "2026-04-10",
+          "done": true
+        },
+        "5": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-05-05",
+          "done": false
+        }
+      }
+    },
+    "4": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "Финэк",
+          "date": "2026-02-01",
+          "done": true
+        },
+        "2": {
+          "assignee": "Ставер А.П.",
+          "comment": "",
+          "date": "2026-02-18",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "ГК от 29.07.2026 № 08693",
+          "date": "2026-03-05",
+          "done": true
+        },
+        "4": {
+          "assignee": "НПО Криста",
+          "comment": "",
+          "date": "2026-03-22",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-12",
+          "done": false
+        }
+      }
+    },
+    "5": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "Финэк",
+          "date": "2026-02-08",
+          "done": true
+        },
+        "2": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "",
+          "date": "2026-02-25",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "ГК от 22.07.2026 № 08298",
+          "date": "2026-03-12",
+          "done": true
+        },
+        "4": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "",
+          "date": "2026-03-28",
+          "done": true
+        },
+        "5": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-04-18",
+          "done": true
+        }
+      }
+    },
+    "6": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-02-15",
+          "done": true
+        },
+        "2": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-03-08",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "ГК от 06.07.2026 № 07812",
+          "date": "2026-03-25",
+          "done": true
+        },
+        "4": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-04-12",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-05",
+          "done": false
+        }
+      }
+    },
+    "7": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-18",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-12",
+          "done": false
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-30",
+          "done": false
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-18",
+          "done": false
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-10",
+          "done": false
+        }
+      }
+    },
+    "8": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-20",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-15",
+          "done": false
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-05",
+          "done": false
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-25",
+          "done": false
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-15",
+          "done": false
+        }
+      }
+    },
+    "9": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-02-25",
+          "done": true
+        },
+        "2": {
+          "assignee": "Ставер А.П.",
+          "comment": "",
+          "date": "2026-03-20",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "ГК от 24.02.2026 \n№ 01501",
+          "date": "2026-04-10",
+          "done": true
+        },
+        "4": {
+          "assignee": "Ставер А.П.",
+          "comment": "",
+          "date": "2026-04-30",
+          "done": true
+        },
+        "5": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-05-20",
+          "done": true
+        }
+      }
+    },
+    "10": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-03-01",
+          "done": true
+        },
+        "2": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "",
+          "date": "2026-03-22",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "ГК 05.06.2026 № 06735",
+          "date": "2026-04-12",
+          "done": true
+        },
+        "4": {
+          "assignee": "НПО Криста",
+          "comment": "",
+          "date": "2026-05-05",
+          "done": true
+        },
+        "5": {
+          "assignee": "НПО Криста",
+          "comment": "",
+          "date": "2026-05-25",
+          "done": true
+        }
+      }
+    },
+    "11": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-03-10",
+          "done": true
+        },
+        "2": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "Дитис согласовал расхождение в ПИ Названия мероприятия с названием в ГК",
+          "date": "2026-04-05",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "",
+          "date": "2026-04-25",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-15",
+          "done": false
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-06-05",
+          "done": false
+        }
+      }
+    },
+    "12": {
+      "steps": {
+        "1": {
+          "assignee": "Ставер А.П.",
+          "comment": "",
+          "date": "2026-01-06",
+          "done": true
+        },
+        "2": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "ТЗ включает 2 этапа: 1-й этап 2026 год, 2-й этап - 2027",
+          "date": "2026-09-11",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": false
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": false
+        }
+      }
+    }
   }
 }

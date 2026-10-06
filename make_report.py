@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Собирает единый отчёт docs/reports/index.md из всех .xlsx в папке reports_src/
-(или из конкретного файла, переданного аргументом).
+Генератор страницы MkDocs "Отчёты отдела СРТП".
 
-Каждый месяц = один H2 → попадает в правый TOC.
-Аккордеон сотрудников:
-    СВЁРНУТО:  ФИО · Звонков N · Заявок K · Задач M › · Резолюций R
-    РАЗВЁРНУТО: полный список задач
+Два источника задач:
+  1) docs/_daily/YYYY-MM/*.md — ежедневные заметки (приоритет);
+  2) reports_src/*.xlsx, лист «Количественная аналитика» — fallback,
+     оттуда же всегда берутся звонки.
 
+Сборка:
+    python3 make_report.py              # по всем xlsx из reports_src/
+    python3 make_report.py 2026 10      # только за октябрь 2026, источник — _daily/
+
+Каждый месяц = один H2 (правый TOC).
 Сотрудники без задач в отчёт не попадают.
-Счётчики заявок/резолюций берутся из столбца J листа.
 """
 import os
 import re
@@ -32,6 +35,7 @@ MONTHS_RU_NOM = {
 
 SHEET_NAME = 'Количественная аналитика'
 SRC_DIR = 'reports_src'
+DAILY_DIR = os.path.join('docs', '_daily')
 OUT_PATH = os.path.join('docs', 'reports', 'index.md')
 COUNTERS_COL = 10  # столбец J (1-based)
 
@@ -60,6 +64,7 @@ def detect_month(xlsx_path):
     return year, month
 
 
+# =====================  EXCEL  =====================
 def find_month_row(ws, year, month):
     month_name = MONTHS_RU_NOM[month].lower()
     for r in range(1, ws.max_row + 1):
@@ -108,13 +113,6 @@ def extract_calls(ws, year, month):
 
 
 def parse_counters(raw):
-    """
-    Примеры входных строк:
-      'Исполнено резолюций - 11, в работе - 27, заявок в службу технической поддержки - 1'
-      'Исполнено резолюций - 2, направлено заявок в службу технической поддержки - 3 (Смета)'
-      'Направлено заявок в службу технической поддержки - 0'
-      'Направлено заявок в службу технической поддержки - 7 заявок'
-    """
     if not raw:
         return {}
     s = str(raw)
@@ -188,6 +186,63 @@ def extract_employees(ws):
     return employees
 
 
+# =====================  DAILY  =====================
+def parse_daily_file(path):
+    """
+    Читает файл заметок формата:
+        # Сапогов — Октябрь 2026
+
+        ## 2026-10-05
+        - Задача 1
+        - Задача 2
+    Возвращает список (date_str, item).
+    """
+    if not os.path.exists(path):
+        return []
+
+    with open(path, 'r', encoding='utf-8') as f:
+        lines = f.read().split('\n')
+
+    entries = []
+    cur_date = None
+
+    for line in lines:
+        s = line.rstrip()
+
+        m = re.match(r'^##\s+(\d{4}-\d{2}-\d{2})\s*$', s)
+        if m:
+            cur_date = m.group(1)
+            continue
+
+        m = re.match(r'^\s*[-*]\s+(.*)$', s)
+        if m and cur_date:
+            item = m.group(1).strip()
+            if item and item.lower() not in SKIP_TASKS:
+                entries.append((cur_date, item))
+
+    return entries
+
+
+def load_daily_for_month(year, month):
+    """
+    { 'Сапогов': [(date, item), ...], ... } — читает все .md из docs/_daily/YYYY-MM/.
+    """
+    folder = os.path.join(DAILY_DIR, f'{year}-{month:02d}')
+    if not os.path.isdir(folder):
+        return {}
+
+    result = {}
+    for fname in sorted(os.listdir(folder)):
+        if not fname.lower().endswith('.md'):
+            continue
+        name = os.path.splitext(fname)[0]
+        entries = parse_daily_file(os.path.join(folder, fname))
+        if entries:
+            result[name] = entries
+    return result
+
+
+# =====================  RENDER  =====================
 def render_employees(calls, employees):
     calls_map = {name: v for name, v in calls}
 
@@ -209,13 +264,11 @@ def render_employees(calls, employees):
         chips = [
             f'<span class="chip calls">Звонков: <b>{calls_val}</b></span>',
         ]
-        # Заявок — идёт вторым
         if e.get('tickets') is not None:
             chips.append(f'<span class="chip tickets">Заявок: <b>{e["tickets"]}</b></span>')
         else:
             chips.append('<span class="chip tickets"></span>')
 
-        # Задач — третьим, с маркером раскрытия
         chips.append(
             f'<span class="chip tasks">Задач: <b>{n_tasks}</b>'
             '<span class="emp-toggle"></span></span>'
@@ -260,12 +313,10 @@ def render_employees(calls, employees):
 
 
 STYLES = '''<style>
-/* ===== Единая сетка колонок для шапки и строк ===== */
 .emp-total,
 .md-typeset .emp-summary,
 .emp-summary {
     display: grid !important;
-    /*          ФИО      Звонков   Заявок   Задач    Резолюций */
     grid-template-columns: 180px 130px 140px 140px 120px;
     justify-content: start !important;
     column-gap: 12px !important;
@@ -274,7 +325,6 @@ STYLES = '''<style>
     padding: 0 !important;
 }
 
-/* ===== Шапка отдела ===== */
 .emp-total {
     background: #ebf8ff;
     border: 1px solid #bee3f8;
@@ -284,27 +334,11 @@ STYLES = '''<style>
     font-size: 13px;
     color: #2c5282;
 }
-.emp-total > span {
-    padding: 6px 8px;
-    white-space: nowrap;
-}
-.emp-total-name {
-    padding-left: 14px !important;
-    font-weight: 600;
-    color: #2b6cb0;
-    white-space: normal;
-}
-.emp-total-name small {
-    display: block;
-    font-weight: 400;
-    font-size: 11px;
-    color: #4a5568;
-    margin-top: 2px;
-    letter-spacing: 0.02em;
-}
+.emp-total > span { padding: 6px 8px; white-space: nowrap; }
+.emp-total-name { padding-left: 14px !important; font-weight: 600; color: #2b6cb0; white-space: normal; }
+.emp-total-name small { display: block; font-weight: 400; font-size: 11px; color: #4a5568; margin-top: 2px; letter-spacing: 0.02em; }
 .emp-total b { color: #2b6cb0; }
 
-/* ===== Список сотрудников ===== */
 .emp-list {
     margin: 16px 0;
     border: 1px solid #e2e8f0;
@@ -337,7 +371,6 @@ STYLES = '''<style>
 }
 .emp-summary:hover { background: #f7fafc; }
 
-/* Полностью убираем все псевдоэлементы и встроенные маркеры summary */
 .md-typeset .emp-summary::before,
 .emp-summary::before,
 .md-typeset .emp-summary::after,
@@ -370,7 +403,6 @@ STYLES = '''<style>
     border-color: transparent !important;
 }
 
-/* === Единственный маркер раскрытия — внутри чипа "Задач" === */
 .md-typeset .chip.tasks .emp-toggle {
     display: inline-flex;
     align-items: center;
@@ -391,11 +423,7 @@ STYLES = '''<style>
     transform: translateY(-1px) rotate(90deg);
 }
 
-.emp-summary > span {
-    padding: 10px 8px;
-    vertical-align: middle;
-    white-space: nowrap;
-}
+.emp-summary > span { padding: 10px 8px; vertical-align: middle; white-space: nowrap; }
 .md-typeset .emp-name,
 .emp-name {
     font-weight: 700;
@@ -405,9 +433,7 @@ STYLES = '''<style>
     text-align: left;
 }
 
-/* Класс больше не используется */
 .emp-arrow { display: none !important; }
-
 .emp-chips { display: contents !important; }
 
 .md-typeset .chip,
@@ -422,7 +448,6 @@ STYLES = '''<style>
     width: auto !important;
 }
 .chip b { font-weight: 700; }
-
 .chip.calls  { color: #2b6cb0; }
 .chip.tasks  { color: #2c7a7b; }
 .chip.tickets{ color: #744210; }
@@ -435,11 +460,7 @@ STYLES = '''<style>
     font-size: 12.5px;
     color: #2d3748;
 }
-.emp-tasks {
-    margin: 0;
-    padding-left: 18px;
-    line-height: 1.5;
-}
+.emp-tasks { margin: 0; padding-left: 18px; line-height: 1.5; }
 .emp-tasks li { margin-bottom: 4px; }
 
 @media (max-width: 900px) {
@@ -463,27 +484,40 @@ STYLES = '''<style>
 </style>'''
 
 
+# =====================  BUILD  =====================
 def build_month_section(xlsx_path):
     year, month = detect_month(xlsx_path)
 
+    daily = load_daily_for_month(year, month)
+
+    calls = []
+    employees_from_excel = []
     try:
         wb = load_workbook(xlsx_path, data_only=True)
+        if SHEET_NAME in wb.sheetnames:
+            ws = wb[SHEET_NAME]
+            calls = extract_calls(ws, year, month)
+            employees_from_excel = extract_employees(ws)
     except Exception as e:
         print(f'  ⚠️  Не удалось открыть {xlsx_path}: {e}')
-        return None
 
-    if SHEET_NAME not in wb.sheetnames:
-        print(f'  ⚠️  В {xlsx_path} нет листа "{SHEET_NAME}", пропускаю')
-        return None
+    if daily:
+        employees = []
+        for name, items in daily.items():
+            employees.append({
+                'name': name,
+                'tasks': [it for _, it in items],
+                'tickets': None,
+                'resolutions': None,
+            })
+        print(f'  ℹ️  Источник задач: _daily/{year}-{month:02d}/ ({len(employees)} сотрудников)')
+    else:
+        employees = employees_from_excel
+        if employees:
+            print(f'  ℹ️  Источник задач: Excel (fallback)')
 
-    ws = wb[SHEET_NAME]
-    calls = extract_calls(ws, year, month)
-    employees = extract_employees(ws)
     month_label = f'{MONTHS_RU_NOM[month]} {year}'
-
-    parts = []
-    parts.append(f'## {month_label}')
-    parts.append('')
+    parts = [f'## {month_label}', '']
 
     html_block = render_employees(calls, employees)
     if not html_block:
@@ -493,26 +527,56 @@ def build_month_section(xlsx_path):
 
     parts.append(html_block)
     parts.append('')
-
     return year, month, '\n'.join(parts)
 
 
+def build_month_section_only_daily(year, month):
+    daily = load_daily_for_month(year, month)
+    if not daily:
+        print(f'  ⚠️  Нет заметок за {year}-{month:02d}')
+        return None
+
+    employees = []
+    for name, items in daily.items():
+        employees.append({
+            'name': name,
+            'tasks': [it for _, it in items],
+            'tickets': None,
+            'resolutions': None,
+        })
+
+    month_label = f'{MONTHS_RU_NOM[month]} {year}'
+    parts = [f'## {month_label}', '', render_employees([], employees), '']
+    print(f'  ℹ️  Источник задач: _daily/{year}-{month:02d}/ ({len(employees)} сотрудников)')
+    return year, month, '\n'.join(parts)
+
+
+# =====================  MAIN  =====================
 def main():
-    if len(sys.argv) > 1:
-        files = [sys.argv[1]]
-    else:
-        files = sorted(glob.glob(os.path.join(SRC_DIR, '*.xlsx')))
-
-    if not files:
-        print('Нет .xlsx-файлов. Положите их в reports_src/ или укажите файл аргументом.')
-        sys.exit(1)
-
     sections = []
-    for f in files:
-        print(f'Обрабатываю: {f}')
-        res = build_month_section(f)
+
+    # Режим: python3 make_report.py 2026 10  → только daily за октябрь
+    if len(sys.argv) == 3 and sys.argv[1].isdigit() and sys.argv[2].isdigit():
+        year, month = int(sys.argv[1]), int(sys.argv[2])
+        print(f'Сборка только daily за {year}-{month:02d}')
+        res = build_month_section_only_daily(year, month)
         if res:
             sections.append(res)
+    else:
+        if len(sys.argv) > 1:
+            files = [sys.argv[1]]
+        else:
+            files = sorted(glob.glob(os.path.join(SRC_DIR, '*.xlsx')))
+
+        if not files:
+            print('Нет .xlsx-файлов. Положите их в reports_src/ или укажите файл аргументом.')
+            sys.exit(1)
+
+        for f in files:
+            print(f'Обрабатываю: {f}')
+            res = build_month_section(f)
+            if res:
+                sections.append(res)
 
     if not sections:
         print('Не удалось собрать ни одного отчёта.')
