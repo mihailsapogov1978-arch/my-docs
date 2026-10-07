@@ -4,6 +4,11 @@
 Формирует docs/calls/calls.md со статистикой по сотрудникам,
 сгруппированной по структурным подразделениям.
 
+Разделы:
+    1. Детализация по подразделениям (раскрывающиеся блоки)
+    2. Нагрузка отделов (гистограмма + таблица + выводы)
+    3. Статистика (карточки с топами)
+
 Запуск из корня проекта:
     python3 parse_calls.py
 """
@@ -158,17 +163,17 @@ FIO_ALIASES = {
     "кузнецова надежда александровн":   "Кузнецова Надежда Александровна",
     "любовь васильевна иванова":        "Иванова Любовь Васильевна",
     "ксения викторовна шевелева":       "Шевелева Ксения Викторовна",
+    "минакова ольга фрунзеновна":       "Минакова Ольга Фахрутдиновна",
 }
 
 
-# ---------- Полный стоп-лист ФИО (полностью исключаем из статистики) ----------
+# ---------- Полный стоп-лист ФИО ----------
 EXCLUDE_FIOS = {
     "Подгайный Алексей Алексеевич",
 }
 
 
 def _norm_fio(s: str) -> str:
-    """Нормализация ФИО для сравнения: нижний регистр, ё→е, одиночные пробелы."""
     if not s:
         return ""
     s = s.lower().replace("ё", "е")
@@ -176,19 +181,15 @@ def _norm_fio(s: str) -> str:
     return s
 
 
-# Нормализованный стоп-лист исключений
 _EXCLUDE_NORM = {_norm_fio(x) for x in EXCLUDE_FIOS}
 
-# Индекс: чистое ФИО (в нижнем регистре) → отдел
 _FIO_TO_DEPT = {}
 for _dept, _fios in DEPARTMENTS.items():
     for _fio in _fios:
         _FIO_TO_DEPT[_norm_fio(_fio)] = _dept
 
-# Индекс алиасов: грязное ФИО (в нижнем регистре) → чистое ФИО (в нижнем регистре)
 _ALIAS_TO_CLEAN = {_norm_fio(k): _norm_fio(v) for k, v in FIO_ALIASES.items()}
 
-# Индекс: нормализованное чистое ФИО → каноничное написание из DEPARTMENTS
 _CLEAN_KEY_TO_CANON = {}
 for _dept, _fios in DEPARTMENTS.items():
     for _f in _fios:
@@ -196,17 +197,14 @@ for _dept, _fios in DEPARTMENTS.items():
 
 
 def is_excluded(fio: str) -> bool:
-    """Проверка: ФИО в стоп-листе (по нормализованному ключу)."""
     if not fio:
         return False
     key = _norm_fio(fio)
-    # проверяем и «как есть», и через алиасы
     clean_key = _ALIAS_TO_CLEAN.get(key, key)
     return key in _EXCLUDE_NORM or clean_key in _EXCLUDE_NORM
 
 
 def resolve_fio(fio: str) -> str:
-    """Приводит ФИО к каноничному виду из справочника (через алиасы, если заданы)."""
     if not fio:
         return ""
     key = _norm_fio(fio)
@@ -305,7 +303,6 @@ def parse_calls() -> dict:
     hour_counter = Counter()
 
     for _, row in df.iterrows():
-        # normalize → resolve через алиасы
         initiator   = resolve_fio(normalize_fio(row.get(c_initiator_name)))
         result      = str(row.get(c_result) or "").strip().lower()
         connected   = is_filled(row.get(c_connect))
@@ -313,7 +310,6 @@ def parse_calls() -> dict:
         target_num  = row.get(c_target_num)
         a_num       = row.get(c_a_num)
 
-        # исключаем из подсчёта тех, кто в EXCLUDE_FIOS
         initiator_ok = bool(initiator) and not is_excluded(initiator)
         target_ok    = bool(target_name) and not is_excluded(target_name)
 
@@ -330,7 +326,6 @@ def parse_calls() -> dict:
         elif missed_call and target_ok and is_internal(target_num):
             stats[target_name]["missed"] += 1
 
-        # мета-статистика — тоже без исключённых
         if connected and initiator_ok and target_ok:
             dur = 0
             if c_duration:
@@ -374,8 +369,8 @@ def parse_calls() -> dict:
         h, cnt = hour_counter.most_common(1)[0]
         peak_hour = {"hour": h, "count": cnt}
 
-    # ---------- Топы ----------
-    MIN_INCOMING_FOR_RATE = 50  # порог для рейтинга по доле
+    # ---------- Топы по сотрудникам ----------
+    MIN_INCOMING_FOR_RATE = 50
 
     top_initiator = top_target = None
     top_missed_rate = None
@@ -390,7 +385,6 @@ def parse_calls() -> dict:
         if st["incoming"] > 0:
             top_target = {"fio": ft, "count": st["incoming"]}
 
-        # рейтинг по доле пропущенных — только те, у кого входящих >= порога
         rate_rows = []
         for fio, s in stats.items():
             total_in = s["incoming"] + s["missed"]
@@ -420,8 +414,30 @@ def parse_calls() -> dict:
                 "percent": round((1 - best["rate"]) * 100),
             }
 
+    # ---------- Агрегация по отделам ----------
+    dept_meta = {}
+    for fio, s in stats.items():
+        dept = get_department(fio)
+        if dept not in dept_meta:
+            dept_meta[dept] = {
+                "incoming": 0, "missed": 0, "outgoing": 0, "employees": 0
+            }
+        dept_meta[dept]["incoming"] += s["incoming"]
+        dept_meta[dept]["missed"]   += s["missed"]
+        dept_meta[dept]["outgoing"] += s["outgoing"]
+        dept_meta[dept]["employees"] += 1
+
+    for dept, d in dept_meta.items():
+        total_in = d["incoming"] + d["missed"]
+        d["total_in"]  = total_in
+        d["total_all"] = d["incoming"] + d["missed"] + d["outgoing"]
+        d["miss_rate"] = (d["missed"] / total_in) if total_in else 0.0
+        d["out_in_ratio"] = (d["outgoing"] / total_in) if total_in else 0.0
+        d["per_employee"] = (d["total_all"] / d["employees"]) if d["employees"] else 0.0
+
     return {
         "stats": dict(stats),
+        "dept_meta": dept_meta,
         "meta": {
             "longest_call": longest_call,
             "top_pair": top_pair,
@@ -502,7 +518,7 @@ HTML_HEADER = """<style>
 .calls-total .ct-miss .ct-value { color: var(--emp-missed); }
 .calls-total .ct-out  .ct-value { color: var(--emp-out); }
 
-/* ---------- Список отделов ---------- */
+/* ---------- Список отделов (раскрывающиеся блоки) ---------- */
 .dept-list {
     margin: 16px 0;
     border: 1px solid var(--emp-border);
@@ -571,7 +587,7 @@ HTML_HEADER = """<style>
     padding: 0;
 }
 
-/* ---------- Таблица внутри отдела ---------- */
+/* ---------- Общая таблица ---------- */
 .calls-table {
     width: 100%;
     border-collapse: collapse;
@@ -625,6 +641,110 @@ HTML_HEADER = """<style>
 .calls-table .col-miss { color: var(--emp-missed); }
 .calls-table .col-out  { color: var(--emp-out); }
 
+/* ---------- Таблица «Нагрузка отделов» (шире по колонкам) ---------- */
+.calls-table.dept-load-table col.col-num  { width: 48px; }
+.calls-table.dept-load-table col.col-fio  { width: auto; }
+.calls-table.dept-load-table col.col-stat { width: 100px; }
+
+.calls-table.dept-load-table thead th {
+    font-size: 11px;
+    padding: 8px 8px;
+    white-space: normal;
+    line-height: 1.2;
+}
+.calls-table.dept-load-table tbody td {
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+/* ---------- Гистограмма нагрузки ---------- */
+.load-chart {
+    margin: 16px 0 24px 0;
+    padding: 16px 20px;
+    border: 1px solid var(--emp-border);
+    border-radius: 10px;
+    background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.load-chart-row {
+    display: grid;
+    grid-template-columns: 260px 1fr 70px;
+    align-items: center;
+    column-gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--emp-border);
+}
+.load-chart-row:last-child { border-bottom: none; }
+
+.load-chart-name {
+    font-size: 13px;
+    color: var(--emp-text);
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.load-chart-bar-wrap {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    background: #f7fafc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.load-chart-bar {
+    display: flex;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+.load-chart-seg {
+    height: 100%;
+    transition: opacity 0.15s;
+}
+.load-chart-seg.seg-in   { background: var(--emp-in); }
+.load-chart-seg.seg-miss { background: var(--emp-missed); }
+.load-chart-seg.seg-out  { background: var(--emp-out); }
+
+.load-chart-value {
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--emp-accent);
+    white-space: nowrap;
+}
+
+.load-chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--emp-border);
+    font-size: 12.5px;
+    color: var(--emp-muted);
+}
+
+.load-chart-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.load-chart-legend-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+.load-chart-legend-dot.legend-in   { background: var(--emp-in); }
+.load-chart-legend-dot.legend-miss { background: var(--emp-missed); }
+.load-chart-legend-dot.legend-out  { background: var(--emp-out); }
+
 /* ---------- Статистика ---------- */
 .facts-grid {
     display: grid;
@@ -673,6 +793,15 @@ HTML_HEADER = """<style>
 .fact-card.fact-miss  { border-left-color: var(--emp-missed); }
 .fact-card.fact-hour  { border-left-color: #dd6b20; }
 
+/* ---------- Мелкий пояснительный текст ---------- */
+.calls-source {
+    font-size: 13px;
+    color: var(--emp-muted);
+    margin: 4px 0 16px 0;
+    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 /* ---------- Адаптив ---------- */
 @media (max-width: 900px) {
     .dept-row {
@@ -685,6 +814,14 @@ HTML_HEADER = """<style>
         text-align: left;
     }
     .dept-toggle { grid-row: 1; grid-column: 2; }
+
+    .load-chart-row {
+        grid-template-columns: 1fr 70px;
+        row-gap: 4px;
+    }
+    .load-chart-name {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (max-width: 720px) {
@@ -699,6 +836,7 @@ HTML_HEADER = """<style>
         padding: 10px 16px;
     }
     .calls-table th, .calls-table td { padding: 8px 8px; }
+    .load-chart { padding: 12px 14px; }
 }
 </style>
 """
@@ -751,9 +889,80 @@ def _fact_card(label: str, value: str, sub: str, cls: str) -> str:
     return "\n".join(L)
 
 
+def _render_load_chart(dept_rows: list) -> str:
+    """
+    Горизонтальная гистограмма нагрузки по отделам.
+    dept_rows — список (dept, d), где d содержит incoming, missed, outgoing, total_all.
+    Ширина полосы = total_all / max(total_all) * 100%.
+    Внутри полосы — три сегмента (принятые / пропущенные / исходящие).
+    """
+    if not dept_rows:
+        return ""
+
+    max_total = max(d["total_all"] for _, d in dept_rows)
+    if max_total == 0:
+        return ""
+
+    L = []
+    L.append('<div class="load-chart">')
+
+    for dept, d in dept_rows:
+        total = d["total_all"]
+        width_pct = total / max_total * 100.0
+
+        # доли сегментов внутри полосы (сумма = 100%)
+        if total > 0:
+            pct_in   = d["incoming"] / total * 100.0
+            pct_miss = d["missed"]   / total * 100.0
+            pct_out  = d["outgoing"] / total * 100.0
+        else:
+            pct_in = pct_miss = pct_out = 0.0
+
+        L.append('<div class="load-chart-row">')
+        L.append(f'  <div class="load-chart-name" title="{dept}">{dept}</div>')
+        L.append('  <div class="load-chart-bar-wrap">')
+        L.append(f'    <div class="load-chart-bar" style="width: {width_pct:.2f}%;">')
+        L.append(
+            f'      <div class="load-chart-seg seg-in" '
+            f'style="width: {pct_in:.2f}%;" title="Принятые: {d["incoming"]}"></div>'
+        )
+        L.append(
+            f'      <div class="load-chart-seg seg-miss" '
+            f'style="width: {pct_miss:.2f}%;" title="Пропущенные: {d["missed"]}"></div>'
+        )
+        L.append(
+            f'      <div class="load-chart-seg seg-out" '
+            f'style="width: {pct_out:.2f}%;" title="Исходящие: {d["outgoing"]}"></div>'
+        )
+        L.append('    </div>')
+        L.append('  </div>')
+        L.append(f'  <div class="load-chart-value">{total}</div>')
+        L.append('</div>')
+
+    # Легенда
+    L.append('  <div class="load-chart-legend">')
+    L.append(
+        '    <span class="load-chart-legend-item">'
+        '<span class="load-chart-legend-dot legend-in"></span>принятые</span>'
+    )
+    L.append(
+        '    <span class="load-chart-legend-item">'
+        '<span class="load-chart-legend-dot legend-miss"></span>пропущенные</span>'
+    )
+    L.append(
+        '    <span class="load-chart-legend-item">'
+        '<span class="load-chart-legend-dot legend-out"></span>исходящие</span>'
+    )
+    L.append('  </div>')
+
+    L.append('</div>')
+    return "\n".join(L)
+
+
 def render_md(data: dict) -> str:
     stats = data["stats"]
     meta = data["meta"]
+    dept_meta = data.get("dept_meta", {})
 
     all_rows = []
     for fio, s in stats.items():
@@ -788,6 +997,7 @@ def render_md(data: dict) -> str:
     L.append("# Статистика звонков за месяц")
     L.append("")
 
+    # ---------- Плашка «Всего звонков» ----------
     L.append('<div class="calls-total">')
     L.append('  <div class="ct-label">Всего звонков</div>')
     L.append('  <div class="ct-cell ct-in">')
@@ -805,6 +1015,7 @@ def render_md(data: dict) -> str:
     L.append('</div>')
     L.append("")
 
+    # ---------- 1. Детализация по подразделениям ----------
     L.append("## Детализация по подразделениям")
     L.append("")
     L.append('<div class="dept-list">')
@@ -839,6 +1050,105 @@ def render_md(data: dict) -> str:
     L.append('</div>')
     L.append("")
 
+    # ---------- 2. Нагрузка отделов ----------
+    L.append("## Нагрузка отделов")
+    L.append("")
+    L.append('<div class="calls-source">'
+             'Сводные показатели по подразделениям. '
+             '«Доля пропущенных» — процент входящих вызовов, '
+             'не завершившихся разговором. '
+             '«Индекс исх./вх.» — отношение исходящих к сумме входящих '
+             '(>1 — отдел больше инициирует, <1 — больше принимает).'
+             '</div>')
+    L.append("")
+
+    dept_rows = []
+    for dept, d in dept_meta.items():
+        if d["employees"] == 0 or d["total_all"] == 0:
+            continue
+        dept_rows.append((dept, d))
+
+    dept_rows.sort(key=lambda x: x[1]["total_all"], reverse=True)
+
+    # Гистограмма
+    L.append(_render_load_chart(dept_rows))
+    L.append("")
+
+    # Сводные выводы
+    L.append('<div class="facts-grid">')
+
+    if dept_rows:
+        most_out = max(dept_rows, key=lambda x: x[1]["outgoing"])
+        most_in  = max(dept_rows, key=lambda x: x[1]["incoming"])
+        worst_miss = max(dept_rows, key=lambda x: x[1]["miss_rate"])
+        best_miss  = min(dept_rows, key=lambda x: x[1]["miss_rate"])
+        most_active = max(dept_rows, key=lambda x: x[1]["total_all"])
+
+        total_all_sum = sum(d["total_all"] for _, d in dept_rows)
+        total_emp_sum = sum(d["employees"] for _, d in dept_rows)
+        avg_per_emp = round(total_all_sum / total_emp_sum) if total_emp_sum else 0
+
+        L.append(_fact_card(
+            "Наибольшее число исходящих",
+            most_out[0],
+            f'{most_out[1]["outgoing"]} исходящих звонков',
+            "fact-out",
+        ))
+        L.append(_fact_card(
+            "Наибольшее число принятых",
+            most_in[0],
+            f'{most_in[1]["incoming"]} принятых звонков',
+            "fact-in",
+        ))
+        L.append(_fact_card(
+            "Наибольшая доля пропущенных",
+            worst_miss[0],
+            f'{worst_miss[1]["missed"]} из {worst_miss[1]["total_in"]} '
+            f'входящих · {worst_miss[1]["miss_rate"] * 100:.1f}%',
+            "fact-miss",
+        ))
+        L.append(_fact_card(
+            "Наилучший приём вызовов",
+            best_miss[0],
+            f'{best_miss[1]["incoming"]} из {best_miss[1]["total_in"]} '
+            f'входящих · принято {(1 - best_miss[1]["miss_rate"]) * 100:.1f}%',
+            "fact-in",
+        ))
+
+        most_extrovert = max(dept_rows, key=lambda x: x[1]["out_in_ratio"])
+        most_introvert = min(dept_rows, key=lambda x: x[1]["out_in_ratio"])
+
+        L.append(_fact_card(
+            "Преобладание исходящих связей",
+            most_extrovert[0],
+            f'Индекс исх./вх. = {most_extrovert[1]["out_in_ratio"]:.2f}'
+            ' — отдел больше инициирует, чем принимает',
+            "fact-out",
+        ))
+        L.append(_fact_card(
+            "Преобладание входящих связей",
+            most_introvert[0],
+            f'Индекс исх./вх. = {most_introvert[1]["out_in_ratio"]:.2f}'
+            ' — отдел больше принимает, чем инициирует',
+            "fact-in",
+        ))
+        L.append(_fact_card(
+            "Средняя нагрузка на сотрудника",
+            f'{avg_per_emp} звонков / мес.',
+            f'Всего в организации: {total_all_sum} звонков, {total_emp_sum} сотрудников',
+            "fact-hour",
+        ))
+        L.append(_fact_card(
+            "Наибольший суммарный объём",
+            most_active[0],
+            f'{most_active[1]["total_all"]} звонков всех типов',
+            "fact-pair",
+        ))
+
+    L.append('</div>')
+    L.append("")
+
+    # ---------- 3. Статистика ----------
     L.append("## Статистика")
     L.append("")
     L.append('<div class="facts-grid">')
@@ -918,7 +1228,6 @@ def main():
     data = parse_calls()
     print(f"[parse_calls] Обработано абонентов: {len(data['stats'])}")
 
-    # Отладка: показать тех, кто не попал в справочник
     unknown = [fio for fio in data["stats"] if get_department(fio) == "Прочие / не указано"]
     if unknown:
         print("[parse_calls] Не сопоставлены со справочником:")

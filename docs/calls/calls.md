@@ -65,7 +65,7 @@
 .calls-total .ct-miss .ct-value { color: var(--emp-missed); }
 .calls-total .ct-out  .ct-value { color: var(--emp-out); }
 
-/* ---------- Список отделов ---------- */
+/* ---------- Список отделов (раскрывающиеся блоки) ---------- */
 .dept-list {
     margin: 16px 0;
     border: 1px solid var(--emp-border);
@@ -134,7 +134,7 @@
     padding: 0;
 }
 
-/* ---------- Таблица внутри отдела ---------- */
+/* ---------- Общая таблица ---------- */
 .calls-table {
     width: 100%;
     border-collapse: collapse;
@@ -188,6 +188,110 @@
 .calls-table .col-miss { color: var(--emp-missed); }
 .calls-table .col-out  { color: var(--emp-out); }
 
+/* ---------- Таблица «Нагрузка отделов» (шире по колонкам) ---------- */
+.calls-table.dept-load-table col.col-num  { width: 48px; }
+.calls-table.dept-load-table col.col-fio  { width: auto; }
+.calls-table.dept-load-table col.col-stat { width: 100px; }
+
+.calls-table.dept-load-table thead th {
+    font-size: 11px;
+    padding: 8px 8px;
+    white-space: normal;
+    line-height: 1.2;
+}
+.calls-table.dept-load-table tbody td {
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+/* ---------- Гистограмма нагрузки ---------- */
+.load-chart {
+    margin: 16px 0 24px 0;
+    padding: 16px 20px;
+    border: 1px solid var(--emp-border);
+    border-radius: 10px;
+    background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.load-chart-row {
+    display: grid;
+    grid-template-columns: 260px 1fr 70px;
+    align-items: center;
+    column-gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--emp-border);
+}
+.load-chart-row:last-child { border-bottom: none; }
+
+.load-chart-name {
+    font-size: 13px;
+    color: var(--emp-text);
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.load-chart-bar-wrap {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    background: #f7fafc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.load-chart-bar {
+    display: flex;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+.load-chart-seg {
+    height: 100%;
+    transition: opacity 0.15s;
+}
+.load-chart-seg.seg-in   { background: var(--emp-in); }
+.load-chart-seg.seg-miss { background: var(--emp-missed); }
+.load-chart-seg.seg-out  { background: var(--emp-out); }
+
+.load-chart-value {
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--emp-accent);
+    white-space: nowrap;
+}
+
+.load-chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--emp-border);
+    font-size: 12.5px;
+    color: var(--emp-muted);
+}
+
+.load-chart-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.load-chart-legend-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+.load-chart-legend-dot.legend-in   { background: var(--emp-in); }
+.load-chart-legend-dot.legend-miss { background: var(--emp-missed); }
+.load-chart-legend-dot.legend-out  { background: var(--emp-out); }
+
 /* ---------- Статистика ---------- */
 .facts-grid {
     display: grid;
@@ -236,6 +340,15 @@
 .fact-card.fact-miss  { border-left-color: var(--emp-missed); }
 .fact-card.fact-hour  { border-left-color: #dd6b20; }
 
+/* ---------- Мелкий пояснительный текст ---------- */
+.calls-source {
+    font-size: 13px;
+    color: var(--emp-muted);
+    margin: 4px 0 16px 0;
+    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 /* ---------- Адаптив ---------- */
 @media (max-width: 900px) {
     .dept-row {
@@ -248,6 +361,14 @@
         text-align: left;
     }
     .dept-toggle { grid-row: 1; grid-column: 2; }
+
+    .load-chart-row {
+        grid-template-columns: 1fr 70px;
+        row-gap: 4px;
+    }
+    .load-chart-name {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (max-width: 720px) {
@@ -262,6 +383,7 @@
         padding: 10px 16px;
     }
     .calls-table th, .calls-table td { padding: 8px 8px; }
+    .load-chart { padding: 12px 14px; }
 }
 </style>
 
@@ -1180,6 +1302,160 @@
 </table>
     </div>
   </div>
+</div>
+
+## Нагрузка отделов
+
+<div class="calls-source">Сводные показатели по подразделениям. «Доля пропущенных» — процент входящих вызовов, не завершившихся разговором. «Индекс исх./вх.» — отношение исходящих к сумме входящих (>1 — отдел больше инициирует, <1 — больше принимает).</div>
+
+<div class="load-chart">
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел расчётов с персоналом">Отдел расчётов с персоналом</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 100.00%;">
+      <div class="load-chart-seg seg-in" style="width: 41.21%;" title="Принятые: 2343"></div>
+      <div class="load-chart-seg seg-miss" style="width: 11.08%;" title="Пропущенные: 630"></div>
+      <div class="load-chart-seg seg-out" style="width: 47.70%;" title="Исходящие: 2712"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">5685</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Администрация">Администрация</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 52.24%;">
+      <div class="load-chart-seg seg-in" style="width: 40.17%;" title="Принятые: 1193"></div>
+      <div class="load-chart-seg seg-miss" style="width: 20.37%;" title="Пропущенные: 605"></div>
+      <div class="load-chart-seg seg-out" style="width: 39.46%;" title="Исходящие: 1172"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">2970</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел СР и ТП">Отдел СР и ТП</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 47.32%;">
+      <div class="load-chart-seg seg-in" style="width: 40.56%;" title="Принятые: 1091"></div>
+      <div class="load-chart-seg seg-miss" style="width: 27.03%;" title="Пропущенные: 727"></div>
+      <div class="load-chart-seg seg-out" style="width: 32.42%;" title="Исходящие: 872"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">2690</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел учета основных средств и запасов">Отдел учета основных средств и запасов</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 45.00%;">
+      <div class="load-chart-seg seg-in" style="width: 42.49%;" title="Принятые: 1087"></div>
+      <div class="load-chart-seg seg-miss" style="width: 5.71%;" title="Пропущенные: 146"></div>
+      <div class="load-chart-seg seg-out" style="width: 51.80%;" title="Исходящие: 1325"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">2558</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел учета доходов">Отдел учета доходов</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 35.76%;">
+      <div class="load-chart-seg seg-in" style="width: 48.40%;" title="Принятые: 984"></div>
+      <div class="load-chart-seg seg-miss" style="width: 8.56%;" title="Пропущенные: 174"></div>
+      <div class="load-chart-seg seg-out" style="width: 43.04%;" title="Исходящие: 875"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">2033</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел расчётов с поставщиками, подрядчиками">Отдел расчётов с поставщиками, подрядчиками</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 33.44%;">
+      <div class="load-chart-seg seg-in" style="width: 47.50%;" title="Принятые: 903"></div>
+      <div class="load-chart-seg seg-miss" style="width: 13.26%;" title="Пропущенные: 252"></div>
+      <div class="load-chart-seg seg-out" style="width: 39.24%;" title="Исходящие: 746"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">1901</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел кадрового и правового обеспечения">Отдел кадрового и правового обеспечения</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 28.44%;">
+      <div class="load-chart-seg seg-in" style="width: 38.65%;" title="Принятые: 625"></div>
+      <div class="load-chart-seg seg-miss" style="width: 15.21%;" title="Пропущенные: 246"></div>
+      <div class="load-chart-seg seg-out" style="width: 46.13%;" title="Исходящие: 746"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">1617</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел подготовки отчетности">Отдел подготовки отчетности</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 14.99%;">
+      <div class="load-chart-seg seg-in" style="width: 41.67%;" title="Принятые: 355"></div>
+      <div class="load-chart-seg seg-miss" style="width: 10.09%;" title="Пропущенные: 86"></div>
+      <div class="load-chart-seg seg-out" style="width: 48.24%;" title="Исходящие: 411"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">852</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел информационной безопасности">Отдел информационной безопасности</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 13.21%;">
+      <div class="load-chart-seg seg-in" style="width: 51.26%;" title="Принятые: 385"></div>
+      <div class="load-chart-seg seg-miss" style="width: 15.05%;" title="Пропущенные: 113"></div>
+      <div class="load-chart-seg seg-out" style="width: 33.69%;" title="Исходящие: 253"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">751</div>
+</div>
+  <div class="load-chart-legend">
+    <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-in"></span>принятые</span>
+    <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-miss"></span>пропущенные</span>
+    <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-out"></span>исходящие</span>
+  </div>
+</div>
+
+<div class="facts-grid">
+<div class="fact-card fact-out">
+  <div class="fact-label">Наибольшее число исходящих</div>
+  <div class="fact-value">Отдел расчётов с персоналом</div>
+  <div class="fact-sub">2712 исходящих звонков</div>
+</div>
+<div class="fact-card fact-in">
+  <div class="fact-label">Наибольшее число принятых</div>
+  <div class="fact-value">Отдел расчётов с персоналом</div>
+  <div class="fact-sub">2343 принятых звонков</div>
+</div>
+<div class="fact-card fact-miss">
+  <div class="fact-label">Наибольшая доля пропущенных</div>
+  <div class="fact-value">Отдел СР и ТП</div>
+  <div class="fact-sub">727 из 1818 входящих · 40.0%</div>
+</div>
+<div class="fact-card fact-in">
+  <div class="fact-label">Наилучший приём вызовов</div>
+  <div class="fact-value">Отдел учета основных средств и запасов</div>
+  <div class="fact-sub">1087 из 1233 входящих · принято 88.2%</div>
+</div>
+<div class="fact-card fact-out">
+  <div class="fact-label">Преобладание исходящих связей</div>
+  <div class="fact-value">Отдел учета основных средств и запасов</div>
+  <div class="fact-sub">Индекс исх./вх. = 1.07 — отдел больше инициирует, чем принимает</div>
+</div>
+<div class="fact-card fact-in">
+  <div class="fact-label">Преобладание входящих связей</div>
+  <div class="fact-value">Отдел СР и ТП</div>
+  <div class="fact-sub">Индекс исх./вх. = 0.48 — отдел больше принимает, чем инициирует</div>
+</div>
+<div class="fact-card fact-hour">
+  <div class="fact-label">Средняя нагрузка на сотрудника</div>
+  <div class="fact-value">263 звонков / мес.</div>
+  <div class="fact-sub">Всего в организации: 21057 звонков, 80 сотрудников</div>
+</div>
+<div class="fact-card fact-pair">
+  <div class="fact-label">Наибольший суммарный объём</div>
+  <div class="fact-value">Отдел расчётов с персоналом</div>
+  <div class="fact-sub">5685 звонков всех типов</div>
+</div>
 </div>
 
 ## Статистика
