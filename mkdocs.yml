@@ -18,6 +18,9 @@ theme:
     - search.highlight
     - search.suggest
     - toc.follow
+    #- navigation.tabs
+    - navigation.indexes
+    - content.tags
     # - toc.integrate
   palette:
     - media: '(prefers-color-scheme: light)'
@@ -73,6 +76,8 @@ markdown_extensions:
       custom_checkbox: true
 
 plugins:
+  - tags
+  - awesome-pages
   - search:
       lang: ru
       separator: '[\s\-–—_]+'
@@ -81,6 +86,7 @@ plugins:
   #     type: date
   #     locale: ru
   #     fallback_to_build_date: False
+  
 
 validation:
   nav:
@@ -101,4 +107,4 @@ nav:
   - Отчёты отдела СРиТП: reports/index.md
   - Заявки: calls/report.md
   - Звонки: calls/calls.md
-  - Функциональные доработки: dorabotky.md
+  - Реестр доработок: registry/index.md

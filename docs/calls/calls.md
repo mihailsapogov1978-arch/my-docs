@@ -254,9 +254,9 @@
     height: 100%;
     transition: opacity 0.15s;
 }
-.load-chart-seg.seg-in   { background: var(--emp-in); }
-.load-chart-seg.seg-miss { background: var(--emp-missed); }
-.load-chart-seg.seg-out  { background: var(--emp-out); }
+.load-chart-seg.seg-in   { background: #6fa8b8; }   /* светлый teal */
+.load-chart-seg.seg-miss { background: #f5a623; }   /* светло-оранжевый / янтарный */
+.load-chart-seg.seg-out  { background: #8ba0c4; }   /* светло-slate */
 
 .load-chart-value {
     text-align: right;
@@ -288,9 +288,9 @@
     height: 12px;
     border-radius: 3px;
 }
-.load-chart-legend-dot.legend-in   { background: var(--emp-in); }
-.load-chart-legend-dot.legend-miss { background: var(--emp-missed); }
-.load-chart-legend-dot.legend-out  { background: var(--emp-out); }
+.load-chart-legend-dot.legend-in   { background: #6fa8b8; }
+.load-chart-legend-dot.legend-miss { background: #f5a623; }
+.load-chart-legend-dot.legend-out  { background: #8ba0c4; }
 
 /* ---------- Статистика ---------- */
 .facts-grid {
@@ -388,7 +388,7 @@
 </style>
 
 
-# Статистика звонков за месяц
+# Статистика звонков за сентябрь 2026
 
 <div class="calls-total">
   <div class="ct-label">Всего звонков</div>
@@ -1458,7 +1458,8 @@
 </div>
 </div>
 
-## Статистика
+<div style="height:32px;"></div>
+## Нагрузка сотрудников
 
 <div class="facts-grid">
 <div class="fact-card fact-time">

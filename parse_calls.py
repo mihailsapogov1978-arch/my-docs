@@ -7,7 +7,7 @@
 Разделы:
     1. Детализация по подразделениям (раскрывающиеся блоки)
     2. Нагрузка отделов (гистограмма + таблица + выводы)
-    3. Статистика (карточки с топами)
+    3. Нагрузка сотрудников (карточки с топами)
 
 Запуск из корня проекта:
     python3 parse_calls.py
@@ -707,9 +707,9 @@ HTML_HEADER = """<style>
     height: 100%;
     transition: opacity 0.15s;
 }
-.load-chart-seg.seg-in   { background: var(--emp-in); }
-.load-chart-seg.seg-miss { background: var(--emp-missed); }
-.load-chart-seg.seg-out  { background: var(--emp-out); }
+.load-chart-seg.seg-in   { background: #6fa8b8; }   /* светлый teal */
+.load-chart-seg.seg-miss { background: #f5a623; }   /* светло-оранжевый / янтарный */
+.load-chart-seg.seg-out  { background: #8ba0c4; }   /* светло-slate */
 
 .load-chart-value {
     text-align: right;
@@ -741,9 +741,9 @@ HTML_HEADER = """<style>
     height: 12px;
     border-radius: 3px;
 }
-.load-chart-legend-dot.legend-in   { background: var(--emp-in); }
-.load-chart-legend-dot.legend-miss { background: var(--emp-missed); }
-.load-chart-legend-dot.legend-out  { background: var(--emp-out); }
+.load-chart-legend-dot.legend-in   { background: #6fa8b8; }
+.load-chart-legend-dot.legend-miss { background: #f5a623; }
+.load-chart-legend-dot.legend-out  { background: #8ba0c4; }
 
 /* ---------- Статистика ---------- */
 .facts-grid {
@@ -994,7 +994,7 @@ def render_md(data: dict) -> str:
     L = []
     L.append(HTML_HEADER)
     L.append("")
-    L.append("# Статистика звонков за месяц")
+    L.append("# Статистика звонков за сентябрь 2026")
     L.append("")
 
     # ---------- Плашка «Всего звонков» ----------
@@ -1051,6 +1051,7 @@ def render_md(data: dict) -> str:
     L.append("")
 
     # ---------- 2. Нагрузка отделов ----------
+    
     L.append("## Нагрузка отделов")
     L.append("")
     L.append('<div class="calls-source">'
@@ -1149,7 +1150,8 @@ def render_md(data: dict) -> str:
     L.append("")
 
     # ---------- 3. Статистика ----------
-    L.append("## Статистика")
+    L.append('<div style="height:32px;"></div>')
+    L.append("## Нагрузка сотрудников")
     L.append("")
     L.append('<div class="facts-grid">')
 

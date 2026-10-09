@@ -16,7 +16,7 @@
         <link rel="prev" href="../report/">
       
       
-        <link rel="next" href="../../dorabotky/">
+        <link rel="next" href="../../registry/">
       
       
         
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#2026" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -462,7 +462,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Детализация по подразделениям
@@ -473,7 +473,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Нагрузка отделов
@@ -484,10 +484,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Статистика
+        Нагрузка сотрудников
       
     </span>
   </a>
@@ -509,14 +509,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dorabotky/" class="md-nav__link">
+      <a href="../../registry/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Функциональные доработки
+    Реестр доработок
   
 
     
@@ -556,7 +556,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Детализация по подразделениям
@@ -567,7 +567,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Нагрузка отделов
@@ -578,10 +578,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Статистика
+        Нагрузка сотрудников
       
     </span>
   </a>
@@ -861,9 +861,9 @@
     height: 100%;
     transition: opacity 0.15s;
 }
-.load-chart-seg.seg-in   { background: var(--emp-in); }
-.load-chart-seg.seg-miss { background: var(--emp-missed); }
-.load-chart-seg.seg-out  { background: var(--emp-out); }
+.load-chart-seg.seg-in   { background: #6fa8b8; }   /* светлый teal */
+.load-chart-seg.seg-miss { background: #f5a623; }   /* светло-оранжевый / янтарный */
+.load-chart-seg.seg-out  { background: #8ba0c4; }   /* светло-slate */
 
 .load-chart-value {
     text-align: right;
@@ -895,9 +895,9 @@
     height: 12px;
     border-radius: 3px;
 }
-.load-chart-legend-dot.legend-in   { background: var(--emp-in); }
-.load-chart-legend-dot.legend-miss { background: var(--emp-missed); }
-.load-chart-legend-dot.legend-out  { background: var(--emp-out); }
+.load-chart-legend-dot.legend-in   { background: #6fa8b8; }
+.load-chart-legend-dot.legend-miss { background: #f5a623; }
+.load-chart-legend-dot.legend-out  { background: #8ba0c4; }
 
 /* ---------- Статистика ---------- */
 .facts-grid {
@@ -994,7 +994,7 @@
 }
 </style>
 
-<h1 id="_1">Статистика звонков за месяц<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="2026">Статистика звонков за сентябрь 2026<a class="headerlink" href="#2026" title="Permanent link">&para;</a></h1>
 <div class="calls-total">
   <div class="ct-label">Всего звонков</div>
   <div class="ct-cell ct-in">
@@ -1011,7 +1011,7 @@
   </div>
 </div>
 
-<h2 id="_2">Детализация по подразделениям<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_1">Детализация по подразделениям<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <div class="dept-list">
   <div class="dept-item">
     <input type="checkbox" id="dept-1" class="dept-checkbox">
@@ -1908,7 +1908,7 @@
   </div>
 </div>
 
-<h2 id="_3">Нагрузка отделов<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_2">Нагрузка отделов<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <div class="calls-source">Сводные показатели по подразделениям. «Доля пропущенных» — процент входящих вызовов, не завершившихся разговором. «Индекс исх./вх.» — отношение исходящих к сумме входящих (>1 — отдел больше инициирует, <1 — больше принимает).</div>
 
 <div class="load-chart">
@@ -2061,7 +2061,8 @@
 </div>
 </div>
 
-<h2 id="_4">Статистика<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div style="height:32px;"></div>
+<h2 id="_3">Нагрузка сотрудников<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="facts-grid">
 <div class="fact-card fact-time">
   <div class="fact-label">Максимальная длительность звонка</div>
@@ -2154,7 +2155,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "toc.follow", "navigation.indexes", "content.tags"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
