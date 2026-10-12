@@ -101,10 +101,11 @@ validation:
 
 nav:
   - Главная: index.md
+  - Календарь: calendar.md
+  - Карта мероприятий: projects_2026/roadmap.md
   - Контракты 2019–2026: Contracts/svod_gk.md
   - Планы информатизации: plans/plans.md
-  - Карта мероприятий: projects_2026/roadmap.md
   - Отчёты отдела СРиТП: reports/index.md
   - Заявки: calls/report.md
   - Звонки: calls/calls.md
-  - Реестр доработок: registry/index.md
+  #- Реестр доработок: registry/index.md

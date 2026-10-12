@@ -10,20 +10,12 @@
     --emp-missed: #c53030;
     --emp-in: #2f855a;
     --emp-out: #2b6cb0;
-
-    --col-num: 56px;
-    --col-stat: 130px;
-    --col-fio-min: 220px;
 }
 
 /* ---------- Плашка «Всего звонков» ---------- */
 .calls-total {
     display: grid;
-    grid-template-columns:
-        minmax(var(--col-fio-min), 1fr)
-        var(--col-stat)
-        var(--col-stat)
-        var(--col-stat);
+    grid-template-columns: minmax(220px, 1fr) 130px 130px 130px;
     align-items: stretch;
     column-gap: 0;
     background: var(--emp-accent-light);
@@ -142,27 +134,30 @@
     font-size: 13.5px;
     table-layout: fixed;
 }
-.calls-table col.col-num  { width: var(--col-num); }
+.calls-table col.col-num  { width: 40px; }
 .calls-table col.col-fio  { width: auto; }
-.calls-table col.col-stat { width: var(--col-stat); }
+.calls-table col.col-stat { width: 140px; }
+.calls-table col.col-pct  { width: 110px; }
 
 .calls-table thead th {
     background: #f0f7ff;
     color: var(--emp-accent);
     font-weight: 700;
-    font-size: 11.5px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    padding: 8px 14px;
+    letter-spacing: 0.02em;
+    padding: 6px 6px;
     border-bottom: 1px solid var(--emp-accent-border);
     border-right: 1px solid var(--emp-accent-border);
     text-align: center;
     vertical-align: middle;
+    white-space: nowrap;
+    word-break: keep-all;
 }
 .calls-table thead th:last-child { border-right: none; }
 
 .calls-table tbody td {
-    padding: 8px 14px;
+    padding: 8px 8px;
     border-bottom: 1px solid var(--emp-border);
     border-right: 1px solid var(--emp-border);
     text-align: right;
@@ -188,21 +183,13 @@
 .calls-table .col-miss { color: var(--emp-missed); }
 .calls-table .col-out  { color: var(--emp-out); }
 
-/* ---------- Таблица «Нагрузка отделов» (шире по колонкам) ---------- */
-.calls-table.dept-load-table col.col-num  { width: 48px; }
-.calls-table.dept-load-table col.col-fio  { width: auto; }
-.calls-table.dept-load-table col.col-stat { width: 100px; }
-
-.calls-table.dept-load-table thead th {
-    font-size: 11px;
-    padding: 8px 8px;
-    white-space: normal;
-    line-height: 1.2;
+.calls-table .col-pct {
+    text-align: center;
+    font-weight: 700;
 }
-.calls-table.dept-load-table tbody td {
-    padding: 8px 10px;
-    font-size: 13px;
-}
+.calls-table .col-pct.pct-good { color: var(--emp-in); }
+.calls-table .col-pct.pct-warn { color: #b7791f; }
+.calls-table .col-pct.pct-bad  { color: var(--emp-missed); }
 
 /* ---------- Гистограмма нагрузки ---------- */
 .load-chart {
@@ -254,9 +241,9 @@
     height: 100%;
     transition: opacity 0.15s;
 }
-.load-chart-seg.seg-in   { background: #6fa8b8; }   /* светлый teal */
-.load-chart-seg.seg-miss { background: #f5a623; }   /* светло-оранжевый / янтарный */
-.load-chart-seg.seg-out  { background: #8ba0c4; }   /* светло-slate */
+.load-chart-seg.seg-in   { background: #6fa8b8; }
+.load-chart-seg.seg-miss { background: #f5a623; }
+.load-chart-seg.seg-out  { background: #8ba0c4; }
 
 .load-chart-value {
     text-align: right;
@@ -427,6 +414,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -434,6 +422,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -447,6 +436,7 @@
       <td class="col-fio">Останин Иван Георгиевич</td>
       <td class="col-in">424</td>
       <td class="col-miss">260</td>
+      <td class="col-pct pct-warn">62%</td>
       <td class="col-out">355</td>
     </tr>
     <tr>
@@ -454,6 +444,7 @@
       <td class="col-fio">Родина Наталья Васильевна</td>
       <td class="col-in">435</td>
       <td class="col-miss">183</td>
+      <td class="col-pct pct-warn">70%</td>
       <td class="col-out">352</td>
     </tr>
     <tr>
@@ -461,6 +452,7 @@
       <td class="col-fio">Гареева Регина Рафаэлевна</td>
       <td class="col-in">102</td>
       <td class="col-miss">63</td>
+      <td class="col-pct pct-warn">62%</td>
       <td class="col-out">207</td>
     </tr>
     <tr>
@@ -468,6 +460,7 @@
       <td class="col-fio">Жданова Галина Игоревна</td>
       <td class="col-in">132</td>
       <td class="col-miss">52</td>
+      <td class="col-pct pct-warn">72%</td>
       <td class="col-out">169</td>
     </tr>
     <tr>
@@ -475,6 +468,7 @@
       <td class="col-fio">Галямов Азат Ахтамович</td>
       <td class="col-in">100</td>
       <td class="col-miss">47</td>
+      <td class="col-pct pct-warn">68%</td>
       <td class="col-out">89</td>
     </tr>
   </tbody>
@@ -499,6 +493,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -506,6 +501,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -519,6 +515,7 @@
       <td class="col-fio">Иванников Вадим Вячеславович</td>
       <td class="col-in">148</td>
       <td class="col-miss">31</td>
+      <td class="col-pct pct-good">83%</td>
       <td class="col-out">71</td>
     </tr>
     <tr>
@@ -526,6 +523,7 @@
       <td class="col-fio">Ананьев Евгений Сергеевич</td>
       <td class="col-in">69</td>
       <td class="col-miss">32</td>
+      <td class="col-pct pct-warn">68%</td>
       <td class="col-out">109</td>
     </tr>
     <tr>
@@ -533,6 +531,7 @@
       <td class="col-fio">Лычев Антон Владимирович</td>
       <td class="col-in">120</td>
       <td class="col-miss">37</td>
+      <td class="col-pct pct-warn">76%</td>
       <td class="col-out">39</td>
     </tr>
     <tr>
@@ -540,6 +539,7 @@
       <td class="col-fio">Шляпин Денис Олегович</td>
       <td class="col-in">48</td>
       <td class="col-miss">13</td>
+      <td class="col-pct pct-warn">79%</td>
       <td class="col-out">34</td>
     </tr>
   </tbody>
@@ -564,6 +564,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -571,6 +572,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -584,6 +586,7 @@
       <td class="col-fio">Чечеткин Михаил Игоревич</td>
       <td class="col-in">260</td>
       <td class="col-miss">332</td>
+      <td class="col-pct pct-bad">44%</td>
       <td class="col-out">271</td>
     </tr>
     <tr>
@@ -591,6 +594,7 @@
       <td class="col-fio">Роганова Анна Анатольевна</td>
       <td class="col-in">318</td>
       <td class="col-miss">224</td>
+      <td class="col-pct pct-warn">59%</td>
       <td class="col-out">82</td>
     </tr>
     <tr>
@@ -598,6 +602,7 @@
       <td class="col-fio">Сапогов Михаил Дмитриевич</td>
       <td class="col-in">171</td>
       <td class="col-miss">69</td>
+      <td class="col-pct pct-warn">71%</td>
       <td class="col-out">179</td>
     </tr>
     <tr>
@@ -605,6 +610,7 @@
       <td class="col-fio">Кошик Владимир Иванович</td>
       <td class="col-in">126</td>
       <td class="col-miss">16</td>
+      <td class="col-pct pct-good">89%</td>
       <td class="col-out">135</td>
     </tr>
     <tr>
@@ -612,6 +618,7 @@
       <td class="col-fio">Худышкин Сергей Николаевич</td>
       <td class="col-in">90</td>
       <td class="col-miss">19</td>
+      <td class="col-pct pct-good">83%</td>
       <td class="col-out">97</td>
     </tr>
     <tr>
@@ -619,6 +626,7 @@
       <td class="col-fio">Мулявин Яков Владиславович</td>
       <td class="col-in">69</td>
       <td class="col-miss">8</td>
+      <td class="col-pct pct-good">90%</td>
       <td class="col-out">55</td>
     </tr>
     <tr>
@@ -626,6 +634,7 @@
       <td class="col-fio">Гасанов Сархан Нураддин</td>
       <td class="col-in">53</td>
       <td class="col-miss">13</td>
+      <td class="col-pct pct-good">80%</td>
       <td class="col-out">45</td>
     </tr>
     <tr>
@@ -633,6 +642,7 @@
       <td class="col-fio">Ставер Андрей Петрович</td>
       <td class="col-in">4</td>
       <td class="col-miss">22</td>
+      <td class="col-pct pct-bad">15%</td>
       <td class="col-out">8</td>
     </tr>
     <tr>
@@ -640,6 +650,7 @@
       <td class="col-fio">Обмолова Валентина Витальевна</td>
       <td class="col-in">0</td>
       <td class="col-miss">24</td>
+      <td class="col-pct pct-bad">0%</td>
       <td class="col-out">0</td>
     </tr>
   </tbody>
@@ -664,6 +675,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -671,6 +683,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -684,6 +697,7 @@
       <td class="col-fio">Ядрова Анна Викторовна</td>
       <td class="col-in">196</td>
       <td class="col-miss">110</td>
+      <td class="col-pct pct-warn">64%</td>
       <td class="col-out">379</td>
     </tr>
     <tr>
@@ -691,6 +705,7 @@
       <td class="col-fio">Чернов Андрей Анатольевич</td>
       <td class="col-in">319</td>
       <td class="col-miss">98</td>
+      <td class="col-pct pct-warn">76%</td>
       <td class="col-out">205</td>
     </tr>
     <tr>
@@ -698,6 +713,7 @@
       <td class="col-fio">Полякова Анна Викторовна</td>
       <td class="col-in">99</td>
       <td class="col-miss">22</td>
+      <td class="col-pct pct-good">82%</td>
       <td class="col-out">110</td>
     </tr>
     <tr>
@@ -705,6 +721,7 @@
       <td class="col-fio">Суханова Ирина Константиновна</td>
       <td class="col-in">9</td>
       <td class="col-miss">12</td>
+      <td class="col-pct pct-bad">43%</td>
       <td class="col-out">50</td>
     </tr>
     <tr>
@@ -712,6 +729,7 @@
       <td class="col-fio">Цветнова Наталья Геннадьевна</td>
       <td class="col-in">2</td>
       <td class="col-miss">4</td>
+      <td class="col-pct pct-bad">33%</td>
       <td class="col-out">2</td>
     </tr>
   </tbody>
@@ -736,6 +754,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -743,6 +762,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -756,6 +776,7 @@
       <td class="col-fio">Гатаулина Марина Васильевна</td>
       <td class="col-in">215</td>
       <td class="col-miss">32</td>
+      <td class="col-pct pct-good">87%</td>
       <td class="col-out">251</td>
     </tr>
     <tr>
@@ -763,6 +784,7 @@
       <td class="col-fio">Стрельникова Ольга Сергеевна</td>
       <td class="col-in">184</td>
       <td class="col-miss">37</td>
+      <td class="col-pct pct-good">83%</td>
       <td class="col-out">142</td>
     </tr>
     <tr>
@@ -770,6 +792,7 @@
       <td class="col-fio">Щирская Ксения Васильевна</td>
       <td class="col-in">93</td>
       <td class="col-miss">18</td>
+      <td class="col-pct pct-good">84%</td>
       <td class="col-out">207</td>
     </tr>
     <tr>
@@ -777,6 +800,7 @@
       <td class="col-fio">Зуева Галия Парвасьевна</td>
       <td class="col-in">109</td>
       <td class="col-miss">7</td>
+      <td class="col-pct pct-good">94%</td>
       <td class="col-out">160</td>
     </tr>
     <tr>
@@ -784,6 +808,7 @@
       <td class="col-fio">Петрова Наталья Александровна</td>
       <td class="col-in">100</td>
       <td class="col-miss">7</td>
+      <td class="col-pct pct-good">93%</td>
       <td class="col-out">122</td>
     </tr>
     <tr>
@@ -791,6 +816,7 @@
       <td class="col-fio">Минакова Ольга Фахрутдиновна</td>
       <td class="col-in">82</td>
       <td class="col-miss">12</td>
+      <td class="col-pct pct-good">87%</td>
       <td class="col-out">129</td>
     </tr>
     <tr>
@@ -798,6 +824,7 @@
       <td class="col-fio">Филиппова Олеся Валерьевна</td>
       <td class="col-in">99</td>
       <td class="col-miss">11</td>
+      <td class="col-pct pct-good">90%</td>
       <td class="col-out">110</td>
     </tr>
     <tr>
@@ -805,6 +832,7 @@
       <td class="col-fio">Шибанаева Татьяна Викторовна</td>
       <td class="col-in">99</td>
       <td class="col-miss">7</td>
+      <td class="col-pct pct-good">93%</td>
       <td class="col-out">91</td>
     </tr>
     <tr>
@@ -812,6 +840,7 @@
       <td class="col-fio">Вернер Елена Викторовна</td>
       <td class="col-in">57</td>
       <td class="col-miss">1</td>
+      <td class="col-pct pct-good">98%</td>
       <td class="col-out">55</td>
     </tr>
     <tr>
@@ -819,6 +848,7 @@
       <td class="col-fio">Ильницкая Светлана Викторовна</td>
       <td class="col-in">29</td>
       <td class="col-miss">6</td>
+      <td class="col-pct pct-good">83%</td>
       <td class="col-out">26</td>
     </tr>
     <tr>
@@ -826,6 +856,7 @@
       <td class="col-fio">Бусыгина Ирина Сергеевна</td>
       <td class="col-in">20</td>
       <td class="col-miss">8</td>
+      <td class="col-pct pct-warn">71%</td>
       <td class="col-out">32</td>
     </tr>
   </tbody>
@@ -850,6 +881,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -857,6 +889,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -870,6 +903,7 @@
       <td class="col-fio">Тимофеева Алиса Николаевна</td>
       <td class="col-in">113</td>
       <td class="col-miss">35</td>
+      <td class="col-pct pct-warn">76%</td>
       <td class="col-out">158</td>
     </tr>
     <tr>
@@ -877,6 +911,7 @@
       <td class="col-fio">Шевелева Ксения Викторовна</td>
       <td class="col-in">111</td>
       <td class="col-miss">21</td>
+      <td class="col-pct pct-good">84%</td>
       <td class="col-out">107</td>
     </tr>
     <tr>
@@ -884,6 +919,7 @@
       <td class="col-fio">Янова Екатерина Анатольевна</td>
       <td class="col-in">55</td>
       <td class="col-miss">7</td>
+      <td class="col-pct pct-good">89%</td>
       <td class="col-out">65</td>
     </tr>
     <tr>
@@ -891,6 +927,7 @@
       <td class="col-fio">Лейпожих Алёна Алексеевна</td>
       <td class="col-in">24</td>
       <td class="col-miss">12</td>
+      <td class="col-pct pct-warn">67%</td>
       <td class="col-out">21</td>
     </tr>
     <tr>
@@ -898,6 +935,7 @@
       <td class="col-fio">Чистякова Елена Дмитриевна</td>
       <td class="col-in">16</td>
       <td class="col-miss">6</td>
+      <td class="col-pct pct-warn">73%</td>
       <td class="col-out">20</td>
     </tr>
     <tr>
@@ -905,6 +943,7 @@
       <td class="col-fio">Яковлева Вилена Фаильевна</td>
       <td class="col-in">18</td>
       <td class="col-miss">3</td>
+      <td class="col-pct pct-good">86%</td>
       <td class="col-out">14</td>
     </tr>
     <tr>
@@ -912,6 +951,7 @@
       <td class="col-fio">Павлова Надежда Григорьевна</td>
       <td class="col-in">14</td>
       <td class="col-miss">2</td>
+      <td class="col-pct pct-good">88%</td>
       <td class="col-out">17</td>
     </tr>
     <tr>
@@ -919,6 +959,7 @@
       <td class="col-fio">Ребась Кристина Владимировна</td>
       <td class="col-in">4</td>
       <td class="col-miss">0</td>
+      <td class="col-pct pct-good">100%</td>
       <td class="col-out">9</td>
     </tr>
   </tbody>
@@ -943,6 +984,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -950,6 +992,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -963,6 +1006,7 @@
       <td class="col-fio">Семенова Наталья Александровна</td>
       <td class="col-in">149</td>
       <td class="col-miss">68</td>
+      <td class="col-pct pct-warn">69%</td>
       <td class="col-out">174</td>
     </tr>
     <tr>
@@ -970,6 +1014,7 @@
       <td class="col-fio">Жукова Анастасия Сергеевна</td>
       <td class="col-in">152</td>
       <td class="col-miss">24</td>
+      <td class="col-pct pct-good">86%</td>
       <td class="col-out">138</td>
     </tr>
     <tr>
@@ -977,6 +1022,7 @@
       <td class="col-fio">Лаба Вера Алексеевна</td>
       <td class="col-in">112</td>
       <td class="col-miss">26</td>
+      <td class="col-pct pct-good">81%</td>
       <td class="col-out">117</td>
     </tr>
     <tr>
@@ -984,6 +1030,7 @@
       <td class="col-fio">Каргаполова Алёна Андреевна</td>
       <td class="col-in">100</td>
       <td class="col-miss">20</td>
+      <td class="col-pct pct-good">83%</td>
       <td class="col-out">97</td>
     </tr>
     <tr>
@@ -991,6 +1038,7 @@
       <td class="col-fio">Юшкевич Татьяна Владимировна</td>
       <td class="col-in">89</td>
       <td class="col-miss">5</td>
+      <td class="col-pct pct-good">95%</td>
       <td class="col-out">87</td>
     </tr>
     <tr>
@@ -998,6 +1046,7 @@
       <td class="col-fio">Занина Ирина Александровна</td>
       <td class="col-in">81</td>
       <td class="col-miss">13</td>
+      <td class="col-pct pct-good">86%</td>
       <td class="col-out">71</td>
     </tr>
     <tr>
@@ -1005,6 +1054,7 @@
       <td class="col-fio">Леванских Людмила Владимировна</td>
       <td class="col-in">77</td>
       <td class="col-miss">6</td>
+      <td class="col-pct pct-good">93%</td>
       <td class="col-out">65</td>
     </tr>
     <tr>
@@ -1012,6 +1062,7 @@
       <td class="col-fio">Кропотов Иван Александрович</td>
       <td class="col-in">68</td>
       <td class="col-miss">3</td>
+      <td class="col-pct pct-good">96%</td>
       <td class="col-out">47</td>
     </tr>
     <tr>
@@ -1019,6 +1070,7 @@
       <td class="col-fio">Фаузер Татьяна Леовна</td>
       <td class="col-in">76</td>
       <td class="col-miss">4</td>
+      <td class="col-pct pct-good">95%</td>
       <td class="col-out">13</td>
     </tr>
     <tr>
@@ -1026,6 +1078,7 @@
       <td class="col-fio">Семенова Наталья Викторовна</td>
       <td class="col-in">50</td>
       <td class="col-miss">1</td>
+      <td class="col-pct pct-good">98%</td>
       <td class="col-out">35</td>
     </tr>
     <tr>
@@ -1033,6 +1086,7 @@
       <td class="col-fio">Мицура Ираида Илдаровна</td>
       <td class="col-in">30</td>
       <td class="col-miss">4</td>
+      <td class="col-pct pct-good">88%</td>
       <td class="col-out">31</td>
     </tr>
   </tbody>
@@ -1057,6 +1111,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -1064,6 +1119,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -1077,6 +1133,7 @@
       <td class="col-fio">Константинова Людмила Алексеевна</td>
       <td class="col-in">240</td>
       <td class="col-miss">81</td>
+      <td class="col-pct pct-warn">75%</td>
       <td class="col-out">423</td>
     </tr>
     <tr>
@@ -1084,6 +1141,7 @@
       <td class="col-fio">Ильдеркина Ирина Николаевна</td>
       <td class="col-in">272</td>
       <td class="col-miss">77</td>
+      <td class="col-pct pct-warn">78%</td>
       <td class="col-out">269</td>
     </tr>
     <tr>
@@ -1091,6 +1149,7 @@
       <td class="col-fio">Павлова Ирина Игоревна</td>
       <td class="col-in">274</td>
       <td class="col-miss">80</td>
+      <td class="col-pct pct-warn">77%</td>
       <td class="col-out">187</td>
     </tr>
     <tr>
@@ -1098,6 +1157,7 @@
       <td class="col-fio">Конева Елена Ивановна</td>
       <td class="col-in">196</td>
       <td class="col-miss">45</td>
+      <td class="col-pct pct-good">81%</td>
       <td class="col-out">281</td>
     </tr>
     <tr>
@@ -1105,6 +1165,7 @@
       <td class="col-fio">Мунарева Виктория Игоревна</td>
       <td class="col-in">131</td>
       <td class="col-miss">20</td>
+      <td class="col-pct pct-good">87%</td>
       <td class="col-out">353</td>
     </tr>
     <tr>
@@ -1112,6 +1173,7 @@
       <td class="col-fio">Алыкова Татьяна Валерьевна</td>
       <td class="col-in">173</td>
       <td class="col-miss">35</td>
+      <td class="col-pct pct-good">83%</td>
       <td class="col-out">212</td>
     </tr>
     <tr>
@@ -1119,6 +1181,7 @@
       <td class="col-fio">Казанцева Лариса Анатольевна</td>
       <td class="col-in">151</td>
       <td class="col-miss">53</td>
+      <td class="col-pct pct-warn">74%</td>
       <td class="col-out">208</td>
     </tr>
     <tr>
@@ -1126,6 +1189,7 @@
       <td class="col-fio">Букреева Елена Николаевна</td>
       <td class="col-in">197</td>
       <td class="col-miss">67</td>
+      <td class="col-pct pct-warn">75%</td>
       <td class="col-out">124</td>
     </tr>
     <tr>
@@ -1133,6 +1197,7 @@
       <td class="col-fio">Сафаралеева Елена Хайрулловна</td>
       <td class="col-in">140</td>
       <td class="col-miss">45</td>
+      <td class="col-pct pct-warn">76%</td>
       <td class="col-out">129</td>
     </tr>
     <tr>
@@ -1140,6 +1205,7 @@
       <td class="col-fio">Россолова Екатерина Сергеевна</td>
       <td class="col-in">152</td>
       <td class="col-miss">24</td>
+      <td class="col-pct pct-good">86%</td>
       <td class="col-out">89</td>
     </tr>
     <tr>
@@ -1147,6 +1213,7 @@
       <td class="col-fio">Злобина Мария Александровна</td>
       <td class="col-in">100</td>
       <td class="col-miss">20</td>
+      <td class="col-pct pct-good">83%</td>
       <td class="col-out">144</td>
     </tr>
     <tr>
@@ -1154,6 +1221,7 @@
       <td class="col-fio">Шахова Галина Максимовна</td>
       <td class="col-in">75</td>
       <td class="col-miss">35</td>
+      <td class="col-pct pct-warn">68%</td>
       <td class="col-out">91</td>
     </tr>
     <tr>
@@ -1161,6 +1229,7 @@
       <td class="col-fio">Манджиева Алевтина Алексеевна</td>
       <td class="col-in">66</td>
       <td class="col-miss">17</td>
+      <td class="col-pct pct-warn">80%</td>
       <td class="col-out">102</td>
     </tr>
     <tr>
@@ -1168,6 +1237,7 @@
       <td class="col-fio">Ершова Алла Николаевна</td>
       <td class="col-in">103</td>
       <td class="col-miss">15</td>
+      <td class="col-pct pct-good">87%</td>
       <td class="col-out">64</td>
     </tr>
     <tr>
@@ -1175,6 +1245,7 @@
       <td class="col-fio">Лазарева Екатерина Николаевна</td>
       <td class="col-in">32</td>
       <td class="col-miss">8</td>
+      <td class="col-pct pct-good">80%</td>
       <td class="col-out">24</td>
     </tr>
     <tr>
@@ -1182,6 +1253,7 @@
       <td class="col-fio">Русмиленко Инга Юрьевна</td>
       <td class="col-in">41</td>
       <td class="col-miss">8</td>
+      <td class="col-pct pct-good">84%</td>
       <td class="col-out">12</td>
     </tr>
   </tbody>
@@ -1206,6 +1278,7 @@
     <col class="col-fio">
     <col class="col-stat">
     <col class="col-stat">
+    <col class="col-pct">
     <col class="col-stat">
   </colgroup>
   <thead>
@@ -1213,6 +1286,7 @@
       <th rowspan="2" class="col-num">№</th>
       <th rowspan="2" class="col-fio">ФИО</th>
       <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
       <th rowspan="2" class="col-out">Исходящие</th>
     </tr>
     <tr>
@@ -1226,6 +1300,7 @@
       <td class="col-fio">Нурулина Наталья Владимировна</td>
       <td class="col-in">171</td>
       <td class="col-miss">113</td>
+      <td class="col-pct pct-warn">60%</td>
       <td class="col-out">194</td>
     </tr>
     <tr>
@@ -1233,6 +1308,7 @@
       <td class="col-fio">Кузнецова Надежда Александровна</td>
       <td class="col-in">103</td>
       <td class="col-miss">17</td>
+      <td class="col-pct pct-good">86%</td>
       <td class="col-out">67</td>
     </tr>
     <tr>
@@ -1240,6 +1316,7 @@
       <td class="col-fio">Обломкина Лариса Ивановна</td>
       <td class="col-in">80</td>
       <td class="col-miss">14</td>
+      <td class="col-pct pct-good">85%</td>
       <td class="col-out">87</td>
     </tr>
     <tr>
@@ -1247,6 +1324,7 @@
       <td class="col-fio">Нурлубаева Алина Залимхановна</td>
       <td class="col-in">119</td>
       <td class="col-miss">21</td>
+      <td class="col-pct pct-good">85%</td>
       <td class="col-out">39</td>
     </tr>
     <tr>
@@ -1254,6 +1332,7 @@
       <td class="col-fio">Дмитриенко Татьяна Валерьевна</td>
       <td class="col-in">105</td>
       <td class="col-miss">10</td>
+      <td class="col-pct pct-good">91%</td>
       <td class="col-out">64</td>
     </tr>
     <tr>
@@ -1261,6 +1340,7 @@
       <td class="col-fio">Мухамадеева Танзиля Рафкатовна</td>
       <td class="col-in">88</td>
       <td class="col-miss">13</td>
+      <td class="col-pct pct-good">87%</td>
       <td class="col-out">74</td>
     </tr>
     <tr>
@@ -1268,6 +1348,7 @@
       <td class="col-fio">Карташова Мария Александровна</td>
       <td class="col-in">63</td>
       <td class="col-miss">15</td>
+      <td class="col-pct pct-good">81%</td>
       <td class="col-out">81</td>
     </tr>
     <tr>
@@ -1275,6 +1356,7 @@
       <td class="col-fio">Горохова Алёна Павловна</td>
       <td class="col-in">69</td>
       <td class="col-miss">18</td>
+      <td class="col-pct pct-warn">79%</td>
       <td class="col-out">51</td>
     </tr>
     <tr>
@@ -1282,6 +1364,7 @@
       <td class="col-fio">Кундаль Нина Валерьевна</td>
       <td class="col-in">70</td>
       <td class="col-miss">11</td>
+      <td class="col-pct pct-good">86%</td>
       <td class="col-out">48</td>
     </tr>
     <tr>
@@ -1289,6 +1372,7 @@
       <td class="col-fio">Якута Светлана Михайловна</td>
       <td class="col-in">35</td>
       <td class="col-miss">18</td>
+      <td class="col-pct pct-warn">66%</td>
       <td class="col-out">41</td>
     </tr>
     <tr>
@@ -1296,6 +1380,7 @@
       <td class="col-fio">Иванова Любовь Васильевна</td>
       <td class="col-in">0</td>
       <td class="col-miss">2</td>
+      <td class="col-pct pct-bad">0%</td>
       <td class="col-out">0</td>
     </tr>
   </tbody>

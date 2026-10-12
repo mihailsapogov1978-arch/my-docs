@@ -463,20 +463,12 @@ HTML_HEADER = """<style>
     --emp-missed: #c53030;
     --emp-in: #2f855a;
     --emp-out: #2b6cb0;
-
-    --col-num: 56px;
-    --col-stat: 130px;
-    --col-fio-min: 220px;
 }
 
 /* ---------- Плашка «Всего звонков» ---------- */
 .calls-total {
     display: grid;
-    grid-template-columns:
-        minmax(var(--col-fio-min), 1fr)
-        var(--col-stat)
-        var(--col-stat)
-        var(--col-stat);
+    grid-template-columns: minmax(220px, 1fr) 130px 130px 130px;
     align-items: stretch;
     column-gap: 0;
     background: var(--emp-accent-light);
@@ -595,27 +587,30 @@ HTML_HEADER = """<style>
     font-size: 13.5px;
     table-layout: fixed;
 }
-.calls-table col.col-num  { width: var(--col-num); }
+.calls-table col.col-num  { width: 40px; }
 .calls-table col.col-fio  { width: auto; }
-.calls-table col.col-stat { width: var(--col-stat); }
+.calls-table col.col-stat { width: 140px; }
+.calls-table col.col-pct  { width: 110px; }
 
 .calls-table thead th {
     background: #f0f7ff;
     color: var(--emp-accent);
     font-weight: 700;
-    font-size: 11.5px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    padding: 8px 14px;
+    letter-spacing: 0.02em;
+    padding: 6px 6px;
     border-bottom: 1px solid var(--emp-accent-border);
     border-right: 1px solid var(--emp-accent-border);
     text-align: center;
     vertical-align: middle;
+    white-space: nowrap;
+    word-break: keep-all;
 }
 .calls-table thead th:last-child { border-right: none; }
 
 .calls-table tbody td {
-    padding: 8px 14px;
+    padding: 8px 8px;
     border-bottom: 1px solid var(--emp-border);
     border-right: 1px solid var(--emp-border);
     text-align: right;
@@ -641,21 +636,13 @@ HTML_HEADER = """<style>
 .calls-table .col-miss { color: var(--emp-missed); }
 .calls-table .col-out  { color: var(--emp-out); }
 
-/* ---------- Таблица «Нагрузка отделов» (шире по колонкам) ---------- */
-.calls-table.dept-load-table col.col-num  { width: 48px; }
-.calls-table.dept-load-table col.col-fio  { width: auto; }
-.calls-table.dept-load-table col.col-stat { width: 100px; }
-
-.calls-table.dept-load-table thead th {
-    font-size: 11px;
-    padding: 8px 8px;
-    white-space: normal;
-    line-height: 1.2;
+.calls-table .col-pct {
+    text-align: center;
+    font-weight: 700;
 }
-.calls-table.dept-load-table tbody td {
-    padding: 8px 10px;
-    font-size: 13px;
-}
+.calls-table .col-pct.pct-good { color: var(--emp-in); }
+.calls-table .col-pct.pct-warn { color: #b7791f; }
+.calls-table .col-pct.pct-bad  { color: var(--emp-missed); }
 
 /* ---------- Гистограмма нагрузки ---------- */
 .load-chart {
@@ -707,9 +694,9 @@ HTML_HEADER = """<style>
     height: 100%;
     transition: opacity 0.15s;
 }
-.load-chart-seg.seg-in   { background: #6fa8b8; }   /* светлый teal */
-.load-chart-seg.seg-miss { background: #f5a623; }   /* светло-оранжевый / янтарный */
-.load-chart-seg.seg-out  { background: #8ba0c4; }   /* светло-slate */
+.load-chart-seg.seg-in   { background: #6fa8b8; }
+.load-chart-seg.seg-miss { background: #f5a623; }
+.load-chart-seg.seg-out  { background: #8ba0c4; }
 
 .load-chart-value {
     text-align: right;
@@ -851,6 +838,7 @@ def _render_dept_table(rows: list) -> str:
     L.append('    <col class="col-fio">')
     L.append('    <col class="col-stat">')
     L.append('    <col class="col-stat">')
+    L.append('    <col class="col-pct">')
     L.append('    <col class="col-stat">')
     L.append('  </colgroup>')
     L.append('  <thead>')
@@ -858,6 +846,7 @@ def _render_dept_table(rows: list) -> str:
     L.append('      <th rowspan="2" class="col-num">№</th>')
     L.append('      <th rowspan="2" class="col-fio">ФИО</th>')
     L.append('      <th colspan="2">Входящие</th>')
+    L.append('      <th rowspan="2" class="col-pct">Принято, %</th>')
     L.append('      <th rowspan="2" class="col-out">Исходящие</th>')
     L.append('    </tr>')
     L.append('    <tr>')
@@ -867,11 +856,28 @@ def _render_dept_table(rows: list) -> str:
     L.append('  </thead>')
     L.append('  <tbody>')
     for i, (fio, s, _) in enumerate(rows, start=1):
+        total_in = s["incoming"] + s["missed"]
+        if total_in > 0:
+            pct = s["incoming"] / total_in * 100
+            pct_text = f'{pct:.0f}%'
+        else:
+            pct_text = '—'
+
+        if total_in == 0:
+            pct_cls = ''
+        elif pct >= 80:
+            pct_cls = 'pct-good'
+        elif pct >= 50:
+            pct_cls = 'pct-warn'
+        else:
+            pct_cls = 'pct-bad'
+
         L.append('    <tr>')
         L.append(f'      <td class="col-num">{i}</td>')
         L.append(f'      <td class="col-fio">{fio}</td>')
         L.append(f'      <td class="col-in">{s["incoming"]}</td>')
         L.append(f'      <td class="col-miss">{s["missed"]}</td>')
+        L.append(f'      <td class="col-pct {pct_cls}">{pct_text}</td>')
         L.append(f'      <td class="col-out">{s["outgoing"]}</td>')
         L.append('    </tr>')
     L.append('  </tbody>')
@@ -890,12 +896,6 @@ def _fact_card(label: str, value: str, sub: str, cls: str) -> str:
 
 
 def _render_load_chart(dept_rows: list) -> str:
-    """
-    Горизонтальная гистограмма нагрузки по отделам.
-    dept_rows — список (dept, d), где d содержит incoming, missed, outgoing, total_all.
-    Ширина полосы = total_all / max(total_all) * 100%.
-    Внутри полосы — три сегмента (принятые / пропущенные / исходящие).
-    """
     if not dept_rows:
         return ""
 
@@ -910,7 +910,6 @@ def _render_load_chart(dept_rows: list) -> str:
         total = d["total_all"]
         width_pct = total / max_total * 100.0
 
-        # доли сегментов внутри полосы (сумма = 100%)
         if total > 0:
             pct_in   = d["incoming"] / total * 100.0
             pct_miss = d["missed"]   / total * 100.0
@@ -939,7 +938,6 @@ def _render_load_chart(dept_rows: list) -> str:
         L.append(f'  <div class="load-chart-value">{total}</div>')
         L.append('</div>')
 
-    # Легенда
     L.append('  <div class="load-chart-legend">')
     L.append(
         '    <span class="load-chart-legend-item">'
@@ -1051,7 +1049,6 @@ def render_md(data: dict) -> str:
     L.append("")
 
     # ---------- 2. Нагрузка отделов ----------
-    
     L.append("## Нагрузка отделов")
     L.append("")
     L.append('<div class="calls-source">'
@@ -1071,11 +1068,9 @@ def render_md(data: dict) -> str:
 
     dept_rows.sort(key=lambda x: x[1]["total_all"], reverse=True)
 
-    # Гистограмма
     L.append(_render_load_chart(dept_rows))
     L.append("")
 
-    # Сводные выводы
     L.append('<div class="facts-grid">')
 
     if dept_rows:

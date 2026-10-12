@@ -920,6 +920,129 @@
                 </div>
             </td>
         </tr>
+                <!-- ============ 13 ============ -->
+        <tr class="main-row" data-key="13" data-status="soglasovanie" data-deadline="">
+            <td>13</td>
+            <td class="meropriyatie-cell">Поставка простых неисключительных лицензий на средства криптографической защиты информации <span class="row-toggle">⌄</span></td>
+            <td><input type="date" class="boss-input" data-field="deadline" value=""></td>
+            <td><span class="status-badge status-soglasovanie" data-field="status-badge">Согласование ТЗ</span></td>
+        </tr>
+        <tr class="detail-row" data-detail-for="13" style="display:none;">
+            <td colspan="4">
+                <div class="detail-wrap">
+                    <table class="detail-table">
+                        <thead>
+                            <tr>
+                                <th>Этап</th>
+                                <th style="width:120px;">Дата</th>
+                                <th style="width:180px;">Ответственный</th>
+                                <th>Комментарий</th>
+                                <th style="width:50px; text-align:center;">✓</th>
+                            </tr>
+                        </thead>
+                        <tbody data-steps-for="13">
+                            <tr data-step="1">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="2">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="3">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="4">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="5">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+
+        <!-- ============ 14 ============ -->
+        <tr class="main-row" data-key="14" data-status="soglasovanie" data-deadline="">
+            <td>14</td>
+            <td class="meropriyatie-cell">Оказание услуг по разработке модели угроз безопасности информации, технического задания на создание системы защиты информации <span class="row-toggle">⌄</span></td>
+            <td><input type="date" class="boss-input" data-field="deadline" value=""></td>
+            <td><span class="status-badge status-soglasovanie" data-field="status-badge">Согласование ТЗ</span></td>
+        </tr>
+        <tr class="detail-row" data-detail-for="14" style="display:none;">
+            <td colspan="4">
+                <div class="detail-wrap">
+                    <table class="detail-table">
+                        <thead>
+                            <tr>
+                                <th>Этап</th>
+                                <th style="width:120px;">Дата</th>
+                                <th style="width:180px;">Ответственный</th>
+                                <th>Комментарий</th>
+                                <th style="width:50px; text-align:center;">✓</th>
+                            </tr>
+                        </thead>
+                        <tbody data-steps-for="14">
+                            <tr data-step="1">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="2">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="3">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="4">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                            <tr data-step="5">
+                                <td class="step-name"></td>
+                                <td><input type="date" class="detail-input" data-step-field="date" value=""></td>
+                                <td><select class="detail-select" data-step-field="assignee"></select></td>
+                                <td><textarea class="detail-input detail-textarea" data-step-field="comment" rows="1" placeholder="—"></textarea></td>
+                                <td style="text-align:center;"><input type="checkbox" class="detail-checkbox" data-step-field="done"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
     </tbody>
 </table>
 
@@ -940,6 +1063,8 @@
     'Гасанов С.Н.',
     'Обмолова В.В.',
     'Суханова И.К.',
+    'Чернов А.А.',
+    'Лычев А.В.',
     'НПО Криста',
   ];
 
