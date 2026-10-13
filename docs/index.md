@@ -97,7 +97,7 @@
 
 # Дашборд
 
-*Обновлено: 12 октября 2026*
+*Обновлено: 13 октября 2026*
 
 <div class="dash-grid">
 <a class="dash-card dc-info" href="projects_2026/roadmap/">

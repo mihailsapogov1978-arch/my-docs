@@ -99,7 +99,7 @@
 
 # Календарь ключевых дат
 
-*Обновлено: 12 октября 2026*
+*Обновлено: 13 октября 2026*
 
 <div class="cal-summary">
 <div class="cs-card cs-overdue">
@@ -123,15 +123,15 @@
 <table class="cal-table">
 <thead><tr><th style="width:130px;">Дата</th><th style="width:130px;">Тип</th><th>Событие</th><th style="width:110px; text-align:right;">Осталось</th></tr></thead>
 <tbody>
-<tr class="cal-row overdue"><td class="cal-date">15.05.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с медицинскими инф. системами <span style="color:#718096;font-size:12px;">— Постановка задачи</span></td><td class="cal-days">просрочено на 150 дн.</td></tr>
-<tr class="cal-row near"><td class="cal-date">26.10.2026</td><td><span class="cal-kind k-report">Отчётность</span></td><td>Отчет по аудиту ПО в ДИТиС <span style="color:#718096;font-size:12px;">— Отчет</span></td><td class="cal-days">14 дн.</td></tr>
-<tr class="cal-row near"><td class="cal-date">01.11.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ЛК/Сметы с сервисом по предоставлению справок <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">20 дн.</td></tr>
-<tr class="cal-row near"><td class="cal-date">01.11.2026</td><td><span class="cal-kind k-report">Отчётность</span></td><td>Отчёт по импортозамещению <span style="color:#718096;font-size:12px;">— ДИТиС</span></td><td class="cal-days">20 дн.</td></tr>
-<tr class="cal-row"><td class="cal-date">25.11.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Настройка Опеки и попечительства <span style="color:#718096;font-size:12px;">— Торги</span></td><td class="cal-days">44 дн.</td></tr>
-<tr class="cal-row"><td class="cal-date">01.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Слияние баз <span style="color:#718096;font-size:12px;">— Торги</span></td><td class="cal-days">50 дн.</td></tr>
-<tr class="cal-row"><td class="cal-date">10.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с РСЭД "Тэзис" <span style="color:#718096;font-size:12px;">— Согласование ТЗ</span></td><td class="cal-days">59 дн.</td></tr>
-<tr class="cal-row"><td class="cal-date">10.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Настройка Родительской платы <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">59 дн.</td></tr>
-<tr class="cal-row"><td class="cal-date">25.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с ГИС "Имущество" <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">74 дн.</td></tr>
-<tr class="cal-row"><td class="cal-date">25.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с ГИС "АПК" <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">74 дн.</td></tr>
-<tr class="cal-row"><td class="cal-date">25.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Настройка функционала администрирования ГИС "Смета ЯНАО" <span style="color:#718096;font-size:12px;">— Торги</span></td><td class="cal-days">74 дн.</td></tr>
+<tr class="cal-row overdue"><td class="cal-date">15.05.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с медицинскими инф. системами <span style="color:#718096;font-size:12px;">— Постановка задачи</span></td><td class="cal-days">просрочено на 151 дн.</td></tr>
+<tr class="cal-row near"><td class="cal-date">26.10.2026</td><td><span class="cal-kind k-report">Отчётность</span></td><td>Отчет по аудиту ПО в ДИТиС <span style="color:#718096;font-size:12px;">— Отчет</span></td><td class="cal-days">13 дн.</td></tr>
+<tr class="cal-row near"><td class="cal-date">01.11.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ЛК/Сметы с сервисом по предоставлению справок <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">19 дн.</td></tr>
+<tr class="cal-row near"><td class="cal-date">01.11.2026</td><td><span class="cal-kind k-report">Отчётность</span></td><td>Отчёт по импортозамещению <span style="color:#718096;font-size:12px;">— ДИТиС</span></td><td class="cal-days">19 дн.</td></tr>
+<tr class="cal-row"><td class="cal-date">25.11.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Настройка Опеки и попечительства <span style="color:#718096;font-size:12px;">— Торги</span></td><td class="cal-days">43 дн.</td></tr>
+<tr class="cal-row"><td class="cal-date">01.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Слияние баз <span style="color:#718096;font-size:12px;">— Торги</span></td><td class="cal-days">49 дн.</td></tr>
+<tr class="cal-row"><td class="cal-date">10.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с РСЭД "Тэзис" <span style="color:#718096;font-size:12px;">— Согласование ТЗ</span></td><td class="cal-days">58 дн.</td></tr>
+<tr class="cal-row"><td class="cal-date">10.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Настройка Родительской платы <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">58 дн.</td></tr>
+<tr class="cal-row"><td class="cal-date">25.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с ГИС "Имущество" <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">73 дн.</td></tr>
+<tr class="cal-row"><td class="cal-date">25.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Интеграция ГИС "Смета ЯНАО" с ГИС "АПК" <span style="color:#718096;font-size:12px;">— Работы по ГК</span></td><td class="cal-days">73 дн.</td></tr>
+<tr class="cal-row"><td class="cal-date">25.12.2026</td><td><span class="cal-kind k-roadmap">Мероприятие</span></td><td>Настройка функционала администрирования ГИС "Смета ЯНАО" <span style="color:#718096;font-size:12px;">— Торги</span></td><td class="cal-days">73 дн.</td></tr>
 </tbody></table>

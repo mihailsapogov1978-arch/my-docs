@@ -75,7 +75,7 @@ def fmt_amount(v):
 
 
 def build_table_html(records, year):
-    """Генерирует HTML-таблицу для конкретного года"""
+    """Генерирует HTML-таблицу для конкретного года (без колонки «Согласовано»)."""
     
     total_amount = 0
     for r in records:
@@ -88,13 +88,11 @@ def build_table_html(records, year):
     for i, r in enumerate(records, start=1):
         amount = fmt_amount(r['amount'])
         name = r['name'].replace('\n', '<br>')
-        status_badge = '✅ Согласовано' if 'Согласовано' in str(r['status']) else '⚠️ ' + str(r['status'])
         
         rows_html += '<tr>'
-        rows_html += '<td style="width: 40px; text-align: center; vertical-align: top;">' + str(i) + '</td>'
-        rows_html += '<td style="width: 120px; vertical-align: top; white-space: nowrap;">' + status_badge + '</td>'
-        rows_html += '<td style="vertical-align: top;">' + name + '</td>'
-        rows_html += '<td style="width: 150px; text-align: right; white-space: nowrap; vertical-align: top;">' + amount + ' ₽</td>'
+        rows_html += '<td class="pt-num">' + str(i) + '</td>'
+        rows_html += '<td class="pt-name">' + name + '</td>'
+        rows_html += '<td class="pt-amount">' + amount + ' ₽</td>'
         rows_html += '</tr>'
 
     rks_link = RKS_LINKS.get(year, '#')
@@ -107,22 +105,20 @@ def build_table_html(records, year):
     total_fmt = fmt_amount(total_amount)
     
     html = link_text + '\n\n'
-    html += '<div style="overflow-x: auto;">\n'
-    html += '<table style="width: 100%; border-collapse: collapse; font-size: 14px;">\n'
+    html += '<div class="plan-table-wrap">\n'
+    html += '<table class="plan-table">\n'
     html += '  <thead>\n'
-    # ДОБАВЛЕНО font-weight: normal для всех ячеек заголовка
-    html += '    <tr style="background-color: #f5f7fa; color: black">\n'
-    html += '      <th style="width: 40px; text-align: center; padding: 10px; font-weight: normal;">№</th>\n'
-    html += '      <th style="width: 120px; text-align: left; padding: 10px; font-weight: normal;">Согласовано</th>\n'
-    html += '      <th style="text-align: left; padding: 10px; font-weight: normal;">Наименование мероприятия</th>\n'
-    html += '      <th style="width: 150px; text-align: right; padding: 10px; font-weight: normal;">Объем расходов</th>\n'
+    html += '    <tr>\n'
+    html += '      <th class="pt-num">№</th>\n'
+    html += '      <th class="pt-name">Наименование мероприятия</th>\n'
+    html += '      <th class="pt-amount">Объем расходов</th>\n'
     html += '    </tr>\n'
     html += '  </thead>\n'
     html += '  <tbody>\n'
     html += rows_html
-    html += '    <tr style="background-color: #e8f4f8; font-size: 16px;">\n'
-    html += '      <td colspan="3" style="text-align: right; padding: 10px;">ИТОГО:</td>\n'
-    html += '      <td style="text-align: right; padding: 10px;">' + total_fmt + ' ₽</td>\n'
+    html += '    <tr class="pt-total">\n'
+    html += '      <td colspan="2" class="pt-total-label">ИТОГО:</td>\n'
+    html += '      <td class="pt-amount pt-total-amount">' + total_fmt + ' ₽</td>\n'
     html += '    </tr>\n'
     html += '  </tbody>\n'
     html += '</table>\n'
@@ -157,7 +153,63 @@ def main():
     
     print('📅 Найдено годов: ' + str(sorted(plans_by_year.keys(), reverse=True)))
     
-    md_content = '# План закупок по мероприятиям информатизации\n\n'
+    md_content = '''<style>
+.plan-table-wrap {
+    margin: 12px 0 24px 0;
+    width: 100%;
+}
+.plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    table-layout: fixed;
+}
+.plan-table thead th {
+    background: #f5f7fa;
+    color: #000;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 1px solid #e2e8f0;
+}
+.plan-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eef2f6;
+    vertical-align: top;
+}
+.plan-table tbody tr:last-child td { border-bottom: none; }
+.plan-table .pt-num    { width: 44px; text-align: center; color: #718096; white-space: nowrap; }
+.plan-table .pt-name {
+    /* ширина по умолчанию auto — займёт всё свободное место */
+}
+.plan-table .pt-amount {
+    width: 150px;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 500;
+}
+.plan-table .pt-total {
+    background: #e8f4f8;
+    font-size: 15px;
+}
+.plan-table .pt-total-label {
+    text-align: right;
+    font-weight: 600;
+    padding: 10px 12px;
+}
+.plan-table .pt-total-amount {
+    font-weight: 700;
+}
+@media (max-width: 720px) {
+    .plan-table { font-size: 13px; table-layout: auto; }
+    .plan-table .pt-num    { width: 28px; }
+    .plan-table .pt-amount { width: 110px; }
+}
+</style>
+
+# План закупок по мероприятиям информатизации
+'''
     
     for year in sorted(plans_by_year.keys(), reverse=True):
         year_records = plans_by_year[year]

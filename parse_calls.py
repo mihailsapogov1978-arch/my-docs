@@ -337,7 +337,7 @@ def parse_calls() -> dict:
                 t1, t2 = row.get(c_connect), row.get(c_disconnect)
                 if is_filled(t1) and is_filled(t2):
                     try:
-                        dur = int((pd.to_datetime(t2) - pd.to_datetime(t1)).total_seconds())
+                        dur = int((pd.to_datetime(str(t2)) - pd.to_datetime(str(t1))).total_seconds())
                     except Exception:
                         dur = 0
 
@@ -355,7 +355,7 @@ def parse_calls() -> dict:
         start = row.get(c_start)
         if is_filled(start):
             try:
-                hour_counter[pd.to_datetime(start).hour] += 1
+                hour_counter[pd.to_datetime(str(start)).hour] += 1
             except Exception:
                 pass
 
@@ -857,20 +857,19 @@ def _render_dept_table(rows: list) -> str:
     L.append('  <tbody>')
     for i, (fio, s, _) in enumerate(rows, start=1):
         total_in = s["incoming"] + s["missed"]
-        if total_in > 0:
-            pct = s["incoming"] / total_in * 100
-            pct_text = f'{pct:.0f}%'
-        else:
-            pct_text = '—'
+        pct = (s["incoming"] / total_in * 100) if total_in > 0 else 0
 
         if total_in == 0:
+            pct_text = '—'
             pct_cls = ''
-        elif pct >= 80:
-            pct_cls = 'pct-good'
-        elif pct >= 50:
-            pct_cls = 'pct-warn'
         else:
-            pct_cls = 'pct-bad'
+            pct_text = f'{pct:.0f}%'
+            if pct >= 80:
+                pct_cls = 'pct-good'
+            elif pct >= 50:
+                pct_cls = 'pct-warn'
+            else:
+                pct_cls = 'pct-bad'
 
         L.append('    <tr>')
         L.append(f'      <td class="col-num">{i}</td>')
