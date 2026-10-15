@@ -2,18 +2,14 @@
 # -*- coding: utf-8 -*-
 """
 Раздаёт собранный сайт MkDocs (папка site/) + API:
-  - /api/statuses           — статусы карты мероприятий (statuses.json)
-  - /api/daily/<slug>       — приём ежедневных заметок (POST) от конкретного сотрудника
-  - /api/daily?employee=...&month=... (GET) — чтение заметок сотрудника за месяц
+  - /api/statuses           — статусы карт мероприятий (statuses.json, с merge)
+  - /api/daily/<slug>       — приём ежедневных заметок (POST)
+  - /api/daily?employee=...&month=... (GET) — чтение заметок
   - /daily/<slug>/          — персональная страница формы ежедневника
 
 Запуск:
     mkdocs build
-    python server.py
-
-Открыть:
-    http://<IP>:8000/                     → главная MkDocs
-    http://<IP>:8000/daily/mulyavin/      → форма для Мулявина
+    python3 server.py
 """
 import json
 import os
@@ -26,9 +22,9 @@ from urllib.parse import urlparse, parse_qs
 # ---------- Настройки ----------
 PORT = 8000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SITE_DIR = os.path.join(BASE_DIR, 'site')                      # статика MkDocs
-STATUS_FILE = os.path.join(BASE_DIR, 'statuses.json')          # статусы roadmap
-DAILY_DIR = os.path.join(BASE_DIR, 'docs', '_daily')           # ежедневные заметки
+SITE_DIR = os.path.join(BASE_DIR, 'site')
+STATUS_FILE = os.path.join(BASE_DIR, 'statuses.json')
+DAILY_DIR = os.path.join(BASE_DIR, 'docs', '_daily')
 
 DEFAULT_STATE = {
     "statuses":  {},
@@ -43,7 +39,6 @@ MONTHS_RU = {
     7: 'Июль', 8: 'Август', 9: 'Сентябрь', 10: 'Октябрь', 11: 'Ноябрь', 12: 'Декабрь',
 }
 
-# Слаг → отображаемое ФИО
 EMPLOYEE_SLUGS = {
     'staver':     'Ставер',
     'sapogov':    'Сапогов',
@@ -71,16 +66,8 @@ def load_statuses():
     if not isinstance(data, dict):
         return dict(DEFAULT_STATE)
 
-    # Миграция старого формата (плоский словарь) в новый
-    if ('statuses' not in data and 'assignees' not in data and
-            'stages' not in data and 'deadlines' not in data and 'details' not in data):
-        data = {"statuses": data, "assignees": {}, "stages": {}, "deadlines": {}, "details": {}}
-    else:
-        data.setdefault('statuses', {})
-        data.setdefault('assignees', {})
-        data.setdefault('stages', {})
-        data.setdefault('deadlines', {})
-        data.setdefault('details', {})
+    for key in ('statuses', 'assignees', 'stages', 'deadlines', 'details'):
+        data.setdefault(key, {})
 
     return data
 
@@ -94,12 +81,6 @@ def save_statuses(data):
 
 # =====================  DAILY  =====================
 def _validate_date(date_str):
-    """
-    Проверяет, что дата в разумных рамках:
-      - не раньше 1-го числа предыдущего месяца,
-      - не позже сегодняшнего дня + 1.
-    Возвращает (ok, message).
-    """
     try:
         dt = datetime.strptime(date_str, '%Y-%m-%d').date()
     except ValueError:
@@ -119,14 +100,6 @@ def _validate_date(date_str):
 
 
 def save_daily_entry(employee, date_str, text):
-    """
-    Сохраняет запись в docs/_daily/YYYY-MM/<имя>.md.
-    Логика:
-      - файла нет → создаём с заголовком "# Имя — Месяц Год";
-      - блок "## YYYY-MM-DD" уже есть → заменяем;
-      - нет → вставляем сверху, сразу под заголовком.
-    Возвращает относительный путь к файлу.
-    """
     dt = datetime.strptime(date_str, '%Y-%m-%d')
 
     safe_name = re.sub(r'[^\w\-А-Яа-яЁё]', '', employee)
@@ -169,10 +142,6 @@ def save_daily_entry(employee, date_str, text):
 
 
 def list_daily_entries(employee, month):
-    """
-    Читает файл заметок сотрудника за месяц.
-    Возвращает (content, error).
-    """
     safe_name = re.sub(r'[^\w\-А-Яа-яЁё]', '', employee or '')
     if not safe_name or not re.match(r'^\d{4}-\d{2}$', month or ''):
         return None, 'invalid params'
@@ -224,12 +193,10 @@ class Handler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
-        # /api/statuses
         if path == '/api/statuses':
             self._send_json(load_statuses())
             return
 
-        # /api/daily?employee=Мулявин&month=2026-10
         if path == '/api/daily':
             qs = parse_qs(parsed.query or '')
             employee = (qs.get('employee') or [''])[0].strip()
@@ -241,10 +208,6 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_json({'ok': True, 'employee': employee, 'month': month, 'content': content or ''})
             return
 
-        # /daily/<slug>/ — персональная форма.
-        # Отдаём site/daily/index.html, добавив <base href="/">,
-        # чтобы ресурсы (assets/, stylesheets/, javascripts/)
-        # грузились от корня сайта, а не от /daily/<slug>/.
         m = re.match(r'^/daily/([a-z\-]+)/?$', path)
         if m and m.group(1).lower() in EMPLOYEE_SLUGS:
             index_path = os.path.join(SITE_DIR, 'daily', 'index.html')
@@ -264,7 +227,6 @@ class Handler(SimpleHTTPRequestHandler):
                 self._send_html(html)
                 return
 
-        # всё остальное — статика MkDocs
         super().do_GET()
 
     # ---------- POST ----------
@@ -276,7 +238,6 @@ class Handler(SimpleHTTPRequestHandler):
             self._handle_statuses_post()
             return
 
-        # /api/daily/<slug>
         m = re.match(r'^/api/daily/([a-z\-]+)/?$', path)
         if m:
             slug = m.group(1).lower()
@@ -287,7 +248,6 @@ class Handler(SimpleHTTPRequestHandler):
             self._handle_daily_post(forced_employee=employee)
             return
 
-        # /api/daily без слага — отключено
         if path == '/api/daily':
             self._send_json({'ok': False, 'error': 'use /api/daily/<slug>'}, 400)
             return
@@ -304,16 +264,19 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_json({'error': 'expected object'}, 400)
             return
 
-        data = {
-            'statuses':  data.get('statuses',  {}) if isinstance(data.get('statuses'),  dict) else {},
-            'assignees': data.get('assignees', {}) if isinstance(data.get('assignees'), dict) else {},
-            'stages':    data.get('stages',    {}) if isinstance(data.get('stages'),    dict) else {},
-            'deadlines': data.get('deadlines', {}) if isinstance(data.get('deadlines'), dict) else {},
-            'details':   data.get('details',   {}) if isinstance(data.get('details'),   dict) else {},
-        }
+        # Читаем текущее состояние — здесь уже лежат все ключи (2026, 2027 и т.д.)
+        current = load_statuses()
+
+        # Сливаем присланное с текущим — по каждой группе отдельно.
+        # Пришедшие ключи перезаписываются, остальные сохраняются.
+        for group in ('statuses', 'assignees', 'stages', 'deadlines', 'details'):
+            incoming = data.get(group)
+            if isinstance(incoming, dict):
+                current.setdefault(group, {})
+                current[group].update(incoming)
 
         try:
-            save_statuses(data)
+            save_statuses(current)
         except Exception as e:
             self._send_json({'error': str(e)}, 500)
             return

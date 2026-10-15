@@ -21,7 +21,7 @@ theme:
     #- navigation.tabs
     - navigation.indexes
     - content.tags
-    # - toc.integrate
+    # toc.integrate
   palette:
     - media: '(prefers-color-scheme: light)'
       scheme: default
@@ -102,7 +102,9 @@ validation:
 nav:
   - Главная: index.md
   - Календарь: calendar.md
-  - Карта мероприятий: projects_2026/roadmap.md
+  - Мероприятия:
+    - 2027: projects_2027/roadmap.md
+    - 2026: projects_2026/roadmap.md
   - Контракты 2019–2026: Contracts/svod_gk.md
   - Планы информатизации: plans/plans.md
   - Отчёты отдела СРиТП: reports/index.md

@@ -188,15 +188,6 @@ def extract_employees(ws):
 
 # =====================  DAILY  =====================
 def parse_daily_file(path):
-    """
-    Читает файл заметок формата:
-        # Сапогов — Октябрь 2026
-
-        ## 2026-10-05
-        - Задача 1
-        - Задача 2
-    Возвращает список (date_str, item).
-    """
     if not os.path.exists(path):
         return []
 
@@ -224,9 +215,6 @@ def parse_daily_file(path):
 
 
 def load_daily_for_month(year, month):
-    """
-    { 'Сапогов': [(date, item), ...], ... } — читает все .md из docs/_daily/YYYY-MM/.
-    """
     folder = os.path.join(DAILY_DIR, f'{year}-{month:02d}')
     if not os.path.isdir(folder):
         return {}
@@ -244,6 +232,7 @@ def load_daily_for_month(year, month):
 
 # =====================  RENDER  =====================
 def render_employees(calls, employees):
+    """Одна строка на сотрудника, всё в виде обычной HTML-таблицы."""
     calls_map = {name: v for name, v in calls}
 
     employees = [e for e in employees if e['tasks']]
@@ -255,231 +244,167 @@ def render_employees(calls, employees):
     total_tickets = sum(e['tickets'] for e in employees if e.get('tickets') is not None)
     total_resolutions = sum(e['resolutions'] for e in employees if e.get('resolutions') is not None)
 
-    rows = []
-    for e in employees:
+    L = []
+    L.append('<table class="report-table">')
+    L.append('  <thead>')
+    L.append('    <tr>')
+    L.append('      <th style="width:240px;">Сотрудник</th>')
+    L.append('      <th style="width:110px;">Звонков</th>')
+    L.append('      <th style="width:110px;">Заявок</th>')
+    L.append('      <th style="width:110px;">Задач</th>')
+    L.append('      <th style="width:120px;">Резолюций</th>')
+    L.append('    </tr>')
+    L.append('  </thead>')
+    L.append('  <tbody>')
+
+    # Первая строка — сводка отдела
+    L.append('    <tr class="report-summary-row">')
+    L.append(f'      <td><b>Отдел СРТП</b><br><small>Сотрудников: {len(employees)}</small></td>')
+    L.append(f'      <td><b>{total_calls}</b></td>')
+    L.append(f'      <td><b>{total_tickets}</b></td>')
+    L.append(f'      <td><b>{total_tasks}</b></td>')
+    L.append(f'      <td><b>{total_resolutions}</b></td>')
+    L.append('    </tr>')
+
+    # Строки сотрудников
+    for idx, e in enumerate(employees, start=1):
         name = e['name']
         calls_val = calls_map.get(name, 0)
         n_tasks = len(e['tasks'])
+        tickets = e.get('tickets')
+        resolutions = e.get('resolutions')
 
-        chips = [
-            f'<span class="chip calls">Звонков: <b>{calls_val}</b></span>',
-        ]
-        if e.get('tickets') is not None:
-            chips.append(f'<span class="chip tickets">Заявок: <b>{e["tickets"]}</b></span>')
-        else:
-            chips.append('<span class="chip tickets"></span>')
-
-        chips.append(
-            f'<span class="chip tasks">Задач: <b>{n_tasks}</b>'
-            '<span class="emp-toggle"></span></span>'
-        )
-
-        if e.get('resolutions') is not None:
-            chips.append(f'<span class="chip res">Резолюций: <b>{e["resolutions"]}</b></span>')
-
-        chips_html = ''.join(chips)
         full_list = ''.join(f'<li>{esc(t)}</li>' for t in e['tasks'])
 
-        rows.append(
-            '<details class="emp-row">'
-            '<summary class="emp-summary">'
-            f'<span class="emp-name">{esc(name)}</span>'
-            f'<span class="emp-chips">{chips_html}</span>'
-            '</summary>'
-            '<div class="emp-body">'
-            f'<ul class="emp-tasks">{full_list}</ul>'
-            '</div>'
-            '</details>'
-        )
+        # Основная строка сотрудника — кликабельная ячейка имени
+        L.append(f'    <tr class="report-row" data-emp="{idx}">')
+        L.append('      <td class="report-name" onclick="toggleReportRow(this)">')
+        L.append(f'        <span class="report-toggle">›</span>')
+        L.append(f'        {esc(name)}')
+        L.append('      </td>')
+        L.append(f'      <td class="report-num">{calls_val}</td>')
+        L.append(f'      <td class="report-num">{tickets if tickets is not None else "—"}</td>')
+        L.append(f'      <td class="report-num">{n_tasks}</td>')
+        L.append(f'      <td class="report-num">{resolutions if resolutions is not None else "—"}</td>')
+        L.append('    </tr>')
 
-    header = (
-        '<div class="emp-total">'
-        f'<span class="emp-total-name">Отдел СРТП<br><small>Сотрудников: {len(employees)}</small></span>'
-        f'<span class="emp-total-cell">Звонков: <b>{total_calls}</b></span>'
-        f'<span class="emp-total-cell">Заявок: <b>{total_tickets}</b></span>'
-        f'<span class="emp-total-cell">Задач: <b>{total_tasks}</b></span>'
-        f'<span class="emp-total-cell">Резолюций: <b>{total_resolutions}</b></span>'
-        '</div>'
-    )
+        # Скрытая строка с задачами
+        L.append(f'    <tr class="report-tasks-row" style="display:none;">')
+        L.append(f'      <td colspan="5">')
+        L.append(f'        <ul class="report-tasks">{full_list}</ul>')
+        L.append('      </td>')
+        L.append('    </tr>')
 
-    return (
-        '<div markdown="1">\n\n'
-        + header + '\n\n'
-        + '<div class="emp-list">\n'
-        + '\n'.join(rows) + '\n'
-        + '</div>\n\n'
-        + '</div>'
-    )
+    L.append('  </tbody>')
+    L.append('</table>')
+
+    return '\n'.join(L)
 
 
 STYLES = '''<style>
-.emp-total,
-.md-typeset .emp-summary,
-.emp-summary {
-    display: grid !important;
-    grid-template-columns: 180px 130px 140px 140px 120px;
-    justify-content: start !important;
-    column-gap: 12px !important;
-    align-items: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.emp-total {
-    background: #ebf8ff;
-    border: 1px solid #bee3f8;
-    border-radius: 8px;
-    margin: 10px 0 12px 0 !important;
-    padding: 4px 0 !important;
-    font-size: 13px;
-    color: #2c5282;
-}
-.emp-total > span { padding: 6px 8px; white-space: nowrap; }
-.emp-total-name { padding-left: 14px !important; font-weight: 600; color: #2b6cb0; white-space: normal; }
-.emp-total-name small { display: block; font-weight: 400; font-size: 11px; color: #4a5568; margin-top: 2px; letter-spacing: 0.02em; }
-.emp-total b { color: #2b6cb0; }
-
-.emp-list {
-    margin: 16px 0;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    overflow: hidden;
+/* ===== Таблица отчёта ===== */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
     background: #fff;
+    border: 1px solid #e0e4e8;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0 28px 0;
+    table-layout: fixed;
 }
-.md-typeset .emp-row,
-.emp-row {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    border-bottom: 1px solid #eef2f6 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-.emp-row:last-child { border-bottom: none !important; }
-
-.md-typeset .emp-summary,
-.emp-summary {
-    cursor: pointer;
-    list-style: none !important;
-    font-size: 13px;
-    line-height: 1.3;
-    transition: background 0.15s;
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    padding-inline-start: 0 !important;
-}
-.emp-summary:hover { background: #f7fafc; }
-
-.md-typeset .emp-summary::before,
-.emp-summary::before,
-.md-typeset .emp-summary::after,
-.emp-summary::after,
-.md-typeset .emp-summary::marker,
-.emp-summary::marker,
-.md-typeset .emp-summary::-webkit-details-marker,
-.emp-summary::-webkit-details-marker {
-    display: none !important;
-    content: none !important;
-}
-.md-typeset details.emp-row > summary::before,
-.md-typeset details.emp-row > summary::after {
-    display: none !important;
-    content: none !important;
-}
-.md-typeset .emp-summary > svg,
-.md-typeset .emp-summary .md-icon,
-.md-typeset .emp-summary .twemoji {
-    display: none !important;
-}
-
-.md-typeset .emp-row:focus,
-.md-typeset .emp-row:focus-visible,
-.md-typeset .emp-row:focus-within,
-.md-typeset .emp-summary:focus,
-.md-typeset .emp-summary:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-    border-color: transparent !important;
-}
-
-.md-typeset .chip.tasks .emp-toggle {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
-    vertical-align: middle;
-}
-.md-typeset .chip.tasks .emp-toggle::after {
-    content: "›";
-    display: inline-block;
-    margin-left: 6px;
-    font-size: 16px;
-    line-height: 1;
-    color: #3182ce;
-    transition: transform 0.15s;
-    transform: translateY(-1px);
-}
-.md-typeset .emp-row[open] .chip.tasks .emp-toggle::after {
-    transform: translateY(-1px) rotate(90deg);
-}
-
-.emp-summary > span { padding: 10px 8px; vertical-align: middle; white-space: nowrap; }
-.md-typeset .emp-name,
-.emp-name {
-    font-weight: 700;
+.report-table thead th {
+    background: #f5f7fa;
     color: #2c3e50;
-    letter-spacing: 0.01em;
-    padding-left: 14px !important;
     text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e0e4e8;
+    white-space: nowrap;
 }
-
-.emp-arrow { display: none !important; }
-.emp-chips { display: contents !important; }
-
-.md-typeset .chip,
-.chip {
-    padding: 10px 8px !important;
-    font-size: 12px;
-    line-height: 1.3;
-    white-space: nowrap !important;
-    background: transparent !important;
-    border-radius: 0 !important;
-    text-align: left !important;
-    width: auto !important;
-}
-.chip b { font-weight: 700; }
-.chip.calls  { color: #2b6cb0; }
-.chip.tasks  { color: #2c7a7b; }
-.chip.tickets{ color: #744210; }
-.chip.res    { color: #6b46c1; }
-
-.md-typeset .emp-body,
-.emp-body {
-    padding: 4px 14px 12px 14px !important;
-    background: #fafbfc;
-    font-size: 12.5px;
+.report-table tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eef2f6;
+    vertical-align: middle;
     color: #2d3748;
+    font-size: 14px;
 }
-.emp-tasks { margin: 0; padding-left: 18px; line-height: 1.5; }
-.emp-tasks li { margin-bottom: 4px; }
+.report-table tbody tr:last-child td { border-bottom: none; }
 
-@media (max-width: 900px) {
-    .emp-total,
-    .md-typeset .emp-summary,
-    .emp-summary {
-        grid-template-columns: 1fr !important;
-        gap: 6px !important;
-        justify-content: stretch !important;
-    }
-    .emp-total > span,
-    .emp-summary > span { padding: 4px 14px; }
-    .emp-chips {
-        display: flex !important;
-        flex-wrap: wrap;
-        gap: 8px;
-        padding-left: 14px;
-    }
-    .chip { padding: 2px 8px !important; }
+/* Сводная строка отдела */
+.report-summary-row td {
+    background: #fafbfc;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #e0e4e8;
+}
+.report-summary-row small {
+    display: block;
+    color: #718096;
+    font-weight: 400;
+    font-size: 12.5px;
+    margin-top: 2px;
+}
+
+/* Кликабельная ячейка имени */
+.report-name {
+    cursor: pointer;
+    user-select: none;
+}
+.report-name:hover {
+    color: #2b6cb0;
+}
+
+/* Маркер раскрытия */
+.report-toggle {
+    display: inline-block;
+    color: #718096;
+    font-size: 15px;
+    font-weight: 700;
+    margin-right: 6px;
+    transition: transform 0.15s;
+}
+.report-toggle.open {
+    transform: rotate(90deg);
+}
+
+.report-num {
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Подсветка раскрытой строки сотрудника */
+.report-row.open td {
+    background: #eaf4ff;
+    border-bottom-color: #bee3f8;
+}
+.report-row.open td:first-child {
+    box-shadow: inset 3px 0 0 #3182ce;
+}
+.report-row.open:hover td {
+    background: #e1efff;
+}
+
+/* Строка с раскрытыми задачами */
+.report-tasks-row > td {
+    background: #fafbfc;
+    padding: 10px 14px 14px 46px;
+    border-bottom: 1px solid #eef2f6;
+}
+.report-tasks {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #2d3748;
+    font-weight: 400;
+}
+.report-tasks li { margin-bottom: 4px; }
+
+@media (max-width: 720px) {
+    .report-table thead th,
+    .report-table tbody td { padding: 8px 8px; }
 }
 </style>'''
 
@@ -588,6 +513,28 @@ def main():
     for _, _, text in sections:
         out.append(text)
         out.append('')
+
+    # Один <script> на всю страницу — работает во всех месячных таблицах
+    out.append('''<script>
+function toggleReportRow(cell) {
+    var tr = cell.closest('tr');
+    if (!tr) return;
+    var next = tr.nextElementSibling;
+    var tog = cell.querySelector('.report-toggle');
+    if (!next || !next.classList.contains('report-tasks-row')) return;
+
+    if (next.style.display === 'none') {
+        next.style.display = '';
+        tr.classList.add('open');
+        if (tog) tog.classList.add('open');
+    } else {
+        next.style.display = 'none';
+        tr.classList.remove('open');
+        if (tog) tog.classList.remove('open');
+    }
+}
+</script>''')
+    out.append('')
 
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, 'w', encoding='utf-8') as fh:

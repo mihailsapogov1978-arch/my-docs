@@ -2,6 +2,9 @@ html {
   scroll-behavior: smooth;
 }
 
+/* .md-grid {
+    max-width: 1600px;   /* было 61rem ≈ 976px */
+} */
 /* Компактная навигация */
 .md-nav__link {
   line-height: 1.2;
@@ -222,4 +225,54 @@ table.steps td strong {
    ============================================ */
 .md-nav--primary > .md-nav__title {
   display: none;
+}
+
+/* ===== Левое меню: более выраженное ===== */
+.md-sidebar--primary .md-nav__link {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #2c3e50;
+    padding: 6px 12px;
+}
+.md-sidebar--primary .md-nav__link:hover {
+    color: #2b6cb0;
+    background: #f0f7ff;
+    border-radius: 6px;
+}
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
+    color: #1a365d;
+    font-weight: 700;
+    background: #ebf8ff;
+    border-radius: 6px;
+    box-shadow: inset 3px 0 0 #3182ce;
+}
+
+/* ===== Правый TOC: спокойнее ===== */
+.md-sidebar--secondary .md-nav__title {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a0aec0;
+    padding: 8px 0;
+    border-bottom: 1px solid #edf2f7;
+    margin-bottom: 8px;
+}
+.md-sidebar--secondary .md-nav__link {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #718096;
+    padding: 3px 8px;
+    line-height: 1.4;
+}
+.md-sidebar--secondary .md-nav__link:hover {
+    color: #4a5568;
+    background: transparent;
+}
+.md-sidebar--secondary .md-nav__link--active {
+    color: #2b6cb0;
+    font-weight: 600;
+    border-left: 2px solid #3182ce;
+    padding-left: 6px;
 }
