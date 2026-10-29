@@ -4,308 +4,313 @@ import re
 from collections import defaultdict
 
 # ========== НАСТРОЙКИ ==========
-CSV_FILE = "downloads_csv/contracts_8901038364.csv"  # исходный CSV
-OUTPUT_DIR = "docs/Contracts"  # директория для выходных файлов
-OUTPUT_MD = os.path.join(OUTPUT_DIR, "svod_gk.md")  # результат
+CSV_FILE = "downloads_csv/contracts_8901038364.csv"
+OUTPUT_DIR = "docs/Contracts"
+OUTPUT_MD = os.path.join(OUTPUT_DIR, "svod_gk.md")
 
-# Создаём директорию если не существует
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Сопоставление типа работ по ключевым словам в названии
 TYPE_MAPPING = {
-    'миграция': 'Миграция данных',
-    'миграции': 'Миграция данных',
-    'технической поддержке': 'Техническая поддержка',
-    'техническая поддержка': 'Техническая поддержка',
-    'настройке': 'Настройка/Развитие системы',
-    'настройка': 'Настройка/Развитие системы',
-    'развитию': 'Настройка/Развитие системы',
-    'развитие': 'Настройка/Развитие системы',
-    'консалтинговых': 'Консалтинг',
+    'миграци': 'Миграция данных',
+    'техническ': 'Техническая поддержка',
+    'настройк': 'Настройка/Развитие системы',
+    'развити': 'Настройка/Развитие системы',
     'консалтинг': 'Консалтинг',
-    'предпроектного': 'Предпроектные работы',
-    'обследования': 'Предпроектные работы',
+    'предпроектн': 'Предпроектные работы',
+    'обследован': 'Предпроектные работы',
 }
 
+
 def detect_encoding(filepath):
-    """Определение кодировки файла"""
-    encodings = ['utf-8-sig', 'utf-8', 'windows-1251', 'cp1251']
-    for enc in encodings:
+    for enc in ('utf-8-sig', 'utf-8', 'windows-1251', 'cp1251'):
         try:
             with open(filepath, 'r', encoding=enc) as f:
                 f.read()
             return enc
-        except:
+        except Exception:
             continue
     return 'utf-8'
 
+
+def detect_delimiter(filepath, encoding):
+    with open(filepath, 'r', encoding=encoding) as f:
+        first_line = f.readline()
+    counts = {',': 0, ';': 0, '\t': 0}
+    in_quotes = False
+    for ch in first_line:
+        if ch == '"':
+            in_quotes = not in_quotes
+        elif not in_quotes and ch in counts:
+            counts[ch] += 1
+    return max(counts, key=counts.get)
+
+
 def extract_year(date_str):
-    """Извлечение года из даты в формате DD.MM.YYYY или YYYY-MM-DD"""
     if not date_str:
-        return 'Неизвестно'
-    
-    # Пробуем формат DD.MM.YYYY
-    match = re.search(r'(\d{2})\.(\d{2})\.(\d{4})', date_str)
-    if match:
-        return match.group(3)  # год
-    
-    # Пробуем формат YYYY-MM-DD
-    match = re.search(r'(\d{4})-\d{2}-\d{2}', date_str)
-    if match:
-        return match.group(1)
-    
-    # Пробуем найти 4 цифры подряд (год)
-    match = re.search(r'\b(\d{4})\b', date_str)
-    if match:
-        year = match.group(1)
-        if 2019 <= int(year) <= 2030:
-            return year
-    
-    return 'Неизвестно'
+        return None
+    m = re.search(r'(\d{2})\.(\d{2})\.(\d{4})', date_str)
+    if m:
+        return m.group(3)
+    m = re.search(r'(\d{4})-\d{2}-\d{2}', date_str)
+    if m:
+        return m.group(1)
+    m = re.search(r'\b(20\d{2})\b', date_str)
+    if m:
+        return m.group(1)
+    return None
+
+
+def normalize_headers(fieldnames):
+    result = []
+    for name in fieldnames or []:
+        if name is None:
+            result.append('')
+            continue
+        clean = name.replace('\ufeff', '').strip()
+        result.append(clean)
+    return result
+
+
+def parse_price(raw):
+    if not raw:
+        return 0.0
+    s = raw.replace('\xa0', '').replace(' ', '').replace(',', '.')
+    s = re.sub(r'[^\d.]', '', s)
+    try:
+        return float(s) if s else 0.0
+    except ValueError:
+        return 0.0
+
+
+def format_money(value):
+    return f"{value:,.2f}".replace(',', ' ').replace('.', ',')
+
 
 def parse_contracts(csv_path):
-    """Парсинг CSV и извлечение данных"""
     print(f"📂 Чтение: {csv_path}")
-    
     encoding = detect_encoding(csv_path)
-    print(f"  Кодировка: {encoding}")
-    
-    contracts = []
-    
-    try:
-        with open(csv_path, 'r', encoding=encoding) as f:
-            reader = csv.DictReader(f, delimiter=';')
-            
-            for row in reader:
-                # Полный номер контракта
-                reg_number = row.get('Реестровый номер закупки', '').strip()
-                reg_number = reg_number.replace('№', '').strip()
-                
-                # Короткий номер (последние 5 цифр)
-                short_number = reg_number[-5:] if reg_number else ''
-                
-                # Название
-                name = row.get('Наименование закупки', '').strip()
-                
-                # Цена
-                price_raw = row.get('Начальная (максимальная) цена контракта', '0')
-                price_clean = price_raw.replace(',', '').replace(' ', '')
-                try:
-                    price_float = float(price_clean) if price_clean else 0
-                except:
-                    price_float = 0
-                price_formatted = f"{price_float:,.2f}".replace(',', ' ').replace('.', ',')
-                
-                # Дата размещения
-                publish_date = row.get('Дата размещения', '').strip()
-                
-                # Извлекаем год из даты
-                year = extract_year(publish_date)
-                
-                # Статус
-                stage = row.get('Этап закупки', '').strip()
-                
-                # Ссылка на карточку
-                link = f"https://zakupki.gov.ru/epz/order/notice/ea44/view/common-info.html?regNumber={reg_number}"
-                
-                # Определяем тип работ
-                work_type = 'Прочее'
-                name_lower = name.lower()
-                for keyword, wtype in TYPE_MAPPING.items():
-                    if keyword in name_lower:
-                        work_type = wtype
-                        break
-                
-                contracts.append({
-                    'reg_number': reg_number,
-                    'short_number': short_number,
-                    'name': name,
-                    'price': price_formatted,
-                    'price_float': price_float,
-                    'publish_date': publish_date,
-                    'year': year,
-                    'stage': stage,
-                    'link': link,
-                    'work_type': work_type,
-                })
-        
-        print(f"  ✅ Обработано контрактов: {len(contracts)}")
-        return contracts
-        
-    except Exception as e:
-        print(f"  ❌ Ошибка: {e}")
-        return []
+    delimiter = detect_delimiter(csv_path, encoding)
+    print(f"  Кодировка: {encoding}, разделитель: {repr(delimiter)}")
 
-def generate_md(contracts):
-    """Генерация MD-файла с корректными годами (2019-2026)"""
-    print(f"\n📝 Генерация: {OUTPUT_MD}")
-    
-    # Группировка по годам (только 2019-2026)
+    contracts = []
+    with open(csv_path, 'r', encoding=encoding, newline='') as f:
+        sample = f.read(4096)
+        f.seek(0)
+        dialect = csv.Sniffer().sniff(sample, delimiters=';,\t') if sample else None
+        if dialect is not None:
+            delimiter = dialect.delimiter
+            
+        reader = csv.reader(f, delimiter=delimiter)
+        try:
+            raw_headers = next(reader)
+        except StopIteration:
+            return []
+        headers = normalize_headers(raw_headers)
+
+        for row in reader:
+            if not row or all(not c.strip() for c in row):
+                continue
+            data = dict(zip(headers, row))
+
+            reg_number = (data.get('Реестровый номер закупки') or '').strip()
+            reg_number = reg_number.replace('№', '').strip()
+            if not reg_number:
+                continue
+
+            name = (data.get('Наименование закупки') or '').strip()
+            price_float = parse_price(data.get('Начальная (максимальная) цена контракта'))
+            publish_date = (data.get('Дата размещения') or '').strip()
+            stage = (data.get('Этап закупки') or '').strip()
+
+            year = extract_year(publish_date)
+            if not year:
+                year = extract_year(reg_number)
+
+            link = ("https://zakupki.gov.ru/epz/order/notice/ea44/view/"
+                    f"common-info.html?regNumber={reg_number}")
+
+            work_type = 'Прочее'
+            name_lower = name.lower()
+            for keyword, wtype in TYPE_MAPPING.items():
+                if keyword in name_lower:
+                    work_type = wtype
+                    break
+
+            contracts.append({
+                'reg_number': reg_number,
+                'short_number': reg_number[-4:],  # Берем ровно 4 последние цифры
+                'name': name,
+                'price': format_money(price_float),
+                'price_float': price_float,
+                'publish_date': publish_date,
+                'year': year,
+                'stage': stage,
+                'link': link,
+                'work_type': work_type,
+            })
+
+    print(f"  ✅ Обработано контрактов: {len(contracts)}")
+    return contracts
+
+
+def load_existing_reg_numbers(md_path):
+    """
+    Читаем существующий md и собираем уже имеющиеся реестровые номера.
+    Ищем либо полные 19-значные номера (из старых версий), 
+    либо 4-значные (из новых).
+    """
+    if not os.path.exists(md_path):
+        return set()
+    with open(md_path, 'r', encoding='utf-8') as f:
+        text = f.read()
+    # Ищем любые числа после знака № (от 4 до 19 цифр)
+    return set(re.findall(r'№\s*(\d{4,19})', text))
+
+
+def merge_with_existing(new_contracts, existing_numbers):
+    """
+    Оставляем только те, которых нет в md. 
+    Проверяем по полному и по короткому номеру.
+    """
+    added = []
+    for c in new_contracts:
+        if c['reg_number'] in existing_numbers or c['short_number'] in existing_numbers:
+            continue
+        added.append(c)
+    return new_contracts, added
+
+
+def render_md(contracts):
     years = defaultdict(list)
     for c in contracts:
-        year = c['year']
-        # Фильтруем только реальные года (2019-2026)
-        if year.isdigit() and 2019 <= int(year) <= 2026:
-            years[year].append(c)
+        if c['year'] and c['year'].isdigit() and 2019 <= int(c['year']) <= 2030:
+            years[c['year']].append(c)
         else:
-            # Если год не определился, пытаемся извлечь из даты ещё раз
-            year2 = extract_year(c['publish_date'])
-            if year2.isdigit() and 2019 <= int(year2) <= 2026:
-                years[year2].append(c)
-            else:
-                print(f"  ⚠️ Пропущен контракт с неверной датой: {c['publish_date']}")
-    
-    # Сортируем года от 2019 до 2026 (по возрастанию)
-    sorted_years = sorted(years.keys())
-    
-    # Но для отображения используем убывание (2026 вверху)
-    display_years = sorted_years[::-1]
-    
-    # Начинаем сбор MD
+            print(f"  ⚠️ Пропущен контракт с неопределённым годом: {c['reg_number']}")
+
+    display_years = sorted(years.keys(), reverse=True)
+
     md = "# Сводная информация по государственным контрактам\n\n"
-    
-    # ===== КОНТРАКТЫ ПО ГОДАМ =====
+
     for year in display_years:
-        year_contracts = years[year]
         md += f"## {year} год\n\n"
-        md += """<div style="overflow-x:auto;">\n"""
-        md += """<table class="table-contracts" style="width:100%; border-collapse:collapse; font-size:0.85em;">\n"""
-        md += """<thead>\n"""
-        md += """<tr style="background-color:#f5f7fa; font-weight:bold;">\n"""
-        md += """  <th style="width:3%; padding:6px; text-align:center;">№</th>\n"""
-        md += """  <th style="width:55%; padding:6px; text-align:left;">Наименование</th>\n"""
-        md += """  <th style="width:21%; padding:6px; text-align:center;">Дата размещения<br>и номер контракта</th>\n"""
-        md += """  <th style="width:21%; padding:6px; text-align:right;">Цена</th>\n"""
-        md += """</tr>\n"""
-        md += """</thead>\n"""
-        md += """<tbody>\n"""
-        
+        md += '<div style="overflow-x:auto;">\n'
+        md += '<table class="table-contracts" style="width:100%; border-collapse:collapse; font-size:0.85em;">\n'
+        md += '<thead>\n<tr style="background-color:#f5f7fa; font-weight:bold;">\n'
+        md += '  <th style="width:3%; padding:6px; text-align:center;">№</th>\n'
+        md += '  <th style="width:55%; padding:6px; text-align:left;">Наименование</th>\n'
+        md += '  <th style="width:21%; padding:6px; text-align:center;">Дата размещения<br>и номер контракта</th>\n'
+        md += '  <th style="width:21%; padding:6px; text-align:right;">Цена</th>\n'
+        md += '</tr>\n</thead>\n<tbody>\n'
+
+        year_contracts = sorted(
+            years[year],
+            key=lambda c: (c['publish_date'][-4:], c['publish_date'][3:5], c['publish_date'][:2]),
+            reverse=True,
+        )
+
         for i, c in enumerate(year_contracts, 1):
-            md += f"""<tr style="border-bottom:1px solid #eee;">\n"""
-            md += f"""  <td style="padding:6px; text-align:center;">{i}</td>\n"""
-            md += f"""  <td style="padding:6px;">{c['name']}</td>\n"""
-            md += f"""  <td style="padding:6px; text-align:center;">{c['publish_date']}<br>№ {c['short_number']}<br><a href="{c['link']}" target="_blank">ГК на zakupki.gov.ru</a></td>\n"""
-            md += f"""  <td style="padding:6px; text-align:right; white-space:nowrap;">{c['price']}</td>\n"""
-            md += f"""</tr>\n"""
-        
-        md += """</tbody>\n"""
-        md += """</table>\n"""
-        md += """</div>\n\n"""
-    
-    # ===== СТАТИСТИКА ПО ГОДАМ =====
+            md += '<tr style="border-bottom:1px solid #eee;">\n'
+            md += f'  <td style="padding:6px; text-align:center;">{i}</td>\n'
+            md += f'  <td style="padding:6px;">{c["name"]}</td>\n'
+            # Выводим только 4 последние цифры в коротком формате
+            md += (f'  <td style="padding:6px; text-align:center;">{c["publish_date"]}'
+                   f'<br>№ {c["short_number"]}<br>'
+                   f'<a href="{c["link"]}" target="_blank">ГК на zakupki.gov.ru</a></td>\n')
+            md += f'  <td style="padding:6px; text-align:right; white-space:nowrap;">{c["price"]}</td>\n'
+            md += '</tr>\n'
+
+        md += '</tbody>\n</table>\n</div>\n\n'
+
+    # --- Статистика по годам ---
     md += "## Общая статистика\n\n"
-    md += """<div style="overflow-x:auto;">\n"""
-    md += """<table class="table-stats" style="width:100%; border-collapse:collapse; font-size:0.85em;">\n"""
-    md += """<thead>\n"""
-    md += """<tr style="background-color:#f5f7fa; font-weight:bold;">\n"""
-    md += """<th style="padding:6px; text-align:left;">Год</th>\n"""
-    md += """<th style="padding:6px; text-align:center;">Контрактов</th>\n"""
-    md += """<th style="padding:6px; text-align:right;">Сумма</th>\n"""
-    md += """</tr>\n"""
-    md += """</thead>\n"""
-    md += """<tbody>\n"""
-    
-    total_count = 0
-    total_sum = 0
-    
+    md += '<div style="overflow-x:auto;">\n'
+    md += '<table class="table-stats" style="width:100%; border-collapse:collapse; font-size:0.85em;">\n'
+    md += '<thead>\n<tr style="background-color:#f5f7fa; font-weight:bold;">\n'
+    md += '<th style="padding:6px; text-align:left;">Год</th>\n'
+    md += '<th style="padding:6px; text-align:center;">Контрактов</th>\n'
+    md += '<th style="padding:6px; text-align:right;">Сумма</th>\n'
+    md += '</tr>\n</thead>\n<tbody>\n'
+
+    total_count, total_sum = 0, 0.0
     for year in display_years:
-        year_contracts = years[year]
-        count = len(year_contracts)
-        total = sum(c['price_float'] for c in year_contracts)
-        total_count += count
-        total_sum += total
-        
-        total_str = f"{total:,.2f}".replace(',', ' ').replace('.', ',')
-        
-        md += f"""<tr style="border-bottom:1px solid #eee;">\n"""
-        md += f"""  <td style="padding:6px; font-weight:bold;">{year}</td>\n"""
-        md += f"""  <td style="padding:6px; text-align:center;">{count}</td>\n"""
-        md += f"""  <td style="padding:6px; text-align:right;">{total_str}</td>\n"""
-        md += f"""</tr>\n"""
-    
-    total_str = f"{total_sum:,.2f}".replace(',', ' ').replace('.', ',')
-    md += f"""<tr style="border-bottom:1px solid #eee; background-color:#f8f9fa; font-weight:bold;">\n"""
-    md += f"""  <td style="padding:6px;">Итого</td>\n"""
-    md += f"""  <td style="padding:6px; text-align:center;">{total_count}</td>\n"""
-    md += f"""  <td style="padding:6px; text-align:right;">{total_str}</td>\n"""
-    md += f"""</tr>\n"""
-    
-    md += """</tbody>\n"""
-    md += """</table>\n"""
-    md += """</div>\n\n"""
-    
-    # ===== РАСПРЕДЕЛЕНИЕ ПО ТИПАМ РАБОТ =====
+        items = years[year]
+        cnt = len(items)
+        s = sum(c['price_float'] for c in items)
+        total_count += cnt
+        total_sum += s
+        md += '<tr style="border-bottom:1px solid #eee;">\n'
+        md += f'  <td style="padding:6px; font-weight:bold;">{year}</td>\n'
+        md += f'  <td style="padding:6px; text-align:center;">{cnt}</td>\n'
+        md += f'  <td style="padding:6px; text-align:right;">{format_money(s)}</td>\n'
+        md += '</tr>\n'
+
+    md += ('<tr style="border-bottom:1px solid #eee; background-color:#f8f9fa; font-weight:bold;">\n'
+           f'  <td style="padding:6px;">Итого</td>\n'
+           f'  <td style="padding:6px; text-align:center;">{total_count}</td>\n'
+           f'  <td style="padding:6px; text-align:right;">{format_money(total_sum)}</td>\n'
+           '</tr>\n</tbody>\n</table>\n</div>\n\n')
+
+    # --- По типам работ ---
     md += "## Распределение по типам работ\n\n"
-    md += """<div style="overflow-x:auto;">\n"""
-    md += """<table class="table-types" style="width:100%; border-collapse:collapse; font-size:0.85em;">\n"""
-    md += """<thead>\n"""
-    md += """<tr style="background-color:#f5f7fa; font-weight:bold;">\n"""
-    md += """<th style="padding:6px; text-align:left;">Тип работ</th>\n"""
-    md += """<th style="padding:6px; text-align:center;">Контрактов</th>\n"""
-    md += """<th style="padding:6px; text-align:right;">Сумма</th>\n"""
-    md += """<th style="padding:6px; text-align:right;">% от общей суммы</th>\n"""
-    md += """</tr>\n"""
-    md += """</thead>\n"""
-    md += """<tbody>\n"""
-    
-    # Группировка по типам
+    md += '<div style="overflow-x:auto;">\n'
+    md += '<table class="table-types" style="width:100%; border-collapse:collapse; font-size:0.85em;">\n'
+    md += '<thead>\n<tr style="background-color:#f5f7fa; font-weight:bold;">\n'
+    md += '<th style="padding:6px; text-align:left;">Тип работ</th>\n'
+    md += '<th style="padding:6px; text-align:center;">Контрактов</th>\n'
+    md += '<th style="padding:6px; text-align:right;">Сумма</th>\n'
+    md += '<th style="padding:6px; text-align:right;">% от общей суммы</th>\n'
+    md += '</tr>\n</thead>\n<tbody>\n'
+
     types = defaultdict(list)
     for c in contracts:
-        # Проверяем, что год корректен
-        if c['year'].isdigit() and 2019 <= int(c['year']) <= 2026:
+        if c['year'] and c['year'].isdigit() and 2019 <= int(c['year']) <= 2030:
             types[c['work_type']].append(c)
-    
-    # Сортируем по убыванию суммы
-    sorted_types = sorted(types.items(), key=lambda x: sum(c['price_float'] for c in x[1]), reverse=True)
-    
-    for wtype, items in sorted_types:
-        count = len(items)
-        total = sum(c['price_float'] for c in items)
-        percent = (total / total_sum * 100) if total_sum > 0 else 0
-        
-        total_str = f"{total:,.2f}".replace(',', ' ').replace('.', ',')
-        percent_str = f"{percent:.1f}%"
-        
-        md += f"""<tr style="border-bottom:1px solid #eee;">\n"""
-        md += f"""  <td style="padding:6px; font-weight:bold;">{wtype}</td>\n"""
-        md += f"""  <td style="padding:6px; text-align:center;">{count}</td>\n"""
-        md += f"""  <td style="padding:6px; text-align:right;">{total_str}</td>\n"""
-        md += f"""  <td style="padding:6px; text-align:right; color:#27ae60;">{percent_str}</td>\n"""
-        md += f"""</tr>\n"""
-    
-    md += """</tbody>\n"""
-    md += """</table>\n"""
-    md += """</div>\n"""
-    
-    # Сохраняем
-    with open(OUTPUT_MD, 'w', encoding='utf-8') as f:
-        f.write(md)
-    
-    print(f"  ✅ Сохранено: {OUTPUT_MD}")
-    print(f"  📊 Всего контрактов: {total_count}")
-    print(f"  💰 Общая сумма: {total_str}")
+
+    for wtype, items in sorted(
+        types.items(), key=lambda x: sum(c['price_float'] for c in x[1]), reverse=True
+    ):
+        s = sum(c['price_float'] for c in items)
+        pct = (s / total_sum * 100) if total_sum else 0
+        md += '<tr style="border-bottom:1px solid #eee;">\n'
+        md += f'  <td style="padding:6px; font-weight:bold;">{wtype}</td>\n'
+        md += f'  <td style="padding:6px; text-align:center;">{len(items)}</td>\n'
+        md += f'  <td style="padding:6px; text-align:right;">{format_money(s)}</td>\n'
+        md += f'  <td style="padding:6px; text-align:right; color:#27ae60;">{pct:.1f}%</td>\n'
+        md += '</tr>\n'
+
+    md += '</tbody>\n</table>\n</div>\n'
+    return md, total_count, total_sum
+
 
 def main():
     print("=" * 60)
-    print("ГЕНЕРАЦИЯ СВОДНОЙ ТАБЛИЦЫ КОНТРАКТОВ")
+    print("ГЕНЕРАЦИЯ / ОБНОВЛЕНИЕ СВОДНОЙ ТАБЛИЦЫ КОНТРАКТОВ")
     print("=" * 60)
-    
+
     if not os.path.exists(CSV_FILE):
         print(f"❌ Файл {CSV_FILE} не найден!")
-        print(f"   Убедитесь, что CSV-файл лежит в папке: {os.getcwd()}")
         return
-    
+
     contracts = parse_contracts(CSV_FILE)
     if not contracts:
         print("❌ Контракты не найдены!")
         return
-    
-    generate_md(contracts)
-    
-    print("\n" + "=" * 60)
-    print("✅ ГОТОВО! Файл svod_gk.md обновлён.")
-    print("   Скопируйте его в папку docs/ вашего MkDocs-проекта.")
+
+    existing = load_existing_reg_numbers(OUTPUT_MD)
+    _, added = merge_with_existing(contracts, existing)
+    print(f"  🆕 Новых контрактов (которых нет в md): {len(added)}")
+
+    md_text, total_count, total_sum = render_md(contracts)
+
+    with open(OUTPUT_MD, 'w', encoding='utf-8') as f:
+        f.write(md_text)
+
+    print(f"\n  ✅ Сохранено: {OUTPUT_MD}")
+    print(f"  📊 Всего контрактов: {total_count}")
+    print(f"  💰 Общая сумма: {format_money(total_sum)}")
     print("=" * 60)
+
 
 if __name__ == "__main__":
     main()
