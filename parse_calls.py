@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 """
-Парсер CDR-звонков из docs/calls/calls_09.xlsx
-Формирует docs/calls/calls.md со статистикой по сотрудникам,
-сгруппированной по структурным подразделениям.
-
-Разделы:
-    1. Детализация по подразделениям (раскрывающиеся блоки)
-    2. Нагрузка отделов (гистограмма + таблица + выводы)
-    3. Нагрузка сотрудников (карточки с топами)
+Парсер CDR-звонков из docs/calls/calls_*.xlsx
+Формирует docs/calls/calls.md:
+  - каждый файл = отдельный H2-раздел (свежие сверху);
+  - в правом TOC — по одной ссылке на месяц.
 
 Запуск из корня проекта:
     python3 parse_calls.py
@@ -35,20 +31,28 @@ for _ in range(5):
 CALLS_DIR = ROOT / "docs" / "calls"
 MD_PATH = CALLS_DIR / "calls.md"
 
-_candidates = (
-    list(CALLS_DIR.glob("calls_*.xlsx"))
-    + list(CALLS_DIR.glob("call_*.xlsx"))
+_candidates = sorted(
+    p for p in (
+        list(CALLS_DIR.glob("calls_*.xlsx"))
+        + list(CALLS_DIR.glob("call_*.xlsx"))
+    ) if not p.name.startswith("~$")
 )
-_candidates = [p for p in _candidates if not p.name.startswith("~$")]
 
 if not _candidates:
     sys.exit(f"В {CALLS_DIR} нет файлов calls_*.xlsx или call_*.xlsx")
 
-XLSX_PATH = max(_candidates, key=lambda p: p.stat().st_mtime)
-
+XLSX_PATHS = _candidates
 print(f"[parse_calls] ROOT      = {ROOT}")
 print(f"[parse_calls] CALLS_DIR = {CALLS_DIR}")
-print(f"[parse_calls] XLSX      = {XLSX_PATH}")
+print(f"[parse_calls] XLSX      = {len(XLSX_PATHS)} файл(ов):")
+for _p in XLSX_PATHS:
+    print(f"[parse_calls]           · {_p.name}")
+
+
+MONTHS_RU = {
+    1: 'Январь', 2: 'Февраль', 3: 'Март', 4: 'Апрель', 5: 'Май', 6: 'Июнь',
+    7: 'Июль', 8: 'Август', 9: 'Сентябрь', 10: 'Октябрь', 11: 'Ноябрь', 12: 'Декабрь',
+}
 
 
 # ---------- Справочник подразделений ----------
@@ -71,12 +75,10 @@ DEPARTMENTS = {
         "Сапогов Михаил Дмитриевич",
         "Мулявин Яков Владиславович",
         "Чечеткин Михаил Игоревич",
-        "Обмолова Валентина Витальевна",
         "Роганова Анна Анатольевна",
         "Кошик Владимир Иванович",
         "Худышкин Сергей Николаевич",
         "Гасанов Сархан Нураддин",
-        "Ставер Андрей Петрович",
     ],
     "Отдел кадрового и правового обеспечения": [
         "Чернов Андрей Анатольевич",
@@ -156,8 +158,6 @@ DEPARTMENTS = {
     ],
 }
 
-
-# ---------- Алиасы (грязное имя в CDR → чистое ФИО из справочника) ----------
 FIO_ALIASES = {
     "константинова людмила алексеев":   "Константинова Людмила Алексеевна",
     "кузнецова надежда александровн":   "Кузнецова Надежда Александровна",
@@ -166,8 +166,6 @@ FIO_ALIASES = {
     "минакова ольга фрунзеновна":       "Минакова Ольга Фахрутдиновна",
 }
 
-
-# ---------- Полный стоп-лист ФИО ----------
 EXCLUDE_FIOS = {
     "Подгайный Алексей Алексеевич",
 }
@@ -219,7 +217,6 @@ def get_department(fio: str) -> str:
     return _FIO_TO_DEPT.get(key, "Прочие / не указано")
 
 
-# ---------- Стоп-лист служебных имён ----------
 SERVICE_NAMES = {
     "uplink", "null", "undefined", "gateway", "logicterminal",
     "disa", "service-platform",
@@ -228,7 +225,6 @@ SERVICE_NAMES = {
 _SERVICE_RE = re.compile(r"(?i)^(disa|sp|gw|trunk)[-_]?\d*$")
 
 
-# ---------- Утилиты ----------
 def is_internal(number) -> bool:
     if number is None or pd.isna(number):
         return False
@@ -268,12 +264,24 @@ def fmt_duration(seconds: int) -> str:
     return f"{s} с"
 
 
-# ---------- Парсинг ----------
-def parse_calls() -> dict:
-    if not XLSX_PATH.exists():
-        sys.exit(f"Файл не найден: {XLSX_PATH}")
+# ---------- Определение месяца по имени файла ----------
+def detect_month_from_filename(path: Path):
+    """По имени calls_10.xlsx → 'Октябрь'. По calls_09.xlsx → 'Сентябрь'."""
+    m = re.search(r'[_-](\d{1,2})(?:\.xlsx)?$', path.stem)
+    if m:
+        month_num = int(m.group(1))
+        if 1 <= month_num <= 12:
+            return MONTHS_RU[month_num]
+    return path.stem  # fallback — имя файла
 
-    df = pd.read_excel(XLSX_PATH, sheet_name=0, header=0, dtype=str)
+
+# ---------- Парсинг одного файла ----------
+def parse_one(path: Path):
+    if not path.exists():
+        print(f"[parse_calls] Файл не найден: {path}")
+        return None
+
+    df = pd.read_excel(path, sheet_name=0, header=0, dtype=str)
     df.columns = [str(c).strip() for c in df.columns]
 
     def find_col(*variants):
@@ -294,10 +302,10 @@ def parse_calls() -> dict:
     c_start          = find_col("Время старта")
 
     if not c_initiator_name or not c_result:
-        sys.exit(f"Не найдены ключевые колонки. Доступные: {list(df.columns)}")
+        print(f"[parse_calls] В {path.name} нет ключевых колонок")
+        return None
 
     stats = defaultdict(lambda: {"incoming": 0, "missed": 0, "outgoing": 0})
-
     longest_call = None
     pair_counter = Counter()
     hour_counter = Counter()
@@ -369,9 +377,7 @@ def parse_calls() -> dict:
         h, cnt = hour_counter.most_common(1)[0]
         peak_hour = {"hour": h, "count": cnt}
 
-    # ---------- Топы по сотрудникам ----------
     MIN_INCOMING_FOR_RATE = 50
-
     top_initiator = top_target = None
     top_missed_rate = None
     best_answer = None
@@ -414,14 +420,11 @@ def parse_calls() -> dict:
                 "percent": round((1 - best["rate"]) * 100),
             }
 
-    # ---------- Агрегация по отделам ----------
     dept_meta = {}
     for fio, s in stats.items():
         dept = get_department(fio)
         if dept not in dept_meta:
-            dept_meta[dept] = {
-                "incoming": 0, "missed": 0, "outgoing": 0, "employees": 0
-            }
+            dept_meta[dept] = {"incoming": 0, "missed": 0, "outgoing": 0, "employees": 0}
         dept_meta[dept]["incoming"] += s["incoming"]
         dept_meta[dept]["missed"]   += s["missed"]
         dept_meta[dept]["outgoing"] += s["outgoing"]
@@ -465,19 +468,16 @@ HTML_HEADER = """<style>
     --emp-out: #2b6cb0;
 }
 
-/* ---------- Плашка «Всего звонков» ---------- */
 .calls-total {
     display: grid;
     grid-template-columns: minmax(220px, 1fr) 130px 130px 130px;
     align-items: stretch;
-    column-gap: 0;
     background: var(--emp-accent-light);
     border: 1px solid var(--emp-accent-border);
     border-radius: 8px;
-    padding: 0;
     margin: 10px 0 24px 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 .calls-total .ct-label {
     display: flex;
@@ -510,7 +510,6 @@ HTML_HEADER = """<style>
 .calls-total .ct-miss .ct-value { color: var(--emp-missed); }
 .calls-total .ct-out  .ct-value { color: var(--emp-out); }
 
-/* ---------- Список отделов (раскрывающиеся блоки) ---------- */
 .dept-list {
     margin: 16px 0;
     border: 1px solid var(--emp-border);
@@ -579,7 +578,6 @@ HTML_HEADER = """<style>
     padding: 0;
 }
 
-/* ---------- Общая таблица ---------- */
 .calls-table {
     width: 100%;
     border-collapse: collapse;
@@ -620,31 +618,16 @@ HTML_HEADER = """<style>
 .calls-table tbody td:last-child { border-right: none; }
 .calls-table tbody tr:last-child td { border-bottom: none; }
 
-.calls-table .col-num {
-    color: var(--emp-muted);
-    text-align: right;
-}
-.calls-table .col-fio {
-    color: var(--emp-text);
-    font-weight: 600;
-    text-align: left;
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+.calls-table .col-num { color: var(--emp-muted); text-align: right; }
+.calls-table .col-fio { color: var(--emp-text); font-weight: 600; text-align: left; white-space: normal; overflow: hidden; text-overflow: ellipsis; }
 .calls-table .col-in   { color: var(--emp-in); }
 .calls-table .col-miss { color: var(--emp-missed); }
 .calls-table .col-out  { color: var(--emp-out); }
-
-.calls-table .col-pct {
-    text-align: center;
-    font-weight: 700;
-}
+.calls-table .col-pct { text-align: center; font-weight: 700; }
 .calls-table .col-pct.pct-good { color: var(--emp-in); }
 .calls-table .col-pct.pct-warn { color: #b7791f; }
 .calls-table .col-pct.pct-bad  { color: var(--emp-missed); }
 
-/* ---------- Гистограмма нагрузки ---------- */
 .load-chart {
     margin: 16px 0 24px 0;
     padding: 16px 20px;
@@ -653,7 +636,6 @@ HTML_HEADER = """<style>
     background: #fff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-
 .load-chart-row {
     display: grid;
     grid-template-columns: 260px 1fr 70px;
@@ -663,76 +645,21 @@ HTML_HEADER = """<style>
     border-bottom: 1px dashed var(--emp-border);
 }
 .load-chart-row:last-child { border-bottom: none; }
-
-.load-chart-name {
-    font-size: 13px;
-    color: var(--emp-text);
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.load-chart-bar-wrap {
-    position: relative;
-    width: 100%;
-    height: 22px;
-    background: #f7fafc;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.load-chart-bar {
-    display: flex;
-    height: 100%;
-    border-radius: 4px;
-    overflow: hidden;
-    transition: width 0.3s ease;
-}
-
-.load-chart-seg {
-    height: 100%;
-    transition: opacity 0.15s;
-}
+.load-chart-name { font-size: 13px; color: var(--emp-text); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.load-chart-bar-wrap { position: relative; width: 100%; height: 22px; background: #f7fafc; border-radius: 4px; overflow: hidden; }
+.load-chart-bar { display: flex; height: 100%; border-radius: 4px; overflow: hidden; transition: width 0.3s ease; }
+.load-chart-seg { height: 100%; transition: opacity 0.15s; }
 .load-chart-seg.seg-in   { background: #6fa8b8; }
 .load-chart-seg.seg-miss { background: #f5a623; }
 .load-chart-seg.seg-out  { background: #8ba0c4; }
-
-.load-chart-value {
-    text-align: right;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--emp-accent);
-    white-space: nowrap;
-}
-
-.load-chart-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 16px;
-    padding-top: 12px;
-    border-top: 1px solid var(--emp-border);
-    font-size: 12.5px;
-    color: var(--emp-muted);
-}
-
-.load-chart-legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-.load-chart-legend-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-}
+.load-chart-value { text-align: right; font-size: 13px; font-weight: 700; color: var(--emp-accent); white-space: nowrap; }
+.load-chart-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--emp-border); font-size: 12.5px; color: var(--emp-muted); }
+.load-chart-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.load-chart-legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
 .load-chart-legend-dot.legend-in   { background: #6fa8b8; }
 .load-chart-legend-dot.legend-miss { background: #f5a623; }
 .load-chart-legend-dot.legend-out  { background: #8ba0c4; }
 
-/* ---------- Статистика ---------- */
 .facts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -752,27 +679,9 @@ HTML_HEADER = """<style>
     box-shadow: 0 4px 12px rgba(43, 108, 176, 0.08);
     transform: translateY(-1px);
 }
-.fact-label {
-    font-size: 11.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--emp-muted);
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-.fact-value {
-    font-size: 15px;
-    color: var(--emp-text);
-    font-weight: 700;
-    line-height: 1.35;
-    margin-bottom: 6px;
-}
-.fact-sub {
-    font-size: 13px;
-    color: var(--emp-muted);
-    font-weight: 500;
-    line-height: 1.4;
-}
+.fact-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--emp-muted); font-weight: 700; margin-bottom: 8px; }
+.fact-value { font-size: 15px; color: var(--emp-text); font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+.fact-sub { font-size: 13px; color: var(--emp-muted); font-weight: 500; line-height: 1.4; }
 .fact-card.fact-time  { border-left-color: #805ad5; }
 .fact-card.fact-pair  { border-left-color: #d53f8c; }
 .fact-card.fact-out   { border-left-color: var(--emp-out); }
@@ -780,7 +689,6 @@ HTML_HEADER = """<style>
 .fact-card.fact-miss  { border-left-color: var(--emp-missed); }
 .fact-card.fact-hour  { border-left-color: #dd6b20; }
 
-/* ---------- Мелкий пояснительный текст ---------- */
 .calls-source {
     font-size: 13px;
     color: var(--emp-muted);
@@ -789,7 +697,6 @@ HTML_HEADER = """<style>
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* ---------- Адаптив ---------- */
 @media (max-width: 900px) {
     .dept-row {
         grid-template-columns: minmax(0, 1fr) 20px;
@@ -801,27 +708,14 @@ HTML_HEADER = """<style>
         text-align: left;
     }
     .dept-toggle { grid-row: 1; grid-column: 2; }
-
-    .load-chart-row {
-        grid-template-columns: 1fr 70px;
-        row-gap: 4px;
-    }
-    .load-chart-name {
-        grid-column: 1 / -1;
-    }
+    .load-chart-row { grid-template-columns: 1fr 70px; row-gap: 4px; }
+    .load-chart-name { grid-column: 1 / -1; }
 }
 
 @media (max-width: 720px) {
     .calls-total { grid-template-columns: 1fr; }
-    .calls-total .ct-label {
-        padding: 12px 16px;
-        border-bottom: 1px solid var(--emp-accent-border);
-    }
-    .calls-total .ct-cell {
-        border-left: none;
-        border-top: 1px solid var(--emp-accent-border);
-        padding: 10px 16px;
-    }
+    .calls-total .ct-label { padding: 12px 16px; border-bottom: 1px solid var(--emp-accent-border); }
+    .calls-total .ct-cell { border-left: none; border-top: 1px solid var(--emp-accent-border); padding: 10px 16px; }
     .calls-table th, .calls-table td { padding: 8px 8px; }
     .load-chart { padding: 12px 14px; }
 }
@@ -829,7 +723,6 @@ HTML_HEADER = """<style>
 """
 
 
-# ---------- Рендер ----------
 def _render_dept_table(rows: list) -> str:
     L = []
     L.append('<table class="calls-table">')
@@ -897,18 +790,14 @@ def _fact_card(label: str, value: str, sub: str, cls: str) -> str:
 def _render_load_chart(dept_rows: list) -> str:
     if not dept_rows:
         return ""
-
     max_total = max(d["total_all"] for _, d in dept_rows)
     if max_total == 0:
         return ""
 
-    L = []
-    L.append('<div class="load-chart">')
-
+    L = ['<div class="load-chart">']
     for dept, d in dept_rows:
         total = d["total_all"]
         width_pct = total / max_total * 100.0
-
         if total > 0:
             pct_in   = d["incoming"] / total * 100.0
             pct_miss = d["missed"]   / total * 100.0
@@ -920,43 +809,24 @@ def _render_load_chart(dept_rows: list) -> str:
         L.append(f'  <div class="load-chart-name" title="{dept}">{dept}</div>')
         L.append('  <div class="load-chart-bar-wrap">')
         L.append(f'    <div class="load-chart-bar" style="width: {width_pct:.2f}%;">')
-        L.append(
-            f'      <div class="load-chart-seg seg-in" '
-            f'style="width: {pct_in:.2f}%;" title="Принятые: {d["incoming"]}"></div>'
-        )
-        L.append(
-            f'      <div class="load-chart-seg seg-miss" '
-            f'style="width: {pct_miss:.2f}%;" title="Пропущенные: {d["missed"]}"></div>'
-        )
-        L.append(
-            f'      <div class="load-chart-seg seg-out" '
-            f'style="width: {pct_out:.2f}%;" title="Исходящие: {d["outgoing"]}"></div>'
-        )
+        L.append(f'      <div class="load-chart-seg seg-in" style="width: {pct_in:.2f}%;" title="Принятые: {d["incoming"]}"></div>')
+        L.append(f'      <div class="load-chart-seg seg-miss" style="width: {pct_miss:.2f}%;" title="Пропущенные: {d["missed"]}"></div>')
+        L.append(f'      <div class="load-chart-seg seg-out" style="width: {pct_out:.2f}%;" title="Исходящие: {d["outgoing"]}"></div>')
         L.append('    </div>')
         L.append('  </div>')
         L.append(f'  <div class="load-chart-value">{total}</div>')
         L.append('</div>')
 
     L.append('  <div class="load-chart-legend">')
-    L.append(
-        '    <span class="load-chart-legend-item">'
-        '<span class="load-chart-legend-dot legend-in"></span>принятые</span>'
-    )
-    L.append(
-        '    <span class="load-chart-legend-item">'
-        '<span class="load-chart-legend-dot legend-miss"></span>пропущенные</span>'
-    )
-    L.append(
-        '    <span class="load-chart-legend-item">'
-        '<span class="load-chart-legend-dot legend-out"></span>исходящие</span>'
-    )
+    L.append('    <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-in"></span>принятые</span>')
+    L.append('    <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-miss"></span>пропущенные</span>')
+    L.append('    <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-out"></span>исходящие</span>')
     L.append('  </div>')
-
     L.append('</div>')
     return "\n".join(L)
 
 
-def render_md(data: dict) -> str:
+def _render_month_report(data: dict, title: str) -> str:
     stats = data["stats"]
     meta = data["meta"]
     dept_meta = data.get("dept_meta", {})
@@ -989,31 +859,18 @@ def render_md(data: dict) -> str:
         ordered_depts.append("Прочие / не указано")
 
     L = []
-    L.append(HTML_HEADER)
-    L.append("")
-    L.append("# Статистика звонков за сентябрь 2026")
+    L.append(f"## {title}")
     L.append("")
 
-    # ---------- Плашка «Всего звонков» ----------
     L.append('<div class="calls-total">')
     L.append('  <div class="ct-label">Всего звонков</div>')
-    L.append('  <div class="ct-cell ct-in">')
-    L.append(f'    <div class="ct-value">{total_in}</div>')
-    L.append('    <div class="ct-caption">Принятые</div>')
-    L.append('  </div>')
-    L.append('  <div class="ct-cell ct-miss">')
-    L.append(f'    <div class="ct-value">{total_missed}</div>')
-    L.append('    <div class="ct-caption">Пропущенные</div>')
-    L.append('  </div>')
-    L.append('  <div class="ct-cell ct-out">')
-    L.append(f'    <div class="ct-value">{total_out}</div>')
-    L.append('    <div class="ct-caption">Исходящие</div>')
-    L.append('  </div>')
+    L.append(f'  <div class="ct-cell ct-in"><div class="ct-value">{total_in}</div><div class="ct-caption">Принятые</div></div>')
+    L.append(f'  <div class="ct-cell ct-miss"><div class="ct-value">{total_missed}</div><div class="ct-caption">Пропущенные</div></div>')
+    L.append(f'  <div class="ct-cell ct-out"><div class="ct-value">{total_out}</div><div class="ct-caption">Исходящие</div></div>')
     L.append('</div>')
     L.append("")
 
-    # ---------- 1. Детализация по подразделениям ----------
-    L.append("## Детализация по подразделениям")
+    L.append("### Детализация по подразделениям")
     L.append("")
     L.append('<div class="dept-list">')
 
@@ -1023,11 +880,11 @@ def render_md(data: dict) -> str:
         if not rows:
             continue
         num += 1
-        dept_in    = sum(r[1]["incoming"] for r in rows)
-        dept_miss  = sum(r[1]["missed"]   for r in rows)
-        dept_out   = sum(r[1]["outgoing"] for r in rows)
+        dept_in   = sum(r[1]["incoming"] for r in rows)
+        dept_miss = sum(r[1]["missed"]   for r in rows)
+        dept_out  = sum(r[1]["outgoing"] for r in rows)
 
-        cb_id = f"dept-{num}"
+        cb_id = f"dept-{title.replace(' ', '-')}-{num}"
         L.append('  <div class="dept-item">')
         L.append(f'    <input type="checkbox" id="{cb_id}" class="dept-checkbox">')
         L.append(f'    <label for="{cb_id}" class="dept-row">')
@@ -1047,8 +904,7 @@ def render_md(data: dict) -> str:
     L.append('</div>')
     L.append("")
 
-    # ---------- 2. Нагрузка отделов ----------
-    L.append("## Нагрузка отделов")
+    L.append("### Нагрузка отделов")
     L.append("")
     L.append('<div class="calls-source">'
              'Сводные показатели по подразделениям. '
@@ -1064,7 +920,6 @@ def render_md(data: dict) -> str:
         if d["employees"] == 0 or d["total_all"] == 0:
             continue
         dept_rows.append((dept, d))
-
     dept_rows.sort(key=lambda x: x[1]["total_all"], reverse=True)
 
     L.append(_render_load_chart(dept_rows))
@@ -1083,156 +938,100 @@ def render_md(data: dict) -> str:
         total_emp_sum = sum(d["employees"] for _, d in dept_rows)
         avg_per_emp = round(total_all_sum / total_emp_sum) if total_emp_sum else 0
 
-        L.append(_fact_card(
-            "Наибольшее число исходящих",
-            most_out[0],
-            f'{most_out[1]["outgoing"]} исходящих звонков',
-            "fact-out",
-        ))
-        L.append(_fact_card(
-            "Наибольшее число принятых",
-            most_in[0],
-            f'{most_in[1]["incoming"]} принятых звонков',
-            "fact-in",
-        ))
-        L.append(_fact_card(
-            "Наибольшая доля пропущенных",
-            worst_miss[0],
-            f'{worst_miss[1]["missed"]} из {worst_miss[1]["total_in"]} '
-            f'входящих · {worst_miss[1]["miss_rate"] * 100:.1f}%',
-            "fact-miss",
-        ))
-        L.append(_fact_card(
-            "Наилучший приём вызовов",
-            best_miss[0],
-            f'{best_miss[1]["incoming"]} из {best_miss[1]["total_in"]} '
-            f'входящих · принято {(1 - best_miss[1]["miss_rate"]) * 100:.1f}%',
-            "fact-in",
-        ))
+        L.append(_fact_card("Наибольшее число исходящих", most_out[0], f'{most_out[1]["outgoing"]} исходящих звонков', "fact-out"))
+        L.append(_fact_card("Наибольшее число принятых", most_in[0], f'{most_in[1]["incoming"]} принятых звонков', "fact-in"))
+        L.append(_fact_card("Наибольшая доля пропущенных", worst_miss[0], f'{worst_miss[1]["missed"]} из {worst_miss[1]["total_in"]} входящих · {worst_miss[1]["miss_rate"] * 100:.1f}%', "fact-miss"))
+        L.append(_fact_card("Наилучший приём вызовов", best_miss[0], f'{best_miss[1]["incoming"]} из {best_miss[1]["total_in"]} входящих · принято {(1 - best_miss[1]["miss_rate"]) * 100:.1f}%', "fact-in"))
 
         most_extrovert = max(dept_rows, key=lambda x: x[1]["out_in_ratio"])
         most_introvert = min(dept_rows, key=lambda x: x[1]["out_in_ratio"])
 
-        L.append(_fact_card(
-            "Преобладание исходящих связей",
-            most_extrovert[0],
-            f'Индекс исх./вх. = {most_extrovert[1]["out_in_ratio"]:.2f}'
-            ' — отдел больше инициирует, чем принимает',
-            "fact-out",
-        ))
-        L.append(_fact_card(
-            "Преобладание входящих связей",
-            most_introvert[0],
-            f'Индекс исх./вх. = {most_introvert[1]["out_in_ratio"]:.2f}'
-            ' — отдел больше принимает, чем инициирует',
-            "fact-in",
-        ))
-        L.append(_fact_card(
-            "Средняя нагрузка на сотрудника",
-            f'{avg_per_emp} звонков / мес.',
-            f'Всего в организации: {total_all_sum} звонков, {total_emp_sum} сотрудников',
-            "fact-hour",
-        ))
-        L.append(_fact_card(
-            "Наибольший суммарный объём",
-            most_active[0],
-            f'{most_active[1]["total_all"]} звонков всех типов',
-            "fact-pair",
-        ))
+        L.append(_fact_card("Преобладание исходящих связей", most_extrovert[0], f'Индекс исх./вх. = {most_extrovert[1]["out_in_ratio"]:.2f} — отдел больше инициирует, чем принимает', "fact-out"))
+        L.append(_fact_card("Преобладание входящих связей", most_introvert[0], f'Индекс исх./вх. = {most_introvert[1]["out_in_ratio"]:.2f} — отдел больше принимает, чем инициирует', "fact-in"))
+        L.append(_fact_card("Средняя нагрузка на сотрудника", f'{avg_per_emp} звонков / мес.', f'Всего: {total_all_sum} звонков, {total_emp_sum} сотрудников', "fact-hour"))
+        L.append(_fact_card("Наибольший суммарный объём", most_active[0], f'{most_active[1]["total_all"]} звонков всех типов', "fact-pair"))
 
     L.append('</div>')
     L.append("")
 
-    # ---------- 3. Статистика ----------
-    L.append('<div style="height:32px;"></div>')
-    L.append("## Нагрузка сотрудников")
+    L.append("### Нагрузка сотрудников")
     L.append("")
     L.append('<div class="facts-grid">')
 
     lc = meta.get("longest_call")
     if lc:
-        L.append(_fact_card(
-            "Максимальная длительность звонка",
-            f'{lc["initiator"]} → {lc["target"]}',
-            f'Длительность: {fmt_duration(lc["duration"])}'
-            + (f' · {lc["start"]}' if lc["start"] else ''),
-            "fact-time",
-        ))
+        L.append(_fact_card("Максимальная длительность звонка", f'{lc["initiator"]} → {lc["target"]}', f'Длительность: {fmt_duration(lc["duration"])}' + (f' · {lc["start"]}' if lc["start"] else ''), "fact-time"))
 
     tp = meta.get("top_pair")
     if tp:
-        L.append(_fact_card(
-            "Наиболее частая пара абонентов",
-            f'{tp["a"]} ⇄ {tp["b"]}',
-            f'Всего звонков: {tp["count"]}',
-            "fact-pair",
-        ))
+        L.append(_fact_card("Наиболее частая пара абонентов", f'{tp["a"]} ⇄ {tp["b"]}', f'Всего звонков: {tp["count"]}', "fact-pair"))
 
     ti = meta.get("top_initiator")
     if ti:
-        L.append(_fact_card(
-            "Лидер по исходящим звонкам",
-            ti["fio"],
-            f'Исходящих: {ti["count"]}',
-            "fact-out",
-        ))
+        L.append(_fact_card("Лидер по исходящим звонкам", ti["fio"], f'Исходящих: {ti["count"]}', "fact-out"))
 
     tt = meta.get("top_target")
     if tt:
-        L.append(_fact_card(
-            "Лидер по принятым звонкам",
-            tt["fio"],
-            f'Принятых: {tt["count"]}',
-            "fact-in",
-        ))
+        L.append(_fact_card("Лидер по принятым звонкам", tt["fio"], f'Принятых: {tt["count"]}', "fact-in"))
 
     tmr = meta.get("top_missed_rate")
     if tmr:
-        L.append(_fact_card(
-            "Наибольшая доля пропущенных звонков",
-            tmr["fio"],
-            f'{tmr["missed"]} из {tmr["total_in"]} входящих · {tmr["percent"]}%',
-            "fact-miss",
-        ))
+        L.append(_fact_card("Наибольшая доля пропущенных звонков", tmr["fio"], f'{tmr["missed"]} из {tmr["total_in"]} входящих · {tmr["percent"]}%', "fact-miss"))
 
     ba = meta.get("best_answer")
     if ba:
-        L.append(_fact_card(
-            "Наилучший приём звонков",
-            ba["fio"],
-            f'{ba["incoming"]} из {ba["total_in"]} входящих · {ba["percent"]}%',
-            "fact-in",
-        ))
+        L.append(_fact_card("Наилучший приём звонков", ba["fio"], f'{ba["incoming"]} из {ba["total_in"]} входящих · {ba["percent"]}%', "fact-in"))
 
     ph = meta.get("peak_hour")
     if ph:
-        L.append(_fact_card(
-            "Час пиковой нагрузки",
-            f'{ph["hour"]:02d}:00 – {ph["hour"]:02d}:59',
-            f'Звонков: {ph["count"]}',
-            "fact-hour",
-        ))
+        L.append(_fact_card("Час пиковой нагрузки", f'{ph["hour"]:02d}:00 – {ph["hour"]:02d}:59', f'Звонков: {ph["count"]}', "fact-hour"))
 
     L.append('</div>')
     L.append("")
-
     return "\n".join(L)
 
 
-# ---------- Точка входа ----------
+# ---------- Сборка всей страницы ----------
 def main():
-    data = parse_calls()
-    print(f"[parse_calls] Обработано абонентов: {len(data['stats'])}")
+    sections = []
+    processed = 0
 
-    unknown = [fio for fio in data["stats"] if get_department(fio) == "Прочие / не указано"]
-    if unknown:
-        print("[parse_calls] Не сопоставлены со справочником:")
-        for fio in sorted(unknown):
-            print(f"    {fio!r}")
+    # Сортируем файлы так, чтобы свежие были сверху (по месяцу из имени)
+    def _month_num(p: Path):
+        m = re.search(r'[_-](\d{1,2})(?:\.xlsx)?$', p.stem)
+        return int(m.group(1)) if m else 0
+
+    files_sorted = sorted(XLSX_PATHS, key=_month_num, reverse=True)
+
+    for path in files_sorted:
+        print(f"[parse_calls] Обрабатываю {path.name}")
+        data = parse_one(path)
+        if not data:
+            continue
+
+        title = detect_month_from_filename(path)
+        sections.append(_render_month_report(data, title))
+        processed += 1
+
+        unknown = [fio for fio in data["stats"] if get_department(fio) == "Прочие / не указано"]
+        if unknown:
+            print(f"[parse_calls]   Не сопоставлены ({path.name}):")
+            for fio in sorted(unknown):
+                print(f"      {fio!r}")
+
+    if not sections:
+        sys.exit("[parse_calls] Не удалось обработать ни одного файла")
+
+    out = [HTML_HEADER, '', '# Статистика звонков', '']
+    for s in sections:
+        out.append(s)
+        out.append('---')
+        out.append('')
 
     MD_PATH.parent.mkdir(parents=True, exist_ok=True)
-    MD_PATH.write_text(render_md(data), encoding="utf-8")
+    MD_PATH.write_text('\n'.join(out), encoding='utf-8')
     print(f"[parse_calls] Записано: {MD_PATH}")
+    print(f"[parse_calls] Отчётов: {processed}")
 
 
 if __name__ == "__main__":

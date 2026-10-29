@@ -16,7 +16,7 @@
         <link rel="prev" href="../plans/plans/">
       
       
-        <link rel="next" href="../calls/report/">
+        <link rel="next" href="../zayavka_week/">
       
       
         
@@ -534,7 +534,7 @@
   <a href="#2026" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Сентябрь 2026
+        Октябрь 2026
       
     </span>
   </a>
@@ -545,7 +545,7 @@
   <a href="#2026_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Август 2026
+        Сентябрь 2026
       
     </span>
   </a>
@@ -554,6 +554,17 @@
       
         <li class="md-nav__item">
   <a href="#2026_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Август 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Июль 2026
@@ -578,7 +589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../calls/report/" class="md-nav__link">
+      <a href="../zayavka_week/" class="md-nav__link">
         
   
   
@@ -625,6 +636,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inn_org/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Базы drx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -655,7 +693,7 @@
   <a href="#2026" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Сентябрь 2026
+        Октябрь 2026
       
     </span>
   </a>
@@ -666,7 +704,7 @@
   <a href="#2026_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Август 2026
+        Сентябрь 2026
       
     </span>
   </a>
@@ -675,6 +713,17 @@
       
         <li class="md-nav__item">
   <a href="#2026_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Август 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Июль 2026
@@ -702,7 +751,6 @@
 
 
 <style>
-/* ===== Таблица отчёта ===== */
 .report-table {
     width: 100%;
     border-collapse: collapse;
@@ -731,8 +779,6 @@
     font-size: 14px;
 }
 .report-table tbody tr:last-child td { border-bottom: none; }
-
-/* Сводная строка отдела */
 .report-summary-row td {
     background: #fafbfc;
     font-weight: 600;
@@ -746,8 +792,6 @@
     font-size: 12.5px;
     margin-top: 2px;
 }
-
-/* Кликабельная ячейка имени */
 .report-name {
     cursor: pointer;
     user-select: none;
@@ -755,8 +799,6 @@
 .report-name:hover {
     color: #2b6cb0;
 }
-
-/* Маркер раскрытия */
 .report-toggle {
     display: inline-block;
     color: #718096;
@@ -768,13 +810,10 @@
 .report-toggle.open {
     transform: rotate(90deg);
 }
-
 .report-num {
     text-align: left;
     white-space: nowrap;
 }
-
-/* Подсветка раскрытой строки сотрудника */
 .report-row.open td {
     background: #eaf4ff;
     border-bottom-color: #bee3f8;
@@ -785,8 +824,6 @@
 .report-row.open:hover td {
     background: #e1efff;
 }
-
-/* Строка с раскрытыми задачами */
 .report-tasks-row > td {
     background: #fafbfc;
     padding: 10px 14px 14px 46px;
@@ -801,7 +838,6 @@
     font-weight: 400;
 }
 .report-tasks li { margin-bottom: 4px; }
-
 @media (max-width: 720px) {
     .report-table thead th,
     .report-table tbody td { padding: 8px 8px; }
@@ -809,7 +845,119 @@
 </style>
 
 <h1 id="_1">Отчёты отдела СРТП<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="2026">Сентябрь 2026<a class="headerlink" href="#2026" title="Permanent link">&para;</a></h2>
+<h2 id="2026">Октябрь 2026<a class="headerlink" href="#2026" title="Permanent link">&para;</a></h2>
+<table class="report-table">
+  <thead>
+    <tr>
+      <th style="width:240px;">Сотрудник</th>
+      <th style="width:110px;">Звонков</th>
+      <th style="width:110px;">Заявок</th>
+      <th style="width:110px;">Задач</th>
+      <th style="width:120px;">Резолюций</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="report-summary-row">
+      <td><b>Отдел СРТП</b><br><small>Сотрудников: 6</small></td>
+      <td><b>2249</b></td>
+      <td><b>70</b></td>
+      <td><b>25</b></td>
+      <td><b>7</b></td>
+    </tr>
+    <tr class="report-row" data-emp="1">
+      <td class="report-name" onclick="toggleReportRow(this)">
+        <span class="report-toggle">›</span>
+        Сапогов
+      </td>
+      <td class="report-num">560</td>
+      <td class="report-num">36</td>
+      <td class="report-num">6</td>
+      <td class="report-num">7</td>
+    </tr>
+    <tr class="report-tasks-row" style="display:none;">
+      <td colspan="5">
+        <ul class="report-tasks"><li>Направил ежемесячные отчеты по аудиту ПО и импортзамещению в ДИТиС (через депфин).</li><li>Техническая поддержка. Выполнял работу по ТП в отсутствие Чечеткина М.И. и Рогановой А.А. органов власти, в том числе Счетной палаты и ДФ.</li><li>Подготовлены предложения (идеи) для расширения функциональности ГИС «Смета ЯНАО»</li><li>Выполнена выгрузка и подготовка (сведение в 2 файла) 45тыс заявок за 2026 год и базы знаний (3 тыс статей) из сервиса «База знаний» НПО Криста для разрабатываемого чат бота – помощника бухгалтеру на базе ИИ.</li><li>Прочее: Корректировки ПИ2026, отчета по ЕСИА, подготовлено предложение по реализации сервиса расчета проезда с требуемыми затратами.</li><li>Ведется создание информационного локального сервиса для оперативного учета выполнения текущих мероприятий, контрактов, планы информатизации, звонки, отчеты и прочее.</li></ul>
+      </td>
+    </tr>
+    <tr class="report-row" data-emp="2">
+      <td class="report-name" onclick="toggleReportRow(this)">
+        <span class="report-toggle">›</span>
+        Мулявин
+      </td>
+      <td class="report-num">153</td>
+      <td class="report-num">11</td>
+      <td class="report-num">9</td>
+      <td class="report-num">—</td>
+    </tr>
+    <tr class="report-tasks-row" style="display:none;">
+      <td colspan="5">
+        <ul class="report-tasks"><li>СМЭВ4. Развёрнут и настроен продуктивный Агент СМЭВ4: подключение к Ядру, регистрация, автозапуск, доступ к витрине Департамента образования и тестовые запросы. Проработаны вопросы безопасности электронной подписи и Рутокена с ДИТИС и Департаментом финансов. С НПО «Криста» ведётся работа по подключению Агента к ГИС «Смета ЯНАО».</li><li>Разработано Python-приложение для отдела подготовки отчётности по автоматической сверке формы 0503125 с данными платёжных поручений и учёта выплат.</li><li>Разработано Python-приложение для отдела расчётов с поставщиками и подрядчиками по автоматической сверке данных информационной базы и ГИС «Смета ЯНАО».</li><li>Разработан бот в корпоративном мессенджере «Среда» для автоматического уведомления ограниченного круга сотрудников о днях рождения коллег.</li><li>Ведётся разработка контура ИИ-распознавания и обработки документов с функциями чата, массовой обработки файлов и сверки данных. Проведена демонстрация отделу расчётов с персоналом, определены пользовательские сценарии.</li><li>Подготовлен файл с данными для отдела расчетов с персоналом примерно по 220 физическим лицам для загрузки в ГИС «Смета ЯНАО» по Департаменту образования.</li><li>Выполнялась работа по технической поддержки: решены текущие вопросы по ЕСКУ, ГИС «Имущество», НДФЛ и работе с Excel-выгрузками</li><li>Проведена работа с реестром Оферт из 835 записей, настроена возможность массового получения, проверки и изменения данных с помощью Python-скриптов.</li><li>Проработана возможность предзаполнения заявок в ELMA365 для отдела информационной безопасности.</li></ul>
+      </td>
+    </tr>
+    <tr class="report-row" data-emp="3">
+      <td class="report-name" onclick="toggleReportRow(this)">
+        <span class="report-toggle">›</span>
+        Кошик
+      </td>
+      <td class="report-num">435</td>
+      <td class="report-num">11</td>
+      <td class="report-num">5</td>
+      <td class="report-num">—</td>
+    </tr>
+    <tr class="report-tasks-row" style="display:none;">
+      <td colspan="5">
+        <ul class="report-tasks"><li>Аудит по использованию Сметы и подготовка общего свода (из них организаций: Надымский р-н - 75, Губкинский - 46, Салехард - 56, Пуровский р-н - 63).</li><li>Оформлено и подписано МЧД в ФНС, Росстат для Контрольного департамента - 6.</li><li>Заявки / обращения по ЭДО Астрал - 9.</li><li>Внедрение и отработка механизма кроссподписания при передаче имущества (ф.0510448, ф.0504805) - Губкинский р-н - 1, Муравленко - 1. ГУ ПТО УД ЯНАО - 1, ГКУ ДКСИИ - 1, ДИО ЯНАО - 1.</li><li>Заявки / обращения от МО через чаты и по телефону &gt;= 300.</li></ul>
+      </td>
+    </tr>
+    <tr class="report-row" data-emp="4">
+      <td class="report-name" onclick="toggleReportRow(this)">
+        <span class="report-toggle">›</span>
+        Худышкин
+      </td>
+      <td class="report-num">214</td>
+      <td class="report-num">3</td>
+      <td class="report-num">1</td>
+      <td class="report-num">—</td>
+    </tr>
+    <tr class="report-tasks-row" style="display:none;">
+      <td colspan="5">
+        <ul class="report-tasks"><li>Консультирование и техническая поддержка муниципальных образований по вопросам подключения, настройки и эксплуатации централизованной ГИС «Смета ЯНАО». Анализ используемых настроек и функционала, выявление участков, требующих дополнительной настройки или консультационного сопровождения.</li></ul>
+      </td>
+    </tr>
+    <tr class="report-row" data-emp="5">
+      <td class="report-name" onclick="toggleReportRow(this)">
+        <span class="report-toggle">›</span>
+        Гасанов
+      </td>
+      <td class="report-num">148</td>
+      <td class="report-num">1</td>
+      <td class="report-num">3</td>
+      <td class="report-num">—</td>
+    </tr>
+    <tr class="report-tasks-row" style="display:none;">
+      <td colspan="5">
+        <ul class="report-tasks"><li>Проведен аудит активности работы муниципальных образований (Ноябрьск 80 учреждений, Новый Уренгой 76 учреждений, Тазовкий район 37 учреждений  и Шурышкарский район 39 учреждений) в ГИС «СМЕТА ЯНАО»</li><li>Обработано более 30 обращений по нестабильной работе ГИС «СМЕТА ЯНАО» (медленно работает, зависает и тд).  1 обращение от органов власти. Решено 6 обращений по восстановлению пароля.</li><li>Обработано до 100 обращения - Консультация / тех. поддержка/ маршрутизация заявок муниципалитетов (ГИС ГМП, МИР, ПП).</li></ul>
+      </td>
+    </tr>
+    <tr class="report-row" data-emp="6">
+      <td class="report-name" onclick="toggleReportRow(this)">
+        <span class="report-toggle">›</span>
+        Роганова
+      </td>
+      <td class="report-num">739</td>
+      <td class="report-num">8</td>
+      <td class="report-num">1</td>
+      <td class="report-num">—</td>
+    </tr>
+    <tr class="report-tasks-row" style="display:none;">
+      <td colspan="5">
+        <ul class="report-tasks"><li>Обработано приказов на временное / постоянное распределения обязанностей сотрудников ЦБ в Смете - 7шт.</li></ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2026_1">Сентябрь 2026<a class="headerlink" href="#2026_1" title="Permanent link">&para;</a></h2>
 <table class="report-table">
   <thead>
     <tr>
@@ -936,7 +1084,7 @@
   </tbody>
 </table>
 
-<h2 id="2026_1">Август 2026<a class="headerlink" href="#2026_1" title="Permanent link">&para;</a></h2>
+<h2 id="2026_2">Август 2026<a class="headerlink" href="#2026_2" title="Permanent link">&para;</a></h2>
 <table class="report-table">
   <thead>
     <tr>
@@ -1033,7 +1181,7 @@
   </tbody>
 </table>
 
-<h2 id="2026_2">Июль 2026<a class="headerlink" href="#2026_2" title="Permanent link">&para;</a></h2>
+<h2 id="2026_3">Июль 2026<a class="headerlink" href="#2026_3" title="Permanent link">&para;</a></h2>
 <table class="report-table">
   <thead>
     <tr>
@@ -1243,11 +1391,10 @@ function toggleReportRow(cell) {
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      Проекты ЦБ ОГВ ЯНАО
+    </div>
   
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       

@@ -14,7 +14,7 @@
     "12": "soglasovanie",
     "13": "soglasovanie",
     "14": "soglasovanie",
-    "2027-1": "postanovka",
+    "2027-1": "soglasovanie",
     "2027-2": "postanovka",
     "2027-3": "postanovka",
     "2027-4": "postanovka",
@@ -101,10 +101,10 @@
           "done": true
         },
         "2": {
-          "assignee": "",
-          "comment": "",
+          "assignee": "Останин И.Г.",
+          "comment": "Отделы вносят (при наличии) предложение в проект ТЗ",
           "date": "",
-          "done": false
+          "done": true
         },
         "3": {
           "assignee": "",

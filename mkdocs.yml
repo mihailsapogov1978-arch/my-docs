@@ -3,6 +3,7 @@ site_url: https://mihailsapogov1978-arch.github.io/my-docs/
 site_description: Проекты ЦБ ОГВ ЯНАО
 dev_addr: 0.0.0.0:8000
 use_directory_urls: true
+copyright: "Проекты ЦБ ОГВ ЯНАО"
 
 theme:
   name: material
@@ -37,6 +38,9 @@ theme:
       toggle:
         icon: material/weather-night
         name: Переключиться на светлый режим
+
+extra:
+  generator: false
 
 extra_css:
   - stylesheets/extra.css
@@ -108,6 +112,7 @@ nav:
   - Контракты 2019–2026: Contracts/svod_gk.md
   - Планы информатизации: plans/plans.md
   - Отчёты отдела СРиТП: reports/index.md
-  - Заявки: calls/report.md
+  - Заявки: zayavka_week.md
   - Звонки: calls/calls.md
-  #- Реестр доработок: registry/index.md
+  #- Реестр доработок: projects_anons.md
+  - Базы drx: inn_org.md 

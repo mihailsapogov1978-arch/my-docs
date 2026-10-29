@@ -161,8 +161,8 @@ table.steps td strong {
 }
 
 .md-typeset table:not([class]) {
-  display: block;
-  overflow-x: auto;
+  display: table;
+  width: 100%;
 }
 
 .discussion-box,
@@ -275,4 +275,37 @@ table.steps td strong {
     font-weight: 600;
     border-left: 2px solid #3182ce;
     padding-left: 6px;
+}
+
+/* Растягиваем таблицы на всю ширину */
+.md-typeset table.full-width {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Убираем возможные ограничения ширины у контейнера */
+/* Растягиваем контент на всю ширину */
+.md-grid {
+    max-width: 61rem; /* Стандартное значение Material (≈ 976px) */
+}
+.md-content__inner {
+    margin: 0 auto;
+    /* убрали max-width: 100%, чтобы вернуть стандартное поведение */
+}
+
+/* Убеждаемся, что таблицы занимают 100% */
+.org-table {
+    width: 100% !important;
+    display: table !important;
+}
+/* Включаем перенос для всех блоков кода */
+.md-typeset pre > code {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+}
+
+/* Убираем полосу прокрутки */
+.md-typeset pre {
+    overflow-x: hidden !important;
 }
