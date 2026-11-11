@@ -285,9 +285,9 @@
     <label for="dept-Октябрь-1" class="dept-row">
       <span class="dept-name">Администрация</span>
       <span class="dept-summary">
-        <span class="ds-cell"><span class="ds-label">принято:</span> <b>1139</b></span>
-        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>530</b></span>
-        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>953</b></span>
+        <span class="ds-cell"><span class="ds-label">принято:</span> <b>1072</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>489</b></span>
+        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>798</b></span>
       </span>
       <span class="dept-toggle">›</span>
     </label>
@@ -341,14 +341,6 @@
     </tr>
     <tr>
       <td class="col-num">4</td>
-      <td class="col-fio">Гареева Регина Рафаэлевна</td>
-      <td class="col-in">67</td>
-      <td class="col-miss">41</td>
-      <td class="col-pct pct-warn">62%</td>
-      <td class="col-out">155</td>
-    </tr>
-    <tr>
-      <td class="col-num">5</td>
       <td class="col-fio">Галямов Азат Ахтамович</td>
       <td class="col-in">76</td>
       <td class="col-miss">33</td>
@@ -362,6 +354,53 @@
   <div class="dept-item">
     <input type="checkbox" id="dept-Октябрь-2" class="dept-checkbox">
     <label for="dept-Октябрь-2" class="dept-row">
+      <span class="dept-name">Отдел анализа и внутреннего аудита</span>
+      <span class="dept-summary">
+        <span class="ds-cell"><span class="ds-label">принято:</span> <b>67</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>41</b></span>
+        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>155</b></span>
+      </span>
+      <span class="dept-toggle">›</span>
+    </label>
+    <div class="dept-details">
+<table class="calls-table">
+  <colgroup>
+    <col class="col-num">
+    <col class="col-fio">
+    <col class="col-stat">
+    <col class="col-stat">
+    <col class="col-pct">
+    <col class="col-stat">
+  </colgroup>
+  <thead>
+    <tr>
+      <th rowspan="2" class="col-num">№</th>
+      <th rowspan="2" class="col-fio">ФИО</th>
+      <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
+      <th rowspan="2" class="col-out">Исходящие</th>
+    </tr>
+    <tr>
+      <th class="col-in">Принятые</th>
+      <th class="col-miss">Пропущенные</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-fio">Гареева Регина Рафаэлевна</td>
+      <td class="col-in">67</td>
+      <td class="col-miss">41</td>
+      <td class="col-pct pct-warn">62%</td>
+      <td class="col-out">155</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </div>
+  <div class="dept-item">
+    <input type="checkbox" id="dept-Октябрь-3" class="dept-checkbox">
+    <label for="dept-Октябрь-3" class="dept-row">
       <span class="dept-name">Отдел информационной безопасности</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>322</b></span>
@@ -431,12 +470,12 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Октябрь-3" class="dept-checkbox">
-    <label for="dept-Октябрь-3" class="dept-row">
+    <input type="checkbox" id="dept-Октябрь-4" class="dept-checkbox">
+    <label for="dept-Октябрь-4" class="dept-row">
       <span class="dept-name">Отдел СР и ТП</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>1056</b></span>
-        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>761</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>713</b></span>
         <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>729</b></span>
       </span>
       <span class="dept-toggle">›</span>
@@ -521,29 +560,13 @@
       <td class="col-pct pct-good">89%</td>
       <td class="col-out">43</td>
     </tr>
-    <tr>
-      <td class="col-num">8</td>
-      <td class="col-fio">Обмолова Валентина Витальевна</td>
-      <td class="col-in">0</td>
-      <td class="col-miss">36</td>
-      <td class="col-pct pct-bad">0%</td>
-      <td class="col-out">0</td>
-    </tr>
-    <tr>
-      <td class="col-num">9</td>
-      <td class="col-fio">Ставер Андрей Петрович</td>
-      <td class="col-in">0</td>
-      <td class="col-miss">12</td>
-      <td class="col-pct pct-bad">0%</td>
-      <td class="col-out">0</td>
-    </tr>
   </tbody>
 </table>
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Октябрь-4" class="dept-checkbox">
-    <label for="dept-Октябрь-4" class="dept-row">
+    <input type="checkbox" id="dept-Октябрь-5" class="dept-checkbox">
+    <label for="dept-Октябрь-5" class="dept-row">
       <span class="dept-name">Отдел кадрового и правового обеспечения</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>597</b></span>
@@ -621,8 +644,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Октябрь-5" class="dept-checkbox">
-    <label for="dept-Октябрь-5" class="dept-row">
+    <input type="checkbox" id="dept-Октябрь-6" class="dept-checkbox">
+    <label for="dept-Октябрь-6" class="dept-row">
       <span class="dept-name">Отдел учета основных средств и запасов</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>1263</b></span>
@@ -748,8 +771,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Октябрь-6" class="dept-checkbox">
-    <label for="dept-Октябрь-6" class="dept-row">
+    <input type="checkbox" id="dept-Октябрь-7" class="dept-checkbox">
+    <label for="dept-Октябрь-7" class="dept-row">
       <span class="dept-name">Отдел подготовки отчетности</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>650</b></span>
@@ -851,8 +874,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Октябрь-7" class="dept-checkbox">
-    <label for="dept-Октябрь-7" class="dept-row">
+    <input type="checkbox" id="dept-Октябрь-8" class="dept-checkbox">
+    <label for="dept-Октябрь-8" class="dept-row">
       <span class="dept-name">Отдел учета доходов</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>864</b></span>
@@ -978,8 +1001,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Октябрь-8" class="dept-checkbox">
-    <label for="dept-Октябрь-8" class="dept-row">
+    <input type="checkbox" id="dept-Октябрь-9" class="dept-checkbox">
+    <label for="dept-Октябрь-9" class="dept-row">
       <span class="dept-name">Отдел расчётов с персоналом</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>2506</b></span>
@@ -1145,8 +1168,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Октябрь-9" class="dept-checkbox">
-    <label for="dept-Октябрь-9" class="dept-row">
+    <input type="checkbox" id="dept-Октябрь-10" class="dept-checkbox">
+    <label for="dept-Октябрь-10" class="dept-row">
       <span class="dept-name">Отдел расчётов с поставщиками, подрядчиками</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>1082</b></span>
@@ -1271,6 +1294,61 @@
 </table>
     </div>
   </div>
+  <div class="dept-item">
+    <input type="checkbox" id="dept-Октябрь-11" class="dept-checkbox">
+    <label for="dept-Октябрь-11" class="dept-row">
+      <span class="dept-name">Прочие / не указано</span>
+      <span class="dept-summary">
+        <span class="ds-cell"><span class="ds-label">принято:</span> <b>0</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>48</b></span>
+        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>0</b></span>
+      </span>
+      <span class="dept-toggle">›</span>
+    </label>
+    <div class="dept-details">
+<table class="calls-table">
+  <colgroup>
+    <col class="col-num">
+    <col class="col-fio">
+    <col class="col-stat">
+    <col class="col-stat">
+    <col class="col-pct">
+    <col class="col-stat">
+  </colgroup>
+  <thead>
+    <tr>
+      <th rowspan="2" class="col-num">№</th>
+      <th rowspan="2" class="col-fio">ФИО</th>
+      <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
+      <th rowspan="2" class="col-out">Исходящие</th>
+    </tr>
+    <tr>
+      <th class="col-in">Принятые</th>
+      <th class="col-miss">Пропущенные</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-fio">Обмолова Валентина Витальевна</td>
+      <td class="col-in">0</td>
+      <td class="col-miss">36</td>
+      <td class="col-pct pct-bad">0%</td>
+      <td class="col-out">0</td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-fio">Ставер Андрей Петрович</td>
+      <td class="col-in">0</td>
+      <td class="col-miss">12</td>
+      <td class="col-pct pct-bad">0%</td>
+      <td class="col-out">0</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </div>
 </div>
 
 ### Нагрузка отделов
@@ -1301,26 +1379,26 @@
   <div class="load-chart-value">2871</div>
 </div>
 <div class="load-chart-row">
-  <div class="load-chart-name" title="Администрация">Администрация</div>
-  <div class="load-chart-bar-wrap">
-    <div class="load-chart-bar" style="width: 42.28%;">
-      <div class="load-chart-seg seg-in" style="width: 43.44%;" title="Принятые: 1139"></div>
-      <div class="load-chart-seg seg-miss" style="width: 20.21%;" title="Пропущенные: 530"></div>
-      <div class="load-chart-seg seg-out" style="width: 36.35%;" title="Исходящие: 953"></div>
-    </div>
-  </div>
-  <div class="load-chart-value">2622</div>
-</div>
-<div class="load-chart-row">
   <div class="load-chart-name" title="Отдел СР и ТП">Отдел СР и ТП</div>
   <div class="load-chart-bar-wrap">
-    <div class="load-chart-bar" style="width: 41.05%;">
-      <div class="load-chart-seg seg-in" style="width: 41.48%;" title="Принятые: 1056"></div>
-      <div class="load-chart-seg seg-miss" style="width: 29.89%;" title="Пропущенные: 761"></div>
-      <div class="load-chart-seg seg-out" style="width: 28.63%;" title="Исходящие: 729"></div>
+    <div class="load-chart-bar" style="width: 40.28%;">
+      <div class="load-chart-seg seg-in" style="width: 42.27%;" title="Принятые: 1056"></div>
+      <div class="load-chart-seg seg-miss" style="width: 28.54%;" title="Пропущенные: 713"></div>
+      <div class="load-chart-seg seg-out" style="width: 29.18%;" title="Исходящие: 729"></div>
     </div>
   </div>
-  <div class="load-chart-value">2546</div>
+  <div class="load-chart-value">2498</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Администрация">Администрация</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 38.04%;">
+      <div class="load-chart-seg seg-in" style="width: 45.44%;" title="Принятые: 1072"></div>
+      <div class="load-chart-seg seg-miss" style="width: 20.73%;" title="Пропущенные: 489"></div>
+      <div class="load-chart-seg seg-out" style="width: 33.83%;" title="Исходящие: 798"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">2359</div>
 </div>
 <div class="load-chart-row">
   <div class="load-chart-name" title="Отдел расчётов с поставщиками, подрядчиками">Отдел расчётов с поставщиками, подрядчиками</div>
@@ -1377,6 +1455,28 @@
   </div>
   <div class="load-chart-value">613</div>
 </div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел анализа и внутреннего аудита">Отдел анализа и внутреннего аудита</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 4.24%;">
+      <div class="load-chart-seg seg-in" style="width: 25.48%;" title="Принятые: 67"></div>
+      <div class="load-chart-seg seg-miss" style="width: 15.59%;" title="Пропущенные: 41"></div>
+      <div class="load-chart-seg seg-out" style="width: 58.94%;" title="Исходящие: 155"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">263</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Прочие / не указано">Прочие / не указано</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 0.77%;">
+      <div class="load-chart-seg seg-in" style="width: 0.00%;" title="Принятые: 0"></div>
+      <div class="load-chart-seg seg-miss" style="width: 100.00%;" title="Пропущенные: 48"></div>
+      <div class="load-chart-seg seg-out" style="width: 0.00%;" title="Исходящие: 0"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">48</div>
+</div>
   <div class="load-chart-legend">
     <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-in"></span>принятые</span>
     <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-miss"></span>пропущенные</span>
@@ -1397,8 +1497,8 @@
 </div>
 <div class="fact-card fact-miss">
   <div class="fact-label">Наибольшая доля пропущенных</div>
-  <div class="fact-value">Отдел СР и ТП</div>
-  <div class="fact-sub">761 из 1817 входящих · 41.9%</div>
+  <div class="fact-value">Прочие / не указано</div>
+  <div class="fact-sub">48 из 48 входящих · 100.0%</div>
 </div>
 <div class="fact-card fact-in">
   <div class="fact-label">Наилучший приём вызовов</div>
@@ -1407,13 +1507,13 @@
 </div>
 <div class="fact-card fact-out">
   <div class="fact-label">Преобладание исходящих связей</div>
-  <div class="fact-value">Отдел кадрового и правового обеспечения</div>
-  <div class="fact-sub">Индекс исх./вх. = 1.02 — отдел больше инициирует, чем принимает</div>
+  <div class="fact-value">Отдел анализа и внутреннего аудита</div>
+  <div class="fact-sub">Индекс исх./вх. = 1.44 — отдел больше инициирует, чем принимает</div>
 </div>
 <div class="fact-card fact-in">
   <div class="fact-label">Преобладание входящих связей</div>
-  <div class="fact-value">Отдел СР и ТП</div>
-  <div class="fact-sub">Индекс исх./вх. = 0.40 — отдел больше принимает, чем инициирует</div>
+  <div class="fact-value">Прочие / не указано</div>
+  <div class="fact-sub">Индекс исх./вх. = 0.00 — отдел больше принимает, чем инициирует</div>
 </div>
 <div class="fact-card fact-hour">
   <div class="fact-label">Средняя нагрузка на сотрудника</div>
@@ -1486,9 +1586,9 @@
     <label for="dept-Сентябрь-1" class="dept-row">
       <span class="dept-name">Администрация</span>
       <span class="dept-summary">
-        <span class="ds-cell"><span class="ds-label">принято:</span> <b>1193</b></span>
-        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>605</b></span>
-        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>1172</b></span>
+        <span class="ds-cell"><span class="ds-label">принято:</span> <b>1091</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>542</b></span>
+        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>965</b></span>
       </span>
       <span class="dept-toggle">›</span>
     </label>
@@ -1534,14 +1634,6 @@
     </tr>
     <tr>
       <td class="col-num">3</td>
-      <td class="col-fio">Гареева Регина Рафаэлевна</td>
-      <td class="col-in">102</td>
-      <td class="col-miss">63</td>
-      <td class="col-pct pct-warn">62%</td>
-      <td class="col-out">207</td>
-    </tr>
-    <tr>
-      <td class="col-num">4</td>
       <td class="col-fio">Жданова Галина Игоревна</td>
       <td class="col-in">132</td>
       <td class="col-miss">52</td>
@@ -1549,7 +1641,7 @@
       <td class="col-out">169</td>
     </tr>
     <tr>
-      <td class="col-num">5</td>
+      <td class="col-num">4</td>
       <td class="col-fio">Галямов Азат Ахтамович</td>
       <td class="col-in">100</td>
       <td class="col-miss">47</td>
@@ -1563,6 +1655,53 @@
   <div class="dept-item">
     <input type="checkbox" id="dept-Сентябрь-2" class="dept-checkbox">
     <label for="dept-Сентябрь-2" class="dept-row">
+      <span class="dept-name">Отдел анализа и внутреннего аудита</span>
+      <span class="dept-summary">
+        <span class="ds-cell"><span class="ds-label">принято:</span> <b>102</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>63</b></span>
+        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>207</b></span>
+      </span>
+      <span class="dept-toggle">›</span>
+    </label>
+    <div class="dept-details">
+<table class="calls-table">
+  <colgroup>
+    <col class="col-num">
+    <col class="col-fio">
+    <col class="col-stat">
+    <col class="col-stat">
+    <col class="col-pct">
+    <col class="col-stat">
+  </colgroup>
+  <thead>
+    <tr>
+      <th rowspan="2" class="col-num">№</th>
+      <th rowspan="2" class="col-fio">ФИО</th>
+      <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
+      <th rowspan="2" class="col-out">Исходящие</th>
+    </tr>
+    <tr>
+      <th class="col-in">Принятые</th>
+      <th class="col-miss">Пропущенные</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-fio">Гареева Регина Рафаэлевна</td>
+      <td class="col-in">102</td>
+      <td class="col-miss">63</td>
+      <td class="col-pct pct-warn">62%</td>
+      <td class="col-out">207</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </div>
+  <div class="dept-item">
+    <input type="checkbox" id="dept-Сентябрь-3" class="dept-checkbox">
+    <label for="dept-Сентябрь-3" class="dept-row">
       <span class="dept-name">Отдел информационной безопасности</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>385</b></span>
@@ -1632,13 +1771,13 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Сентябрь-3" class="dept-checkbox">
-    <label for="dept-Сентябрь-3" class="dept-row">
+    <input type="checkbox" id="dept-Сентябрь-4" class="dept-checkbox">
+    <label for="dept-Сентябрь-4" class="dept-row">
       <span class="dept-name">Отдел СР и ТП</span>
       <span class="dept-summary">
-        <span class="ds-cell"><span class="ds-label">принято:</span> <b>1091</b></span>
-        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>727</b></span>
-        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>872</b></span>
+        <span class="ds-cell"><span class="ds-label">принято:</span> <b>1087</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>681</b></span>
+        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>864</b></span>
       </span>
       <span class="dept-toggle">›</span>
     </label>
@@ -1722,29 +1861,13 @@
       <td class="col-pct pct-good">80%</td>
       <td class="col-out">45</td>
     </tr>
-    <tr>
-      <td class="col-num">8</td>
-      <td class="col-fio">Ставер Андрей Петрович</td>
-      <td class="col-in">4</td>
-      <td class="col-miss">22</td>
-      <td class="col-pct pct-bad">15%</td>
-      <td class="col-out">8</td>
-    </tr>
-    <tr>
-      <td class="col-num">9</td>
-      <td class="col-fio">Обмолова Валентина Витальевна</td>
-      <td class="col-in">0</td>
-      <td class="col-miss">24</td>
-      <td class="col-pct pct-bad">0%</td>
-      <td class="col-out">0</td>
-    </tr>
   </tbody>
 </table>
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Сентябрь-4" class="dept-checkbox">
-    <label for="dept-Сентябрь-4" class="dept-row">
+    <input type="checkbox" id="dept-Сентябрь-5" class="dept-checkbox">
+    <label for="dept-Сентябрь-5" class="dept-row">
       <span class="dept-name">Отдел кадрового и правового обеспечения</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>625</b></span>
@@ -1822,8 +1945,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Сентябрь-5" class="dept-checkbox">
-    <label for="dept-Сентябрь-5" class="dept-row">
+    <input type="checkbox" id="dept-Сентябрь-6" class="dept-checkbox">
+    <label for="dept-Сентябрь-6" class="dept-row">
       <span class="dept-name">Отдел учета основных средств и запасов</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>1087</b></span>
@@ -1949,8 +2072,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Сентябрь-6" class="dept-checkbox">
-    <label for="dept-Сентябрь-6" class="dept-row">
+    <input type="checkbox" id="dept-Сентябрь-7" class="dept-checkbox">
+    <label for="dept-Сентябрь-7" class="dept-row">
       <span class="dept-name">Отдел подготовки отчетности</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>355</b></span>
@@ -2052,8 +2175,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Сентябрь-7" class="dept-checkbox">
-    <label for="dept-Сентябрь-7" class="dept-row">
+    <input type="checkbox" id="dept-Сентябрь-8" class="dept-checkbox">
+    <label for="dept-Сентябрь-8" class="dept-row">
       <span class="dept-name">Отдел учета доходов</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>984</b></span>
@@ -2179,8 +2302,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Сентябрь-8" class="dept-checkbox">
-    <label for="dept-Сентябрь-8" class="dept-row">
+    <input type="checkbox" id="dept-Сентябрь-9" class="dept-checkbox">
+    <label for="dept-Сентябрь-9" class="dept-row">
       <span class="dept-name">Отдел расчётов с персоналом</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>2343</b></span>
@@ -2346,8 +2469,8 @@
     </div>
   </div>
   <div class="dept-item">
-    <input type="checkbox" id="dept-Сентябрь-9" class="dept-checkbox">
-    <label for="dept-Сентябрь-9" class="dept-row">
+    <input type="checkbox" id="dept-Сентябрь-10" class="dept-checkbox">
+    <label for="dept-Сентябрь-10" class="dept-row">
       <span class="dept-name">Отдел расчётов с поставщиками, подрядчиками</span>
       <span class="dept-summary">
         <span class="ds-cell"><span class="ds-label">принято:</span> <b>903</b></span>
@@ -2472,6 +2595,61 @@
 </table>
     </div>
   </div>
+  <div class="dept-item">
+    <input type="checkbox" id="dept-Сентябрь-11" class="dept-checkbox">
+    <label for="dept-Сентябрь-11" class="dept-row">
+      <span class="dept-name">Прочие / не указано</span>
+      <span class="dept-summary">
+        <span class="ds-cell"><span class="ds-label">принято:</span> <b>4</b></span>
+        <span class="ds-cell"><span class="ds-label">пропущено:</span> <b>46</b></span>
+        <span class="ds-cell"><span class="ds-label">исходящих:</span> <b>8</b></span>
+      </span>
+      <span class="dept-toggle">›</span>
+    </label>
+    <div class="dept-details">
+<table class="calls-table">
+  <colgroup>
+    <col class="col-num">
+    <col class="col-fio">
+    <col class="col-stat">
+    <col class="col-stat">
+    <col class="col-pct">
+    <col class="col-stat">
+  </colgroup>
+  <thead>
+    <tr>
+      <th rowspan="2" class="col-num">№</th>
+      <th rowspan="2" class="col-fio">ФИО</th>
+      <th colspan="2">Входящие</th>
+      <th rowspan="2" class="col-pct">Принято, %</th>
+      <th rowspan="2" class="col-out">Исходящие</th>
+    </tr>
+    <tr>
+      <th class="col-in">Принятые</th>
+      <th class="col-miss">Пропущенные</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-fio">Ставер Андрей Петрович</td>
+      <td class="col-in">4</td>
+      <td class="col-miss">22</td>
+      <td class="col-pct pct-bad">15%</td>
+      <td class="col-out">8</td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-fio">Обмолова Валентина Витальевна</td>
+      <td class="col-in">0</td>
+      <td class="col-miss">24</td>
+      <td class="col-pct pct-bad">0%</td>
+      <td class="col-out">0</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </div>
 </div>
 
 ### Нагрузка отделов
@@ -2491,26 +2669,26 @@
   <div class="load-chart-value">5685</div>
 </div>
 <div class="load-chart-row">
-  <div class="load-chart-name" title="Администрация">Администрация</div>
-  <div class="load-chart-bar-wrap">
-    <div class="load-chart-bar" style="width: 52.24%;">
-      <div class="load-chart-seg seg-in" style="width: 40.17%;" title="Принятые: 1193"></div>
-      <div class="load-chart-seg seg-miss" style="width: 20.37%;" title="Пропущенные: 605"></div>
-      <div class="load-chart-seg seg-out" style="width: 39.46%;" title="Исходящие: 1172"></div>
-    </div>
-  </div>
-  <div class="load-chart-value">2970</div>
-</div>
-<div class="load-chart-row">
   <div class="load-chart-name" title="Отдел СР и ТП">Отдел СР и ТП</div>
   <div class="load-chart-bar-wrap">
-    <div class="load-chart-bar" style="width: 47.32%;">
-      <div class="load-chart-seg seg-in" style="width: 40.56%;" title="Принятые: 1091"></div>
-      <div class="load-chart-seg seg-miss" style="width: 27.03%;" title="Пропущенные: 727"></div>
-      <div class="load-chart-seg seg-out" style="width: 32.42%;" title="Исходящие: 872"></div>
+    <div class="load-chart-bar" style="width: 46.30%;">
+      <div class="load-chart-seg seg-in" style="width: 41.30%;" title="Принятые: 1087"></div>
+      <div class="load-chart-seg seg-miss" style="width: 25.87%;" title="Пропущенные: 681"></div>
+      <div class="load-chart-seg seg-out" style="width: 32.83%;" title="Исходящие: 864"></div>
     </div>
   </div>
-  <div class="load-chart-value">2690</div>
+  <div class="load-chart-value">2632</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Администрация">Администрация</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 45.70%;">
+      <div class="load-chart-seg seg-in" style="width: 41.99%;" title="Принятые: 1091"></div>
+      <div class="load-chart-seg seg-miss" style="width: 20.86%;" title="Пропущенные: 542"></div>
+      <div class="load-chart-seg seg-out" style="width: 37.14%;" title="Исходящие: 965"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">2598</div>
 </div>
 <div class="load-chart-row">
   <div class="load-chart-name" title="Отдел учета основных средств и запасов">Отдел учета основных средств и запасов</div>
@@ -2578,6 +2756,28 @@
   </div>
   <div class="load-chart-value">751</div>
 </div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Отдел анализа и внутреннего аудита">Отдел анализа и внутреннего аудита</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 6.54%;">
+      <div class="load-chart-seg seg-in" style="width: 27.42%;" title="Принятые: 102"></div>
+      <div class="load-chart-seg seg-miss" style="width: 16.94%;" title="Пропущенные: 63"></div>
+      <div class="load-chart-seg seg-out" style="width: 55.65%;" title="Исходящие: 207"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">372</div>
+</div>
+<div class="load-chart-row">
+  <div class="load-chart-name" title="Прочие / не указано">Прочие / не указано</div>
+  <div class="load-chart-bar-wrap">
+    <div class="load-chart-bar" style="width: 1.02%;">
+      <div class="load-chart-seg seg-in" style="width: 6.90%;" title="Принятые: 4"></div>
+      <div class="load-chart-seg seg-miss" style="width: 79.31%;" title="Пропущенные: 46"></div>
+      <div class="load-chart-seg seg-out" style="width: 13.79%;" title="Исходящие: 8"></div>
+    </div>
+  </div>
+  <div class="load-chart-value">58</div>
+</div>
   <div class="load-chart-legend">
     <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-in"></span>принятые</span>
     <span class="load-chart-legend-item"><span class="load-chart-legend-dot legend-miss"></span>пропущенные</span>
@@ -2598,8 +2798,8 @@
 </div>
 <div class="fact-card fact-miss">
   <div class="fact-label">Наибольшая доля пропущенных</div>
-  <div class="fact-value">Отдел СР и ТП</div>
-  <div class="fact-sub">727 из 1818 входящих · 40.0%</div>
+  <div class="fact-value">Прочие / не указано</div>
+  <div class="fact-sub">46 из 50 входящих · 92.0%</div>
 </div>
 <div class="fact-card fact-in">
   <div class="fact-label">Наилучший приём вызовов</div>
@@ -2608,13 +2808,13 @@
 </div>
 <div class="fact-card fact-out">
   <div class="fact-label">Преобладание исходящих связей</div>
-  <div class="fact-value">Отдел учета основных средств и запасов</div>
-  <div class="fact-sub">Индекс исх./вх. = 1.07 — отдел больше инициирует, чем принимает</div>
+  <div class="fact-value">Отдел анализа и внутреннего аудита</div>
+  <div class="fact-sub">Индекс исх./вх. = 1.25 — отдел больше инициирует, чем принимает</div>
 </div>
 <div class="fact-card fact-in">
   <div class="fact-label">Преобладание входящих связей</div>
-  <div class="fact-value">Отдел СР и ТП</div>
-  <div class="fact-sub">Индекс исх./вх. = 0.48 — отдел больше принимает, чем инициирует</div>
+  <div class="fact-value">Прочие / не указано</div>
+  <div class="fact-sub">Индекс исх./вх. = 0.16 — отдел больше принимает, чем инициирует</div>
 </div>
 <div class="fact-card fact-hour">
   <div class="fact-label">Средняя нагрузка на сотрудника</div>

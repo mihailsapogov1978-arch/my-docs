@@ -267,93 +267,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../calendar/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Календарь
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Мероприятия
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Мероприятия
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../projects_2027/roadmap/" class="md-nav__link">
         
   
@@ -361,7 +274,7 @@
   <span class="md-ellipsis">
     
   
-    2027
+    Мероприятия 2027
   
 
     
@@ -373,10 +286,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
@@ -389,7 +301,7 @@
   <span class="md-ellipsis">
     
   
-    2026
+    Мероприятия 2026
   
 
     
@@ -398,14 +310,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -557,38 +461,10 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Направленные заявки за неделю
+        Направленные заявки (по неделям)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Направленные заявки за неделю">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#week-1-15-10-по-22-10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Период: 15.10 по 22.10
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#week-2-08-10-по-15-10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Период: 08.10 по 15.10
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -615,6 +491,33 @@
     
   
     Звонки
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reestr_offert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Реестр офферт
   
 
     
@@ -682,38 +585,10 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Направленные заявки за неделю
+        Направленные заявки (по неделям)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Направленные заявки за неделю">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#week-1-15-10-по-22-10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Период: 15.10 по 22.10
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#week-2-08-10-по-15-10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Период: 08.10 по 15.10
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -737,324 +612,326 @@
   <h1>Заявки</h1>
 
 <style>
-.weeks-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Ровно 2 колонки одинаковой ширины */
-  gap: 40px; /* Большой отступ между колонками */
-  margin: 20px 0;
-  align-items: start;
-}
-.week-column {
-  width: 100%;
-  min-width: 0; /* Позволяет сжиматься при необходимости */
-}
-.week-period {
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #2c3e50;
-  font-size: 14px;
-}
-.ticket-table {
-  width: 100%;
-  border-collapse: collapse;
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin: 30px 0;
+  padding: 20px;
   background: #fff;
   border: 1px solid #e0e4e8;
-  border-radius: 6px;
-  overflow: hidden;
-  font-size: 14px; /* Шрифт 14px */
-  margin-bottom: 4px;
+  border-radius: 8px;
 }
-.ticket-table thead th {
-  background: #f5f7fa;
-  color: #2c3e50;
-  text-align: left;
-  font-weight: 600;
-  padding: 6px 10px;
-  border-bottom: 1px solid #e0e4e8;
-  font-size: 14px;
-}
-.ticket-table thead th:last-child {
-  text-align: center;
-  width: 70px;
-}
-.ticket-table tbody td {
-  padding: 5px 10px;
-  border-bottom: 1px solid #eef2f6;
-  color: #2d3748;
-  font-size: 14px;
-}
-.ticket-table tbody td.ticket-count {
-  text-align: center;
-}
-.ticket-table tbody tr:last-child td {
-  border-bottom: none;
-}
-.total-row td {
-  background: #fafbfc;
-  font-weight: 600;
-  border-top: 2px solid #e0e4e8;
-  padding: 8px 10px;
-}
-.toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  background: #f5f7fa;
-  border: 1px solid #e0e4e8;
-  border-radius: 4px;
-  color: #2b6cb0;
-  font-size: 13px;
+
+.chart-container canvas {
   cursor: pointer;
-  margin-top: 8px;
-  transition: all 0.15s;
 }
-.toggle-btn:hover {
-  background: #eaf4ff;
-  border-color: #bee3f8;
+
+.chart-hint {
+  text-align: center;
+  color: #718096;
+  font-size: 13px;
+  margin-top: 10px;
+  font-style: italic;
 }
-.toggle-icon {
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border: 1px solid #e0e4e8;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+#modalTitle {
+  margin-top: 0;
+  color: #2c3e50;
+  border-bottom: 2px solid #e0e4e8;
+  padding-bottom: 10px;
+}
+
+.detail-section {
+  margin: 20px 0;
+}
+
+.detail-section h4 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.detail-table th {
+  background: #f5f7fa;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 2px solid #e0e4e8;
+  font-weight: 600;
+}
+
+.detail-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.detail-table tr:hover {
+  background: #f9fafb;
+}
+
+.total-badge {
   display: inline-block;
-  font-size: 16px;
-  font-weight: 700;
-  transition: transform 0.15s;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 10px;
 }
-.toggle-btn.open .toggle-icon {
-  transform: rotate(90deg);
+
+.total-badge.dev {
+  background: #e3f2fd;
+  color: #1976d2;
 }
-/* Скрываем H3 из TOC визуально, но оставляем в структуре для MkDocs */
-h3.toc-hidden {
-  display: none !important;
-}
-/* Адаптивность: на узких экранах переходим в 1 колонку */
-@media (max-width: 900px) {
-  .weeks-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
+
+.total-badge.accounting {
+  background: #f3e5f5;
+  color: #7b1fa2;
 }
 </style>
-<h2 id="_1">Направленные заявки за неделю<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h3 class="toc-hidden" id="week-1-15-10-по-22-10">Период: 15.10 по 22.10<a class="headerlink" href="#week-1-15-10-по-22-10" title="Permanent link">&para;</a></h3>
-<h3 class="toc-hidden" id="week-2-08-10-по-15-10">Период: 08.10 по 15.10<a class="headerlink" href="#week-2-08-10-по-15-10" title="Permanent link">&para;</a></h3>
-<div class="weeks-grid">
-<div class="week-column">
-  <div class="week-period">Период: 15.10 по 22.10</div>
-  <table class="ticket-table" id="table-1">
-    <thead>
-      <tr>
-        <th>Отправитель</th>
-        <th>Заявок</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Сапогов М.Д.</td>
-        <td class="ticket-count">16</td>
-      </tr>
-      <tr>
-        <td>Роганова А.А.</td>
-        <td class="ticket-count">4</td>
-      </tr>
-      <tr>
-        <td>Гасанов С.Н.</td>
-        <td class="ticket-count">2</td>
-      </tr>
-      <tr>
-        <td>Шевелева К.В.</td>
-        <td class="ticket-count">2</td>
-      </tr>
-      <tr>
-        <td>Мулявин Я.В.</td>
-        <td class="ticket-count">2</td>
-      </tr>
-      <tr>
-        <td>Останин И.Г.</td>
-        <td class="ticket-count">2</td>
-      </tr>
-      <tr>
-        <td>Худышкин С.Н.</td>
-        <td class="ticket-count">2</td>
-      </tr>
-      <tr>
-        <td>Кошик В.И.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr>
-        <td>Конева Е.И.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr>
-        <td>Родина Н.В.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Павлова Н.Г.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="total-row">
-        <td>Итого:</td>
-        <td class="ticket-count">34</td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="toggle-btn" onclick="toggleWeek(1)" data-col="1">
-    <span class="toggle-icon">›</span>
-    Показать ещё 1 записей
-  </button>
+<h2 id="_1">Направленные заявки (по неделям)<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="chart-container">
+  <canvas id="ticketsChart" width="400" height="200"></canvas>
+  <div class="chart-hint">💡 Нажмите на точку для просмотра детализации по сотрудникам</div>
+  <div id="chartError" style="display: none; padding: 20px; text-align: center; color: #e74c3c;">
+    Не удалось загрузить диаграмму. Пожалуйста, обновите страницу.
+  </div>
 </div>
-<div class="week-column">
-  <div class="week-period">Период: 08.10 по 15.10</div>
-  <table class="ticket-table" id="table-2">
-    <thead>
-      <tr>
-        <th>Отправитель</th>
-        <th>Заявок</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Сапогов М.Д.</td>
-        <td class="ticket-count">8</td>
-      </tr>
-      <tr>
-        <td>Ильдеркина И.Н.</td>
-        <td class="ticket-count">5</td>
-      </tr>
-      <tr>
-        <td>Петрова Н.А.</td>
-        <td class="ticket-count">5</td>
-      </tr>
-      <tr>
-        <td>Роганова А.А.</td>
-        <td class="ticket-count">5</td>
-      </tr>
-      <tr>
-        <td>Суханова И.К.</td>
-        <td class="ticket-count">4</td>
-      </tr>
-      <tr>
-        <td>Кузнецова Н.А.</td>
-        <td class="ticket-count">3</td>
-      </tr>
-      <tr>
-        <td>Родина Н.В.</td>
-        <td class="ticket-count">3</td>
-      </tr>
-      <tr>
-        <td>Худышкин С.Н.</td>
-        <td class="ticket-count">3</td>
-      </tr>
-      <tr>
-        <td>Дмитриенко Т.В.</td>
-        <td class="ticket-count">2</td>
-      </tr>
-      <tr>
-        <td>Мулявин Я.В.</td>
-        <td class="ticket-count">2</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Алыкова Т.В.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Букреева Е.Н.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Бусыгина И.С.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Вернер Е.В.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Гасанов С.Н.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Ершова А.Н.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Зуева Г.П.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Каргаполова А.А.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Кошик В.И.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Лазарева Е.Н.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Минакова О.Ф.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Семенова Н.В.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Тимофеева А.Н.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Шибанаева Т.В.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="ticket-hidden-row" style="display: none;">
-        <td>Юшкевич Т.В.</td>
-        <td class="ticket-count">1</td>
-      </tr>
-      <tr class="total-row">
-        <td>Итого:</td>
-        <td class="ticket-count">55</td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="toggle-btn" onclick="toggleWeek(2)" data-col="2">
-    <span class="toggle-icon">›</span>
-    Показать ещё 15 записей
-  </button>
-</div>
+
+<div id="detailModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+  </div>
 </div>
 
 <script>
-function toggleWeek(colIndex) {
-  // Ищем таблицу по уникальному ID
-  var table = document.getElementById('table-' + colIndex);
-  if (!table) return;
+window.chartData = [{"period": "08.10 по 15.10", "total": 55, "dev": 20, "accounting": 35, "dev_top10": [{"name": "Сапогов М.Д.", "count": 8}, {"name": "Роганова А.А.", "count": 5}, {"name": "Худышкин С.Н.", "count": 3}, {"name": "Мулявин Я.В.", "count": 2}, {"name": "Гасанов С.Н.", "count": 1}, {"name": "Кошик В.И.", "count": 1}], "accounting_top10": [{"name": "Ильдеркина И.Н.", "count": 5}, {"name": "Петрова Н.А.", "count": 5}, {"name": "Суханова И.К.", "count": 4}, {"name": "Кузнецова Н.А.", "count": 3}, {"name": "Родина Н.В.", "count": 3}, {"name": "Дмитриенко Т.В.", "count": 2}, {"name": "Алыкова Т.В.", "count": 1}, {"name": "Букреева Е.Н.", "count": 1}, {"name": "Бусыгина И.С.", "count": 1}, {"name": "Вернер Е.В.", "count": 1}]}, {"period": "15.10 по 22.10", "total": 34, "dev": 27, "accounting": 7, "dev_top10": [{"name": "Сапогов М.Д.", "count": 16}, {"name": "Роганова А.А.", "count": 4}, {"name": "Гасанов С.Н.", "count": 2}, {"name": "Мулявин Я.В.", "count": 2}, {"name": "Худышкин С.Н.", "count": 2}, {"name": "Кошик В.И.", "count": 1}], "accounting_top10": [{"name": "Шевелева К.В.", "count": 2}, {"name": "Останин И.Г.", "count": 2}, {"name": "Конева Е.И.", "count": 1}, {"name": "Родина Н.В.", "count": 1}, {"name": "Павлова Н.Г.", "count": 1}]}, {"period": "22.10 по 29.10", "total": 38, "dev": 21, "accounting": 17, "dev_top10": [{"name": "Сапогов М.Д.", "count": 7}, {"name": "Гасанов С.Н.", "count": 4}, {"name": "Кошик В.И.", "count": 4}, {"name": "Мулявин Я.В.", "count": 4}, {"name": "Роганова А.А.", "count": 2}], "accounting_top10": [{"name": "Останин И.Г.", "count": 6}, {"name": "Зуева Г.П.", "count": 2}, {"name": "Лазарева Е.Н.", "count": 1}, {"name": "Манджиева  А.А.", "count": 1}, {"name": "Минакова О.Ф.", "count": 1}, {"name": "Нурлубаева А.З.", "count": 1}, {"name": "Россолова Е.С.", "count": 1}, {"name": "Русмиленко И.Ю.", "count": 1}, {"name": "Семенова Н.В.", "count": 1}, {"name": "Стрельникова О.С.", "count": 1}]}, {"period": "29.10 по 05.11", "total": 31, "dev": 16, "accounting": 15, "dev_top10": [{"name": "Роганова А.А.", "count": 9}, {"name": "Сапогов М.Д.", "count": 4}, {"name": "Кошик В.И.", "count": 2}, {"name": "Гасанов С.Н.", "count": 1}], "accounting_top10": [{"name": "Останин И.Г.", "count": 3}, {"name": "Зуева Г.П.", "count": 2}, {"name": "Манджиева  А.А.", "count": 2}, {"name": "Ершова А.Н.", "count": 1}, {"name": "Кропотов И.А.", "count": 1}, {"name": "Кузнецова Н.А.", "count": 1}, {"name": "Лычев А.В.", "count": 1}, {"name": "Павлова Н.Г.", "count": 1}, {"name": "Петрова Н.А.", "count": 1}, {"name": "Россолова Е.С.", "count": 1}]}];
+</script>
 
-  var hiddenRows = table.querySelectorAll('.ticket-hidden-row');
-  if (!hiddenRows || hiddenRows.length === 0) return;
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(function() {
+  function initChart() {
+    const chartData = window.chartData || [];
 
-  // Проверяем состояние первой скрытой строки
-  var isHidden = hiddenRows[0].style.display === 'none';
+    if (chartData.length === 0) {
+      console.error('chartData не найден');
+      return;
+    }
 
-  // Переключаем все скрытые строки в этой таблице
-  for (var i = 0; i < hiddenRows.length; i++) {
-    hiddenRows[i].style.display = isHidden ? '' : 'none';
+    const canvas = document.getElementById('ticketsChart');
+    if (!canvas) {
+      console.error('Canvas не найден');
+      return;
+    }
+
+    if (typeof Chart === 'undefined') {
+      console.error('Chart.js не загружен');
+      document.getElementById('chartError').style.display = 'block';
+      canvas.style.display = 'none';
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: chartData.map(d => d.period),
+        datasets: [
+          {
+            label: 'Всего заявок',
+            data: chartData.map(d => d.total),
+            borderColor: '#2c3e50',
+            backgroundColor: 'rgba(44, 62, 80, 0.05)',
+            borderWidth: 1.5,
+            pointRadius: 6,
+            pointHoverRadius: 10,
+            pointBackgroundColor: '#fff',
+            pointBorderColor: '#2c3e50',
+            pointBorderWidth: 2,
+            pointStyle: 'circle',
+            fill: true,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(255, 255, 255, 0.98)',
+            titleColor: '#2c3e50',
+            bodyColor: '#2d3748',
+            borderColor: '#e0e4e8',
+            borderWidth: 1,
+            padding: 12,
+            titleFont: { size: 13, weight: 'bold' },
+            bodyFont: { size: 12 },
+            displayColors: false,
+            callbacks: {
+              title: function(context) {
+                return context[0].label;
+              },
+              label: function(context) {
+                const index = context.dataIndex;
+                const data = chartData[index];
+                return [
+                  `Всего: ${data.total} заявок`,
+                  `Отдел развития: ${data.dev}`,
+                  `Бухгалтерия: ${data.accounting}`,
+                  '',
+                  '👆 Нажмите для детализации'
+                ];
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              font: { size: 11 },
+              maxRotation: 45,
+              minRotation: 45
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: { 
+              color: '#f0f0f0',
+              drawBorder: false
+            },
+            ticks: { 
+              font: { size: 11 },
+              stepSize: 10
+            }
+          }
+        },
+        onHover: function(e, elements) {
+          const canvas = e.chart.canvas;
+          if (elements.length > 0) {
+            canvas.style.cursor = 'pointer';
+          } else {
+            canvas.style.cursor = 'default';
+          }
+        },
+        onClick: function(e, elements) {
+          if (elements.length > 0) {
+            const index = elements[0].index;
+            showDetails(index);
+          }
+        }
+      }
+    });
   }
 
-  // Находим кнопку по атрибуту data-col
-  var btn = document.querySelector('button[data-col="' + colIndex + '"]');
-  if (!btn) return;
+  function showDetails(index) {
+    const data = window.chartData[index];
+    const modal = document.getElementById('detailModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
 
-  if (isHidden) {
-    btn.classList.add('open');
-    btn.innerHTML = '<span class="toggle-icon" style="transform: rotate(90deg);">›</span> Скрыть записи';
+    modalTitle.innerHTML = `Период: ${data.period} <span class="total-badge dev">Отдел развития: ${data.dev}</span> <span class="total-badge accounting">Бухгалтерия: ${data.accounting}</span> <span class="total-badge" style="background: #e0e4e8; color: #2c3e50;">Всего: ${data.total}</span>`;
+
+    let html = '';
+
+    if (data.dev_top10.length > 0) {
+      html += '<div class="detail-section">';
+      html += '<h4>🔧 Отдел развития (Топ 10)</h4>';
+      html += '<table class="detail-table">';
+      html += '<thead><tr><th>Сотрудник</th><th>Заявок</th></tr></thead>';
+      html += '<tbody>';
+      data.dev_top10.forEach(item => {
+        html += `<tr><td>${item.name}</td><td>${item.count}</td></tr>`;
+      });
+      html += '</tbody></table>';
+      html += '</div>';
+    }
+
+    if (data.accounting_top10.length > 0) {
+      html += '<div class="detail-section">';
+      html += '<h4>📊 Бухгалтерия (Топ 10)</h4>';
+      html += '<table class="detail-table">';
+      html += '<thead><tr><th>Сотрудник</th><th>Заявок</th></tr></thead>';
+      html += '<tbody>';
+      data.accounting_top10.forEach(item => {
+        html += `<tr><td>${item.name}</td><td>${item.count}</td></tr>`;
+      });
+      html += '</tbody></table>';
+      html += '</div>';
+    }
+
+    modalBody.innerHTML = html;
+    modal.style.display = 'block';
+  }
+
+  document.querySelector('.close').onclick = function() {
+    document.getElementById('detailModal').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('detailModal');
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChart);
   } else {
-    btn.classList.remove('open');
-    btn.innerHTML = '<span class="toggle-icon">›</span> Показать ещё ' + hiddenRows.length + ' записей';
+    initChart();
   }
-}
+})();
 </script>
 
 

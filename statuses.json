@@ -1,19 +1,19 @@
 {
   "statuses": {
     "1": "raboty",
-    "2": "torgi",
-    "3": "soglasovanie",
-    "4": "soglasovanie",
-    "5": "torgi",
-    "6": "soglasovanie",
-    "7": "soglasovanie",
+    "2": "raboty",
+    "3": "raboty",
+    "4": "raboty",
+    "5": "raboty",
+    "6": "raboty",
+    "7": "raboty",
     "8": "soglasovanie",
     "9": "done",
-    "10": "soglasovanie",
+    "10": "done",
     "11": "done",
-    "12": "soglasovanie",
-    "13": "soglasovanie",
-    "14": "soglasovanie",
+    "12": "raboty",
+    "13": "torgi",
+    "14": "torgi",
     "2027-1": "soglasovanie",
     "2027-2": "postanovka",
     "2027-3": "postanovka",
@@ -61,26 +61,26 @@
     "1": {
       "steps": {
         "1": {
-          "assignee": "Мулявин Я.В.",
+          "assignee": "Останин И.Г.",
           "comment": "Резолюция № 12",
           "date": "2026-02-10",
           "done": true
         },
         "2": {
-          "assignee": "",
+          "assignee": "Ставер А.П.",
           "comment": "Протокол ВКС",
           "date": "2026-03-01",
           "done": true
         },
         "3": {
-          "assignee": "",
+          "assignee": "Суханова И.К.",
           "comment": "Извещение № 017320000123",
           "date": "2026-03-15",
           "done": true
         },
         "4": {
-          "assignee": "",
-          "comment": "",
+          "assignee": "Сапогов М.Д.",
+          "comment": "Периодически связь с Орловым, тестировать в феврале с Кириченко",
           "date": "2026-04-01",
           "done": true
         },
@@ -485,6 +485,346 @@
           "comment": "",
           "date": "",
           "done": false
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": false
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": false
+        }
+      }
+    },
+    "2": {
+      "steps": {
+        "1": {
+          "assignee": "Останин И.Г.",
+          "comment": "",
+          "date": "2026-02-05",
+          "done": true
+        },
+        "2": {
+          "assignee": "Сапогов М.Д.",
+          "comment": "",
+          "date": "2026-02-20",
+          "done": true
+        },
+        "3": {
+          "assignee": "Суханова И.К.",
+          "comment": "",
+          "date": "2026-03-10",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-25",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-15",
+          "done": false
+        }
+      }
+    },
+    "3": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-12",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-05",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-20",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-10",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-05",
+          "done": false
+        }
+      }
+    },
+    "4": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-01",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-18",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-05",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-22",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-12",
+          "done": false
+        }
+      }
+    },
+    "5": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-08",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-25",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-12",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-28",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-18",
+          "done": false
+        }
+      }
+    },
+    "6": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-15",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-08",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-25",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-12",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-05",
+          "done": false
+        }
+      }
+    },
+    "7": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-02-18",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-12",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-30",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-18",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-10",
+          "done": false
+        }
+      }
+    },
+    "10": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-01",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-03-22",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-04-12",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-05",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "2026-05-25",
+          "done": true
+        }
+      }
+    },
+    "12": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": false
+        }
+      }
+    },
+    "13": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "4": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": false
+        },
+        "5": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": false
+        }
+      }
+    },
+    "14": {
+      "steps": {
+        "1": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "2": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
+        },
+        "3": {
+          "assignee": "",
+          "comment": "",
+          "date": "",
+          "done": true
         },
         "4": {
           "assignee": "",

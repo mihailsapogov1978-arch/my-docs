@@ -105,14 +105,13 @@ validation:
 
 nav:
   - Главная: index.md
-  - Календарь: calendar.md
-  - Мероприятия:
-    - 2027: projects_2027/roadmap.md
-    - 2026: projects_2026/roadmap.md
+  #- Календарь: calendar.md
+  - Мероприятия 2027: projects_2027/roadmap.md
+  - Мероприятия 2026: projects_2026/roadmap.md
   - Контракты 2019–2026: Contracts/svod_gk.md
   - Планы информатизации: plans/plans.md
   - Отчёты отдела СРиТП: reports/index.md
   - Заявки: zayavka_week.md
   - Звонки: calls/calls.md
-  #- Реестр доработок: projects_anons.md
+  - Реестр офферт: reestr_offert.md
   - Базы drx: inn_org.md 
